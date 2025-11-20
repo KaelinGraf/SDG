@@ -59,14 +59,9 @@ class SceneBuilder:
 
     
     def world_setup(self):
-        self.world = World(stage_units_in_meters=1.0)
+        self.world = World()
         self.world.scene.add_default_ground_plane()
-        bin_prim = prims.create_prim(
-            prim_path="/World/Bin",
-            position=(0,0,0),
-            scale=(1,1,1),
-            usd_path=self.scene_config["bin_usd_filepath"],
-        )
+        
         
     def data_generator_loop(self,iters):
         #main data generation loop
@@ -76,7 +71,11 @@ class SceneBuilder:
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.populate_scene()
             #do rendering stuff here
-            time.sleep(15.0) #wait a second for physics to settle
+            while True:
+                simulation_app.update() 
+
+            
+
             
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
@@ -129,30 +128,54 @@ class SceneBuilder:
         max_diag_length = 0.0
         for obj_name in objects_to_add:
             obj_diag_length = self.asset_manager.asset_registry[obj_name]["diag_length"]
+            print(f"obj diagonal length: {obj_diag_length}")
             if self.scene_config.get("vary_object_scale",False):
                 obj_diag_length *= max_scale #scale the diag length by the max scale factor
             if obj_diag_length > max_diag_length:
                 max_diag_length = obj_diag_length
-        max_diag_length += self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
+            
+            print(f"max_diag_length: {max_diag_length}")
+        max_diag_length = max_diag_length* 1.1 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
+        print(f"max diagonal length: {max_diag_length}")
         
         #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
-        bin_dims = self.scene_config["bin_dimensions"]
-        if self.scene_config.get("rand_bin_size", False):
+        bin_dims = np.asarray(self.scene_config["bin_dimensions"])
+        scale_factor = 1
+        if self.scene_config.get("vary_bin_scale", False):
             scale_factor = random.uniform(self.scene_config["bin_scale_range"][0], self.scene_config["bin_scale_range"][1])
             bin_dims = bin_dims * scale_factor
-            #ensure x-y diagonal is at least as large as max_diag_length
-            xy_diag = math.sqrt(bin_dims[0]**2 + bin_dims[1]**2)
-            if xy_diag < max_diag_length:
-                adjust_scale = max_diag_length / xy_diag
-                bin_dims = bin_dims * adjust_scale
+            #ensure smallest dimension is larger than diag_length (as this is spawn cell size)
+            min_dim = np.min(bin_dims)
+            if min_dim < max_diag_length:
+                adjust_scale = max_diag_length / min_dim
+                bin_dims = bin_dims * adjust_scale * 1.1
             print(f"Randomized bin dimensions to: {bin_dims}")
         
-        #create bin prim with physics properties
-        omni.kit.commands.execute(
-            "IsaacSimScalePrim",
-            path="/World/Bin",
-            scale = (scale_factor, scale_factor, scale_factor), #uniform scaling
-        )
+        bin_usd = self.scene_config.get("usd_filepath",None)
+        if bin_usd is not None:
+            print("creating bin prim")
+            self.bin_prim = prims.create_prim(
+                prim_path="/World/Bin",
+                prim_type="Xform",
+                position=(0,0,0),
+                scale=(scale_factor,scale_factor,scale_factor),
+                usd_path=bin_usd,
+            )
+            # Apply Rigid Body API
+            rb_api = UsdPhysics.RigidBodyAPI.Apply(self.bin_prim)
+            rb_api.CreateRigidBodyEnabledAttr(True)
+            rb_api.CreateKinematicEnabledAttr(True) 
+
+            # Apply Collision API
+            col_api = UsdPhysics.CollisionAPI.Apply(self.bin_prim)
+            col_api.CreateCollisionEnabledAttr(True)
+            
+            # Optional: Apply Mesh Collision (for accurate concave bin shapes)
+            # If objects fall through the walls, enable this:
+            mesh_api = UsdPhysics.MeshCollisionAPI.Apply(self.bin_prim)
+            mesh_api.CreateApproximationAttr("convexDecomposition")
+        else:
+            raise Exception
             
             
         #create voxel grid, starting from the top of the bin, with cell size = max_diag_length
@@ -179,7 +202,7 @@ class SceneBuilder:
             object_prim = prims.create_prim(
                 prim_path=f"/World/{selected_object}_{i}",
                 position=(cell_x, cell_y, cell_z), #objects are positioned within their respective voxel (with jitter)
-                orientation=euler_angles_to_quat([random.uniform(0, math.pi), random.uniform(0, math.pi), random.uniform(0, math.pi)]),
+                orientation=euler_angles_to_quat([random.uniform(-math.pi, math.pi), random.uniform(-math.pi, math.pi), random.uniform(-math.pi, math.pi)]),
                 scale = (scale_factor_part, scale_factor_part, scale_factor_part), #uniformly scale to preserve proportions
                 usd_path=self.objects_config[selected_object]["usd_filepath"],
                 semantic_label=self.objects_config[selected_object]["class"],
@@ -225,7 +248,18 @@ def main():
     scene_builder = SceneBuilder(args.scene_name) #initialize scene builder with specified scene config, does not start data generation
     
     print(f"Scene Builder initialised for scene: {args.scene_name}. Starting data generation loop for {args.iters} iterations.")
+    scene_builder.world.reset()
 
+    print("Holding simulation open. Press Ctrl+C in terminal to stop.")
+    
+    # # Create a viewer loop so you can see the bin
+    # while simulation_app.is_running():
+    #     # This triggers the renderer and physics step
+    #     simulation_app.update() 
+        
+    #     # Optional: If you want to verify the bin exists, check it here
+    #     # if scene_builder.world.scene.get_object("/World/Bin"):
+    #     #    pass
     scene_builder.data_generator_loop(args.iters) #start data generation loop
     
     

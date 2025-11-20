@@ -1,25 +1,44 @@
 {
-    "default_scene":{
-        "num_objects": 20,
-        "rand_num_objects": true,
-        "max_num_objects": 30,
-        "min_num_objects": 5,
-        "object_type":"homogeneous",
-        "vary_object_type": true,
-        "vary_object_scale": true,
-        "min_scale_bounds": [0.3, 1.0],
-        "max_scale_bounds": [1.0, 2.0],
-        "bin_filepath": "path/to/medium_bin.usd",
-        "mesh_filepath":"../Meshes/bin_1.obj",
-        "bin_position": [0.0, 0.0, 0.0],
-        "vary_bin_scale": true,
-        "bin_scale_range": [0.5, 2.0],
-        "bin_dimensions": [0.479,0.678,0.35],
-        "cam_z_dist":0.6,
-        "num_cameras":3,
-        "sensor_type":"depth_simulator",
-        "sensor_resolution":[640,480],
-        "voxel_jitter":0.01
-
-    }
+	"default_scene": {
+		"num_objects": 20,
+		"rand_num_objects": true,
+		"max_num_objects": 20,
+		"min_num_objects": 5,
+		"object_type": "heterogeneous",
+		"vary_object_type": true,
+		"vary_object_scale": true,
+		"min_scale_bounds": [
+			0.3,
+			1.0
+		],
+		"max_scale_bounds": [
+			1.0,
+			1.5
+		],
+		"mesh_filepath": "../Meshes/bin_1.obj",
+		"usd_filepath": "../Meshes/bin_1.usd",
+		"bin_position": [
+			0.0,
+			0.0,
+			0.0
+		],
+		"vary_bin_scale": true,
+		"bin_scale_range": [
+			0.8,
+			3.0
+		],
+		"bin_dimensions": [
+			0.6975,
+			0.4975,
+			0.35
+		],
+		"cam_z_dist": 0.6,
+		"num_cameras": 3,
+		"sensor_type": "depth_simulator",
+		"sensor_resolution": [
+			640,
+			480
+		],
+		"voxel_jitter": 0.01
+	}
 }

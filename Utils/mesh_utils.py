@@ -34,8 +34,11 @@ class AssetManager:
                 bounds = np.array(bounds_utils.compute_aabb(cache,temp_path))
                 #compute the diagonal (eg 0,0,0) to (x,y,z)
                 diag_vector = bounds[3:] - bounds[0:3]
+                print(f"diagonal vector: {diag_vector}")
                 diag_length = np.linalg.norm(diag_vector) #this is the diameter of a bounding sphere around the object (max distance across the object)
                 #store in asset registry
+                print(bounds)
+                print(f"diagonal length: {diag_length}")
                 self.asset_registry[obj_name] = {
                     "bounds": bounds,
                     "diag_length": diag_length
