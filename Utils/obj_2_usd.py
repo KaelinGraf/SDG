@@ -5,26 +5,28 @@
 #a usd_filepath entry to the object config for later use in scene building
 
 #kaelin graf-ogilvie 2025
+ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
 
 from isaacsim import SimulationApp
-simulation_app = SimulationApp({"headless": True})
+simulation_app = SimulationApp({
+    "headless": False,
+})
 import omni
 from isaacsim.core.utils.extensions import enable_extension
 enable_extension("omni.kit.asset_converter")
-import omni.kit.asset_converter as asset_converter
 
 
 import os
 import json
 import argparse
+import asyncio
 
 class Obj2UsdConverter:
     def __init__(self, config_path="./Config/objects.json"):
         self.config_path = config_path
         self.objects_config = self.load_config()
-        self.converter = asset_converter.get_instance()
-        self.context = asset_converter.AssetConverterContext()
-        
+    
+
     def setup_context(self):
         #add any context setup here if needed
         self.context.ignore_camera = True
@@ -56,10 +58,12 @@ class Obj2UsdConverter:
         if obj_info:
             obj_filepath = obj_info.get("mesh_filepath", None)
             if obj_filepath and obj_filepath.lower().endswith('.obj'):
-                usd_filepath = self.convert_obj_to_usd(obj_filepath)
-                if usd_filepath:
-                    self.objects_config[obj_name]["usd_filepath"] = usd_filepath
-                    print(f"Converted {obj_name}: {obj_filepath} -> {usd_filepath}")
+                status = asyncio.get_event_loop().run_until_complete(
+                        convert_obj_to_usd(obj_filepath)
+                    )
+                if status:
+                    self.objects_config[obj_name]["usd_filepath"] = self.usd_filepath
+                    print(f"Converted {obj_name}: {obj_filepath} -> {self.usd_filepath}")
                     self.save_updated_config()
                 else:
                     print(f"Failed to convert {obj_name}: {obj_filepath}")
@@ -68,19 +72,22 @@ class Obj2UsdConverter:
         else:
             print(f"Object {obj_name} not found in config")
     
-    def convert_obj_to_usd(self, obj_filepath):
-        try:
-            usd_filepath = os.path.splitext(obj_filepath)[0] + '.usd' #replace .obj with .usd
-            task = self.converter.create_converter_task(obj_filepath,usd_filepath,None,self.context)
-            task.wait_until_finished()
+    async def convert_obj_to_usd(self, obj_filepath):
+        import omni.kit.asset_converter as asset_converter
+        self.converter = asset_converter.get_instance()
+        self.context = asset_converter.AssetConverterContext()
+        def progress_callback(progress, total_steps):
+            pass
+        self.usd_filepath = os.path.splitext(obj_filepath)[0] + '.usd' #replace .obj with .usd
+        task = self.converter.create_converter_task(obj_filepath,self.usd_filepath,progress_callback,self.context)
+        while True:
+            success = await task.wait_until_finished()
+            if not success:
+                await asyncio.sleep(0.1)
+            else:
+                break
             
-            status = task.get_status()
-            if status == asset_converter.AssetConverterStatus.ERROR: 
-                raise Exception(f"Conversion error: {task.get_error_message()}")
-            return usd_filepath
-        except Exception as e:
-            print(f"Error converting {obj_filepath}: {e}")
-            return None
+            
     
     def save_updated_config(self):
         with open(self.config_path, 'w') as f:

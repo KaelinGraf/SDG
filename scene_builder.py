@@ -14,20 +14,29 @@
 #Author: Kaelin Graf-Ogilvie (ISCAR Pus)
 #Email: kaelin@iscar.co.nz
 
+ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
 
 from isaacsim import SimulationApp
-from warp import printf
-simulation_app = SimulationApp({"headless": False}) 
-
+import warp
+simulation_app = SimulationApp({
+    "headless": False,
+}) 
+from isaacsim.core.utils.extensions import enable_extension
+import omni.kit.app
+extension_manager = omni.kit.app.get_app().get_extension_manager()
+extension_manager.add_path(ZIVID_EXT_PATH)
+if not enable_extension("isaacsim.zivid"):
+    raise RuntimeError("Failed to enable zivid extension")
 import omni.replicator.core as rep
 import omni.usd
 from omni.isaac.core.utils import prims
 from omni.isaac.core import World
 from omni.isaac.core.utils.semantics import add_update_semantics
 from omni.isaac.core.materials import PhysicsMaterial
-from pxr import UsdGeom, Gf, UsdPhysics
+from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf
 from isaacsim.core.utils.rotations import euler_angles_to_quat
 import isaacsim.core.utils.bounds as bounds_utils
+import isaacsim.zivid as zivid_sim
 import numpy as np
 import json
 import os
@@ -52,6 +61,12 @@ class SceneBuilder:
     def world_setup(self):
         self.world = World(stage_units_in_meters=1.0)
         self.world.scene.add_default_ground_plane()
+        bin_prim = prims.create_prim(
+            prim_path="/World/Bin",
+            position=(0,0,0),
+            scale=(1,1,1),
+            usd_path=self.scene_config["bin_usd_filepath"],
+        )
         
     def data_generator_loop(self,iters):
         #main data generation loop
@@ -60,6 +75,12 @@ class SceneBuilder:
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.populate_scene()
+            #do rendering stuff here
+            time.sleep(15.0) #wait a second for physics to settle
+            
+            for obj in self.scene_objects:
+                prims.delete_prim(prims.get_prim_path(obj))
+            print(f"Completed data generation iteration {i+1}/{iters}")
             
         pass     
     def populate_scene(self):
@@ -75,8 +96,12 @@ class SceneBuilder:
             - Within each cell, the object is randomly oriented and offset in each axis by a random amount (up to +- jitter)
             - Each object is then assigned a slightly different specular texture to simulate specular effects with ray tracing/depth sensor simulation
         """
+        max_scale = 1.0
+        min_scale = 1.0
         self.scene_objects = [] #list to hold selected objects for the scene
         objects_to_add = [] #list to hold object names to be added to the scene
+        
+        #randomise number of objects if specified
         if self.scene_config.get("rand_num_objects", False):
             self.scene_config["num_objects"] = random.randint(
                 self.scene_config["min_num_objects"],
@@ -84,6 +109,7 @@ class SceneBuilder:
             )
             print(f"Randomized number of objects to: {self.scene_config['num_objects']}")
         
+        #randomise scale bounds if specified
         if self.scene_config.get("vary_object_scale",False):
             #randomise scale bounds such that each object can be scaled independently, between min and max scale factors
             min_scale = random.uniform(self.scene_config["min_scale_bounds"][0], self.scene_config["min_scale_bounds"][1])
@@ -120,6 +146,14 @@ class SceneBuilder:
                 adjust_scale = max_diag_length / xy_diag
                 bin_dims = bin_dims * adjust_scale
             print(f"Randomized bin dimensions to: {bin_dims}")
+        
+        #create bin prim with physics properties
+        omni.kit.commands.execute(
+            "IsaacSimScalePrim",
+            path="/World/Bin",
+            scale = (scale_factor, scale_factor, scale_factor), #uniform scaling
+        )
+            
             
         #create voxel grid, starting from the top of the bin, with cell size = max_diag_length
         num_cells_x = int(bin_dims[0] // max_diag_length)
@@ -127,18 +161,12 @@ class SceneBuilder:
         num_cells_z = math.ceil(self.scene_config["num_objects"] / (num_cells_x * num_cells_y)) #number of vertical layers needed (round up)
         
         #create a list of all possible voxel cell positions, each object will be randomly assigned to one 
-        voxel_cells = [0] * (num_cells_x * num_cells_y * num_cells_z) #when a cell is occupied, set to 1
+        voxel_cells = list(range(0, num_cells_x * num_cells_y * num_cells_z))
+        random.shuffle(voxel_cells) #randomize order
         
-                
-        #we may need to extrat object dimensions from USD file here to ensure proper placement within bin, and to ensure proper z offset
-        #collision checks may also be needed to prevent initial overlaps
         for i, selected_object in enumerate(objects_to_add):
             #randomly select an unoccupied voxel cell
-            while True:
-                cell_index = random.randint(0, len(voxel_cells)-1)
-                if voxel_cells[cell_index] == 0:
-                    voxel_cells[cell_index] = 1 #mark cell as occupied
-                    break
+            cell_index = voxel_cells.pop()
             #compute voxel cell position
             [cell_x, cell_y, cell_z] = get_position_from_voxel_index(
                 voxel_index=(cell_index % num_cells_x, (cell_index // num_cells_x) % num_cells_y, cell_index // (num_cells_x * num_cells_y)),
@@ -147,17 +175,33 @@ class SceneBuilder:
                 jitter=self.scene_config["voxel_jitter"]
             )
             #compute scale within scene scaling bounds
-            scale_factor = random.uniform(min_scale, max_scale) if self.scene_config.get("vary_object_scale",False) else 1.0
+            scale_factor_part = random.uniform(min_scale, max_scale) if self.scene_config.get("vary_object_scale",False) else 1.0
             object_prim = prims.create_prim(
                 prim_path=f"/World/{selected_object}_{i}",
                 position=(cell_x, cell_y, cell_z), #objects are positioned within their respective voxel (with jitter)
                 orientation=euler_angles_to_quat([random.uniform(0, math.pi), random.uniform(0, math.pi), random.uniform(0, math.pi)]),
-                scale = (scale_factor, scale_factor, scale_factor), #uniformly scale to preserve proportions
+                scale = (scale_factor_part, scale_factor_part, scale_factor_part), #uniformly scale to preserve proportions
                 usd_path=self.objects_config[selected_object]["usd_filepath"],
                 semantic_label=self.objects_config[selected_object]["class"],
             )
             self.scene_objects.append(object_prim)
-
+    def assign_physics_materials(self):
+        #assign material properties to bin and objects. Objects get slightly randomized specular properties to simulate specular effects
+        pass
+    
+    def populate_sensor(self):
+        """
+        Use the zivid IsaacSim api to generate a zivid camera, and create a replicator camera to move with it (to capture annotation data).
+        The camera is moved n times during the capturing of a scene (after the phyiscs steps have been completed) to generate N unique datapoints per scene.
+        This approach is preferable over spawning N cameras, due to the reduced resource usage. 
+        The camera is not destroyed between scenes as to minimise the chance of memory leaks.
+        """
+        self.zivid_camera = zivid_sim.ZividCamera(
+            prim_path="/world/ZividCamera",
+            model_name = zivid_sim.ZividCameraModelName.ZIVID_2_PLUS_MR60
+        )
+        
+        
     def read_configs(self):
         #read scene config file
         with open("./Config/scene_config.json", 'r') as f:
