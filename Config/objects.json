@@ -1,0 +1,32 @@
+{
+    "object_1": {
+        "name": "Object One",
+        "class": "Type A",
+        "mesh_filepath": "path/to/object_one_mesh.obj",
+        "properties": {
+            "property_1": "value_1",
+            "property_2": "value_2",
+            "scale": 1.0
+        }
+    },
+    "object_2": {
+        "name": "Object Two",
+        "class": "Type B",
+        "mesh_filepath": "path/to/object_two_mesh.obj",
+        "properties": {
+            "property_1": "value_3",
+            "property_2": "value_4",
+            "scale": 0.5
+        }
+    }, 
+    "object_3": {
+        "name": "Object Three",
+        "class": "Type A",
+        "mesh_filepath": "path/to/object_three_mesh.obj",
+        "properties": {
+            "property_1": "value_5",
+            "property_2": "value_6",
+            "scale": 1.5
+        }
+    }
+}
