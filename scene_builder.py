@@ -33,7 +33,8 @@ from omni.isaac.core.utils import prims
 from omni.isaac.core import World
 from omni.isaac.core.utils.semantics import add_update_semantics
 from omni.isaac.core.materials import PhysicsMaterial
-from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf
+from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf, PhysxSchema
+from omni.physx.scripts import utils
 from isaacsim.core.utils.rotations import euler_angles_to_quat
 import isaacsim.core.utils.bounds as bounds_utils
 import isaacsim.zivid as zivid_sim
@@ -60,25 +61,45 @@ class SceneBuilder:
     
     def world_setup(self):
         self.world = World()
-        self.world.scene.add_default_ground_plane()
-        
-        
+        #self.world.scene.add_default_ground_plane()
+        stage = omni.usd.get_context().get_stage()
+        scene = UsdPhysics.Scene.Define(stage,Sdf.Path("/World/PhysicsScene"))
+        scene_prim = self.world.stage.GetPrimAtPath("/World/PhysicsScene")  
+        if not scene_prim.HasAPI(PhysxSchema.PhysxSceneAPI):
+            physx_scene_api = PhysxSchema.PhysxSceneAPI.Apply(scene_prim)
+        else:
+            physx_scene_api = PhysxSchema.PhysxSceneAPI(scene_prim)
+        scene.CreateGravityDirectionAttr().Set(Gf.Vec3f(0.0, 0.0, -1.0))
+        scene.CreateGravityMagnitudeAttr().Set(4.810)
+        self.world.get_physics_context().set_solver_type("TGS")
+
+    def material_setup(self):
+        """
+        TODO: Impliment material generation (high friction metal-realistic physics properties)
+            also must have randomisation graph for specular attributes
+            Materials will be dynamically bound to primitive.
+
+            Also: impliment bin material here
+        """
+        pass
     def data_generator_loop(self,iters):
         #main data generation loop
         #randomises certain scene parameters based on config. 
         #clears and repopulates the scene each iteration
         for i in range(iters):
+            self.world.clear()
+            self.world.scene.add_default_ground_plane()
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.populate_scene()
-            #do rendering stuff here
-            while True:
-                simulation_app.update() 
-
-            
+            self.world.reset()
+            for j in range(1000):
+                #print(f"step {i}")
+                self.world.step(render=True)
 
             
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
+            prims.delete_prim(prim_path = "/World/Bin")
             print(f"Completed data generation iteration {i+1}/{iters}")
             
         pass     
@@ -128,15 +149,15 @@ class SceneBuilder:
         max_diag_length = 0.0
         for obj_name in objects_to_add:
             obj_diag_length = self.asset_manager.asset_registry[obj_name]["diag_length"]
-            print(f"obj diagonal length: {obj_diag_length}")
+            
             if self.scene_config.get("vary_object_scale",False):
                 obj_diag_length *= max_scale #scale the diag length by the max scale factor
             if obj_diag_length > max_diag_length:
                 max_diag_length = obj_diag_length
             
-            print(f"max_diag_length: {max_diag_length}")
+            
         max_diag_length = max_diag_length* 1.1 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
-        print(f"max diagonal length: {max_diag_length}")
+       
         
         #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
         bin_dims = np.asarray(self.scene_config["bin_dimensions"])
@@ -161,19 +182,15 @@ class SceneBuilder:
                 scale=(scale_factor,scale_factor,scale_factor),
                 usd_path=bin_usd,
             )
-            # Apply Rigid Body API
             rb_api = UsdPhysics.RigidBodyAPI.Apply(self.bin_prim)
             rb_api.CreateRigidBodyEnabledAttr(True)
             rb_api.CreateKinematicEnabledAttr(True) 
-
-            # Apply Collision API
-            col_api = UsdPhysics.CollisionAPI.Apply(self.bin_prim)
-            col_api.CreateCollisionEnabledAttr(True)
             
-            # Optional: Apply Mesh Collision (for accurate concave bin shapes)
-            # If objects fall through the walls, enable this:
             mesh_api = UsdPhysics.MeshCollisionAPI.Apply(self.bin_prim)
             mesh_api.CreateApproximationAttr("convexDecomposition")
+            col_api = UsdPhysics.CollisionAPI.Apply(self.bin_prim)
+            col_api.CreateCollisionEnabledAttr(True)
+
         else:
             raise Exception
             
@@ -206,11 +223,37 @@ class SceneBuilder:
                 scale = (scale_factor_part, scale_factor_part, scale_factor_part), #uniformly scale to preserve proportions
                 usd_path=self.objects_config[selected_object]["usd_filepath"],
                 semantic_label=self.objects_config[selected_object]["class"],
+                prim_type="Xform"
             )
+            self.assign_physics_materials(object_prim)
+
             self.scene_objects.append(object_prim)
-    def assign_physics_materials(self):
-        #assign material properties to bin and objects. Objects get slightly randomized specular properties to simulate specular effects
-        pass
+    def assign_physics_materials(self, prim):
+        """
+        Applies Rigid Body physics, Mass, Collisions, and Visual Materials.
+        """
+        # 1. RIGID BODY
+        if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
+            rb_api = UsdPhysics.RigidBodyAPI.Apply(prim)
+            rb_api.CreateRigidBodyEnabledAttr(True)
+            rb_api.CreateKinematicEnabledAttr(False) 
+        # MESH STUFF
+        if not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
+            mesh_api = UsdPhysics.MeshCollisionAPI.Apply(prim)
+            mesh_api.CreateApproximationAttr("convexDecomposition")
+        # COLLISION
+        if not prim.HasAPI(UsdPhysics.CollisionAPI):
+            col_api = UsdPhysics.CollisionAPI.Apply(prim)
+            col_api.CreateCollisionEnabledAttr(True)
+            
+        # MASS
+        if not prim.HasAPI(UsdPhysics.MassAPI):
+            mass_api = UsdPhysics.MassAPI.Apply(prim)
+            mass_api.CreateDensityAttr(7800) #constant steel density for now
+        if not prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI):
+            physx_rb_api = PhysxSchema.PhysxRigidBodyAPI.Apply(prim)
+            physx_rb_api.CreateEnableCCDAttr(True)
+
     
     def populate_sensor(self):
         """

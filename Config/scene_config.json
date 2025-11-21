@@ -2,8 +2,8 @@
 	"default_scene": {
 		"num_objects": 20,
 		"rand_num_objects": true,
-		"max_num_objects": 20,
-		"min_num_objects": 5,
+		"max_num_objects": 80,
+		"min_num_objects": 50,
 		"object_type": "heterogeneous",
 		"vary_object_type": true,
 		"vary_object_scale": true,
