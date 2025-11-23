@@ -48,6 +48,7 @@ import math
 import logging
 from Utils.mesh_utils import AssetManager
 from Utils.mesh_utils import get_position_from_voxel_index
+from Utils.replicator_utils import RepCam
 
 
 class SceneBuilder:
@@ -73,6 +74,8 @@ class SceneBuilder:
         scene.CreateGravityMagnitudeAttr().Set(4.810)
         self.world.get_physics_context().set_solver_type("TGS")
 
+        
+
     def material_setup(self):
         """
         TODO: Impliment material generation (high friction metal-realistic physics properties)
@@ -86,13 +89,17 @@ class SceneBuilder:
         #main data generation loop
         #randomises certain scene parameters based on config. 
         #clears and repopulates the scene each iteration
+        
+        self.world.clear()
+        self.world.scene.add_default_ground_plane()
+        self.rep_cam = RepCam()
         for i in range(iters):
-            self.world.clear()
-            self.world.scene.add_default_ground_plane()
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.populate_scene()
             self.world.reset()
             for j in range(1000):
+                if j == 1:
+                    time.sleep(5)
                 #print(f"step {i}")
                 self.world.step(render=True)
 
@@ -100,6 +107,8 @@ class SceneBuilder:
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
             prims.delete_prim(prim_path = "/World/Bin")
+            for z in range(500):
+                self.world.step(render=True)
             print(f"Completed data generation iteration {i+1}/{iters}")
             
         pass     
@@ -170,7 +179,9 @@ class SceneBuilder:
             if min_dim < max_diag_length:
                 adjust_scale = max_diag_length / min_dim
                 bin_dims = bin_dims * adjust_scale * 1.1
+                scale_factor *= adjust_scale * 1.1
             print(f"Randomized bin dimensions to: {bin_dims}")
+        print(f"Scale factor: {scale_factor}")
         
         bin_usd = self.scene_config.get("usd_filepath",None)
         if bin_usd is not None:
@@ -179,20 +190,17 @@ class SceneBuilder:
                 prim_path="/World/Bin",
                 prim_type="Xform",
                 position=(0,0,0),
-                scale=(scale_factor,scale_factor,scale_factor),
                 usd_path=bin_usd,
+                semantic_label="bin"
             )
-            rb_api = UsdPhysics.RigidBodyAPI.Apply(self.bin_prim)
-            rb_api.CreateRigidBodyEnabledAttr(True)
-            rb_api.CreateKinematicEnabledAttr(True) 
-            
-            mesh_api = UsdPhysics.MeshCollisionAPI.Apply(self.bin_prim)
-            mesh_api.CreateApproximationAttr("convexDecomposition")
-            col_api = UsdPhysics.CollisionAPI.Apply(self.bin_prim)
-            col_api.CreateCollisionEnabledAttr(True)
-
+            bin_xform = UsdGeom.Xformable(self.bin_prim)
+            bin_xform.ClearXformOpOrder() 
+            bin_xform.AddTranslateOp().Set(Gf.Vec3d(0,0,0))
+            bin_xform.AddRotateXYZOp().Set(Gf.Vec3d(0,0,0))
+            bin_xform.AddScaleOp().Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
+            self.assign_physics_materials(self.bin_prim,is_static=True)
         else:
-            raise Exception
+            raise Exception("No bin USD filepath specified")
             
             
         #create voxel grid, starting from the top of the bin, with cell size = max_diag_length
@@ -228,15 +236,11 @@ class SceneBuilder:
             self.assign_physics_materials(object_prim)
 
             self.scene_objects.append(object_prim)
-    def assign_physics_materials(self, prim):
+    def assign_physics_materials(self, prim,is_static=False):
         """
         Applies Rigid Body physics, Mass, Collisions, and Visual Materials.
         """
-        # 1. RIGID BODY
-        if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
-            rb_api = UsdPhysics.RigidBodyAPI.Apply(prim)
-            rb_api.CreateRigidBodyEnabledAttr(True)
-            rb_api.CreateKinematicEnabledAttr(False) 
+
         # MESH STUFF
         if not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
             mesh_api = UsdPhysics.MeshCollisionAPI.Apply(prim)
@@ -245,27 +249,34 @@ class SceneBuilder:
         if not prim.HasAPI(UsdPhysics.CollisionAPI):
             col_api = UsdPhysics.CollisionAPI.Apply(prim)
             col_api.CreateCollisionEnabledAttr(True)
-            
-        # MASS
-        if not prim.HasAPI(UsdPhysics.MassAPI):
-            mass_api = UsdPhysics.MassAPI.Apply(prim)
-            mass_api.CreateDensityAttr(7800) #constant steel density for now
-        if not prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI):
-            physx_rb_api = PhysxSchema.PhysxRigidBodyAPI.Apply(prim)
-            physx_rb_api.CreateEnableCCDAttr(True)
+        if not is_static:
+            # RIGID BODY
+            if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
+                rb_api = UsdPhysics.RigidBodyAPI.Apply(prim)
+                rb_api.CreateRigidBodyEnabledAttr(True)
+                rb_api.CreateKinematicEnabledAttr(False)      
+            # MASS
+            if not prim.HasAPI(UsdPhysics.MassAPI):
+                mass_api = UsdPhysics.MassAPI.Apply(prim)
+                mass_api.CreateDensityAttr(7800) #constant steel density for now
+
+            #
+            if not prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI):
+                physx_rb_api = PhysxSchema.PhysxRigidBodyAPI.Apply(prim)
+                physx_rb_api.CreateEnableCCDAttr(True)
 
     
-    def populate_sensor(self):
-        """
-        Use the zivid IsaacSim api to generate a zivid camera, and create a replicator camera to move with it (to capture annotation data).
-        The camera is moved n times during the capturing of a scene (after the phyiscs steps have been completed) to generate N unique datapoints per scene.
-        This approach is preferable over spawning N cameras, due to the reduced resource usage. 
-        The camera is not destroyed between scenes as to minimise the chance of memory leaks.
-        """
-        self.zivid_camera = zivid_sim.ZividCamera(
-            prim_path="/world/ZividCamera",
-            model_name = zivid_sim.ZividCameraModelName.ZIVID_2_PLUS_MR60
-        )
+    # def populate_sensor(self):
+    #     """
+    #     Use the zivid IsaacSim api to generate a zivid camera, and create a replicator camera to move with it (to capture annotation data).
+    #     The camera is moved n times during the capturing of a scene (after the phyiscs steps have been completed) to generate N unique datapoints per scene.
+    #     This approach is preferable over spawning N cameras, due to the reduced resource usage. 
+    #     The camera is not destroyed between scenes as to minimise the chance of memory leaks.
+    #     """
+    #     self.zivid_camera = zivid_sim.camera.ZividCamera(
+    #         prim_path="/World/ZividCamera",
+    #         model_name = zivid_sim.camera.models.ZividCameraModelName.ZIVID_2_PLUS_MR60
+    #     )
         
         
     def read_configs(self):
