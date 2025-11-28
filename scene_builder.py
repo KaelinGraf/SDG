@@ -92,17 +92,15 @@ class SceneBuilder:
         
         self.world.clear()
         self.world.scene.add_default_ground_plane()
-        self.rep_cam = RepCam()
+        self.rep_cam = RepCam(self.scene_config.get("bin_dimensions",None))
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.populate_scene()
             self.world.reset()
             for j in range(1000):
-                if j == 1:
-                    time.sleep(5)
-                #print(f"step {i}")
                 self.world.step(render=True)
-
+            self.rep_cam.cam_look_at("/World/Bin")
+            #self.rep_cam.cam_trigger()
             
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
@@ -110,7 +108,6 @@ class SceneBuilder:
             for z in range(500):
                 self.world.step(render=True)
             print(f"Completed data generation iteration {i+1}/{iters}")
-            
         pass     
     def populate_scene(self):
         """
