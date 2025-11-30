@@ -1,0 +1,205 @@
+{
+    "aluminium_anodized": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Anodized.mdl",
+        "name": "aluminium_anodized",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "aluminium_brushed": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Brushed.mdl",
+        "name": "aluminium_brushed",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "aluminum_cast": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Cast.mdl",
+        "name": "aluminum_cast",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "aluminum_scratched": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Scratched.mdl",
+        "name": "aluminum_scratched",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "brass": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Brass.mdl",
+        "name": "brass",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "brushed_antique_copper": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Brushed_Antique_Copper.mdl",
+        "name": "brushed_antique_copper",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "copper": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Copper.mdl",
+        "name": "copper",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "plastic_abs": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Plastic_ABS.mdl",
+        "name": "plastic_abs",
+        "non_visual": [
+            "plastic",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ]
+        }
+    },
+    "stainless_steel": {
+        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Stainless_Steel.mdl",
+        "name": "stainless_steel",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.0,
+                1.0
+            ]
+        }
+    }
+}

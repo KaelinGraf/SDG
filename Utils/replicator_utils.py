@@ -65,11 +65,22 @@ class RepCam:
         """
         rotate camera to look at a prim by computing the dot product of the camera's forward vector and the vector from the camera to the prim,
         and then using the arccos of the dot product to compute the angle between the two vectors. 
+        @args:
+            prim_path: reference path to extract prim pose from 
+            prim_pos: optional, if prim_pos is provided, it will be used instead of extracting from prim_path
+                        format: [[x,y,z],[qx,qy,qz,qw]]
         """
         if prim_pos is None:
             prim = get_prim_at_path(prim_path)
             prim_pos = get_world_pose(prim_path) 
         print(prim_pos[0],prim_pos[1])
+
+        cam_pos = get_world_pose("/World/ZividCamera") #we will translate the rep cam afterward to match
+        #position randomisation has already been applied to the zivid camera at this step, we're now concerned
+        #with re-alignment of the camera toward the specified prim
+        cam_rot =cam_pos[1]
+        
+
         
 
         
