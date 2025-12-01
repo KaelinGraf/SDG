@@ -33,6 +33,8 @@ from omni.isaac.core.utils import prims
 from omni.isaac.core import World
 from omni.isaac.core.utils.semantics import add_update_semantics
 from omni.isaac.core.materials import PhysicsMaterial
+from isaacsim.core.api.materials import OmniPBR
+from isaacsim.sensors.rtx import apply_nonvisual_material
 from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf, PhysxSchema
 from omni.physx.scripts import utils
 from isaacsim.core.utils.rotations import euler_angles_to_quat
@@ -49,6 +51,7 @@ import logging
 from Utils.mesh_utils import AssetManager
 from Utils.mesh_utils import get_position_from_voxel_index
 from Utils.replicator_utils import RepCam
+from Utils.material_manager import MaterialManager
 
 
 class SceneBuilder:
@@ -57,7 +60,9 @@ class SceneBuilder:
         self.objects = {}
         self.read_configs()
         self.asset_manager = AssetManager(self.objects_config)
+        self.material_manager = MaterialManager()
         self.world_setup()
+
 
     
     def world_setup(self):
@@ -84,6 +89,8 @@ class SceneBuilder:
 
             Also: impliment bin material here
         """
+
+
         pass
     def data_generator_loop(self,iters):
         #main data generation loop
@@ -95,6 +102,8 @@ class SceneBuilder:
         self.rep_cam = RepCam(self.scene_config.get("bin_dimensions",None))
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
+            self.material_manager.reset()
+            self.material_manager.populate_materials(n=1)
             self.populate_scene()
             self.world.reset()
             for j in range(1000):
@@ -109,6 +118,7 @@ class SceneBuilder:
                 self.world.step(render=True)
             print(f"Completed data generation iteration {i+1}/{iters}")
         pass     
+    
     def populate_scene(self):
         """
         Populate scene is called within the data_generator_loop method.
@@ -230,6 +240,8 @@ class SceneBuilder:
                 semantic_label=self.objects_config[selected_object]["class"],
                 prim_type="Xform"
             )
+            #self.material_manager.create_and_bind(prim_path=object_prim.GetPath())
+            self.material_manager.bind_material(prim_path=object_prim.GetPath())
             self.assign_physics_materials(object_prim)
 
             self.scene_objects.append(object_prim)

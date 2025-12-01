@@ -1,6 +1,6 @@
 {
     "aluminium_anodized": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Anodized.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Aluminum_Anodized.mdl",
         "name": "aluminium_anodized",
         "non_visual": [
             "aluminum",
@@ -23,8 +23,8 @@
         }
     },
     "aluminium_brushed": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Brushed.mdl",
-        "name": "aluminium_brushed",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Brushed.mdl",
+        "name": "Aluminum_Brushed",
         "non_visual": [
             "aluminum",
             "none",
@@ -40,13 +40,13 @@
                 1.0
             ],
             "metallic": [
-                0.0,
+                0.8,
                 1.0
             ]
         }
     },
     "aluminum_cast": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Cast.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Aluminum_Cast.mdl",
         "name": "aluminum_cast",
         "non_visual": [
             "aluminum",
@@ -68,8 +68,54 @@
             ]
         }
     },
+    "aluminum_knurled": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Knurling.mdl",
+        "name": "Aluminum_Knurling",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                1.0
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "aluminum_sheet": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Sheet.mdl",
+        "name": "Aluminum_Sheet",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                0.5
+            ],
+            "metallic": [
+                0.9,
+                1.0
+            ]
+        }
+    },
     "aluminum_scratched": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Aluminum_Scratched.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Scratched.mdl",
         "name": "aluminum_scratched",
         "non_visual": [
             "aluminum",
@@ -92,7 +138,7 @@
         }
     },
     "brass": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Brass.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Brass.mdl",
         "name": "brass",
         "non_visual": [
             "brass",
@@ -114,8 +160,54 @@
             ]
         }
     },
+    "brass_polished": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Brass_Polished.mdl",
+        "name": "Brass_Polished",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.8,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                0.2
+            ],
+            "metallic": [
+                0.9,
+                1.0
+            ]
+        }
+    },
+    "brass_knurled": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Brass_Knurling.mdl",
+        "name": "Brass_Knurling",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.2,
+                0.8
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
     "brushed_antique_copper": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Brushed_Antique_Copper.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Brushed_Antique_Copper.mdl",
         "name": "brushed_antique_copper",
         "non_visual": [
             "bronze",
@@ -137,8 +229,54 @@
             ]
         }
     },
+    "chromium": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Chromium.mdl",
+        "name": "Chromium",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.8,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                0.3
+            ],
+            "metallic": [
+                0.9,
+                1.0
+            ]
+        }
+    },
+    "chromium_knurled": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Chromium_Knurling.mdl",
+        "name": "Chromium_Knurling",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.5,
+                1.0
+            ],
+            "roughness": [
+                0.2,
+                0.8
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
     "copper": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Copper.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Copper.mdl",
         "name": "copper",
         "non_visual": [
             "bronze",
@@ -160,8 +298,123 @@
             ]
         }
     },
+    "copper_scratched": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Copper_Scratched.mdl",
+        "name": "Copper_Scratched",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                0.8
+            ],
+            "roughness": [
+                0.2,
+                0.7
+            ],
+            "metallic": [
+                0.7,
+                1.0
+            ]
+        }
+    },
+    "iron_brushed": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Iron_Brushed.mdl",
+        "name": "Iron_Brushed",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                1.0
+            ],
+            "roughness": [
+                0.3,
+                0.7
+            ],
+            "metallic": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "iron_cast": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Iron_Cast.mdl",
+        "name": "Iron_Cast",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                0.5
+            ],
+            "roughness": [
+                0.5,
+                1.0
+            ],
+            "metallic": [
+                0.4,
+                0.9
+            ]
+        }
+    },
+    "iron_pitted_steel": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Iron_Pitted_Steel.mdl",
+        "name": "Iron_Pitted_Steel",
+        "non_visual": [
+            "oxidized_steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.0,
+                0.4
+            ],
+            "roughness": [
+                0.6,
+                1.0
+            ],
+            "metallic": [
+                0.2,
+                0.8
+            ]
+        }
+    },
+    "nickel_brushed": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Nickel_Brushed.mdl",
+        "name": "Nickel_Brushed",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.5,
+                1.0
+            ],
+            "roughness": [
+                0.2,
+                0.6
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
     "plastic_abs": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Plastic_ABS.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Plastics/Plastic_ABS.mdl",
         "name": "plastic_abs",
         "non_visual": [
             "plastic",
@@ -180,7 +433,7 @@
         }
     },
     "stainless_steel": {
-        "mdl_path": "/home/kaelin/BinPicking/SDG/Materials/Stainless_Steel.mdl",
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Stainless_Steel.mdl",
         "name": "stainless_steel",
         "non_visual": [
             "steel",
@@ -199,6 +452,121 @@
             "metallic": [
                 0.0,
                 1.0
+            ]
+        }
+    },
+    "stainless_steel_milled": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Stainless_Steel_Milled.mdl",
+        "name": "Stainless_Steel_Milled",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.4,
+                1.0
+            ],
+            "roughness": [
+                0.2,
+                0.6
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "steel_carbon": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Steel_Carbon.mdl",
+        "name": "Steel_Carbon",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                0.8
+            ],
+            "roughness": [
+                0.4,
+                0.8
+            ],
+            "metallic": [
+                0.7,
+                1.0
+            ]
+        }
+    },
+    "steel_galvanized": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Steel_Galvanized.mdl",
+        "name": "Steel_Galvanized",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.1,
+                0.6
+            ],
+            "roughness": [
+                0.3,
+                0.7
+            ],
+            "metallic": [
+                0.5,
+                0.9
+            ]
+        }
+    },
+    "titanium_sheet": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Titanium_Sheet.mdl",
+        "name": "Titanium_Sheet",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.4,
+                0.9
+            ],
+            "roughness": [
+                0.2,
+                0.6
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "zinc_galvanizing": {
+        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Zinc_Galvanizing.mdl",
+        "name": "Zinc_Galvanizing",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.1,
+                0.5
+            ],
+            "roughness": [
+                0.4,
+                0.8
+            ],
+            "metallic": [
+                0.5,
+                0.9
             ]
         }
     }
