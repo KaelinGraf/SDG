@@ -21,9 +21,11 @@ import warp
 simulation_app = SimulationApp({
     "headless": False,
 }) 
+import carb
 from isaacsim.core.utils.extensions import enable_extension
 import omni.kit.app
 extension_manager = omni.kit.app.get_app().get_extension_manager()
+
 extension_manager.add_path(ZIVID_EXT_PATH)
 if not enable_extension("isaacsim.zivid"):
     raise RuntimeError("Failed to enable zivid extension")
@@ -35,7 +37,7 @@ from omni.isaac.core.utils.semantics import add_update_semantics
 from omni.isaac.core.materials import PhysicsMaterial
 from isaacsim.core.api.materials import OmniPBR
 from isaacsim.sensors.rtx import apply_nonvisual_material
-from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf, PhysxSchema
+from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf, PhysxSchema, Vt, Usd
 from omni.physx.scripts import utils
 from isaacsim.core.utils.rotations import euler_angles_to_quat
 import isaacsim.core.utils.bounds as bounds_utils
@@ -52,7 +54,55 @@ from Utils.mesh_utils import AssetManager
 from Utils.mesh_utils import get_position_from_voxel_index
 from Utils.replicator_utils import RepCam
 from Utils.material_manager import MaterialManager
+# --- FIX START: REGISTER PATHS BEFORE LOADING MATERIAL LIB ---
+# In scene_builder.py
 
+def register_core_mdl_paths():
+    tokens = carb.tokens.get_tokens_interface()
+    kit_path = tokens.resolve("${kit}")
+    
+    # 1. Define the necessary paths
+    # Core definitions (::nvidia::core)
+    path_core = os.path.join(kit_path, "mdl", "core", "mdl")
+    # Material definitions (::base, ::state, etc.)
+    path_materials = os.path.join(kit_path, "mdl", "materials", "mdl")
+    # Your local assets
+    path_local = "/home/kaelin/Documents/mdl"
+    
+    paths_to_add = [path_core, path_materials, path_local]
+
+    # 2. Update Settings Safely
+    settings = carb.settings.get_settings()
+    key = "/renderer/mdl/searchPaths"
+    
+    # Get raw value (do not force string)
+    current_value = settings.get(key)
+    
+    final_paths = []
+    
+    # Handle existing paths whether they are a List or a String
+    if current_value:
+        if isinstance(current_value, list):
+            final_paths = list(current_value)
+        elif isinstance(current_value, str):
+            final_paths = current_value.split(os.pathsep)
+            
+    # Add new paths if they aren't already there
+    for p in paths_to_add:
+        if p not in final_paths:
+            final_paths.append(p)
+            
+    # 3. Write back. 
+    # Important: Isaac Sim prefers the List format if it started that way.
+    settings.set(key, final_paths)
+    
+    print(f"[SceneBuilder] Registered MDL Paths: {final_paths}")
+
+# Call this BEFORE enable_extension("omni.kit.material.library")
+register_core_mdl_paths()
+
+# 3. NOW enable the extension. It will see the paths during startup.
+enable_extension("omni.kit.material.library")
 
 class SceneBuilder:
     def __init__(self,scene_name):
@@ -103,7 +153,8 @@ class SceneBuilder:
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
-            self.material_manager.populate_materials(n=1)
+            self.material_manager.create_material(template="plastic_abs")
+            self.material_manager.populate_materials(n=4)
             self.populate_scene()
             self.world.reset()
             for j in range(1000):
@@ -205,10 +256,14 @@ class SceneBuilder:
             bin_xform.AddTranslateOp().Set(Gf.Vec3d(0,0,0))
             bin_xform.AddRotateXYZOp().Set(Gf.Vec3d(0,0,0))
             bin_xform.AddScaleOp().Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
+            self.generate_box_uvs(self.bin_prim)
+            self.material_manager.bind_material(mat_prim_path="/Looks/Plastic_ABS",prim_path="/World/Bin")
             self.assign_physics_materials(self.bin_prim,is_static=True)
         else:
             raise Exception("No bin USD filepath specified")
             
+        #use bin scale factor to change number of objects
+        #self.scene_config["num_objects"] = int(self.scene_config["num_objects"] * scale_factor)
             
         #create voxel grid, starting from the top of the bin, with cell size = max_diag_length
         num_cells_x = int(bin_dims[0] // max_diag_length)
@@ -240,6 +295,7 @@ class SceneBuilder:
                 semantic_label=self.objects_config[selected_object]["class"],
                 prim_type="Xform"
             )
+            self.generate_box_uvs(object_prim)
             #self.material_manager.create_and_bind(prim_path=object_prim.GetPath())
             self.material_manager.bind_material(prim_path=object_prim.GetPath())
             self.assign_physics_materials(object_prim)
@@ -299,8 +355,84 @@ class SceneBuilder:
         self.object_keys = list(self.objects_config.keys()) #list to hold object names, for easy random selection
         print(len(self.objects_config.keys()), " objects available for scene building")
         
-        
 
+
+
+
+
+    def generate_box_uvs(self, root_prim, scale=10.0):
+        """
+        Applies Box Mapping (Tri-planar) UVs to all meshes under root_prim.
+        Uses faceVarying interpolation to prevent stretching on sides.
+        """
+        # Create iterator to find all meshes
+        range_iterator = Usd.PrimRange(root_prim)
+        
+        for prim in range_iterator:
+            if not prim.IsA(UsdGeom.Mesh):
+                continue
+                
+            mesh = UsdGeom.Mesh(prim)
+            
+            # Get mesh data
+            points = mesh.GetPointsAttr().Get()
+            face_vertex_counts = mesh.GetFaceVertexCountsAttr().Get()
+            face_vertex_indices = mesh.GetFaceVertexIndicesAttr().Get()
+            
+            if not points or not face_vertex_indices:
+                continue
+
+            pv_api = UsdGeom.PrimvarsAPI(prim)
+            # Optional: Skip if UVs exist
+            # if pv_api.HasPrimvar("st"): continue
+
+            uvs = []
+            
+            # Iterate over faces to calculate normals and project UVs
+            # faceVarying means we generate 1 UV per vertex-index in the face list
+            idx_pointer = 0
+            for count in face_vertex_counts:
+                # Get indices for this face
+                face_indices = face_vertex_indices[idx_pointer : idx_pointer + count]
+                idx_pointer += count
+                
+                # Calculate rough Face Normal using first 3 points of the polygon
+                # (Assumes planar faces, which is standard)
+                p0 = Gf.Vec3f(points[face_indices[0]])
+                p1 = Gf.Vec3f(points[face_indices[1]])
+                p2 = Gf.Vec3f(points[face_indices[2]])
+                
+                # Normal = Cross Product of two edges
+                v1 = p1 - p0
+                v2 = p2 - p0
+                normal = Gf.Cross(v1, v2).GetNormalized()
+                
+                # Determine Dominant Axis for Box Mapping
+                # X-projection
+                if abs(normal[0]) >= abs(normal[1]) and abs(normal[0]) >= abs(normal[2]):
+                    u_idx, v_idx = 1, 2 # Project onto YZ plane
+                # Y-projection
+                elif abs(normal[1]) >= abs(normal[0]) and abs(normal[1]) >= abs(normal[2]):
+                    u_idx, v_idx = 0, 2 # Project onto XZ plane
+                # Z-projection
+                else:
+                    u_idx, v_idx = 0, 1 # Project onto XY plane
+
+                # Generate UVs for this face
+                for v_idx_in_face in face_indices:
+                    p = points[v_idx_in_face]
+                    
+                    # Apply Scale
+                    u = p[u_idx] * scale
+                    v = p[v_idx] * scale
+                    
+                    uvs.append(Gf.Vec2f(u, v))
+
+            # Apply the Primvar with faceVarying interpolation
+            # This allows 1 vertex to have different UVs for different faces (sharp edges)
+            pv = pv_api.CreatePrimvar("st", Sdf.ValueTypeNames.TexCoord2fArray, UsdGeom.Tokens.faceVarying)
+            pv.Set(uvs)
+            print(f"Generated Box UVs for {prim.GetPath()}")
     
 def main():
     parser = argparse.ArgumentParser(description="Isaac Sim Bin Picking Data Generator Scene Builder")

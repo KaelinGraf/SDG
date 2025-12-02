@@ -1,7 +1,7 @@
 {
     "aluminium_anodized": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Aluminum_Anodized.mdl",
-        "name": "aluminium_anodized",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Anodized.mdl",
+        "name": "Aluminum_Anodized",
         "non_visual": [
             "aluminum",
             "none",
@@ -19,11 +19,35 @@
             "metallic": [
                 0.0,
                 1.0
+            ],
+            "smudges": [
+                0.0,
+                0.4
+            ],
+            "wear": [
+                0.0,
+                0.4
+            ],
+            "dirt_weight": [
+                0.0,
+                0.4
+            ],
+            "scratches": [
+                0.0,
+                0.4
+            ],
+            "scratches_bump_strength": [
+                0.0,
+                0.6
+            ],
+            "anodization_bump_size": [
+                0.04,
+                0.64
             ]
         }
     },
     "aluminium_brushed": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Brushed.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Brushed.mdl",
         "name": "Aluminum_Brushed",
         "non_visual": [
             "aluminum",
@@ -42,34 +66,23 @@
             "metallic": [
                 0.8,
                 1.0
-            ]
-        }
-    },
-    "aluminum_cast": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Aluminum_Cast.mdl",
-        "name": "aluminum_cast",
-        "non_visual": [
-            "aluminum",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "specular": [
-                0.0,
-                1.0
             ],
-            "roughness": [
+            "scratch_variation_amount": [
                 0.0,
-                1.0
+                0.8
             ],
-            "metallic": [
-                0.0,
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
                 1.0
             ]
         }
     },
     "aluminum_knurled": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Knurling.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Knurling.mdl",
         "name": "Aluminum_Knurling",
         "non_visual": [
             "aluminum",
@@ -92,7 +105,7 @@
         }
     },
     "aluminum_sheet": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Sheet.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Sheet.mdl",
         "name": "Aluminum_Sheet",
         "non_visual": [
             "aluminum",
@@ -111,12 +124,20 @@
             "metallic": [
                 0.9,
                 1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
             ]
         }
     },
     "aluminum_scratched": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Aluminum_Scratched.mdl",
-        "name": "aluminum_scratched",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Scratched.mdl",
+        "name": "Aluminum_Scratched",
         "non_visual": [
             "aluminum",
             "none",
@@ -134,12 +155,48 @@
             "metallic": [
                 0.0,
                 1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
             ]
         }
     },
     "brass": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Brass.mdl",
-        "name": "brass",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass.mdl",
+        "name": "Brass",
         "non_visual": [
             "brass",
             "none",
@@ -157,11 +214,27 @@
             "metallic": [
                 0.0,
                 1.0
+            ],
+            "roughness_variation": [
+                0.75,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.4
+            ],
+            "dirt_dents": [
+                0.0,
+                0.4
+            ],
+            "bump_strength": [
+                0.0,
+                0.49
             ]
         }
     },
     "brass_polished": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Brass_Polished.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Polished.mdl",
         "name": "Brass_Polished",
         "non_visual": [
             "brass",
@@ -180,11 +253,23 @@
             "metallic": [
                 0.9,
                 1.0
+            ],
+            "roughness_variation": [
+                0.42,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.4
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
             ]
         }
     },
     "brass_knurled": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Brass_Knurling.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Knurling.mdl",
         "name": "Brass_Knurling",
         "non_visual": [
             "brass",
@@ -203,12 +288,24 @@
             "metallic": [
                 0.8,
                 1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.52
+            ],
+            "cavities_dirt": [
+                0.53,
+                1.0
+            ],
+            "bump_strength": [
+                0.8,
+                1.0
             ]
         }
     },
     "brushed_antique_copper": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Brushed_Antique_Copper.mdl",
-        "name": "brushed_antique_copper",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Antique_Brushed_Patinated.mdl",
+        "name": "Copper_Antique_Brushed_Patinated",
         "non_visual": [
             "bronze",
             "none",
@@ -226,11 +323,35 @@
             "metallic": [
                 0.0,
                 1.0
+            ],
+            "patina_metal_blend": [
+                0.3,
+                0.9
+            ],
+            "patina_metal_blend_softness": [
+                0.05,
+                0.65
+            ],
+            "patina_brightness": [
+                0.3,
+                0.9
+            ],
+            "smudge_amount": [
+                0.0,
+                0.8
+            ],
+            "patina_bump_amount": [
+                0.0,
+                0.8
+            ],
+            "copper_bump_amount": [
+                0.0,
+                0.8
             ]
         }
     },
     "chromium": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Chromium.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium.mdl",
         "name": "Chromium",
         "non_visual": [
             "silver",
@@ -249,11 +370,15 @@
             "metallic": [
                 0.9,
                 1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
             ]
         }
     },
     "chromium_knurled": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Chromium_Knurling.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Knurling.mdl",
         "name": "Chromium_Knurling",
         "non_visual": [
             "silver",
@@ -276,8 +401,8 @@
         }
     },
     "copper": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Metals/Copper.mdl",
-        "name": "copper",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper.mdl",
+        "name": "Copper",
         "non_visual": [
             "bronze",
             "none",
@@ -295,11 +420,15 @@
             "metallic": [
                 0.0,
                 1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
             ]
         }
     },
     "copper_scratched": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Copper_Scratched.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Scratched.mdl",
         "name": "Copper_Scratched",
         "non_visual": [
             "bronze",
@@ -318,11 +447,47 @@
             "metallic": [
                 0.7,
                 1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
             ]
         }
     },
     "iron_brushed": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Iron_Brushed.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Brushed.mdl",
         "name": "Iron_Brushed",
         "non_visual": [
             "iron",
@@ -341,34 +506,23 @@
             "metallic": [
                 0.6,
                 1.0
-            ]
-        }
-    },
-    "iron_cast": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Iron_Cast.mdl",
-        "name": "Iron_Cast",
-        "non_visual": [
-            "iron",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "specular": [
+            ],
+            "scratch_variation_amount": [
                 0.0,
-                0.5
+                0.8
             ],
-            "roughness": [
-                0.5,
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
                 1.0
-            ],
-            "metallic": [
-                0.4,
-                0.9
             ]
         }
     },
     "iron_pitted_steel": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Iron_Pitted_Steel.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Pitted_Steel.mdl",
         "name": "Iron_Pitted_Steel",
         "non_visual": [
             "oxidized_steel",
@@ -387,11 +541,23 @@
             "metallic": [
                 0.2,
                 0.8
+            ],
+            "rust_brightness": [
+                0.0,
+                0.4
+            ],
+            "bump_amount_1": [
+                0.0,
+                0.8
+            ],
+            "pit_transition_softness": [
+                0.0,
+                0.4
             ]
         }
     },
     "nickel_brushed": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Nickel_Brushed.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Brushed.mdl",
         "name": "Nickel_Brushed",
         "non_visual": [
             "silver",
@@ -410,31 +576,44 @@
             "metallic": [
                 0.8,
                 1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
             ]
         }
     },
     "plastic_abs": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/Base/Plastics/Plastic_ABS.mdl",
-        "name": "plastic_abs",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/Base/Plastics/Plastic_ABS.mdl",
+        "name": "Plastic_ABS",
         "non_visual": [
             "plastic",
             "none",
             "emissive"
         ],
         "randomise": {
-            "specular": [
-                0.0,
+            "roughness": [
+                0.6,
                 1.0
             ],
-            "roughness": [
+            "color": "true",
+            "specular": [
                 0.0,
-                1.0
+                0.3
             ]
         }
     },
     "stainless_steel": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Stainless_Steel.mdl",
-        "name": "stainless_steel",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel.mdl",
+        "name": "Stainless_Steel",
         "non_visual": [
             "steel",
             "none",
@@ -452,11 +631,39 @@
             "metallic": [
                 0.0,
                 1.0
+            ],
+            "roughness_variation": [
+                0.01,
+                0.61
+            ],
+            "milling_bump_strength": [
+                0.0,
+                0.4
+            ],
+            "dents_bump_strength": [
+                0.0,
+                0.41
+            ],
+            "smudges_1_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_2_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_falloff": [
+                0.25,
+                0.85
+            ],
+            "smudges_scale": [
+                0.8,
+                1.0
             ]
         }
     },
     "stainless_steel_milled": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Stainless_Steel_Milled.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Milled.mdl",
         "name": "Stainless_Steel_Milled",
         "non_visual": [
             "steel",
@@ -475,11 +682,19 @@
             "metallic": [
                 0.8,
                 1.0
+            ],
+            "milling_bump_strength": [
+                0.8,
+                1.0
+            ],
+            "dents_bump_strength": [
+                0.0,
+                0.4
             ]
         }
     },
     "steel_carbon": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Steel_Carbon.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Carbon.mdl",
         "name": "Steel_Carbon",
         "non_visual": [
             "steel",
@@ -498,11 +713,31 @@
             "metallic": [
                 0.7,
                 1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.4
+            ],
+            "oxide_thickness": [
+                0.0,
+                0.4
+            ],
+            "oxide_contrast": [
+                0.8,
+                1.0
+            ],
+            "bright_rust_amount": [
+                0.0,
+                0.8
+            ],
+            "rust_saturation": [
+                0.0,
+                0.4
             ]
         }
     },
     "steel_galvanized": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Steel_Galvanized.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Galvanized.mdl",
         "name": "Steel_Galvanized",
         "non_visual": [
             "steel",
@@ -521,11 +756,31 @@
             "metallic": [
                 0.5,
                 0.9
+            ],
+            "oxidation_amount": [
+                0.0,
+                0.8
+            ],
+            "oxide_roughness": [
+                0.59,
+                1.0
+            ],
+            "dirt_spots_weight": [
+                0.0,
+                0.58
+            ],
+            "leak_dirt_weight": [
+                0.0,
+                0.43
+            ],
+            "bump_strength": [
+                0.08,
+                0.68
             ]
         }
     },
     "titanium_sheet": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Titanium_Sheet.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Sheet.mdl",
         "name": "Titanium_Sheet",
         "non_visual": [
             "steel",
@@ -544,11 +799,19 @@
             "metallic": [
                 0.8,
                 1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
             ]
         }
     },
     "zinc_galvanizing": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Metal/Zinc_Galvanizing.mdl",
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Galvanizing.mdl",
         "name": "Zinc_Galvanizing",
         "non_visual": [
             "steel",
@@ -567,6 +830,3560 @@
             "metallic": [
                 0.5,
                 0.9
+            ],
+            "oxidation_amount": [
+                0.0,
+                0.8
+            ],
+            "oxide_roughness": [
+                0.59,
+                1.0
+            ],
+            "dirt_spots_weight": [
+                0.0,
+                0.58
+            ],
+            "leak_dirt_weight": [
+                0.0,
+                0.43
+            ],
+            "bump_strength": [
+                0.08,
+                0.68
+            ]
+        }
+    },
+    "aging__copper": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aging_Copper.mdl",
+        "name": "Aging_Copper",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratches_abrasion": [
+                0.0,
+                0.51
+            ],
+            "spotsdirt_amount": [
+                0.0,
+                0.8
+            ]
+        }
+    },
+    "aluminum": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum.mdl",
+        "name": "Aluminum",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "aluminum__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Foil.mdl",
+        "name": "Aluminum_Foil",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "aluminum__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Hammered.mdl",
+        "name": "Aluminum_Hammered",
+        "non_visual": [
+            "aluminum",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "blued__steel__cold": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Blued_Steel_Cold.mdl",
+        "name": "Blued_Steel_Cold",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.52
+            ],
+            "smudges": [
+                0.0,
+                0.4
+            ],
+            "smudges_roughness": [
+                0.0,
+                0.42
+            ],
+            "damage": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "brass__antique": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Antique.mdl",
+        "name": "Brass_Antique",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_dents": [
+                0.4,
+                1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.5
+            ]
+        }
+    },
+    "brass__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Brushed.mdl",
+        "name": "Brass_Brushed",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.41
+            ],
+            "dirt_dents": [
+                0.0,
+                0.41
+            ],
+            "bump_strength": [
+                0.0,
+                0.41
+            ]
+        }
+    },
+    "brass__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Foil.mdl",
+        "name": "Brass_Foil",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.54
+            ],
+            "smudges": [
+                0.68,
+                1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "brass__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Hammered.mdl",
+        "name": "Brass_Hammered",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.79,
+                1.0
+            ]
+        }
+    },
+    "brass__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Scratched.mdl",
+        "name": "Brass_Scratched",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "bump_strength": [
+                0.0,
+                0.4
+            ],
+            "rough_scratches_roughness": [
+                0.1,
+                0.7
+            ],
+            "rough_scratches_attenuation": [
+                0.77,
+                1.0
+            ],
+            "shiny_scratches_roughness": [
+                0.0,
+                0.4
+            ],
+            "shiny_scratches_brightness": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "brass__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Sheet.mdl",
+        "name": "Brass_Sheet",
+        "non_visual": [
+            "brass",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.5
+            ]
+        }
+    },
+    "bronze": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze.mdl",
+        "name": "Bronze",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.75,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.4
+            ],
+            "dirt_dents": [
+                0.0,
+                0.4
+            ],
+            "bump_strength": [
+                0.0,
+                0.49
+            ]
+        }
+    },
+    "bronze__antique": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Antique.mdl",
+        "name": "Bronze_Antique",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_dents": [
+                0.4,
+                1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.5
+            ]
+        }
+    },
+    "bronze__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Brushed.mdl",
+        "name": "Bronze_Brushed",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.41
+            ],
+            "dirt_dents": [
+                0.0,
+                0.41
+            ],
+            "bump_strength": [
+                0.0,
+                0.41
+            ]
+        }
+    },
+    "bronze__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Foil.mdl",
+        "name": "Bronze_Foil",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.54
+            ],
+            "smudges": [
+                0.68,
+                1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "bronze__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Hammered.mdl",
+        "name": "Bronze_Hammered",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.79,
+                1.0
+            ]
+        }
+    },
+    "bronze__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Knurling.mdl",
+        "name": "Bronze_Knurling",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.52
+            ],
+            "cavities_dirt": [
+                0.53,
+                1.0
+            ],
+            "bump_strength": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "bronze__polished": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Polished.mdl",
+        "name": "Bronze_Polished",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.9,
+                1.0
+            ],
+            "roughness": [
+                0.0,
+                0.1
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.42,
+                1.0
+            ],
+            "surface_dirt": [
+                0.0,
+                0.4
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "bronze__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Scratched.mdl",
+        "name": "Bronze_Scratched",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "surface_dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "bump_strength": [
+                0.0,
+                0.4
+            ],
+            "rough_scratches_roughness": [
+                0.1,
+                0.7
+            ],
+            "rough_scratches_attenuation": [
+                0.77,
+                1.0
+            ],
+            "shiny_scratches_roughness": [
+                0.0,
+                0.4
+            ],
+            "shiny_scratches_brightness": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "bronze__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Sheet.mdl",
+        "name": "Bronze_Sheet",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.795,
+                1.0
+            ]
+        }
+    },
+    "bronze__sheet__punched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Sheet_Punched.mdl",
+        "name": "Bronze_Sheet_Punched",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.45
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "chrome__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chrome_Hammered.mdl",
+        "name": "Chrome_Hammered",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "chromium__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Brushed.mdl",
+        "name": "Chromium_Brushed",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "chromium__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Foil.mdl",
+        "name": "Chromium_Foil",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "chromium__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Scratched.mdl",
+        "name": "Chromium_Scratched",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "chromium__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Sheet.mdl",
+        "name": "Chromium_Sheet",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "copper__antique__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Antique_Brushed.mdl",
+        "name": "Copper_Antique_Brushed",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudge_amount": [
+                0.0,
+                0.8
+            ],
+            "bump_amount": [
+                0.0,
+                0.8
+            ]
+        }
+    },
+    "copper__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Brushed.mdl",
+        "name": "Copper_Brushed",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "copper__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Foil.mdl",
+        "name": "Copper_Foil",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "copper__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Hammered.mdl",
+        "name": "Copper_Hammered",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "copper__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Knurling.mdl",
+        "name": "Copper_Knurling",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "copper__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Sheet.mdl",
+        "name": "Copper_Sheet",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "diamond__plate__double__tear": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Double_Tear.mdl",
+        "name": "Diamond_Plate_Double_Tear",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.45
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.0,
+                0.4
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "diamond__plate__quadruple__tear": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Quadruple_Tear.mdl",
+        "name": "Diamond_Plate_Quadruple_Tear",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.45
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.8,
+                1.0
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "diamond__plate__quintuple__tear": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Quintuple_Tear.mdl",
+        "name": "Diamond_Plate_Quintuple_Tear",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.45
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.8,
+                1.0
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "diamond__plate__single__tear": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Single_Tear.mdl",
+        "name": "Diamond_Plate_Single_Tear",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.45
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.8,
+                1.0
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "diamond__plate__spike": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Spike.mdl",
+        "name": "Diamond_Plate_Spike",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.45
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.8,
+                1.0
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "diamond__plate__triple__tear": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Triple_Tear.mdl",
+        "name": "Diamond_Plate_Triple_Tear",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.45
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.8,
+                1.0
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "gold": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold.mdl",
+        "name": "Gold",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "gold__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Brushed.mdl",
+        "name": "Gold_Brushed",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "gold__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Foil.mdl",
+        "name": "Gold_Foil",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "gold__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Hammered.mdl",
+        "name": "Gold_Hammered",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "gold__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Knurling.mdl",
+        "name": "Gold_Knurling",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "gold__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Scratched.mdl",
+        "name": "Gold_Scratched",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "gold__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Sheet.mdl",
+        "name": "Gold_Sheet",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "iron": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron.mdl",
+        "name": "Iron",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "iron__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Foil.mdl",
+        "name": "Iron_Foil",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "iron__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Hammered.mdl",
+        "name": "Iron_Hammered",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "iron__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Knurling.mdl",
+        "name": "Iron_Knurling",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "iron__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Scratched.mdl",
+        "name": "Iron_Scratched",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "iron__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Sheet.mdl",
+        "name": "Iron_Sheet",
+        "non_visual": [
+            "iron",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "mercury": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Mercury.mdl",
+        "name": "Mercury",
+        "non_visual": [
+            "metal",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "metal__cast": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Metal_Cast.mdl",
+        "name": "Metal_Cast",
+        "non_visual": [
+            "metal",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.5,
+                1.0
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.47,
+                1.0
+            ],
+            "smudges": [
+                0.0,
+                0.57
+            ],
+            "bump_strength": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "nickel": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel.mdl",
+        "name": "Nickel",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "nickel__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Foil.mdl",
+        "name": "Nickel_Foil",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "nickel__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Hammered.mdl",
+        "name": "Nickel_Hammered",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "nickel__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Knurling.mdl",
+        "name": "Nickel_Knurling",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "nickel__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Scratched.mdl",
+        "name": "Nickel_Scratched",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "nickel__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Sheet.mdl",
+        "name": "Nickel_Sheet",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "pcb__copper": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/PCB_Copper.mdl",
+        "name": "PCB_Copper",
+        "non_visual": [
+            "bronze",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.1,
+                0.7
+            ]
+        }
+    },
+    "pcb__goldfinger": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/PCB_Goldfinger.mdl",
+        "name": "PCB_Goldfinger",
+        "non_visual": [
+            "gold",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.6
+            ]
+        }
+    },
+    "platinum": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum.mdl",
+        "name": "Platinum",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "platinum__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Brushed.mdl",
+        "name": "Platinum_Brushed",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "platinum__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Foil.mdl",
+        "name": "Platinum_Foil",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "platinum__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Hammered.mdl",
+        "name": "Platinum_Hammered",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "platinum__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Knurling.mdl",
+        "name": "Platinum_Knurling",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "platinum__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Scratched.mdl",
+        "name": "Platinum_Scratched",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "platinum__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Sheet.mdl",
+        "name": "Platinum_Sheet",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "punched__circular__plate": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Punched_Circular_Plate.mdl",
+        "name": "Punched_Circular_Plate",
+        "non_visual": [
+            "metal",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.0,
+                0.46
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "dirt_weight": [
+                0.8,
+                1.0
+            ],
+            "dirt_brightness": [
+                0.18,
+                0.78
+            ]
+        }
+    },
+    "silver": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver.mdl",
+        "name": "Silver",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "silver__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Brushed.mdl",
+        "name": "Silver_Brushed",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "silver__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Foil.mdl",
+        "name": "Silver_Foil",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "silver__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Hammered.mdl",
+        "name": "Silver_Hammered",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "silver__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Knurling.mdl",
+        "name": "Silver_Knurling",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "silver__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Scratched.mdl",
+        "name": "Silver_Scratched",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "silver__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Sheet.mdl",
+        "name": "Silver_Sheet",
+        "non_visual": [
+            "silver",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "solder__paste": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Solder_Paste.mdl",
+        "name": "Solder_Paste",
+        "non_visual": [
+            "metal",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.0,
+                0.5
+            ]
+        }
+    },
+    "stainless__steel__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Brushed.mdl",
+        "name": "Stainless_Steel_Brushed",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "brush_brightness_variation": [
+                0.71,
+                1.0
+            ],
+            "brushing_bump_strength": [
+                0.0,
+                0.4
+            ],
+            "dents_bump_strength": [
+                0.0,
+                0.4
+            ],
+            "smudges_1_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_2_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_falloff": [
+                0.0,
+                0.5
+            ],
+            "smudges_scale": [
+                1.8,
+                1.0
+            ],
+            "brightness_variation": [
+                0.0,
+                0.4
+            ]
+        }
+    },
+    "stainless__steel__brushed__punched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Brushed_Punched.mdl",
+        "name": "Stainless_Steel_Brushed_Punched",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "brush_brightness_variation": [
+                0.71,
+                1.0
+            ],
+            "brushing_bump_strength": [
+                0.0,
+                0.4
+            ],
+            "dents_bump_strength": [
+                0.0,
+                0.4
+            ],
+            "smudges_1_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_2_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_falloff": [
+                0.0,
+                0.5
+            ],
+            "smudges_scale": [
+                1.8,
+                1.0
+            ],
+            "brightness_variation": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "stainless__steel__punched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Punched.mdl",
+        "name": "Stainless_Steel_Punched",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.01,
+                0.61
+            ],
+            "milling_bump_strength": [
+                0.0,
+                0.4
+            ],
+            "dents_bump_strength": [
+                0.0,
+                0.41
+            ],
+            "smudges_1_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_2_weight": [
+                0.0,
+                0.4
+            ],
+            "smudges_falloff": [
+                0.25,
+                0.85
+            ],
+            "smudges_scale": [
+                0.8,
+                1.0
+            ],
+            "cutout_bump_strength": [
+                1.8,
+                1.0
+            ]
+        }
+    },
+    "steel__painted": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Painted.mdl",
+        "name": "Steel_Painted",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "paint_roughness_variation": [
+                0.0,
+                0.5
+            ],
+            "dirt_weight": [
+                0.0,
+                0.44
+            ],
+            "damages_scale": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "steel__painted__cracked": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Painted_Cracked.mdl",
+        "name": "Steel_Painted_Cracked",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "paint_roughness_variation": [
+                0.14,
+                0.74
+            ],
+            "dirt_weight": [
+                0.0,
+                0.5
+            ],
+            "cracks_bump_strength": [
+                0.2,
+                0.8
+            ],
+            "damages_scale": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "titanium": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium.mdl",
+        "name": "Titanium",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "titanium__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Brushed.mdl",
+        "name": "Titanium_Brushed",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "titanium__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Foil.mdl",
+        "name": "Titanium_Foil",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "titanium__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Hammered.mdl",
+        "name": "Titanium_Hammered",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "titanium__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Knurling.mdl",
+        "name": "Titanium_Knurling",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "titanium__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Scratched.mdl",
+        "name": "Titanium_Scratched",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "tungsten": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten.mdl",
+        "name": "Tungsten",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "tungsten__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Brushed.mdl",
+        "name": "Tungsten_Brushed",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "tungsten__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Foil.mdl",
+        "name": "Tungsten_Foil",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "tungsten__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Hammered.mdl",
+        "name": "Tungsten_Hammered",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "tungsten__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Knurling.mdl",
+        "name": "Tungsten_Knurling",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "tungsten__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Scratched.mdl",
+        "name": "Tungsten_Scratched",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "tungsten__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Sheet.mdl",
+        "name": "Tungsten_Sheet",
+        "non_visual": [
+            "tungsten",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "zinc": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc.mdl",
+        "name": "Zinc",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "smudges": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "zinc__brushed": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Brushed.mdl",
+        "name": "Zinc_Brushed",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_variation_amount": [
+                0.0,
+                0.8
+            ],
+            "scratch_reflection_variation": [
+                0.2,
+                0.8
+            ],
+            "scratches_bump": [
+                0.45,
+                1.0
+            ]
+        }
+    },
+    "zinc__foil": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Foil.mdl",
+        "name": "Zinc_Foil",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.364,
+                0.964
+            ],
+            "smudges": [
+                0.15,
+                0.75
+            ],
+            "bump_strength": [
+                0.0,
+                0.45
+            ]
+        }
+    },
+    "zinc__hammered": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Hammered.mdl",
+        "name": "Zinc_Hammered",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "bump_strength": [
+                0.6,
+                1.0
+            ]
+        }
+    },
+    "zinc__knurling": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Knurling.mdl",
+        "name": "Zinc_Knurling",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ]
+        }
+    },
+    "zinc__scratched": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Scratched.mdl",
+        "name": "Zinc_Scratched",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "roughness_variation": [
+                0.008,
+                0.608
+            ],
+            "brightness_variation": [
+                0.1,
+                0.7
+            ],
+            "bump_factor": [
+                0.0,
+                0.587
+            ],
+            "roughness_scratches": [
+                0.0,
+                0.545
+            ],
+            "scratches_variation": [
+                0.1,
+                0.7
+            ],
+            "scratches_bump_factor": [
+                0.235,
+                0.835
+            ],
+            "dirt_transition_softness": [
+                0.65,
+                1.0
+            ],
+            "dirt_amount": [
+                0.0,
+                0.8
+            ],
+            "brush_scratches_weight": [
+                0.3,
+                0.9
+            ]
+        }
+    },
+    "zinc__sheet": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Sheet.mdl",
+        "name": "Zinc_Sheet",
+        "non_visual": [
+            "steel",
+            "none",
+            "emissive"
+        ],
+        "randomise": {
+            "specular": [
+                0.2,
+                1.0
+            ],
+            "roughness": [
+                0.1,
+                0.7
+            ],
+            "metallic": [
+                0.8,
+                1.0
+            ],
+            "scratch_bump_factor": [
+                0.0,
+                0.4
+            ],
+            "cutout_bump_strength": [
+                0.6,
+                1.0
             ]
         }
     }

@@ -25,7 +25,7 @@
 		"vary_bin_scale": true,
 		"bin_scale_range": [
 			0.8,
-			3.0
+			2.0
 		],
 		"bin_dimensions": [
 			0.6975,

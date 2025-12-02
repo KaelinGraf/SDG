@@ -1,7 +1,7 @@
 #methods for templating, randomising and applying realistic materials to USD prims
 from isaacsim.sensors.rtx import apply_nonvisual_material
 from isaacsim.core.api.materials import OmniPBR
-from pxr import UsdShade, Sdr, Sdf  
+from pxr import UsdShade, Sdr, Sdf, UsdGeom, Gf
 import omni.kit.commands
 import json     
 import random
@@ -9,11 +9,13 @@ import omni
 import carb
 import os
 import omni.kit.material.library
+import colorsys
+from omni.isaac.core.utils import prims
+
 
 class MaterialManager:
     def __init__(self):
-        self.asset_root = "/home/kaelin/Documents/mdl"
-        self._register_mdl_search_path(self.asset_root)
+        
         self.templates=json.load(open("Config/materials.json"))
         if self.templates is None:
             raise ValueError("Failed to load materials.json")
@@ -25,51 +27,17 @@ class MaterialManager:
             "roughness": "inputs:reflection_roughness_constant",
             "metallic": "inputs:metallic_constant",
             "specular": "inputs:specular_level", # Some MDLs use this
-            "weight": "inputs:reflection_weight"  # Fallback for some materials
+            "color": "inputs:diffuse_color_constant",
+            "weight": "inputs:reflection_weight",  # Fallback for some materials
+            "tint": "inputs:diffuse_tint"    
         }
     def reset(self):
         """Call this at the start of every data_generator_loop iteration"""
+        for mat in self.materials_in_scene:
+            prims.delete_prim(mat)
+        self.materials_in_scene = []
         self.active_scene_materials = []
-    def _register_mdl_search_path(self, local_root_path):
-
-        """Fixes dependency resolution by adding local folder to renderer paths"""
-        if not os.path.exists(local_root_path): return
-        settings = carb.settings.get_settings()
-        key = "/renderer/mdl/searchPaths"
-        current = settings.get(key)
-        
-        # Add path if not present (handles list or string formats)
-        if isinstance(current, list):
-            if local_root_path not in current:
-                current.append(local_root_path)
-                settings.set(key, current)
-        else:
-            if not current or local_root_path not in current:
-                new_paths = f"{current}:{local_root_path}" if current else local_root_path
-                settings.set_string(key, new_paths)
-            
-        print(f"[MaterialManager] Added MDL Search Path: {local_root_path}")
-
-    def _sanitize_path(self, raw_url):
-        """
-        Converts absolute paths to Relative Paths based on the Asset Root.
-        This forces the MDL compiler to use package-based resolution (fixing C120 errors).
-        """
-        # 1. Strip URI prefix
-        if raw_url.startswith("file://"):
-            clean_path = raw_url.replace("file://", "")
-        else:
-            clean_path = raw_url
-
-        # 2. Relativize
-        # If the path starts with our root (e.g. /home/kaelin/IsaacAssets/Materials/...)
-        # We cut it down to (Materials/...)
-        if clean_path.startswith(self.asset_root):
-            # +1 removes the leading slash
-            rel_path = clean_path[len(self.asset_root):].lstrip("/")
-            return rel_path
-            
-        return clean_path
+    
     def get_template(self,template_name):
         result = self.templates.get(template_name,None)
         if result is None:
@@ -95,7 +63,7 @@ class MaterialManager:
         material_idx = len(self.materials_in_scene)
         mat_name = f"{template_data['name']}"
         mat_path = f"/World/Looks/{mat_name}"
-        mdl_url = self._sanitize_path(template_data['mdl_path'])
+        mdl_url = template_data['mdl_path']
 
         # 1. Create the Material
         mat_prim_path = omni.kit.material.library.create_mdl_material(
@@ -115,21 +83,21 @@ class MaterialManager:
         registry = Sdr.Registry()
         
         # Fast check: is it already there?
-        found = False
-        if self._is_shader_loaded(registry, target_filename):
-            found = True
-        else:
-            # Wait loop
-            # print(f"Compiling {target_filename}...")
-            for _ in range(50): # Wait up to ~1 sec (50 frames is plenty for local files)
-                omni.kit.app.get_app().update()
-                if self._is_shader_loaded(registry, target_filename):
-                    found = True
-                    break
+        found = True
+        # if self._is_shader_loaded(registry, target_filename):
+        #     found = True
+        # else:
+        #     # Wait loop
+        #     # print(f"Compiling {target_filename}...")
+        #     for _ in range(1000): # Wait up to ~1 sec (50 frames is plenty for local files)
+        #         omni.kit.app.get_app().update()
+        #         if self._is_shader_loaded(registry, target_filename):
+        #             found = True
+        #             break
             
-        if not found:
-            # This prevents the crash. If it times out, we skip randomization but don't error out.
-            carb.log_warn(f"Shader {target_filename} timed out. Skipping randomization.")
+        # if not found:
+        #     # This prevents the crash. If it times out, we skip randomization but don't error out.
+        #     carb.log_warn(f"Shader {target_filename} timed out. Skipping randomization.")
         
         # 3. Randomize Inputs (Only if shader was found)
         if found and "randomise" in template_data:
@@ -137,10 +105,43 @@ class MaterialManager:
             shader = UsdShade.Shader(mat_prim)
             
             for param_key, bounds in template_data["randomise"].items():
-                usd_input = self.param_map.get(param_key)
-                if usd_input:
+                usd_input_name = self.param_map.get(param_key)
+                if not usd_input_name:
+                    usd_input_name = f"inputs:{param_key}"
+
+                # 3. Check if this input actually exists on the shader
+                # This prevents crashing if the JSON asks for a param the shader doesn't have
+                usd_input = shader.GetInput(usd_input_name)
+                if not usd_input:
+                    # Try creating it? vMaterials usually pre-expose them, 
+                    # but if it's missing, creating it might not link to anything internal.
+                    # Safe logic: Check if it exists, if not, skip.
+                    # print(f"Warning: Input {usd_input_name} not found on {mat_name}")
+                    continue
+
+                tint_input = shader.GetInput("inputs:diffuse_tint")
+                if not tint_input:
+                    # Create it if it doesn't exist (it should, but safety first)
+                    tint_input = shader.CreateInput("inputs:diffuse_tint", Sdf.ValueTypeNames.Color3f)
+                tint_input.Set(Gf.Vec3f(1.0, 1.0, 1.0))
+                if param_key == "color":
+                    # Use HSV to generate vibrant colors (avoiding muddy greys)
+                    # Hue: Random (0.0 to 1.0)
+                    # Saturation: High (0.6 to 1.0) -> Vivid colors
+                    # Value: High (0.6 to 1.0) -> Bright colors
+                    hue = random.random()
+                    sat = random.uniform(0.6, 1.0)
+                    val = random.uniform(0.6, 1.0)
+                    
+                    # Convert to RGB
+                    r, g, b = colorsys.hsv_to_rgb(hue, sat, val)
+                    
+                    # Create Input with Color3f type (Essential for USD)
+                    color_val = Gf.Vec3f(r, g, b)
+                    shader.CreateInput(usd_input, Sdf.ValueTypeNames.Color3f).Set(color_val)
+                elif isinstance(bounds, list) and len(bounds) == 2:
                     val = random.uniform(bounds[0], bounds[1])
-                    # Sdf is now imported, so this will work
+                    # Set the value found dynamically
                     shader.CreateInput(usd_input, Sdf.ValueTypeNames.Float).Set(val)
 
         # 4. Apply Non-Visual Attributes
@@ -155,22 +156,42 @@ class MaterialManager:
             )
         return mat_prim_path
 
+
+
     def bind_material(self, mat_prim_path=None, prim_path=None):
         """
-        Binds a material to a prim.
+        Binds a material to a prim with 'StrongerThanDescendants' strength.
+        This forces the binding even if the child Mesh has its own material.
         """
         if prim_path is None:
             raise ValueError("prim_path must be specified")
-        
-        prim = self.stage.GetPrimAtPath(prim_path)
+
 
         if mat_prim_path is None:
+            if not self.materials_in_scene:
+                carb.log_warn("No materials created yet.")
+                return
             mat_prim_path = random.choice(self.materials_in_scene)
+
+
+        prim = self.stage.GetPrimAtPath(prim_path)
+        material = UsdShade.Material(self.stage.GetPrimAtPath(mat_prim_path))
+
+        if not prim.IsValid() or not material.GetPrim().IsValid():
+            carb.log_warn(f"Invalid prim or material: {prim_path} / {mat_prim_path}")
+            return
+
+
+        binding_api = UsdShade.MaterialBindingAPI.Apply(prim)
         
-        omni.kit.material.library.bind_material_to_selected_prims(
-            material_prim_path=mat_prim_path,
-            paths=[prim_path]
+
+        binding_api.Bind(
+            material, 
+            bindingStrength=UsdShade.Tokens.strongerThanDescendants
         )
+        
+
+        print(f"[MaterialManager] Bound {mat_prim_path} to {prim_path} (StrongerThanDescendants)")
     def create_and_bind(self, template=None, prim_path=None):
         """
         Creates a new material instance, randomizes it, and binds it to the prim.
@@ -260,18 +281,20 @@ class MaterialManager:
     def on_created_mdl(self,mat_prim):
         carb.log_info("[MaterialManager] Created MDL material")
     def _is_shader_loaded(self, registry, filename):
-        """Helper to find if a shader is loaded by checking identifiers for the filename."""
-        # This is expensive to check all, but safe. 
-        # For better perf, you can try registry.GetNodeByIdentifier(full_path) first.
+        """
+        Checks if the shader is loaded. 
+        Note: 'filename' passed here is usually 'MaterialName.mdl'.
+        We must check for 'MaterialName' without the extension.
+        """
+        # 1. Strip extension to get the likely Sdr identifier part
+        # e.g. "Copper_Scratched.mdl" -> "Copper_Scratched"
+        base_name = os.path.splitext(filename)[0]
         
-        # 1. Try exact match (Fastest)
-        # Sdr often strips 'file://' so we try raw path if URL provided
-        if registry.GetNodeByIdentifier(filename): 
-            return True
-            
-        # 2. Fuzzy search (Slower but robust for file URI issues)
-        # Only do this if you are getting timeouts
+        # 2. Iterate and check
+        # Sdr identifiers are often full URIs like:
+        # '::vMaterials_2::Metal::Copper_Scratched::Copper_Scratched'
         for uri in registry.GetNodeIdentifiers():
-            if filename in uri:
+            if base_name in uri:
                 return True
+                
         return False
