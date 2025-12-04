@@ -25,12 +25,13 @@ class RepCam:
             model_name = zivid_sim.camera.models.ZividCameraModelName.ZIVID_2_PLUS_MR60
         )
         self.zivid_camera.initialize()
-            
-        #self.zivid_camera.set_world_pose([x,y,z+focal_length])
-
+        
+        init_translation =Ztransforms.Transform(np.array([0,0,focal_length]), Ztransforms.Rotation.from_euler(np.array([np.pi/2,np.pi/2,0])))
+        self.zivid_camera.set_world_pose(init_translation)
+        
         self.rep_cam = rep.create.camera(
             position = [0,0,0],
-            focus_distance = 600,
+            focus_distance = focal_length,
             f_stop = 1.8,
             name = "rep_cam"
         )

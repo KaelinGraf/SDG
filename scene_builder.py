@@ -150,24 +150,27 @@ class SceneBuilder:
         
         self.world.clear()
         self.world.scene.add_default_ground_plane()
-        self.rep_cam = RepCam(self.scene_config.get("bin_dimensions",None))
+        self.rep_cam = RepCam(self.scene_config["bin_dimensions"], focal_length=self.scene_config["cam_z_dist"])
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
             self.material_manager.create_material(template="plastic_standardized_surface_finish")
-            self.material_manager.populate_materials(n=4)
+            self.material_manager.populate_materials(n=3)
             self.populate_scene()
             self.world.reset()
-            for j in range(1000000):
+            for j in range(500):
                 self.world.step(render=True)
-            self.rep_cam.cam_look_at("/World/Bin")
-            #self.rep_cam.cam_trigger()
-            
+            # data_frames = self.rep_cam.capture_scene(
+            #     bin_pos=(0, 0, 0), # Or extract from self.bin_prim
+            #     num_views=self.scene_config["num_cameras"]
+            # )
+            #self.rep_cam.capture_scene()
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
             prims.delete_prim(prim_path = "/World/Bin")
-            for z in range(500):
+            for _ in range(5):
                 self.world.step(render=True)
+
             print(f"Completed data generation iteration {i+1}/{iters}")
         pass     
     
@@ -224,7 +227,7 @@ class SceneBuilder:
                 max_diag_length = obj_diag_length
             
             
-        max_diag_length = max_diag_length* 1.25 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
+        max_diag_length = max_diag_length* 1.1 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
        
         
         #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
@@ -280,6 +283,15 @@ class SceneBuilder:
         if num_cells_y < 1: num_cells_y = 1
 
         num_cells_z = math.ceil(self.scene_config["num_objects"] / (num_cells_x * num_cells_y))
+
+        #check total volume does not exceed bin volume by a lot
+        total_volume = num_cells_x * num_cells_y * num_cells_z * max_diag_length ** 3
+        bin_volume = bin_dims[0] * bin_dims[1] * bin_dims[2]
+        if total_volume > bin_volume * 5:
+            acceptable_cells = math.ceil(bin_volume / (max_diag_length ** 3)) * 5
+            objects_to_add = objects_to_add[:acceptable_cells] #take n first objects 
+            num_cells_z = math.ceil(acceptable_cells / (num_cells_x * num_cells_y))
+        
 
         voxel_cells = list(range(0, num_cells_x * num_cells_y * num_cells_z))
         random.shuffle(voxel_cells)

@@ -14,7 +14,7 @@
             ],
             "scratches_abrasion": [
                 0.0,
-                0.4
+                1.0
             ],
             "drops_variation": [
                 0.6,
@@ -23,6 +23,10 @@
             "spotsdirt_amount": [
                 0.0,
                 0.4
+            ],
+            "age": [
+                0.0,
+                0.16
             ]
         }
     },
@@ -40,7 +44,7 @@
                 0.53
             ],
             "smudges": [
-                0.6,
+                0.4,
                 1.0
             ]
         }
@@ -67,12 +71,12 @@
                 0.4
             ],
             "wear": [
-                0.0,
-                0.4
+                0.5,
+                1.0
             ],
             "abrasion": [
-                0.0,
-                0.4
+                0.5,
+                1.0
             ],
             "dirt_weight": [
                 0.0,
@@ -370,7 +374,7 @@
             ],
             "dirt_dents": [
                 0.0,
-                0.35
+                0.7
             ],
             "bump_strength": [
                 0.43,
@@ -432,33 +436,6 @@
             ]
         }
     },
-    "brass__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Knurling.mdl",
-        "name": "Brass_Knurling",
-        "non_visual": [
-            "brass",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "knurling_roughness": [
-                0.67,
-                1.0
-            ],
-            "surface_dirt": [
-                0.65,
-                1.0
-            ],
-            "cavities_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.6,
-                1.0
-            ]
-        }
-    },
     "brass__polished": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Polished.mdl",
         "name": "Brass_Polished",
@@ -474,14 +451,14 @@
             ],
             "roughness": [
                 0.15,
-                0.34
+                0.8
             ],
             "roughness_variation": [
                 0.49,
                 0.99
             ],
             "surface_dirt": [
-                0.65,
+                0.2,
                 1.0
             ],
             "bump_strength": [
@@ -669,37 +646,6 @@
             ]
         }
     },
-    "bronze__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Knurling.mdl",
-        "name": "Bronze_Knurling",
-        "non_visual": [
-            "bronze",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "copper_tint": [
-                0.3,
-                0.7
-            ],
-            "knurling_roughness": [
-                0.67,
-                1.0
-            ],
-            "surface_dirt": [
-                0.65,
-                1.0
-            ],
-            "cavities_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.6,
-                1.0
-            ]
-        }
-    },
     "bronze__polished": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Polished.mdl",
         "name": "Bronze_Polished",
@@ -765,19 +711,19 @@
                 1.0
             ],
             "rough_scratches_roughness": [
-                0.69,
+                0.2,
                 1.0
             ],
             "rough_scratches_attenuation": [
-                0.76,
+                0.2,
                 1.0
             ],
             "shiny_scratches_roughness": [
-                0.6,
+                0.2,
                 1.0
             ],
             "shiny_scratches_brightness": [
-                0.74,
+                0.2,
                 1.0
             ]
         }
@@ -813,7 +759,7 @@
             ],
             "imperfections_amount": [
                 0.0,
-                0.565
+                1.0
             ],
             "impurities_weight_1": [
                 0.55,
@@ -909,40 +855,6 @@
                 0.6,
                 1.0
             ]
-        }
-    },
-    "chromium__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Knurling.mdl",
-        "name": "Chromium_Knurling",
-        "non_visual": [
-            "silver",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "brightness": [
-                0.2,
-                0.6
-            ],
-            "roughness": [
-                0.6,
-                1.0
-            ],
-            "grooves_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.5,
-                1.0
-            ],
-            "tint": "color",
-            "grazing_tint": "color",
-            "weight": [
-                0.6,
-                1.0
-            ],
-            "metal_tint": "color"
         }
     },
     "chromium__scratched": {
@@ -1181,40 +1093,6 @@
                 1.0
             ],
             "metal_color": "color"
-        }
-    },
-    "copper__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Knurling.mdl",
-        "name": "Copper_Knurling",
-        "non_visual": [
-            "bronze",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "brightness": [
-                0.2,
-                0.6
-            ],
-            "roughness": [
-                0.6,
-                1.0
-            ],
-            "grooves_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.5,
-                1.0
-            ],
-            "tint": "color",
-            "grazing_tint": "color",
-            "weight": [
-                0.6,
-                1.0
-            ],
-            "metal_tint": "color"
         }
     },
     "copper__scratched": {
@@ -1866,40 +1744,6 @@
             "metal_color": "color"
         }
     },
-    "platinum__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Knurling.mdl",
-        "name": "Platinum_Knurling",
-        "non_visual": [
-            "silver",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "brightness": [
-                0.2,
-                0.6
-            ],
-            "roughness": [
-                0.6,
-                1.0
-            ],
-            "grooves_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.5,
-                1.0
-            ],
-            "tint": "color",
-            "grazing_tint": "color",
-            "weight": [
-                0.6,
-                1.0
-            ],
-            "metal_tint": "color"
-        }
-    },
     "platinum__scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Scratched.mdl",
         "name": "Platinum_Scratched",
@@ -2030,40 +1874,6 @@
             "metal_color": "color"
         }
     },
-    "silver__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Knurling.mdl",
-        "name": "Silver_Knurling",
-        "non_visual": [
-            "silver",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "brightness": [
-                0.2,
-                0.6
-            ],
-            "roughness": [
-                0.6,
-                1.0
-            ],
-            "grooves_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.5,
-                1.0
-            ],
-            "tint": "color",
-            "grazing_tint": "color",
-            "weight": [
-                0.6,
-                1.0
-            ],
-            "metal_tint": "color"
-        }
-    },
     "silver__scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Scratched.mdl",
         "name": "Silver_Scratched",
@@ -2079,7 +1889,7 @@
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                1.0
             ],
             "brightness": [
                 0.6,
@@ -2098,8 +1908,8 @@
                 0.65
             ],
             "scratches_variation": [
-                0.0,
-                0.4
+                0.2,
+                1.0
             ],
             "scratches_bump_factor": [
                 0.703,
@@ -2691,40 +2501,6 @@
             "metal_color": "color"
         }
     },
-    "titanium__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Knurling.mdl",
-        "name": "Titanium_Knurling",
-        "non_visual": [
-            "steel",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "brightness": [
-                0.2,
-                0.6
-            ],
-            "roughness": [
-                0.6,
-                1.0
-            ],
-            "grooves_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.5,
-                1.0
-            ],
-            "tint": "color",
-            "grazing_tint": "color",
-            "weight": [
-                0.6,
-                1.0
-            ],
-            "metal_tint": "color"
-        }
-    },
     "titanium__scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Scratched.mdl",
         "name": "Titanium_Scratched",
@@ -3018,40 +2794,6 @@
                 1.0
             ],
             "metal_color": "color"
-        }
-    },
-    "zinc__knurling": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Knurling.mdl",
-        "name": "Zinc_Knurling",
-        "non_visual": [
-            "steel",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "brightness": [
-                0.2,
-                0.6
-            ],
-            "roughness": [
-                0.6,
-                1.0
-            ],
-            "grooves_dirt": [
-                0.6,
-                1.0
-            ],
-            "bump_strength": [
-                0.5,
-                1.0
-            ],
-            "tint": "color",
-            "grazing_tint": "color",
-            "weight": [
-                0.6,
-                1.0
-            ],
-            "metal_tint": "color"
         }
     },
     "zinc__scratched": {
