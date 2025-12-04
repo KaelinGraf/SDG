@@ -127,6 +127,7 @@ class SceneBuilder:
             physx_scene_api = PhysxSchema.PhysxSceneAPI(scene_prim)
         scene.CreateGravityDirectionAttr().Set(Gf.Vec3f(0.0, 0.0, -1.0))
         scene.CreateGravityMagnitudeAttr().Set(4.810)
+        self.world.set_simulation_dt(physics_dt=1.0 / 120.0, rendering_dt=1.0 / 60.0)
         self.world.get_physics_context().set_solver_type("TGS")
 
         
@@ -153,11 +154,11 @@ class SceneBuilder:
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
-            self.material_manager.create_material(template="plastic_abs")
+            self.material_manager.create_material(template="plastic_standardized_surface_finish")
             self.material_manager.populate_materials(n=4)
             self.populate_scene()
             self.world.reset()
-            for j in range(1000):
+            for j in range(1000000):
                 self.world.step(render=True)
             self.rep_cam.cam_look_at("/World/Bin")
             #self.rep_cam.cam_trigger()
@@ -223,7 +224,7 @@ class SceneBuilder:
                 max_diag_length = obj_diag_length
             
             
-        max_diag_length = max_diag_length* 1.1 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
+        max_diag_length = max_diag_length* 1.25 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
        
         
         #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
@@ -240,7 +241,8 @@ class SceneBuilder:
                 scale_factor *= adjust_scale * 1.1
             print(f"Randomized bin dimensions to: {bin_dims}")
         print(f"Scale factor: {scale_factor}")
-        
+        start_x = -bin_dims[0] / 2.0
+        start_y = -bin_dims[1] / 2.0
         bin_usd = self.scene_config.get("usd_filepath",None)
         if bin_usd is not None:
             print("creating bin prim")
@@ -253,11 +255,11 @@ class SceneBuilder:
             )
             bin_xform = UsdGeom.Xformable(self.bin_prim)
             bin_xform.ClearXformOpOrder() 
-            bin_xform.AddTranslateOp().Set(Gf.Vec3d(0,0,0))
+            bin_xform.AddTranslateOp().Set(Gf.Vec3d(start_x,start_y,0))
             bin_xform.AddRotateXYZOp().Set(Gf.Vec3d(0,0,0))
             bin_xform.AddScaleOp().Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
             self.generate_box_uvs(self.bin_prim)
-            self.material_manager.bind_material(mat_prim_path="/Looks/Plastic_ABS",prim_path="/World/Bin")
+            self.material_manager.bind_material(mat_prim_path="/Looks/Plastic_Standardized_Surface_Finish_V15",prim_path="/World/Bin")
             self.assign_physics_materials(self.bin_prim,is_static=True)
         else:
             raise Exception("No bin USD filepath specified")
@@ -266,22 +268,30 @@ class SceneBuilder:
         #self.scene_config["num_objects"] = int(self.scene_config["num_objects"] * scale_factor)
             
         #create voxel grid, starting from the top of the bin, with cell size = max_diag_length
+        
+        spawn_height_z = bin_dims[2] # Start spawning at the top rim of the bin
+
+        # Create voxel grid
         num_cells_x = int(bin_dims[0] // max_diag_length)
         num_cells_y = int(bin_dims[1] // max_diag_length)
-        num_cells_z = math.ceil(self.scene_config["num_objects"] / (num_cells_x * num_cells_y)) #number of vertical layers needed (round up)
-        
-        #create a list of all possible voxel cell positions, each object will be randomly assigned to one 
+
+        # Safety check: If bin is too small for even one object
+        if num_cells_x < 1: num_cells_x = 1
+        if num_cells_y < 1: num_cells_y = 1
+
+        num_cells_z = math.ceil(self.scene_config["num_objects"] / (num_cells_x * num_cells_y))
+
         voxel_cells = list(range(0, num_cells_x * num_cells_y * num_cells_z))
-        random.shuffle(voxel_cells) #randomize order
-        
+        random.shuffle(voxel_cells)
+
         for i, selected_object in enumerate(objects_to_add):
-            #randomly select an unoccupied voxel cell
             cell_index = voxel_cells.pop()
-            #compute voxel cell position
+            
+            # 3. FIX: Pass the corrected corner origin
             [cell_x, cell_y, cell_z] = get_position_from_voxel_index(
                 voxel_index=(cell_index % num_cells_x, (cell_index // num_cells_x) % num_cells_y, cell_index // (num_cells_x * num_cells_y)),
                 voxel_size=(max_diag_length, max_diag_length, max_diag_length),
-                grid_origin=(0, 0, bin_dims[2]),  # Assuming the origin is at (0,0,0), adjust as needed
+                grid_origin=(start_x, start_y, spawn_height_z), 
                 jitter=self.scene_config["voxel_jitter"]
             )
             #compute scale within scene scaling bounds
@@ -309,7 +319,11 @@ class SceneBuilder:
         # MESH STUFF
         if not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
             mesh_api = UsdPhysics.MeshCollisionAPI.Apply(prim)
-            mesh_api.CreateApproximationAttr("convexDecomposition")
+            
+            if not is_static:
+                mesh_api.CreateApproximationAttr("convexHull")
+            else:
+                mesh_api.CreateApproximationAttr("convexDecomposition") #bin gets decomp
         # COLLISION
         if not prim.HasAPI(UsdPhysics.CollisionAPI):
             col_api = UsdPhysics.CollisionAPI.Apply(prim)
@@ -329,6 +343,11 @@ class SceneBuilder:
             if not prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI):
                 physx_rb_api = PhysxSchema.PhysxRigidBodyAPI.Apply(prim)
                 physx_rb_api.CreateEnableCCDAttr(True)
+                physx_rb_api.CreateSolverPositionIterationCountAttr(8) # Default is usually 4 or 8
+                physx_rb_api.CreateSolverVelocityIterationCountAttr(0)
+                physx_rb_api.CreateSleepThresholdAttr(0.005) # Prevent sleeping while still settling
+                physx_rb_api.CreateLinearDampingAttr(0.5)  # "Air resistance"
+                physx_rb_api.CreateAngularDampingAttr(0.5) # Rotational resistance
 
     
     # def populate_sensor(self):

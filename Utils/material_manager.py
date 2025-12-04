@@ -23,14 +23,10 @@ class MaterialManager:
         self.stage = omni.usd.get_context().get_stage()
         self.materials = list(self.templates.keys()) #iterable of available materials for randomisation
         self.materials_in_scene = [] #stores the paths of materials that have been created in the scene 
-        self.param_map = {
-            "roughness": "inputs:reflection_roughness_constant",
-            "metallic": "inputs:metallic_constant",
-            "specular": "inputs:specular_level", # Some MDLs use this
-            "color": "inputs:diffuse_color_constant",
-            "weight": "inputs:reflection_weight",  # Fallback for some materials
-            "tint": "inputs:diffuse_tint"    
-        }
+
+
+
+
     def reset(self):
         """Call this at the start of every data_generator_loop iteration"""
         for mat in self.materials_in_scene:
@@ -72,7 +68,7 @@ class MaterialManager:
             mtl_name=mat_name,
             on_create_fn=self.on_created_mdl
         )
-        if mat_prim_path is not None:
+        if mat_prim_path is not None and mat_name != "Plastic_Standardized_Surface_Finish_V15":
             carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
             self.materials_in_scene.append(mat_prim_path)
 
@@ -84,65 +80,37 @@ class MaterialManager:
         
         # Fast check: is it already there?
         found = True
-        # if self._is_shader_loaded(registry, target_filename):
-        #     found = True
-        # else:
-        #     # Wait loop
-        #     # print(f"Compiling {target_filename}...")
-        #     for _ in range(1000): # Wait up to ~1 sec (50 frames is plenty for local files)
-        #         omni.kit.app.get_app().update()
-        #         if self._is_shader_loaded(registry, target_filename):
-        #             found = True
-        #             break
-            
-        # if not found:
-        #     # This prevents the crash. If it times out, we skip randomization but don't error out.
-        #     carb.log_warn(f"Shader {target_filename} timed out. Skipping randomization.")
-        
-        # 3. Randomize Inputs (Only if shader was found)
-        if found and "randomise" in template_data:
-            mat_prim = self.stage.GetPrimAtPath(mat_prim_path)
-            shader = UsdShade.Shader(mat_prim)
-            
-            for param_key, bounds in template_data["randomise"].items():
-                usd_input_name = self.param_map.get(param_key)
-                if not usd_input_name:
-                    usd_input_name = f"inputs:{param_key}"
+        mat_prim = self.stage.GetPrimAtPath(mat_prim_path)
+        if not mat_prim:
+            found = False
+            carb.log_warn(f"Material {mat_name} not found. Skipping randomization.")
 
-                # 3. Check if this input actually exists on the shader
-                # This prevents crashing if the JSON asks for a param the shader doesn't have
-                usd_input = shader.GetInput(usd_input_name)
-                if not usd_input:
-                    # Try creating it? vMaterials usually pre-expose them, 
-                    # but if it's missing, creating it might not link to anything internal.
-                    # Safe logic: Check if it exists, if not, skip.
-                    # print(f"Warning: Input {usd_input_name} not found on {mat_name}")
-                    continue
+        shader_path = mat_prim_path + "/Shader"
+        shader_prim = self.stage.GetPrimAtPath(shader_path)
+        if not shader_prim:
+            found = False
+            carb.log_warn(f"Shader {mat_name} not found. Skipping randomization.")
 
-                tint_input = shader.GetInput("inputs:diffuse_tint")
-                if not tint_input:
-                    # Create it if it doesn't exist (it should, but safety first)
-                    tint_input = shader.CreateInput("inputs:diffuse_tint", Sdf.ValueTypeNames.Color3f)
-                tint_input.Set(Gf.Vec3f(1.0, 1.0, 1.0))
-                if param_key == "color":
-                    # Use HSV to generate vibrant colors (avoiding muddy greys)
-                    # Hue: Random (0.0 to 1.0)
-                    # Saturation: High (0.6 to 1.0) -> Vivid colors
-                    # Value: High (0.6 to 1.0) -> Bright colors
-                    hue = random.random()
-                    sat = random.uniform(0.6, 1.0)
-                    val = random.uniform(0.6, 1.0)
+        if "randomise" in template_data:
+            shader = UsdShade.Shader(shader_prim)
+            
+            for param_key, value_data in template_data["randomise"].items():
+                
+                if param_key=="plastic_color":
+                    h = random.uniform(value_data['h'][0], value_data['h'][1])
+                    s = random.uniform(value_data['s'][0], value_data['s'][1])
+                    v = random.uniform(value_data['v'][0], value_data['v'][1])
+                    r, g, b = colorsys.hsv_to_rgb(h, s, v)
                     
-                    # Convert to RGB
-                    r, g, b = colorsys.hsv_to_rgb(hue, sat, val)
+                    # Create as Color3f
+                    shader.CreateInput("plastic_color", Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(r, g, b))
+                    shader.CreateInput("texture_scale", Sdf.ValueTypeNames.Float2).Set(Gf.Vec2f(5.0, 5.0))
+
+                elif isinstance(value_data, list) and len(value_data) == 2:
+                    val = random.uniform(value_data[0], value_data[1])
                     
-                    # Create Input with Color3f type (Essential for USD)
-                    color_val = Gf.Vec3f(r, g, b)
-                    shader.CreateInput(usd_input, Sdf.ValueTypeNames.Color3f).Set(color_val)
-                elif isinstance(bounds, list) and len(bounds) == 2:
-                    val = random.uniform(bounds[0], bounds[1])
-                    # Set the value found dynamically
-                    shader.CreateInput(usd_input, Sdf.ValueTypeNames.Float).Set(val)
+                    # Create as Float
+                    shader.CreateInput(param_key, Sdf.ValueTypeNames.Float).Set(val)
 
         # 4. Apply Non-Visual Attributes
         if "non_visual" in template_data and len(template_data['non_visual']) == 3:

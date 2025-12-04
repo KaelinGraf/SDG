@@ -10,19 +10,19 @@
         "randomise": {
             "age_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_abrasion": [
                 0.0,
-                0.4
+                0.3
             ],
             "drops_variation": [
-                0.6,
+                0.7,
                 1.0
             ],
             "spotsdirt_amount": [
                 0.0,
-                0.4
+                0.3
             ]
         }
     },
@@ -36,11 +36,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -55,7 +55,7 @@
         ],
         "randomise": {
             "color_out_gamma": [
-                0.6,
+                0.7,
                 1.0
             ],
             "anodization_roughness": [
@@ -64,23 +64,23 @@
             ],
             "smudges": [
                 0.0,
-                0.4
+                0.3
             ],
             "wear": [
                 0.0,
-                0.4
+                0.3
             ],
             "abrasion": [
                 0.0,
-                0.4
+                0.3
             ],
             "dirt_weight": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_strength": [
                 0.05,
@@ -92,11 +92,11 @@
             ],
             "color_1": "color",
             "normal_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -111,15 +111,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -127,7 +127,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -142,7 +142,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -170,11 +170,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -184,7 +184,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -200,12 +200,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.054,
@@ -216,23 +216,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.411,
-                0.911
+                0.811
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -261,19 +261,19 @@
             ],
             "roughness": [
                 0.35,
-                0.85
+                0.75
             ],
             "roughness_variation": [
                 0.64,
                 1.0
             ],
             "smudges": [
-                0.49,
-                1.0
+                0.59,
+                0.99
             ],
             "smudges_roughness": [
-                0.15,
-                0.5
+                0.0,
+                0.4
             ],
             "damage": [
                 0.56,
@@ -291,23 +291,23 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.6,
+                0.7,
                 1.0
             ],
             "surface_dirt": [
-                0.62,
+                0.72,
                 1.0
             ],
             "dirt_dents": [
-                0.05,
-                0.65
+                0.15,
+                0.55
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -323,18 +323,18 @@
         "randomise": {
             "roughness": [
                 0.45,
-                0.95
+                0.85
             ],
             "surface_dirt_amount": [
                 0.29,
                 0.89
             ],
             "dirt_dents": [
-                0.43,
-                1.0
+                0.53,
+                0.93
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -349,12 +349,12 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "brushing_roughness": [
                 0.55,
-                1.0
+                0.95
             ],
             "brushing_anisotropy": [
                 0.76,
@@ -366,11 +366,11 @@
             ],
             "surface_dirt": [
                 0.0,
-                0.35
+                0.25
             ],
             "dirt_dents": [
                 0.0,
-                0.35
+                0.25
             ],
             "bump_strength": [
                 0.43,
@@ -378,11 +378,11 @@
             ],
             "anisotropy": [
                 0.0,
-                0.4
+                0.3
             ],
             "anisotropy_rotation": [
                 0.0,
-                0.4
+                0.3
             ]
         }
     },
@@ -396,16 +396,16 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.464
+                0.0,
+                0.364
             ],
             "roughness_variation": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "smudges": [
-                0.45,
-                1.0
+                0.55,
+                0.95
             ],
             "bump_strength": [
                 0.69,
@@ -446,15 +446,15 @@
                 1.0
             ],
             "surface_dirt": [
-                0.65,
+                0.75,
                 1.0
             ],
             "cavities_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -470,18 +470,18 @@
         "randomise": {
             "polish_film_roughness": [
                 0.3,
-                0.8
+                0.7
             ],
             "roughness": [
-                0.15,
-                0.34
+                0.0,
+                0.24
             ],
             "roughness_variation": [
                 0.49,
-                0.99
+                0.89
             ],
             "surface_dirt": [
-                0.65,
+                0.75,
                 1.0
             ],
             "bump_strength": [
@@ -489,7 +489,7 @@
                 0.74
             ],
             "polish_film_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -505,14 +505,14 @@
         "randomise": {
             "roughness": [
                 0.44,
-                0.94
+                0.84
             ],
             "surface_dirt_amount": [
                 0.61,
                 1.0
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "rough_scratches_roughness": [
@@ -524,7 +524,7 @@
                 1.0
             ],
             "shiny_scratches_roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "shiny_scratches_brightness": [
@@ -543,27 +543,27 @@
         ],
         "randomise": {
             "copper_tint": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.6,
+                0.7,
                 1.0
             ],
             "surface_dirt": [
-                0.62,
+                0.72,
                 1.0
             ],
             "dirt_dents": [
-                0.05,
-                0.65
+                0.15,
+                0.55
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -579,18 +579,18 @@
         "randomise": {
             "roughness": [
                 0.45,
-                0.95
+                0.85
             ],
             "surface_dirt_amount": [
                 0.29,
                 0.89
             ],
             "dirt_dents": [
-                0.43,
-                1.0
+                0.53,
+                0.93
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -605,8 +605,8 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "copper_tint": [
                 0.3,
@@ -614,7 +614,7 @@
             ],
             "brushing_roughness": [
                 0.55,
-                1.0
+                0.95
             ],
             "brushing_anisotropy": [
                 0.76,
@@ -626,11 +626,11 @@
             ],
             "surface_dirt": [
                 0.0,
-                0.35
+                0.25
             ],
             "dirt_dents": [
                 0.0,
-                0.35
+                0.25
             ],
             "bump_strength": [
                 0.43,
@@ -638,11 +638,11 @@
             ],
             "anisotropy": [
                 0.0,
-                0.4
+                0.3
             ],
             "anisotropy_rotation": [
                 0.0,
-                0.4
+                0.3
             ]
         }
     },
@@ -687,15 +687,15 @@
                 1.0
             ],
             "surface_dirt": [
-                0.65,
+                0.75,
                 1.0
             ],
             "cavities_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -711,22 +711,22 @@
         "randomise": {
             "polish_film_roughness": [
                 0.3,
-                0.8
+                0.7
             ],
             "copper_tint": [
                 0.3,
                 0.7
             ],
             "roughness": [
-                0.15,
-                0.34
+                0.0,
+                0.24
             ],
             "roughness_variation": [
                 0.49,
-                0.99
+                0.89
             ],
             "surface_dirt": [
-                0.65,
+                0.75,
                 1.0
             ],
             "bump_strength": [
@@ -734,7 +734,7 @@
                 0.74
             ],
             "polish_film_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -754,14 +754,14 @@
             ],
             "roughness": [
                 0.44,
-                0.94
+                0.84
             ],
             "surface_dirt_amount": [
                 0.61,
                 1.0
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "rough_scratches_roughness": [
@@ -773,7 +773,7 @@
                 1.0
             ],
             "shiny_scratches_roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "shiny_scratches_brightness": [
@@ -801,14 +801,14 @@
             ],
             "roughness": [
                 0.3,
-                0.8
+                0.7
             ],
             "scratch_bump_factor": [
                 0.0,
                 0.25
             ],
             "cutout_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "imperfections_amount": [
@@ -825,14 +825,14 @@
             ],
             "impurities_weight_3": [
                 0.0,
-                0.4
+                0.3
             ],
             "base_normal_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "detail_normal_weight": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -847,12 +847,12 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "diffuse_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "bump_strength": [
                 0.2,
@@ -871,11 +871,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -890,15 +890,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -906,7 +906,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -925,11 +925,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -939,7 +939,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -955,12 +955,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -971,23 +971,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -1011,11 +1011,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1035,15 +1035,15 @@
             ],
             "smudge_amount": [
                 0.0,
-                0.4
+                0.3
             ],
             "bump_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "patina_amount": [
                 0.5,
@@ -1058,7 +1058,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "reflection_contrast": [
@@ -1080,10 +1080,10 @@
         "randomise": {
             "metal_roughness": [
                 0.3,
-                0.8
+                0.7
             ],
             "patina_metal_blend": [
-                0.6,
+                0.7,
                 1.0
             ],
             "patina_metal_blend_softness": [
@@ -1096,23 +1096,23 @@
             ],
             "smudge_amount": [
                 0.0,
-                0.4
+                0.3
             ],
             "patina_bump_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "copper_bump_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metallic": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "color_offset": "color",
             "color_scale": "color",
@@ -1123,7 +1123,7 @@
                 0.45
             ],
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1138,15 +1138,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -1154,7 +1154,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1169,7 +1169,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -1197,11 +1197,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -1211,7 +1211,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -1227,12 +1227,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -1243,23 +1243,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -1288,26 +1288,26 @@
             ],
             "metal_roughness": [
                 0.18,
-                0.68
+                0.58
             ],
             "roughness_variation": [
                 0.33,
-                0.83
+                0.73
             ],
             "dirt_amount": [
                 0.08,
                 0.68
             ],
             "dirt_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "dirt_brightness": [
-                0.1,
-                0.7
+                0.2,
+                0.6
             ],
             "strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1327,26 +1327,26 @@
             ],
             "metal_roughness": [
                 0.18,
-                0.68
+                0.58
             ],
             "roughness_variation": [
                 0.33,
-                0.83
+                0.73
             ],
             "dirt_amount": [
                 0.08,
                 0.68
             ],
             "dirt_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "dirt_brightness": [
-                0.1,
-                0.7
+                0.2,
+                0.6
             ],
             "strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1361,11 +1361,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1380,12 +1380,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -1396,23 +1396,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -1436,11 +1436,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1455,15 +1455,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -1471,7 +1471,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1486,7 +1486,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -1514,11 +1514,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -1528,7 +1528,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -1544,12 +1544,12 @@
         ],
         "randomise": {
             "steel_roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "rust_brightness": [
                 0.0,
-                0.4
+                0.3
             ],
             "bump_amount_1": [
                 0.3,
@@ -1557,23 +1557,23 @@
             ],
             "pit_transition_softness": [
                 0.0,
-                0.4
+                0.3
             ],
             "roughness": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "color_offset": "color",
             "color_scale": "color",
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "heat_treatment_amount": [
                 0.0,
-                0.4
+                0.3
             ],
             "color_1": "color",
             "color_2": "color"
@@ -1589,12 +1589,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -1605,23 +1605,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -1645,21 +1645,22 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.55
+                0.05,
+                0.45
             ],
             "roughness_variation": [
                 0.47,
-                0.97
+                0.87
             ],
             "smudges": [
                 0.0,
-                0.47
+                0.37
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
-            ]
+            ],
+            "metal_tint": "color"
         }
     },
     "nickel": {
@@ -1672,11 +1673,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1691,15 +1692,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -1707,7 +1708,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1722,7 +1723,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -1746,12 +1747,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -1762,23 +1763,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -1802,11 +1803,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1821,15 +1822,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -1837,7 +1838,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1852,7 +1853,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -1880,11 +1881,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -1894,7 +1895,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -1910,12 +1911,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -1926,23 +1927,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -1966,11 +1967,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -1985,15 +1986,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -2001,7 +2002,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2016,7 +2017,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -2044,11 +2045,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -2058,7 +2059,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -2074,12 +2075,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -2090,23 +2091,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -2130,12 +2131,12 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "brightness": [
                 0.3,
@@ -2147,26 +2148,26 @@
             ],
             "dents_bump_strength": [
                 0.0,
-                0.4
+                0.3
             ],
             "dents_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "smudges_1_weight": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_2_weight": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_falloff": [
-                0.15,
-                0.75
+                0.25,
+                0.65
             ],
             "smudges_scale": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2182,7 +2183,7 @@
         "randomise": {
             "roughness": [
                 0.15,
-                0.65
+                0.55
             ],
             "brightness": [
                 0.3,
@@ -2194,30 +2195,30 @@
             ],
             "brushing_bump_strength": [
                 0.0,
-                0.4
+                0.3
             ],
             "dents_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "dents_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "smudges_1_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "smudges_2_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "smudges_falloff": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brightness_variation": [
@@ -2225,7 +2226,7 @@
                 1.0
             ],
             "brush_gloss_variation": [
-                0.6,
+                0.7,
                 1.0
             ],
             "steel_anisotropy": [
@@ -2244,8 +2245,8 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.48
+                0.0,
+                0.38
             ],
             "brightness": [
                 0.3,
@@ -2257,42 +2258,42 @@
             ],
             "brushing_bump_strength": [
                 0.0,
-                0.4
+                0.3
             ],
             "dents_bump_strength": [
                 0.0,
-                0.4
+                0.3
             ],
             "dents_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "smudges_1_weight": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_2_weight": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_falloff": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brightness_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "brush_gloss_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "cutout_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "steel_anisotropy": [
@@ -2300,11 +2301,11 @@
                 0.73
             ],
             "base_normal_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "detail_normal_weight": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2320,18 +2321,18 @@
         "randomise": {
             "roughness": [
                 0.47,
-                0.97
+                0.87
             ],
             "brightness": [
                 0.4,
                 0.8
             ],
             "milling_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "dents_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "dents_scale": [
@@ -2350,12 +2351,12 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.6
+                0.1,
+                0.5
             ],
             "roughness_variation": [
-                0.15,
-                0.5
+                0.0,
+                0.4
             ],
             "brightness": [
                 0.3,
@@ -2370,35 +2371,35 @@
                 0.32
             ],
             "dents_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "smudges_1_weight": [
                 0.0,
-                0.34
+                0.24
             ],
             "smudges_2_weight": [
                 0.0,
-                0.35
+                0.25
             ],
             "smudges_falloff": [
                 0.0,
-                0.4
+                0.3
             ],
             "smudges_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "cutout_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "base_normal_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "detail_normal_weight": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2413,23 +2414,23 @@
         ],
         "randomise": {
             "color_out_gamma": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brightness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness": [
                 0.2,
-                0.7
+                0.6
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "oxide_thickness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "oxide_contrast": [
@@ -2437,20 +2438,20 @@
                 0.9
             ],
             "bright_rust_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "rust_saturation": [
-                0.6,
+                0.7,
                 1.0
             ],
             "normal_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "impurities_weight_1": [
                 0.0,
-                0.4
+                0.3
             ],
             "impurities_weight_2": [
                 0.39,
@@ -2472,8 +2473,8 @@
         ],
         "randomise": {
             "zinc_roughness": [
-                0.15,
-                0.5
+                0.0,
+                0.4
             ],
             "oxidation_amount": [
                 0.4,
@@ -2481,15 +2482,15 @@
             ],
             "oxide_roughness": [
                 0.59,
-                1.0
+                0.99
             ],
             "dirt_spots_weight": [
                 0.0,
-                0.48
+                0.38
             ],
             "leak_dirt_weight": [
                 0.0,
-                0.33
+                0.23
             ],
             "bump_strength": [
                 0.0,
@@ -2507,41 +2508,41 @@
         ],
         "randomise": {
             "paint_roughness": [
-                0.15,
-                0.42
+                0.0,
+                0.32
             ],
             "paint_roughness_variation": [
-                0.15,
-                0.4
+                0.0,
+                0.3
             ],
             "dirt_weight": [
                 0.0,
-                0.34
+                0.24
             ],
             "damages_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "paint_color": "color",
             "strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "strength_a": [
-                0.6,
+                0.7,
                 1.0
             ],
             "strength_b": [
-                0.6,
+                0.7,
                 1.0
             ],
             "normal_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "wash_weight": [
                 0.0,
-                0.4
+                0.3
             ],
             "paint_stroke_normal_strength": [
                 0.0,
@@ -2549,7 +2550,7 @@
             ],
             "uneven_normal_strength": [
                 0.0,
-                0.4
+                0.3
             ]
         }
     },
@@ -2564,18 +2565,18 @@
         "randomise": {
             "paint_roughness": [
                 0.16,
-                0.66
+                0.56
             ],
             "paint_roughness_variation": [
                 0.66,
                 1.0
             ],
             "dirt_weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "cracks_bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "cracks_darkness": [
@@ -2583,24 +2584,24 @@
                 0.97
             ],
             "damages_scale": [
-                0.6,
+                0.7,
                 1.0
             ],
             "paint_color": "color",
             "strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "strength_a": [
-                0.6,
+                0.7,
                 1.0
             ],
             "strength_b": [
-                0.6,
+                0.7,
                 1.0
             ],
             "normal_strength": [
-                0.6,
+                0.7,
                 1.0
             ],
             "wash_weight": [
@@ -2627,11 +2628,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2646,15 +2647,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -2662,7 +2663,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2677,7 +2678,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -2705,11 +2706,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -2719,7 +2720,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -2735,12 +2736,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -2751,23 +2752,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -2791,11 +2792,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2810,15 +2811,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -2826,7 +2827,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2841,7 +2842,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -2865,12 +2866,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -2881,23 +2882,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -2921,11 +2922,11 @@
         ],
         "randomise": {
             "roughness": [
-                0.15,
-                0.53
+                0.03,
+                0.43
             ],
             "smudges": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2940,15 +2941,15 @@
         ],
         "randomise": {
             "brush_width": [
-                0.6,
+                0.7,
                 1.0
             ],
             "brush_height_blur": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_variation_amount": [
-                0.6,
+                0.7,
                 1.0
             ],
             "scratch_reflection_variation": [
@@ -2956,7 +2957,7 @@
                 1.0
             ],
             "scratches_bump": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -2971,8 +2972,8 @@
         ],
         "randomise": {
             "zinc_roughness": [
-                0.15,
-                0.59
+                0.09,
+                0.49
             ],
             "oxidation_amount": [
                 0.52,
@@ -2980,18 +2981,18 @@
             ],
             "oxide_roughness": [
                 0.52,
-                1.0
+                0.92
             ],
             "dirt_spots_weight": [
-                0.56,
+                0.66,
                 1.0
             ],
             "leak_dirt_weight": [
-                0.43,
-                1.0
+                0.53,
+                0.93
             ],
             "bump_strength": [
-                0.6,
+                0.7,
                 1.0
             ]
         }
@@ -3006,7 +3007,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "diffuse_variation": [
@@ -3034,11 +3035,11 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.7,
                 1.0
             ],
             "grooves_dirt": [
-                0.6,
+                0.7,
                 1.0
             ],
             "bump_strength": [
@@ -3048,7 +3049,7 @@
             "tint": "color",
             "grazing_tint": "color",
             "weight": [
-                0.6,
+                0.7,
                 1.0
             ],
             "metal_tint": "color"
@@ -3064,12 +3065,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_variation": [
-                0.15,
-                0.508
+                0.008,
+                0.408
             ],
             "brightness": [
                 0.6,
@@ -3080,23 +3081,23 @@
                 1.0
             ],
             "bump_factor": [
-                0.6,
+                0.7,
                 1.0
             ],
             "roughness_scratches": [
                 0.15,
-                0.65
+                0.55
             ],
             "scratches_variation": [
                 0.0,
-                0.4
+                0.3
             ],
             "scratches_bump_factor": [
                 0.703,
                 1.0
             ],
             "dirt_transition_softness": [
-                0.601,
+                0.701,
                 1.0
             ],
             "dirt_amount": [
@@ -3110,9 +3111,9 @@
             "reflection_color": "color"
         }
     },
-    "plastic_standardized_surface_finish": {
-        "mdl_path": "file:///home/kaelin/IsaacAssets/Materials/vMaterials_2/Plastic/Plastic_Standardized_Surface_Finish.mdl",
-        "name": "Plastic_Standardized_Surface_Finish_V15",
+    "polycarbonate__opaque": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Plastic/Polycarbonate_Opaque.mdl",
+        "name": "Polycarbonate_Opaque",
         "non_visual": [
             "plastic",
             "none",
@@ -3120,31 +3121,16 @@
         ],
         "randomise": {
             "roughness": [
-                0.8,
-                1.0
-            ],
-            "bump_strength": [
                 0.5,
-                1.5
+                0.8
             ],
-            "reflection_weight": [
+            "diffuse_tint": "color",
+            "smudges": [
                 0.0,
-                0.05
+                0.3
             ],
-            "plastic_color": {
-                "h": [
-                    0.0,
-                    1.0
-                ],
-                "s": [
-                    0.3,
-                    0.8
-                ],
-                "v": [
-                    0.1,
-                    0.5
-                ]
-            }
+            "albedo": "color",
+            "transmissive_tint": "color"
         }
     }
 }
