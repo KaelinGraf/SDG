@@ -19,7 +19,7 @@ ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
 from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
-    "headless": False,
+    "headless": True,
 }) 
 import carb
 from isaacsim.core.utils.extensions import enable_extension
@@ -37,7 +37,7 @@ from omni.isaac.core.utils.semantics import add_update_semantics
 from omni.isaac.core.materials import PhysicsMaterial
 from isaacsim.core.api.materials import OmniPBR
 from isaacsim.sensors.rtx import apply_nonvisual_material
-from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf, PhysxSchema, Vt, Usd
+from pxr import UsdGeom, Gf, UsdPhysics,UsdShade,Sdf, PhysxSchema, Vt, Usd,UsdLux
 from omni.physx.scripts import utils
 from isaacsim.core.utils.rotations import euler_angles_to_quat
 import isaacsim.core.utils.bounds as bounds_utils
@@ -54,6 +54,29 @@ from Utils.mesh_utils import AssetManager
 from Utils.mesh_utils import get_position_from_voxel_index
 from Utils.replicator_utils import RepCam
 from Utils.material_manager import MaterialManager
+# App
+import carb.settings
+carb.settings.get_settings().set("/app/enableDeveloperWarnings", False)
+carb.settings.get_settings().set("/app/scripting/ignoreWarningDialog", True)
+
+# UI Console
+import carb.settings
+carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/verbose", False)
+carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/info", False)
+carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/warning", False)
+carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/error", False)
+carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/fatal", False)
+
+# Log 
+import carb.settings
+carb.settings.get_settings().set("/log/debugConsoleLevel", "Fatal")  # verbose"|"info"|"warning"|"error"|"fatal"
+carb.settings.get_settings().set("/log/enabled", False)
+carb.settings.get_settings().set("/log/outputStreamLevel", "Error")
+carb.settings.get_settings().set("/log/fileLogLevel", "Error")
+# logger = logging.getLogger()
+# logger.setLevel(logging.ERROR)
+# for hndlr in logger.handlers:
+#     logger.removeHandler(hndlr)
 # --- FIX START: REGISTER PATHS BEFORE LOADING MATERIAL LIB ---
 # In scene_builder.py
 
@@ -150,21 +173,48 @@ class SceneBuilder:
         
         self.world.clear()
         self.world.scene.add_default_ground_plane()
+        self.material_manager.create_material(template="wood")
+        self.material_manager.bind_material(mat_prim_path="/Looks/Wood_Cork",prim_path="/World/defaultGroundPlane")
+        #make ground plane invisible
+        #ground_plane = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane")
+        #ground_plane.GetAttribute("visibility").Set(False)
+        ground_plane_light = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane/SphereLight")
+        ground_plane_light.GetAttribute("inputs:intensity").Set(150000.0)
+        #translate light up and to the right a bit
+        ground_plane_light_xform = UsdGeom.Xformable(ground_plane_light)
+        ground_plane_light_xform.ClearXformOpOrder()
+        ground_plane_light_xform.AddTranslateOp().Set(Gf.Vec3d(0.0,0.0,2.0))
+        #create an ambient light
+        #light = UsdLux.DomeLight.Define(self.world.stage, "/World/AmbientLight")
+        # light.CreateIntensityAttr(200)
+        # light.CreateColorAttr(Gf.Vec3f(1.0, 1.0, 1.0))
+
         self.rep_cam = RepCam(self.scene_config["bin_dimensions"], focal_length=self.scene_config["cam_z_dist"])
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
+            # self.rep_cam.init_cam()
+            # for _ in range(5): #warmup
+            #     self.world.step(render=True)
+            # self.rep_cam.zivid_camera.verify_gamma_linearity()
+
             self.material_manager.create_material(template="plastic_standardized_surface_finish")
             self.material_manager.populate_materials(n=3)
             self.populate_scene()
             self.world.reset()
-            for j in range(500):
+            self.rep_cam.init_cam()
+            for _ in range(5): #warmup
                 self.world.step(render=True)
-            # data_frames = self.rep_cam.capture_scene(
-            #     bin_pos=(0, 0, 0), # Or extract from self.bin_prim
-            #     num_views=self.scene_config["num_cameras"]
-            # )
-            #self.rep_cam.capture_scene()
+         
+           
+            for j in range(100):
+                self.world.step(render=True)
+                #self.rep_cam.draw_fov_zivid()
+            
+            #self.rep_cam.zivid_camera.verify_replicator_attachment()
+            #self.rep_cam.zivid_camera.verify_gamma_linearity()
+            self.rep_cam.cam_trigger()
+        
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
             prims.delete_prim(prim_path = "/World/Bin")

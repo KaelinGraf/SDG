@@ -146,7 +146,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "diffuse_variation": [
@@ -174,7 +174,7 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "grooves_dirt": [
@@ -204,12 +204,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.2,
                 1.0
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                0.808
             ],
             "brightness": [
                 0.054,
@@ -264,7 +264,7 @@
                 0.7
             ],
             "roughness": [
-                0.35,
+                0.15,
                 0.85
             ],
             "roughness_variation": [
@@ -295,8 +295,8 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
-                1.0
+                0.2,
+                0.8
             ],
             "roughness_variation": [
                 0.6,
@@ -326,8 +326,8 @@
         ],
         "randomise": {
             "roughness": [
-                0.45,
-                0.95
+                0.15,
+                0.7
             ],
             "surface_dirt_amount": [
                 0.29,
@@ -867,7 +867,7 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
@@ -1081,7 +1081,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.2,
                 1.0
             ],
             "diffuse_variation": [
@@ -1105,12 +1105,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.2,
                 1.0
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                0.808
             ],
             "brightness": [
                 0.6,
@@ -1258,12 +1258,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                0.808
             ],
             "brightness": [
                 0.6,
@@ -1315,7 +1315,7 @@
         "randomise": {
             "roughness": [
                 0.15,
-                0.53
+                0.93
             ],
             "smudges": [
                 0.6,
@@ -1364,7 +1364,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "diffuse_variation": [
@@ -1392,7 +1392,7 @@
                 0.6
             ],
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "grooves_dirt": [
@@ -1423,7 +1423,7 @@
         "randomise": {
             "steel_roughness": [
                 0.15,
-                0.4
+                0.6
             ],
             "rust_brightness": [
                 0.0,
@@ -1439,7 +1439,7 @@
             ],
             "roughness": [
                 0.15,
-                0.4
+                0.8
             ],
             "color_offset": "color",
             "color_scale": "color",
@@ -1451,7 +1451,7 @@
             ],
             "heat_treatment_amount": [
                 0.0,
-                0.4
+                0.9
             ],
             "color_1": "color",
             "color_2": "color"
@@ -1467,12 +1467,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                0.808
             ],
             "brightness": [
                 0.6,
@@ -1524,7 +1524,7 @@
         "randomise": {
             "roughness": [
                 0.15,
-                0.55
+                0.95
             ],
             "roughness_variation": [
                 0.47,
@@ -1551,7 +1551,7 @@
         "randomise": {
             "roughness": [
                 0.15,
-                0.53
+                0.83
             ],
             "smudges": [
                 0.6,
@@ -1600,7 +1600,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "diffuse_variation": [
@@ -1624,12 +1624,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.2,
                 1.0
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                0.808
             ],
             "brightness": [
                 0.6,
@@ -1681,7 +1681,7 @@
         "randomise": {
             "roughness": [
                 0.15,
-                0.53
+                0.73
             ],
             "smudges": [
                 0.6,
@@ -1730,7 +1730,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "diffuse_variation": [
@@ -1754,12 +1754,12 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
                 0.15,
-                0.508
+                0.808
             ],
             "brightness": [
                 0.6,
@@ -1860,7 +1860,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.2,
                 1.0
             ],
             "diffuse_variation": [
@@ -1884,7 +1884,7 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
@@ -1940,7 +1940,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
@@ -1992,7 +1992,7 @@
         "randomise": {
             "roughness": [
                 0.15,
-                0.65
+                0.75
             ],
             "brightness": [
                 0.3,
@@ -2129,7 +2129,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.47,
+                0.17,
                 0.97
             ],
             "brightness": [
@@ -2487,7 +2487,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "diffuse_variation": [
@@ -2511,7 +2511,7 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.2,
                 1.0
             ],
             "roughness_variation": [
@@ -2617,7 +2617,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.2,
                 1.0
             ],
             "diffuse_variation": [
@@ -2641,7 +2641,7 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
@@ -2661,8 +2661,8 @@
                 1.0
             ],
             "roughness_scratches": [
-                0.15,
-                0.65
+                0.35,
+                0.95
             ],
             "scratches_variation": [
                 0.0,
@@ -2782,7 +2782,7 @@
         ],
         "randomise": {
             "roughness": [
-                0.6,
+                0.1,
                 1.0
             ],
             "diffuse_variation": [
@@ -2806,7 +2806,7 @@
         ],
         "randomise": {
             "roughness_metal_surface": [
-                0.6,
+                0.1,
                 1.0
             ],
             "roughness_variation": [
@@ -2871,7 +2871,7 @@
             ],
             "reflection_weight": [
                 0.0,
-                0.05
+                0.01
             ],
             "plastic_color": {
                 "h": [
@@ -2888,5 +2888,17 @@
                 ]
             }
         }
+    },
+    
+    "wood": {
+        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Wood/Wood_Cork.mdl",
+        "name": "Wood_Cork",
+        "non_visual": [
+            "wood",
+            "none",
+            "emissive"
+        ],
+        "randomise": {}
     }
+    
 }

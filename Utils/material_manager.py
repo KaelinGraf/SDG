@@ -49,7 +49,10 @@ class MaterialManager:
         """create a single material primitive and return the path"""
 
         if template is None:
-            template_key = random.choice(self.materials)
+            while True:
+                template_key = random.choice(self.materials)
+                if "wood" not in template_key:
+                    break
         else:
             template_key = template
             
