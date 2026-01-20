@@ -19,7 +19,7 @@ ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
 from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
-    "headless": True,
+    "headless": False,
 }) 
 import carb
 from isaacsim.core.utils.extensions import enable_extension
@@ -34,6 +34,8 @@ import omni.usd
 from omni.isaac.core.utils import prims
 from omni.isaac.core import World
 from omni.isaac.core.utils.semantics import add_update_semantics
+from omni.isaac.core.utils.stage import open_stage
+
 from omni.isaac.core.materials import PhysicsMaterial
 from isaacsim.core.api.materials import OmniPBR
 from isaacsim.sensors.rtx import apply_nonvisual_material
@@ -128,13 +130,16 @@ register_core_mdl_paths()
 enable_extension("omni.kit.material.library")
 
 class SceneBuilder:
-    def __init__(self,scene_name):
+    def __init__(self,scene_name,usd_path=None):
+        if usd_path is not None:
+            self.world_setup_from_usd(usd_path)
+        else:
+            self.world_setup()
         self.scene_name = scene_name
         self.objects = {}
         self.read_configs()
         self.asset_manager = AssetManager(self.objects_config)
         self.material_manager = MaterialManager()
-        self.world_setup()
 
 
     
@@ -152,6 +157,15 @@ class SceneBuilder:
         scene.CreateGravityMagnitudeAttr().Set(4.810)
         self.world.set_simulation_dt(physics_dt=1.0 / 120.0, rendering_dt=1.0 / 60.0)
         self.world.get_physics_context().set_solver_type("TGS")
+        
+    def world_setup_from_usd(self,usd_path):
+        """
+        Alternative world setup method, which loads a pre-defined USD scene file.
+        """
+        open_stage(usd_path)
+        self.world = World()
+        self.world.reset()
+
 
         
 
@@ -171,19 +185,19 @@ class SceneBuilder:
         #randomises certain scene parameters based on config. 
         #clears and repopulates the scene each iteration
         
-        self.world.clear()
-        self.world.scene.add_default_ground_plane()
-        self.material_manager.create_material(template="wood")
-        self.material_manager.bind_material(mat_prim_path="/Looks/Wood_Cork",prim_path="/World/defaultGroundPlane")
+        #self.world.clear()
+        #self.world.scene.add_default_ground_plane()
+        #self.material_manager.create_material(template="wood")
+        #self.material_manager.bind_material(mat_prim_path="/Looks/Wood_Cork",prim_path="/World/defaultGroundPlane")
         #make ground plane invisible
         #ground_plane = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane")
         #ground_plane.GetAttribute("visibility").Set(False)
-        ground_plane_light = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane/SphereLight")
-        ground_plane_light.GetAttribute("inputs:intensity").Set(150000.0)
+        #ground_plane_light = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane/SphereLight")
+        #ground_plane_light.GetAttribute("inputs:intensity").Set(150000.0)
         #translate light up and to the right a bit
-        ground_plane_light_xform = UsdGeom.Xformable(ground_plane_light)
-        ground_plane_light_xform.ClearXformOpOrder()
-        ground_plane_light_xform.AddTranslateOp().Set(Gf.Vec3d(0.0,0.0,2.0))
+        # ground_plane_light_xform = UsdGeom.Xformable(ground_plane_light)
+        # ground_plane_light_xform.ClearXformOpOrder()
+        # ground_plane_light_xform.AddTranslateOp().Set(Gf.Vec3d(0.0,0.0,2.0))
         #create an ambient light
         #light = UsdLux.DomeLight.Define(self.world.stage, "/World/AmbientLight")
         # light.CreateIntensityAttr(200)
@@ -193,10 +207,6 @@ class SceneBuilder:
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
-            # self.rep_cam.init_cam()
-            # for _ in range(5): #warmup
-            #     self.world.step(render=True)
-            # self.rep_cam.zivid_camera.verify_gamma_linearity()
 
             self.material_manager.create_material(template="plastic_standardized_surface_finish")
             self.material_manager.populate_materials(n=3)
@@ -207,7 +217,7 @@ class SceneBuilder:
                 self.world.step(render=True)
          
            
-            for j in range(100):
+            for j in range(10000):
                 self.world.step(render=True)
                 #self.rep_cam.draw_fov_zivid()
             
@@ -308,9 +318,9 @@ class SceneBuilder:
             )
             bin_xform = UsdGeom.Xformable(self.bin_prim)
             bin_xform.ClearXformOpOrder() 
-            bin_xform.AddTranslateOp().Set(Gf.Vec3d(start_x,start_y,0))
-            bin_xform.AddRotateXYZOp().Set(Gf.Vec3d(0,0,0))
-            bin_xform.AddScaleOp().Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
+            bin_xform.AddTranslateOp(precision=UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(start_x,start_y,0))
+            bin_xform.AddRotateXYZOp(precision=UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(0,0,0))
+            bin_xform.AddScaleOp(precision=UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
             self.generate_box_uvs(self.bin_prim)
             self.material_manager.bind_material(mat_prim_path="/Looks/Plastic_Standardized_Surface_Finish_V15",prim_path="/World/Bin")
             self.assign_physics_materials(self.bin_prim,is_static=True)
@@ -521,10 +531,10 @@ def main():
     parser.add_argument('--iters', type=int, default=10, help='Number of data generation iterations to run')
     args = parser.parse_args()
     
-    scene_builder = SceneBuilder(args.scene_name) #initialize scene builder with specified scene config, does not start data generation
+    scene_builder = SceneBuilder(args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/warehouse_ur12e.usd") #initialize scene builder with specified scene config, does not start data generation
     
     print(f"Scene Builder initialised for scene: {args.scene_name}. Starting data generation loop for {args.iters} iterations.")
-    scene_builder.world.reset()
+    #scene_builder.world.reset()
 
     print("Holding simulation open. Press Ctrl+C in terminal to stop.")
     

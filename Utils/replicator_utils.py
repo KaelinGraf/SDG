@@ -7,7 +7,7 @@ from isaacsim.zivid import transforms as Ztransforms
 import omni.replicator.core as rep
 from isaacsim.core.utils.prims import get_prim_at_path
 from isaacsim.core.utils.xforms import get_world_pose
-import zivid
+#import zivid
 import open3d as o3d
 import numpy as np
 from omni.kit.viewport.utility import create_viewport_window
