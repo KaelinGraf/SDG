@@ -2,23 +2,23 @@
 	"object_1": {
 		"name": "rb_50x70",
 		"class": "round_billet",
-		"mesh_filepath": "../Meshes/rb_50x70_v2.obj",
+		"mesh_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_50x70_v2.obj",
 		"properties": {
 			"property_1": "value_1",
 			"property_2": "value_2",
 			"scale": 1.0
 		},
-		"usd_filepath": "../Meshes/rb_50x70_v2.usd"
+		"usd_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_50x70_v2.usd"
 	},
 	"object_2": {
 		"name": "rb_100x50",
 		"class": "round_billet",
-		"mesh_filepath": "../Meshes/rb_100x50.obj",
+		"mesh_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_100x50.obj",
 		"properties": {
 			"property_1": "value_3",
 			"property_2": "value_4",
 			"scale": 0.5
 		},
-		"usd_filepath": "../Meshes/rb_100x50.usd"
+		"usd_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_100x50.usd"
 	}
 }

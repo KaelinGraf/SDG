@@ -52,35 +52,14 @@ import argparse
 import random
 import math
 import logging
-from Utils.mesh_utils import AssetManager
+from PyQt6.QtWidgets import QApplication, QWidget
+
+from Utils.mesh_utils import AssetManager,get_bounds
 from Utils.mesh_utils import get_position_from_voxel_index
 from Utils.replicator_utils import RepCam
 from Utils.material_manager import MaterialManager
-# App
-import carb.settings
-carb.settings.get_settings().set("/app/enableDeveloperWarnings", False)
-carb.settings.get_settings().set("/app/scripting/ignoreWarningDialog", True)
 
-# UI Console
-import carb.settings
-carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/verbose", False)
-carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/info", False)
-carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/warning", False)
-carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/error", False)
-carb.settings.get_settings().set("/exts/omni.kit.window.console/logFilter/fatal", False)
 
-# Log 
-import carb.settings
-carb.settings.get_settings().set("/log/debugConsoleLevel", "Fatal")  # verbose"|"info"|"warning"|"error"|"fatal"
-carb.settings.get_settings().set("/log/enabled", False)
-carb.settings.get_settings().set("/log/outputStreamLevel", "Error")
-carb.settings.get_settings().set("/log/fileLogLevel", "Error")
-# logger = logging.getLogger()
-# logger.setLevel(logging.ERROR)
-# for hndlr in logger.handlers:
-#     logger.removeHandler(hndlr)
-# --- FIX START: REGISTER PATHS BEFORE LOADING MATERIAL LIB ---
-# In scene_builder.py
 
 def register_core_mdl_paths():
     tokens = carb.tokens.get_tokens_interface()
@@ -123,27 +102,43 @@ def register_core_mdl_paths():
     
     print(f"[SceneBuilder] Registered MDL Paths: {final_paths}")
 
-# Call this BEFORE enable_extension("omni.kit.material.library")
 register_core_mdl_paths()
-
-# 3. NOW enable the extension. It will see the paths during startup.
 enable_extension("omni.kit.material.library")
 
 class SceneBuilder:
     def __init__(self,scene_name,usd_path=None):
         if usd_path is not None:
             self.world_setup_from_usd(usd_path)
+            self.scene_name = scene_name
+            self.objects = {}
+            self.read_configs()
+            #initialise asset and material managers after stage is loaded such that the stage pointer held in them is valid
+            self.asset_manager = AssetManager(self.objects_config)
+            self.material_manager = MaterialManager()
         else:
+            #initialise asset and material managers after stage is loaded such that the stage pointer held in them is valid
+            self.scene_name = scene_name
+            self.objects = {}
+            self.read_configs()
+            self.asset_manager = AssetManager(self.objects_config)
+            self.material_manager = MaterialManager()
+            
             self.world_setup()
-        self.scene_name = scene_name
-        self.objects = {}
-        self.read_configs()
-        self.asset_manager = AssetManager(self.objects_config)
-        self.material_manager = MaterialManager()
+    
+        self.table_bounds = None
+        if usd_path is not None:
+            cache = bounds_utils.create_bbox_cache()
+            self.table_bounds = np.array(bounds_utils.compute_aabb(cache,self.scene_config["tabletop_prim"]))
+        
+        
+     
 
 
     
     def world_setup(self):
+        """
+        Use in the event that a pre-existing USD stage is NOT available. 
+        """
         self.world = World()
         #self.world.scene.add_default_ground_plane()
         stage = omni.usd.get_context().get_stage()
@@ -154,9 +149,26 @@ class SceneBuilder:
         else:
             physx_scene_api = PhysxSchema.PhysxSceneAPI(scene_prim)
         scene.CreateGravityDirectionAttr().Set(Gf.Vec3f(0.0, 0.0, -1.0))
-        scene.CreateGravityMagnitudeAttr().Set(4.810)
-        self.world.set_simulation_dt(physics_dt=1.0 / 120.0, rendering_dt=1.0 / 60.0)
+        scene.CreateGravityMagnitudeAttr().Set(9.810)
+        
         self.world.get_physics_context().set_solver_type("TGS")
+        self.world.clear()
+        self.world.scene.add_default_ground_plane()
+        self.material_manager.create_material(template="wood")
+        self.material_manager.bind_material(mat_prim_path="/Looks/Wood_Cork",prim_path="/World/defaultGroundPlane")
+        #make ground plane invisible
+        #ground_plane = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane")
+        #ground_plane.GetAttribute("visibility").Set(False)
+        ground_plane_light = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane/SphereLight")
+        ground_plane_light.GetAttribute("inputs:intensity").Set(150000.0)
+        #translate light up and to the right a bit
+        ground_plane_light_xform = UsdGeom.Xformable(ground_plane_light)
+        ground_plane_light_xform.ClearXformOpOrder()
+        ground_plane_light_xform.AddTranslateOp().Set(Gf.Vec3d(0.0,0.0,2.0))
+        #create an ambient light
+        # light = UsdLux.DomeLight.Define(self.world.stage, "/World/AmbientLight")
+        # light.CreateIntensityAttr(200)
+        # light.CreateColorAttr(Gf.Vec3f(1.0, 1.0, 1.0))
         
     def world_setup_from_usd(self,usd_path):
         """
@@ -165,45 +177,17 @@ class SceneBuilder:
         open_stage(usd_path)
         self.world = World()
         self.world.reset()
-
-
         
 
-    def material_setup(self):
-        """
-        TODO: Impliment material generation (high friction metal-realistic physics properties)
-            also must have randomisation graph for specular attributes
-            Materials will be dynamically bound to primitive.
-
-            Also: impliment bin material here
-        """
 
 
-        pass
-    def data_generator_loop(self,iters):
+    def data_generator_loop(self,iters=10):
         #main data generation loop
         #randomises certain scene parameters based on config. 
         #clears and repopulates the scene each iteration
         
-        #self.world.clear()
-        #self.world.scene.add_default_ground_plane()
-        #self.material_manager.create_material(template="wood")
-        #self.material_manager.bind_material(mat_prim_path="/Looks/Wood_Cork",prim_path="/World/defaultGroundPlane")
-        #make ground plane invisible
-        #ground_plane = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane")
-        #ground_plane.GetAttribute("visibility").Set(False)
-        #ground_plane_light = self.world.stage.GetPrimAtPath("/World/defaultGroundPlane/SphereLight")
-        #ground_plane_light.GetAttribute("inputs:intensity").Set(150000.0)
-        #translate light up and to the right a bit
-        # ground_plane_light_xform = UsdGeom.Xformable(ground_plane_light)
-        # ground_plane_light_xform.ClearXformOpOrder()
-        # ground_plane_light_xform.AddTranslateOp().Set(Gf.Vec3d(0.0,0.0,2.0))
-        #create an ambient light
-        #light = UsdLux.DomeLight.Define(self.world.stage, "/World/AmbientLight")
-        # light.CreateIntensityAttr(200)
-        # light.CreateColorAttr(Gf.Vec3f(1.0, 1.0, 1.0))
 
-        self.rep_cam = RepCam(self.scene_config["bin_dimensions"], focal_length=self.scene_config["cam_z_dist"])
+    
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
@@ -211,6 +195,7 @@ class SceneBuilder:
             self.material_manager.create_material(template="plastic_standardized_surface_finish")
             self.material_manager.populate_materials(n=3)
             self.populate_scene()
+            self.rep_cam = RepCam(self.bin_dims,self.bin_pos, focal_length=self.scene_config["cam_z_dist"])
             self.world.reset()
             self.rep_cam.init_cam()
             for _ in range(5): #warmup
@@ -223,7 +208,7 @@ class SceneBuilder:
             
             #self.rep_cam.zivid_camera.verify_replicator_attachment()
             #self.rep_cam.zivid_camera.verify_gamma_linearity()
-            self.rep_cam.cam_trigger()
+            #self.rep_cam.cam_trigger()
         
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
@@ -290,22 +275,6 @@ class SceneBuilder:
         max_diag_length = max_diag_length* 1.1 + self.scene_config.get("voxel_jitter", 0.0) * 2.0 #add jitter to voxel size to ensure no overlaps
        
         
-        #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
-        bin_dims = np.asarray(self.scene_config["bin_dimensions"])
-        scale_factor = 1
-        if self.scene_config.get("vary_bin_scale", False):
-            scale_factor = random.uniform(self.scene_config["bin_scale_range"][0], self.scene_config["bin_scale_range"][1])
-            bin_dims = bin_dims * scale_factor
-            #ensure smallest dimension is larger than diag_length (as this is spawn cell size)
-            min_dim = np.min(bin_dims)
-            if min_dim < max_diag_length:
-                adjust_scale = max_diag_length / min_dim
-                bin_dims = bin_dims * adjust_scale * 1.1
-                scale_factor *= adjust_scale * 1.1
-            print(f"Randomized bin dimensions to: {bin_dims}")
-        print(f"Scale factor: {scale_factor}")
-        start_x = -bin_dims[0] / 2.0
-        start_y = -bin_dims[1] / 2.0
         bin_usd = self.scene_config.get("usd_filepath",None)
         if bin_usd is not None:
             print("creating bin prim")
@@ -316,11 +285,39 @@ class SceneBuilder:
                 usd_path=bin_usd,
                 semantic_label="bin"
             )
+            
+            #find table dimensions
+            if self.table_bounds is None:
+                self.table_bounds = np.zeros(6)
+            bin_pos_x = (self.table_bounds[0] + self.table_bounds[3]) /2
+            bin_pos_y = (self.table_bounds[1] + self.table_bounds[4]) /2
+            bin_pos_z = self.table_bounds[5] + 0.03
+
+            bin_bounds = np.array(get_bounds("/World/Bin"))
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
             bin_xform = UsdGeom.Xformable(self.bin_prim)
             bin_xform.ClearXformOpOrder() 
-            bin_xform.AddTranslateOp(precision=UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(start_x,start_y,0))
-            bin_xform.AddRotateXYZOp(precision=UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(0,0,0))
-            bin_xform.AddScaleOp(precision=UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
+            bin_xform.AddTranslateOp().Set(Gf.Vec3d((bin_pos_x,bin_pos_y,bin_pos_z+(bin_dims[2]/2))))
+            #bin_xform.AddRotateXYZOp().Set(Gf.Vec3d(0,0,90))
+                    #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
+            bin_bounds = np.array(get_bounds("/World/Bin"))
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
+            self.bin_dims = bin_dims
+            self.bin_pos = [bin_pos_x,bin_pos_y,bin_pos_z]
+            print(f"bin dims: {bin_dims}")
+            scale_factor = 1
+            if self.scene_config.get("vary_bin_scale", False):
+                scale_factor = random.uniform(self.scene_config["bin_scale_range"][0], self.scene_config["bin_scale_range"][1])
+                bin_dims = bin_dims * scale_factor
+                #ensure smallest dimension is larger than diag_length (as this is spawn cell size)
+                min_dim = np.min(bin_dims)
+                if min_dim < max_diag_length:
+                    adjust_scale = max_diag_length / min_dim
+                    bin_dims = bin_dims * adjust_scale * 1.1
+                    scale_factor *= adjust_scale * 1.1
+                print(f"Randomized bin dimensions to: {bin_dims}")
+            print(f"Scale factor: {scale_factor}")
+            bin_xform.AddScaleOp(UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
             self.generate_box_uvs(self.bin_prim)
             self.material_manager.bind_material(mat_prim_path="/Looks/Plastic_Standardized_Surface_Finish_V15",prim_path="/World/Bin")
             self.assign_physics_materials(self.bin_prim,is_static=True)
@@ -359,11 +356,23 @@ class SceneBuilder:
         for i, selected_object in enumerate(objects_to_add):
             cell_index = voxel_cells.pop()
             
-            # 3. FIX: Pass the corrected corner origin
+            # # 3. FIX: Pass the corrected corner origin
+            # [cell_x, cell_y, cell_z] = get_position_from_voxel_index(
+            #     voxel_index=(cell_index % num_cells_x, (cell_index // num_cells_x) % num_cells_y, cell_index // (num_cells_x * num_cells_y)),
+            #     voxel_size=(max_diag_length, max_diag_length, max_diag_length),
+            #     grid_origin=(bin_pos_x,bin_pos_y,bin_pos_z+spawn_height_z),#(bin_pos_x,bin_pos_y, spawn_height_z + bin_pos_z), 
+            #     jitter=self.scene_config["voxel_jitter"]
+            # )
+            idx_x = cell_index % num_cells_x
+            idx_y = (cell_index // num_cells_x) % num_cells_y
+            idx_z = cell_index // (num_cells_x * num_cells_y)
             [cell_x, cell_y, cell_z] = get_position_from_voxel_index(
-                voxel_index=(cell_index % num_cells_x, (cell_index // num_cells_x) % num_cells_y, cell_index // (num_cells_x * num_cells_y)),
+                voxel_index=(idx_x, idx_y, idx_z),
                 voxel_size=(max_diag_length, max_diag_length, max_diag_length),
-                grid_origin=(start_x, start_y, spawn_height_z), 
+                # grid_origin is the center of the bin in X/Y, and the top rim in Z
+                grid_origin=(bin_pos_x, bin_pos_y, bin_pos_z + spawn_height_z), 
+                # NEW: Pass grid counts so the function knows how far to offset to center the grid
+                grid_counts=(num_cells_x, num_cells_y, num_cells_z),
                 jitter=self.scene_config["voxel_jitter"]
             )
             #compute scale within scene scaling bounds
@@ -395,7 +404,7 @@ class SceneBuilder:
             if not is_static:
                 mesh_api.CreateApproximationAttr("convexHull")
             else:
-                mesh_api.CreateApproximationAttr("convexDecomposition") #bin gets decomp
+                mesh_api.CreateApproximationAttr("meshSimplification") #bin gets decomp
         # COLLISION
         if not prim.HasAPI(UsdPhysics.CollisionAPI):
             col_api = UsdPhysics.CollisionAPI.Apply(prim)
@@ -404,8 +413,10 @@ class SceneBuilder:
             # RIGID BODY
             if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
                 rb_api = UsdPhysics.RigidBodyAPI.Apply(prim)
-                rb_api.CreateRigidBodyEnabledAttr(True)
-                rb_api.CreateKinematicEnabledAttr(False)      
+            else:
+                rb_api = UsdPhysics.RigidBodyApi(prim)
+            rb_api.CreateRigidBodyEnabledAttr(True)
+            rb_api.CreateKinematicEnabledAttr(False)      
             # MASS
             if not prim.HasAPI(UsdPhysics.MassAPI):
                 mass_api = UsdPhysics.MassAPI.Apply(prim)
@@ -420,6 +431,13 @@ class SceneBuilder:
                 physx_rb_api.CreateSleepThresholdAttr(0.005) # Prevent sleeping while still settling
                 physx_rb_api.CreateLinearDampingAttr(0.5)  # "Air resistance"
                 physx_rb_api.CreateAngularDampingAttr(0.5) # Rotational resistance
+                
+        if is_static:
+            if prim.HasAPI(UsdPhysics.RigidBodyAPI):
+                rb_api = UsdPhysics.RigidBodyAPI(prim)
+                rb_api.CreateRigidBodyEnabledAttr(True)
+                rb_api.CreateKinematicEnabledAttr(False)      
+
 
     
     # def populate_sensor(self):
@@ -532,21 +550,22 @@ def main():
     args = parser.parse_args()
     
     scene_builder = SceneBuilder(args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/warehouse_ur12e.usd") #initialize scene builder with specified scene config, does not start data generation
-    
+    #scene_builder = SceneBuilder(args.scene_name)#args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/warehouse_ur12e.usd") #initialize scene builder with specified scene config, does not start data generation
+
     print(f"Scene Builder initialised for scene: {args.scene_name}. Starting data generation loop for {args.iters} iterations.")
     #scene_builder.world.reset()
-
+    scene_builder.data_generator_loop()
     print("Holding simulation open. Press Ctrl+C in terminal to stop.")
-    
+    #scene_builder.data_generator_loop(args.iters) #start data generation loop
     # # Create a viewer loop so you can see the bin
-    # while simulation_app.is_running():
-    #     # This triggers the renderer and physics step
-    #     simulation_app.update() 
+    while simulation_app.is_running():
+        # This triggers the renderer and physics step
+        simulation_app.update() 
         
     #     # Optional: If you want to verify the bin exists, check it here
     #     # if scene_builder.world.scene.get_object("/World/Bin"):
     #     #    pass
-    scene_builder.data_generator_loop(args.iters) #start data generation loop
+    
     
     
     

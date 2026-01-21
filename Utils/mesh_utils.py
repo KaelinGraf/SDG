@@ -45,15 +45,45 @@ class AssetManager:
                 }
                 #delete temp prim
                 prim_utils.delete_prim(temp_path)
+                
+                
+def get_bounds(prim_path):
+    cache = bounds_utils.create_bbox_cache()
+    return np.array(bounds_utils.compute_aabb(cache,prim_path))
+
+
     
 
-def get_position_from_voxel_index(voxel_index,voxel_size,grid_origin,jitter=0.0):
+# def get_position_from_voxel_index(voxel_index,voxel_size,grid_origin,jitter=0.0):
+#     """
+#     Given a voxel index (i,j,k), voxel size, and grid origin, compute the world position of the center of the voxel.
+#     Adds optional random jitter to each axis within the range [-jitter, jitter].
+#     """
+#     i,j,k = voxel_index
+#     x = grid_origin[0] + (i + 0.5) * voxel_size[0] + random.uniform(-jitter, jitter)
+#     y = grid_origin[1] + (j + 0.5) * voxel_size[1] + random.uniform(-jitter, jitter)
+#     z = grid_origin[2] + (k + 0.5) * voxel_size[2] + random.uniform(-jitter, jitter)
+#     return (x,y,z)
+
+
+
+def get_position_from_voxel_index(voxel_index, voxel_size, grid_origin, grid_counts, jitter=0.0):
     """
-    Given a voxel index (i,j,k), voxel size, and grid origin, compute the world position of the center of the voxel.
-    Adds optional random jitter to each axis within the range [-jitter, jitter].
+    grid_counts: A tuple (nx, ny, nz) representing the total number of voxels in each axis.
+                 Used to center the grid around grid_origin for X and Y.
     """
-    i,j,k = voxel_index
-    x = grid_origin[0] + (i + 0.5) * voxel_size[0] + random.uniform(-jitter, jitter)
-    y = grid_origin[1] + (j + 0.5) * voxel_size[1] + random.uniform(-jitter, jitter)
+    i, j, k = voxel_index
+    nx, ny, _ = grid_counts  # Total count of voxels in X and Y (Z is unused for centering)
+
+    # 1. Calculate the 'center offset'
+    # We subtract half the total grid width from the origin to start 'left/back' of the center.
+    # Formula: (index - (total_count / 2) + 0.5) centers the range.
+    
+    x = grid_origin[0] + (i - nx / 2.0 + 0.5) * voxel_size[0] + random.uniform(-jitter, jitter)
+    y = grid_origin[1] + (j - ny / 2.0 + 0.5) * voxel_size[1] + random.uniform(-jitter, jitter)
+    
+    # Z usually stays 'floor-up' (stacking on top of origin), so we keep original logic.
+    # If you want Z centered too, replace 'k' with '(k - nz / 2.0)'
     z = grid_origin[2] + (k + 0.5) * voxel_size[2] + random.uniform(-jitter, jitter)
-    return (x,y,z)
+    
+    return (x, y, z)

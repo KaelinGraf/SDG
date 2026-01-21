@@ -18,7 +18,7 @@ from pathlib import Path
 SETTINGS_YAML = "/home/kaelin/BinPicking/Pose_R_CNN/configs/zivid_config_specular.yml"
 
 class RepCam:
-    def __init__(self,bin_bounds,focal_length=0.6):
+    def __init__(self,bin_bounds,bin_position,focal_length=0.6):
         """
         Use the zivid IsaacSim api to generate a zivid camera, and create a replicator camera to move with it (to capture annotation data).
         The camera is moved n times during the capturing of a scene (after the phyiscs steps have been completed) to generate N unique datapoints per scene.
@@ -26,8 +26,8 @@ class RepCam:
         The camera is not destroyed between scenes as to minimise the chance of memory leaks.
         """
         self.bin_bounds = bin_bounds
-        self.focal_length = focal_length + bin_bounds[2]
-        init_translation =Ztransforms.Transform(np.array([0,0,self.focal_length]), Ztransforms.Rotation.from_euler(np.array([0,np.pi/2,0])))
+        self.focal_length = focal_length 
+        init_translation =Ztransforms.Transform(np.array([bin_position[0],bin_position[1],self.focal_length+bin_position[2]+bin_bounds[2]]), Ztransforms.Rotation.from_euler(np.array([0,np.pi/2,0])))
 
         zivid_prim = zivid_sim.camera.spawn_zivid_casing(
             prim_path = "/World/ZividCamera",

@@ -62,27 +62,29 @@ class Obj2UsdConverter:
                 print(f"No valid OBJ filepath for {obj_name}")
         self.save_updated_config()
     
-    def convert_one(self, obj_name):
-        obj_info = self.objects_config.get(obj_name, None)
-        if obj_info:
-            obj_filepath = obj_info.get("mesh_filepath", None)
-            if obj_filepath and obj_filepath.lower().endswith('.obj'):
+    def convert_one(self, obj_name=None,obj_filepath=None):
+        if obj_filepath is None:
+            obj_info = self.objects_config.get(obj_name, None)
+            if obj_info:
+                obj_filepath = obj_info.get("mesh_filepath", None)
+            else:
+                print(f"No valid OBJ filepath for {obj_name}")
+        else:
+            print(f"Object {obj_name} not found in config")
+            
+        if obj_filepath and obj_filepath.lower().endswith('.obj'):
 
                 usd_filepath = asyncio.get_event_loop().run_until_complete(
                         self.convert_obj_to_usd(obj_filepath)
                     )
                 
-                if usd_filepath:
+                if usd_filepath and obj_filepath is None:
 
                     self.objects_config[obj_name]["usd_filepath"] = usd_filepath
                     print(f"Converted {obj_name}: {obj_filepath} -> {usd_filepath}")
                     self.save_updated_config()
                 else:
                     print(f"Failed to convert {obj_name}: {obj_filepath}")
-            else:
-                print(f"No valid OBJ filepath for {obj_name}")
-        else:
-            print(f"Object {obj_name} not found in config")
     
     async def convert_obj_to_usd(self, obj_filepath):
         import omni.kit.asset_converter as asset_converter
@@ -118,10 +120,12 @@ def main():
     args = parser.parse_args()
     
     converter = Obj2UsdConverter(args.config_path)
-    if args.object_name:
-        converter.convert_one(args.object_name)
-    else:
-        converter.convert_all()
+    # if args.object_name:
+    #     converter.convert_one(args.object_name)
+    # else:
+    #     converter.convert_all()
+    
+    converter.convert_one(obj_filepath="/home/kaelin/BinPicking/SDG/Meshes/bin_centered_meter.obj")
         
     simulation_app.close()
     
