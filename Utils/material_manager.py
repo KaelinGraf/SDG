@@ -23,7 +23,7 @@ class MaterialManager:
         self.stage = omni.usd.get_context().get_stage()
         self.materials = list(self.templates.keys()) #iterable of available materials for randomisation
         self.materials_in_scene = [] #stores the paths of materials that have been created in the scene 
-
+        self.plastics = []
 
 
 
@@ -31,8 +31,11 @@ class MaterialManager:
         """Call this at the start of every data_generator_loop iteration"""
         for mat in self.materials_in_scene:
             prims.delete_prim(mat)
+        for mat in self.plastics:
+            prims.delete_prim(mat)
         self.materials_in_scene = []
         self.active_scene_materials = []
+        self.plastics = []
     
     def get_template(self,template_name):
         result = self.templates.get(template_name,None)
@@ -74,6 +77,9 @@ class MaterialManager:
         if mat_prim_path is not None and mat_name != "Plastic_Standardized_Surface_Finish_V15":
             carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
             self.materials_in_scene.append(mat_prim_path)
+        
+        if mat_prim_path is not None and mat_name == "Plastic_Standardized_Surface_Finish_V15":
+            self.plastics.append(mat_prim_path)
 
         # 2. Smart Wait for Compilation
         # We check if the shader is in the registry. 

@@ -18,7 +18,7 @@ from pathlib import Path
 SETTINGS_YAML = "/home/kaelin/BinPicking/Pose_R_CNN/configs/zivid_config_specular.yml"
 
 class RepCam:
-    def __init__(self,bin_bounds,bin_position,focal_length=0.6):
+    def __init__(self,bin_bounds=[0,0,0,0,0,0],bin_position=[0,0,0,0,0,0],focal_length=0.6):
         """
         Use the zivid IsaacSim api to generate a zivid camera, and create a replicator camera to move with it (to capture annotation data).
         The camera is moved n times during the capturing of a scene (after the phyiscs steps have been completed) to generate N unique datapoints per scene.
@@ -27,7 +27,7 @@ class RepCam:
         """
         self.bin_bounds = bin_bounds
         self.focal_length = focal_length 
-        init_translation =Ztransforms.Transform(np.array([bin_position[0],bin_position[1],self.focal_length+bin_position[2]+bin_bounds[2]]), Ztransforms.Rotation.from_euler(np.array([0,np.pi/2,0])))
+        init_translation =Ztransforms.Transform(np.array([bin_position[0],bin_position[1],self.focal_length+bin_position[2]+bin_bounds[2]]), Ztransforms.Rotation.from_euler(np.array([0,0,0])))
 
         zivid_prim = zivid_sim.camera.spawn_zivid_casing(
             prim_path = "/World/ZividCamera",
@@ -78,11 +78,39 @@ class RepCam:
         be a unique camera position after physics simulations (i.e. multiple frames per scene)
         """
         frame = self.zivid_camera.get_frame()
-        frame.save_ply(Path("./frame.ply"))
+        #frame.save_ply(Path("./frame.ply"))
         #visualise frame
-        self.visualize_frame(frame)
+        #self.visualize_frame(frame)
     
-  
+    def set_pose(self,trans,rot,quat=False,local=False):
+        """
+        Set pose of capture rig
+        If either trans or rot is None, keep current of that type
+        Args:
+            Trans (np.array): [x,y,z]
+            Rot (np.array): [rx,ry,rz] (or quat if quat=True). 
+            Quat (bool): Expect quaternion input format [w,x,y,z]
+            Local (bool): if local, translation is relative to parent prim
+        """
+
+        transform = self.zivid_camera.get_local_pose()
+
+        if not quat and rot is not None:
+            zivid_rot = Ztransforms.Rotation.from_euler(euler=rot,degrees=True)
+            transform.rot = zivid_rot
+        elif quat and rot is not None:
+            zivid_rot = Ztransforms.Rotation.from_quat(quat = rot)
+            transform.rot = zivid_rot
+            
+        if trans is not None:
+            transform.t = trans
+            
+        
+        
+        
+        self.zivid_camera.set_local_pose(transform)
+
+        
 
     def visualize_frame(self,frame):
         point_cloud = frame.get_data_xyz()

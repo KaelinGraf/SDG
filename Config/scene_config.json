@@ -16,8 +16,8 @@
 			1.5
 		],
 		"mesh_filepath": "/home/kaelin/BinPicking/SDG/Meshes/bin_1.obj",
-		"usd_filepath": "/home/kaelin/Desktop/custom_usds/bin.usd",
-		"tabletop_prim":"/World/table_origin_reset_xform/ISC_TBL_A002_tabletop_satin/Body3",
+		"usd_filepath": "/home/kaelin/Desktop/custom_usds/bin_nophys.usd",
+		"tabletop_prim":"/World/Xform/ISC_TBL_A002_tabletop_satin/Body3",
 		"bin_position": [
 			0.0,
 			0.0,

@@ -109,6 +109,7 @@ class SceneBuilder:
     def __init__(self,scene_name,usd_path=None):
         if usd_path is not None:
             self.world_setup_from_usd(usd_path)
+            self.carb_setup()
             self.scene_name = scene_name
             self.objects = {}
             self.read_configs()
@@ -124,16 +125,92 @@ class SceneBuilder:
             self.material_manager = MaterialManager()
             
             self.world_setup()
+            self.carb_setup()
     
         self.table_bounds = None
         if usd_path is not None:
             cache = bounds_utils.create_bbox_cache()
             self.table_bounds = np.array(bounds_utils.compute_aabb(cache,self.scene_config["tabletop_prim"]))
+            #apply physics to tabletop
+            self.assign_physics_materials(self.world.stage.GetPrimAtPath(self.scene_config["tabletop_prim"]),is_static=True)
         
         
      
 
+    def carb_setup(self):
+        settings = carb.settings.get_settings()
+        
+        settings.set("/rtx/rendermode", "PathTracing")
+        settings.set("/rtx/pathtracing/maxBounces", 4) 
+        # Set samples per pixel per frame (higher = less noise per 'kit.update()')
+        settings.set("/rtx/pathtracing/spp", 1) 
+        settings.set("/rtx/pathtracing/totalSpp", 1)
+        settings.set("/rtx/pathtracing/adaptiveSampling/enabled", True)
+        settings.set("/rtx/pathtracing/adaptiveSampling/targetError",0.01)
+        
+        # Enable/Disable the denoiser (OptiX AI Denoiser)
+        settings.set("/rtx/pathtracing/optixDenoiser/enabled", True)
+        settings.set("/rtx/pathtracing/optixDenoiser/temporalMode/enabled", False)
+        settings.set("/rtx/pathtracing/optixDenoiser/AOV", True)
+        settings.set("/rtx/pathtracing/optixDenoiser/blendFactor", 0.0)
+        #disaple path tracing aa
+        settings.set("/rtx/pathtracing/aa/op", 1)
+        settings.set("/rtx/pathtracing/aa/filterRadius", 0.0)
+        
+        settings.set("/rtx/pathtracing/cached/enabled", True)
+        
+        #AOV
+        #settings.set("/rtx/pathtracing/depth32BitAov", True)
 
+
+
+        settings.set_bool("/rtx/directLighting/sampledLighting/enabled", False)
+        #settings.set_int("/rtx/directLighting/sampledLighting/samplesPerPixel", 64)
+        settings.set_bool("/rtx/ambientOcclusion/enabled", False)
+
+       
+        #settings.set_int("/rtx/reflections/sampledLighting/samplesPerPixel", )
+        # 4. Enable Global Illumination (for indirect light bounces)
+        settings.set_bool("/rtx/indirectDiffuse/enabled",False)
+        settings.set_int("/rtx/indirectDiffuse/maxIndirectDiffuseBounces", 2)
+        # settings.set("/rtx/indirectDiffuse/mode", "RayTraced") # Optional: Heavy performance cost
+
+        # 5. Fix "White Bleeding" (Bloom & Denoising)
+        # Disable Bloom so bright white fringes don't glow into black areas
+        settings.set_bool("/rtx/post/bloom/enabled", False)
+        settings.set_bool("/rtx/post/lensFlares/enabled", False)
+        
+        # 6. Sharpness Settings
+        settings.set_int("/rtx/texturestreaming/mode", 0) # Force full-res textures
+        settings.set_int("/rtx/post/aa/op", 0)            # Disable TAA (prevents ghosting/blur)
+        settings.set_int("/rtx/post/dlss/execMode", 0)    # Disable DLSS
+
+        settings.set_bool("/rtx/indirectLighting/enabled", True)
+
+        settings.set_bool("/rtx/post/autoExposure/enabled", False)
+
+        settings.set_int("/rtx/post/tonemap/op", 1) # 1 = Linear
+        #settings.set_float("/rtx/post/tonemap/whitepoint", 1.0) # Default whitepoint
+        settings.set_bool("/rtx/materialDb/syncLoads", True)
+        settings.set_int("/rtx/material/textureFilterMode", 0)
+        settings.set_bool("/rtx/hydra/materialSyncLoads", True)
+        settings.set_int("/rtx/material/textureFilterMode", 0) # 0 = Linear, 1 = Cubic?
+        #settings.set_float("/rtx/hydra/subdivision/refinementLevel", 1.0)
+        settings.set("/log/debugConsoleLevel", "Fatal") # Levels: "verbose"|"info"|"warning"|"error"|"fatal"
+        settings.set("/log/outputStreamLevel", "Fatal")
+        settings.set("/log/fileLogLevel", "Fatal")
+        settings.set("log/Level", "Fatal")
+        settings.set_int("/rtx/post/dlss/execMode", 0) 
+        
+        # 2. Force Render Scale to 100% (Native)
+        settings.set_float("/rtx/hydra/renderScale", 1.0)
+
+        #settings.set("/rtx/post/tonemap/op", 0) # 0 = Linear/Off
+        #settings.set("/rtx/post/tonemap/gamma", 1.0)
+        
+        # settings.set_bool("/rtx/pathtracing/color32BitAov", True) 
+        # settings.set_bool("/rtx/hydra/AOV/color32Bit", True)     # Fallback for some versions
+        return settings
     
     def world_setup(self):
         """
@@ -177,6 +254,18 @@ class SceneBuilder:
         open_stage(usd_path)
         self.world = World()
         self.world.reset()
+        stage = omni.usd.get_context().get_stage()
+
+        scene = UsdPhysics.Scene.Define(stage,Sdf.Path("/World/PhysicsScene"))
+        scene_prim = self.world.stage.GetPrimAtPath("/World/PhysicsScene")  
+        if not scene_prim.HasAPI(PhysxSchema.PhysxSceneAPI):
+            physx_scene_api = PhysxSchema.PhysxSceneAPI.Apply(scene_prim)
+        else:
+            physx_scene_api = PhysxSchema.PhysxSceneAPI(scene_prim)
+        scene.CreateGravityDirectionAttr().Set(Gf.Vec3f(0.0, 0.0, -1.0))
+        scene.CreateGravityMagnitudeAttr().Set(9.810)
+        
+        self.world.get_physics_context().set_solver_type("TGS")
         
 
 
@@ -187,7 +276,10 @@ class SceneBuilder:
         #clears and repopulates the scene each iteration
         
 
-    
+        self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
+        self.rep_cam.init_cam()
+
+
         for i in range(iters):
             print(f"Starting data generation iteration {i+1}/{iters}")
             self.material_manager.reset()
@@ -195,25 +287,28 @@ class SceneBuilder:
             self.material_manager.create_material(template="plastic_standardized_surface_finish")
             self.material_manager.populate_materials(n=3)
             self.populate_scene()
-            self.rep_cam = RepCam(self.bin_dims,self.bin_pos, focal_length=self.scene_config["cam_z_dist"])
+            
+            cam_trans = [self.bin_pos[0],self.bin_pos[1],self.bin_pos[2]+self.bin_dims[2]+0.6]
+            cam_rot = np.asarray([-90.0,0.0,90.0])
+            self.rep_cam.set_pose(trans = cam_trans,rot=cam_rot)
+
             self.world.reset()
-            self.rep_cam.init_cam()
-            for _ in range(5): #warmup
+            for _ in range(10):
                 self.world.step(render=True)
-         
-           
-            for j in range(10000):
+            for j in range(550):
                 self.world.step(render=True)
                 #self.rep_cam.draw_fov_zivid()
             
             #self.rep_cam.zivid_camera.verify_replicator_attachment()
             #self.rep_cam.zivid_camera.verify_gamma_linearity()
-            #self.rep_cam.cam_trigger()
+            self.rep_cam.cam_trigger()
         
             for obj in self.scene_objects:
                 prims.delete_prim(prims.get_prim_path(obj))
             prims.delete_prim(prim_path = "/World/Bin")
             for _ in range(5):
+                self.world.step(render=True)
+            for _ in range(10050):
                 self.world.step(render=True)
 
             print(f"Completed data generation iteration {i+1}/{iters}")
@@ -291,13 +386,14 @@ class SceneBuilder:
                 self.table_bounds = np.zeros(6)
             bin_pos_x = (self.table_bounds[0] + self.table_bounds[3]) /2
             bin_pos_y = (self.table_bounds[1] + self.table_bounds[4]) /2
-            bin_pos_z = self.table_bounds[5] + 0.03
+            bin_pos_z = self.table_bounds[5]
 
             bin_bounds = np.array(get_bounds("/World/Bin"))
             bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
             bin_xform = UsdGeom.Xformable(self.bin_prim)
             bin_xform.ClearXformOpOrder() 
-            bin_xform.AddTranslateOp().Set(Gf.Vec3d((bin_pos_x,bin_pos_y,bin_pos_z+(bin_dims[2]/2))))
+            translate = bin_xform.AddTranslateOp()
+            translate.Set(Gf.Vec3d((bin_pos_x,bin_pos_y,bin_pos_z)))
             #bin_xform.AddRotateXYZOp().Set(Gf.Vec3d(0,0,90))
                     #randomly scale bin dimensions (ensuring min dimension is at least as large as max_diag_length)
             bin_bounds = np.array(get_bounds("/World/Bin"))
@@ -318,8 +414,13 @@ class SceneBuilder:
                 print(f"Randomized bin dimensions to: {bin_dims}")
             print(f"Scale factor: {scale_factor}")
             bin_xform.AddScaleOp(UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
-            self.generate_box_uvs(self.bin_prim)
-            self.material_manager.bind_material(mat_prim_path="/Looks/Plastic_Standardized_Surface_Finish_V15",prim_path="/World/Bin")
+            translate.Set(Gf.Vec3d((bin_pos_x,bin_pos_y,bin_pos_z + bin_dims[2]/2)))
+            bin_bounds = np.array(get_bounds("/World/Bin"))
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
+            self.bin_dims = bin_dims
+
+            #self.generate_box_uvs(self.bin_prim)
+            self.material_manager.bind_material(mat_prim_path="/World/Looks/Plastic_Standardized_Surface_Finish_V15",prim_path="/World/Bin/bin/Visuals/FOF_Mesh_Magenta_Box")
             self.assign_physics_materials(self.bin_prim,is_static=True)
         else:
             raise Exception("No bin USD filepath specified")
@@ -384,9 +485,10 @@ class SceneBuilder:
                 scale = (scale_factor_part, scale_factor_part, scale_factor_part), #uniformly scale to preserve proportions
                 usd_path=self.objects_config[selected_object]["usd_filepath"],
                 semantic_label=self.objects_config[selected_object]["class"],
-                prim_type="Xform"
+                prim_type="Xform",
+                #attributes={"instanceable": True}
             )
-            self.generate_box_uvs(object_prim)
+            #self.generate_box_uvs(object_prim)
             #self.material_manager.create_and_bind(prim_path=object_prim.GetPath())
             self.material_manager.bind_material(prim_path=object_prim.GetPath())
             self.assign_physics_materials(object_prim)
@@ -549,12 +651,12 @@ def main():
     parser.add_argument('--iters', type=int, default=10, help='Number of data generation iterations to run')
     args = parser.parse_args()
     
-    scene_builder = SceneBuilder(args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/warehouse_ur12e.usd") #initialize scene builder with specified scene config, does not start data generation
+    scene_builder = SceneBuilder(args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/Collected_digital_twin_warehouse_12e/digital_twin_warehouse_12e.usd") #initialize scene builder with specified scene config, does not start data generation
     #scene_builder = SceneBuilder(args.scene_name)#args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/warehouse_ur12e.usd") #initialize scene builder with specified scene config, does not start data generation
 
     print(f"Scene Builder initialised for scene: {args.scene_name}. Starting data generation loop for {args.iters} iterations.")
     #scene_builder.world.reset()
-    scene_builder.data_generator_loop()
+    scene_builder.data_generator_loop(iters=20)
     print("Holding simulation open. Press Ctrl+C in terminal to stop.")
     #scene_builder.data_generator_loop(args.iters) #start data generation loop
     # # Create a viewer loop so you can see the bin
