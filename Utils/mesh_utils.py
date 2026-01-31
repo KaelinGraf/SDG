@@ -3,6 +3,9 @@ import isaacsim.core.utils.bounds as bounds_utils
 import isaacsim.core.utils.prims as prim_utils
 import numpy as np
 import random
+import os 
+import json
+from pathlib import Path
 
 
 class AssetManager:
@@ -16,42 +19,148 @@ class AssetManager:
         self.asset_registry = {} #dictionary to hold object bounding boxes by name
         self._get_all_object_bounds()
         
+        
     
     
     def _get_all_object_bounds(self):
-        temp_path = "/World/Temp_Asset_Manager_Prim"
+        prims_path = "/World/Prim_Library"
         cache = bounds_utils.create_bbox_cache()
 
-        for obj_name, obj_info in self.objects_config.items():
+        for obj_name, obj_info in self.objects_config["parts"].items():
             usd_filepath = obj_info.get("usd_filepath", None)
-            
+            prim_path = f"{prims_path}/{self.objects_config['parts'][obj_name]['name']}"
             if usd_filepath:
                 prim = prim_utils.create_prim(
-                    prim_path=temp_path,
+                    prim_path=prim_path,
                     usd_path=usd_filepath,
+                    translation=[1000, 0, 0],
+                    semantic_label="part",
+                    attributes={
+                        #"instanceable": True
+                    }
                 )
+                prim.SetInstanceable(True)
                                               
-                bounds = np.array(bounds_utils.compute_aabb(cache,temp_path))
+                bounds = np.array(bounds_utils.compute_aabb(cache,prim_path))
                 #compute the diagonal (eg 0,0,0) to (x,y,z)
                 diag_vector = bounds[3:] - bounds[0:3]
-                print(f"diagonal vector: {diag_vector}")
+                #print(f"diagonal vector: {diag_vector}")
                 diag_length = np.linalg.norm(diag_vector) #this is the diameter of a bounding sphere around the object (max distance across the object)
                 #store in asset registry
-                print(bounds)
-                print(f"diagonal length: {diag_length}")
+                #print(bounds)
+                #print(f"diagonal length: {diag_length}")
                 self.asset_registry[obj_name] = {
                     "bounds": bounds,
                     "diag_length": diag_length
                 }
+                prim_utils.set_prim_visibility(prim,False)
                 #delete temp prim
-                prim_utils.delete_prim(temp_path)
+                #prim_utils.delete_prim(temp_path)
                 
                 
 def get_bounds(prim_path):
     cache = bounds_utils.create_bbox_cache()
     return np.array(bounds_utils.compute_aabb(cache,prim_path))
 
+def create_objects_json(asset_paths,output_path="./Config/objects.json"):
+    """
+    Searches asset folder (assumed to be in format)
+    /assets
+        --/bins
+            -bin_1.usd
 
+        --/materials
+        --/parts
+            -part_1.usd
+        --stage.usd
+        
+    Produces a JSON file with the format:
+    {
+        "bins": {
+            bin_1: {
+                "name": "bin_1",
+                "usd_filepath": "/path/to/bin_1.usd",
+                "class": "0"
+            },
+        },
+        "parts": {
+            part_1: {
+                "name": "part_1",
+                "usd_filepath": "/path/to/part_1.usd",
+                "class": "1"
+            },
+        }
+        "stage": {
+            "name": "stage",
+            "usd_filepath": "/path/to/stage.usd"
+        }
+    }
+    
+
+    Args:
+        asset_paths (_type_): path to /assets folder
+        output_path (str, optional): output path for json file. Defaults to "./Config/objects.json".
+    """
+    
+    assets = {
+        "bins": {},
+        "parts": {},
+        "stage": {}
+    }
+    
+    bins_path = os.path.join(asset_paths,"bins")
+    parts_path = os.path.join(asset_paths,"parts")
+    
+    if not os.path.exists(asset_paths):
+        print(f"Asset path {asset_paths} does not exist!")
+        return
+        
+    
+    #process bins
+    if os.path.exists(bins_path):
+        bin_files = [f for f in os.listdir(bins_path) if f.endswith('.usd')]
+        for idx,bin_file in enumerate(bin_files):
+            bin_label = f"bin_{idx}"
+            bin_name = os.path.splitext(bin_file)[0]
+            assets["bins"][bin_label] = {
+                "name": bin_name,
+                "usd_filepath": os.path.join(bins_path,bin_file),
+                "class": "0"
+            }
+    else:
+        print(f"No bins folder found at {bins_path}, skipping bin processing.")
+    
+    #process parts
+    if os.path.exists(parts_path):
+        part_files = [f for f in os.listdir(parts_path) if f.endswith('.usd')]
+        for idx,part_file in enumerate(part_files):
+            part_label = f"part_{idx}"
+            part_name = os.path.splitext(part_file)[0]
+            assets["parts"][part_label] = {
+                "name": part_name,
+                "usd_filepath": os.path.join(parts_path,part_file),
+                "class": "1"
+            }
+    else:
+        print(f"No parts folder found at {parts_path}, skipping part processing.")
+    
+    #process stage
+    for file in os.listdir(asset_paths):
+        if file.endswith('.usd') and 'stage' in file.lower():
+            stage_path = os.path.join(asset_paths,file)
+            stage_name = os.path.splitext(file)[0]
+            assets["stage"] = {
+                "name": stage_name,
+                "usd_filepath": stage_path
+            }
+    
+    #write to json
+    with open(output_path,'w') as f:
+        json.dump(assets,f,indent=4)
+    
+    print(f"Created objects.json at {output_path}")
+    
+    
     
 
 # def get_position_from_voxel_index(voxel_index,voxel_size,grid_origin,jitter=0.0):
@@ -87,3 +196,9 @@ def get_position_from_voxel_index(voxel_index, voxel_size, grid_origin, grid_cou
     z = grid_origin[2] + (k + 0.5) * voxel_size[2] + random.uniform(-jitter, jitter)
     
     return (x, y, z)
+
+
+
+
+
+#create_objects_json(asset_paths="/home/kaelin/BinPicking/SDG/IS/assets",output_path="./Config/objects.json")

@@ -1,5 +1,5 @@
 {
-    "aging__copper": {
+    "aging_copper": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aging_Copper.mdl",
         "name": "Aging_Copper",
         "non_visual": [
@@ -49,7 +49,7 @@
             ]
         }
     },
-    "aluminum__anodized": {
+    "aluminum_anodized": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Anodized.mdl",
         "name": "Aluminum_Anodized",
         "non_visual": [
@@ -105,7 +105,7 @@
             ]
         }
     },
-    "aluminum__brushed": {
+    "aluminum_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Brushed.mdl",
         "name": "Aluminum_Brushed",
         "non_visual": [
@@ -136,7 +136,7 @@
             ]
         }
     },
-    "aluminum__hammered": {
+    "aluminum_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Hammered.mdl",
         "name": "Aluminum_Hammered",
         "non_visual": [
@@ -160,7 +160,7 @@
             "metal_color": "color"
         }
     },
-    "aluminum__knurling": {
+    "aluminum_knurling": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Knurling.mdl",
         "name": "Aluminum_Knurling",
         "non_visual": [
@@ -194,7 +194,7 @@
             "metal_tint": "color"
         }
     },
-    "aluminum__scratched": {
+    "aluminum_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Aluminum_Scratched.mdl",
         "name": "Aluminum_Scratched",
         "non_visual": [
@@ -250,7 +250,7 @@
             "reflection_color": "color"
         }
     },
-    "blued__steel__cold": {
+    "blued_steel_cold": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Blued_Steel_Cold.mdl",
         "name": "Blued_Steel_Cold",
         "non_visual": [
@@ -316,7 +316,7 @@
             ]
         }
     },
-    "brass__antique": {
+    "brass_antique": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Antique.mdl",
         "name": "Brass_Antique",
         "non_visual": [
@@ -343,7 +343,7 @@
             ]
         }
     },
-    "brass__brushed": {
+    "brass_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Brushed.mdl",
         "name": "Brass_Brushed",
         "non_visual": [
@@ -390,7 +390,7 @@
             ]
         }
     },
-    "brass__foil": {
+    "brass_foil": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Foil.mdl",
         "name": "Brass_Foil",
         "non_visual": [
@@ -417,7 +417,7 @@
             ]
         }
     },
-    "brass__hammered": {
+    "brass_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Hammered.mdl",
         "name": "Brass_Hammered",
         "non_visual": [
@@ -436,7 +436,7 @@
             ]
         }
     },
-    "brass__polished": {
+    "brass_polished": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Polished.mdl",
         "name": "Brass_Polished",
         "non_visual": [
@@ -471,7 +471,7 @@
             ]
         }
     },
-    "brass__scratched": {
+    "brass_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Brass_Scratched.mdl",
         "name": "Brass_Scratched",
         "non_visual": [
@@ -545,34 +545,8 @@
             ]
         }
     },
-    "bronze__antique": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Antique.mdl",
-        "name": "Bronze_Antique",
-        "non_visual": [
-            "oxidized_Bronze_Patina",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "roughness": [
-                0.45,
-                0.95
-            ],
-            "surface_dirt_amount": [
-                0.29,
-                0.89
-            ],
-            "dirt_dents": [
-                0.43,
-                1.0
-            ],
-            "bump_strength": [
-                0.6,
-                1.0
-            ]
-        }
-    },
-    "bronze__brushed": {
+    
+    "bronze_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Brushed.mdl",
         "name": "Bronze_Brushed",
         "non_visual": [
@@ -623,7 +597,7 @@
             ]
         }
     },
-    "bronze__hammered": {
+    "bronze_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Hammered.mdl",
         "name": "Bronze_Hammered",
         "non_visual": [
@@ -646,7 +620,7 @@
             ]
         }
     },
-    "bronze__polished": {
+    "bronze_polished": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Polished.mdl",
         "name": "Bronze_Polished",
         "non_visual": [
@@ -685,7 +659,7 @@
             ]
         }
     },
-    "bronze__scratched": {
+    "bronze_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Scratched.mdl",
         "name": "Bronze_Scratched",
         "non_visual": [
@@ -728,7 +702,7 @@
             ]
         }
     },
-    "bronze__sheet__punched": {
+    "bronze_sheet_punched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Bronze_Sheet_Punched.mdl",
         "name": "Bronze_Sheet_Punched",
         "non_visual": [
@@ -783,7 +757,7 @@
             ]
         }
     },
-    "chrome__hammered": {
+    "chrome_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chrome_Hammered.mdl",
         "name": "Chrome_Hammered",
         "non_visual": [
@@ -826,7 +800,7 @@
             ]
         }
     },
-    "chromium__brushed": {
+    "chromium_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Brushed.mdl",
         "name": "Chromium_Brushed",
         "non_visual": [
@@ -857,7 +831,7 @@
             ]
         }
     },
-    "chromium__scratched": {
+    "chromium_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Chromium_Scratched.mdl",
         "name": "Chromium_Scratched",
         "non_visual": [
@@ -932,7 +906,7 @@
             ]
         }
     },
-    "copper__antique__brushed": {
+    "copper_antique_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Antique_Brushed.mdl",
         "name": "Copper_Antique_Brushed",
         "non_visual": [
@@ -981,7 +955,7 @@
             "color_2": "color"
         }
     },
-    "copper__antique__brushed__patinated": {
+    "copper_antique_brushed_patinated": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Antique_Brushed_Patinated.mdl",
         "name": "Copper_Antique_Brushed_Patinated",
         "non_visual": [
@@ -1040,7 +1014,7 @@
             ]
         }
     },
-    "copper__brushed": {
+    "copper_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Brushed.mdl",
         "name": "Copper_Brushed",
         "non_visual": [
@@ -1071,7 +1045,7 @@
             ]
         }
     },
-    "copper__hammered": {
+    "copper_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Hammered.mdl",
         "name": "Copper_Hammered",
         "non_visual": [
@@ -1095,7 +1069,7 @@
             "metal_color": "color"
         }
     },
-    "copper__scratched": {
+    "copper_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Scratched.mdl",
         "name": "Copper_Scratched",
         "non_visual": [
@@ -1151,7 +1125,7 @@
             "reflection_color": "color"
         }
     },
-    "diamond__plate__single__tear": {
+    "diamond_plate_single_tear": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Single_Tear.mdl",
         "name": "Diamond_Plate_Single_Tear",
         "non_visual": [
@@ -1190,7 +1164,7 @@
             ]
         }
     },
-    "diamond__plate__spike": {
+    "diamond_plate_spike": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Diamond_Plate_Spike.mdl",
         "name": "Diamond_Plate_Spike",
         "non_visual": [
@@ -1248,7 +1222,7 @@
             ]
         }
     },
-    "gold__scratched": {
+    "gold_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Gold_Scratched.mdl",
         "name": "Gold_Scratched",
         "non_visual": [
@@ -1323,7 +1297,7 @@
             ]
         }
     },
-    "iron__brushed": {
+    "iron_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Brushed.mdl",
         "name": "Iron_Brushed",
         "non_visual": [
@@ -1354,7 +1328,7 @@
             ]
         }
     },
-    "iron__hammered": {
+    "iron_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Hammered.mdl",
         "name": "Iron_Hammered",
         "non_visual": [
@@ -1378,7 +1352,7 @@
             "metal_color": "color"
         }
     },
-    "iron__knurling": {
+    "iron_knurling": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Knurling.mdl",
         "name": "Iron_Knurling",
         "non_visual": [
@@ -1412,7 +1386,7 @@
             "metal_tint": "color"
         }
     },
-    "iron__pitted__steel": {
+    "iron_pitted_steel": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Pitted_Steel.mdl",
         "name": "Iron_Pitted_Steel",
         "non_visual": [
@@ -1457,7 +1431,7 @@
             "color_2": "color"
         }
     },
-    "iron__scratched": {
+    "iron_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Iron_Scratched.mdl",
         "name": "Iron_Scratched",
         "non_visual": [
@@ -1513,7 +1487,7 @@
             "reflection_color": "color"
         }
     },
-    "metal__cast": {
+    "metal_cast": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Metal_Cast.mdl",
         "name": "Metal_Cast",
         "non_visual": [
@@ -1559,7 +1533,7 @@
             ]
         }
     },
-    "nickel__brushed": {
+    "nickel_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Brushed.mdl",
         "name": "Nickel_Brushed",
         "non_visual": [
@@ -1590,7 +1564,7 @@
             ]
         }
     },
-    "nickel__hammered": {
+    "nickel_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Hammered.mdl",
         "name": "Nickel_Hammered",
         "non_visual": [
@@ -1614,7 +1588,7 @@
             "metal_color": "color"
         }
     },
-    "nickel__scratched": {
+    "nickel_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Nickel_Scratched.mdl",
         "name": "Nickel_Scratched",
         "non_visual": [
@@ -1689,7 +1663,7 @@
             ]
         }
     },
-    "platinum__brushed": {
+    "platinum_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Brushed.mdl",
         "name": "Platinum_Brushed",
         "non_visual": [
@@ -1720,7 +1694,7 @@
             ]
         }
     },
-    "platinum__hammered": {
+    "platinum_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Hammered.mdl",
         "name": "Platinum_Hammered",
         "non_visual": [
@@ -1744,7 +1718,7 @@
             "metal_color": "color"
         }
     },
-    "platinum__scratched": {
+    "platinum_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Platinum_Scratched.mdl",
         "name": "Platinum_Scratched",
         "non_visual": [
@@ -1819,7 +1793,7 @@
             ]
         }
     },
-    "silver__brushed": {
+    "silver_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Brushed.mdl",
         "name": "Silver_Brushed",
         "non_visual": [
@@ -1850,7 +1824,7 @@
             ]
         }
     },
-    "silver__hammered": {
+    "silver_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Hammered.mdl",
         "name": "Silver_Hammered",
         "non_visual": [
@@ -1874,7 +1848,7 @@
             "metal_color": "color"
         }
     },
-    "silver__scratched": {
+    "silver_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Silver_Scratched.mdl",
         "name": "Silver_Scratched",
         "non_visual": [
@@ -1930,7 +1904,7 @@
             "reflection_color": "color"
         }
     },
-    "stainless__steel": {
+    "stainless_steel": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel.mdl",
         "name": "Stainless_Steel",
         "non_visual": [
@@ -1981,7 +1955,7 @@
             ]
         }
     },
-    "stainless__steel__brushed": {
+    "stainless_steel_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Brushed.mdl",
         "name": "Stainless_Steel_Brushed",
         "non_visual": [
@@ -2044,7 +2018,7 @@
             ]
         }
     },
-    "stainless__steel__brushed__punched": {
+    "stainless_steel_brushed_punched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Brushed_Punched.mdl",
         "name": "Stainless_Steel_Brushed_Punched",
         "non_visual": [
@@ -2119,7 +2093,7 @@
             ]
         }
     },
-    "stainless__steel__milled": {
+    "stainless_steel_milled": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Milled.mdl",
         "name": "Stainless_Steel_Milled",
         "non_visual": [
@@ -2150,7 +2124,7 @@
             ]
         }
     },
-    "stainless__steel__punched": {
+    "stainless_steel_punched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Stainless_Steel_Punched.mdl",
         "name": "Stainless_Steel_Punched",
         "non_visual": [
@@ -2213,7 +2187,7 @@
             ]
         }
     },
-    "steel__carbon": {
+    "steel_carbon": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Carbon.mdl",
         "name": "Steel_Carbon",
         "non_visual": [
@@ -2272,7 +2246,7 @@
             ]
         }
     },
-    "steel__galvanized": {
+    "steel_galvanized": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Galvanized.mdl",
         "name": "Steel_Galvanized",
         "non_visual": [
@@ -2307,7 +2281,7 @@
             ]
         }
     },
-    "steel__painted": {
+    "steel_painted": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Painted.mdl",
         "name": "Steel_Painted",
         "non_visual": [
@@ -2363,7 +2337,7 @@
             ]
         }
     },
-    "steel__painted__cracked": {
+    "steel_painted_cracked": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Steel_Painted_Cracked.mdl",
         "name": "Steel_Painted_Cracked",
         "non_visual": [
@@ -2446,7 +2420,7 @@
             ]
         }
     },
-    "titanium__brushed": {
+    "titanium_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Brushed.mdl",
         "name": "Titanium_Brushed",
         "non_visual": [
@@ -2477,7 +2451,7 @@
             ]
         }
     },
-    "titanium__hammered": {
+    "titanium_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Hammered.mdl",
         "name": "Titanium_Hammered",
         "non_visual": [
@@ -2501,7 +2475,7 @@
             "metal_color": "color"
         }
     },
-    "titanium__scratched": {
+    "titanium_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Titanium_Scratched.mdl",
         "name": "Titanium_Scratched",
         "non_visual": [
@@ -2576,7 +2550,7 @@
             ]
         }
     },
-    "tungsten__brushed": {
+    "tungsten_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Brushed.mdl",
         "name": "Tungsten_Brushed",
         "non_visual": [
@@ -2607,7 +2581,7 @@
             ]
         }
     },
-    "tungsten__hammered": {
+    "tungsten_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Hammered.mdl",
         "name": "Tungsten_Hammered",
         "non_visual": [
@@ -2631,7 +2605,7 @@
             "metal_color": "color"
         }
     },
-    "tungsten__scratched": {
+    "tungsten_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Tungsten_Scratched.mdl",
         "name": "Tungsten_Scratched",
         "non_visual": [
@@ -2706,7 +2680,7 @@
             ]
         }
     },
-    "zinc__brushed": {
+    "zinc_brushed": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Brushed.mdl",
         "name": "Zinc_Brushed",
         "non_visual": [
@@ -2737,7 +2711,7 @@
             ]
         }
     },
-    "zinc__galvanizing": {
+    "zinc_galvanizing": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Galvanizing.mdl",
         "name": "Zinc_Galvanizing",
         "non_visual": [
@@ -2772,7 +2746,7 @@
             ]
         }
     },
-    "zinc__hammered": {
+    "zinc_hammered": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Hammered.mdl",
         "name": "Zinc_Hammered",
         "non_visual": [
@@ -2796,7 +2770,7 @@
             "metal_color": "color"
         }
     },
-    "zinc__scratched": {
+    "zinc_scratched": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Zinc_Scratched.mdl",
         "name": "Zinc_Scratched",
         "non_visual": [
@@ -2890,7 +2864,7 @@
         }
     },
     
-    "wood": {
+    "wood_cork": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Wood/Wood_Cork.mdl",
         "name": "Wood_Cork",
         "non_visual": [

@@ -77,7 +77,8 @@ class RepCam:
         Trigger both cameras to capture their respective data streams. We will trigger on frame, where each frame will
         be a unique camera position after physics simulations (i.e. multiple frames per scene)
         """
-        frame = self.zivid_camera.get_frame()
+        self.zivid_camera.get_frame()
+        print("made it out of capture")
         #frame.save_ply(Path("./frame.ply"))
         #visualise frame
         #self.visualize_frame(frame)

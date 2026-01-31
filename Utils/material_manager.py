@@ -10,9 +10,10 @@ import carb
 import os
 import omni.kit.material.library
 import colorsys
+import asyncio
 from omni.isaac.core.utils import prims
 
-
+DIAGNOSTICS = True
 class MaterialManager:
     def __init__(self):
         
@@ -23,10 +24,64 @@ class MaterialManager:
         self.stage = omni.usd.get_context().get_stage()
         self.materials = list(self.templates.keys()) #iterable of available materials for randomisation
         self.materials_in_scene = [] #stores the paths of materials that have been created in the scene 
+        self.mat_params={} #dict of material parameters found in shader for randomisation
         self.plastics = []
+        self.add_all_materials_to_scene()
+        #self._get_all_randomisable_params()
+
+        #self._get_randomisable_params(self.materials_in_scene[0])
+        
+            
+        
+    def _get_all_randomisable_params(self):
+        """Goes through all created materials in the scene, and gets their randomisable parameters from the templates"""
+        kit = omni.kit.app.get_app()
+
+        for mat in self.materials_in_scene:
+            self.mat_params[mat] = self._get_randomisable_params(prim_path=mat)
+    def _get_randomisable_params(self,prim_path=None,template_name=None):
+        if prim_path is None and template_name is None:
+            raise ValueError("Either prim_path or template_name must be specified")
+        if template_name is None:
+            template_name = prim_path.split("/")[-1]
+
+        template_data = self.get_template(template_name.lower())
+        if prim_path is None:
+            prim_path = f"/World/Looks/{template_data.get('name','')}"
+        randomizations = template_data.get("randomise", {})
+        
+        shader_path = prim_path + "/Shader"
+        shader = UsdShade.Shader.Get(self.stage,shader_path)
+        registry = Sdr.Registry()
+        #shader_id = shader.GetIdAttr()
+        #shader_implimentation = shader.GetImplementationSource()
+        param_map = {}
+        if DIAGNOSTICS:
+            print(f"Material Prim: ", prim_path)
+            print(f"Shader Prim: ", shader)
+            #print(f"Randomisations: ", randomizations)
+
+        shader_inputs = shader.GetInputs(onlyAuthored=False)
+        print(f"Shader Inputs Length: ", len(shader_inputs))
+        for inp in shader_inputs:
+            print(f"Shader Input Found: ", inp.GetBaseName())
+            if inp.GetBaseName() in randomizations:
+                print(f"Shader Input found in randomisation: ", inp.GetBaseName())
+                param_map[inp.GetBaseName()] = template_data["randomise"].get(inp.GetBaseName())
+                
+        #print(f"Parameter Map: ", param_map)
+        return param_map
+                
+                
+
+    def add_all_materials_to_scene(self):
+        """creates all materials defined in the materials.json file, stores their paths in a list"""
+        for template_key in self.materials:
+            asyncio.ensure_future(self.create_material(template=template_key))
 
 
-
+            #self._get_randomisable_params(template_name=template_key)
+            
     def reset(self):
         """Call this at the start of every data_generator_loop iteration"""
         for mat in self.materials_in_scene:
@@ -47,7 +102,7 @@ class MaterialManager:
         """creates n materials, stores their paths in a list"""
         for i in range(n):
             self.materials_in_scene.append(self.create_material())
-    def create_material(self,template=None):
+    async def create_material(self,template=None):
 
         """create a single material primitive and return the path"""
 
@@ -74,19 +129,20 @@ class MaterialManager:
             mtl_name=mat_name,
             on_create_fn=self.on_created_mdl
         )
+        await omni.kit.app.get_app().next_update_async()
+        shader_path = mat_prim_path + "/Shader"
+
+        selection = omni.usd.get_context().get_selection()
+
+        selection.set_selected_prim_paths([shader_path],False)
+        await omni.kit.app.get_app().next_update_async()
         if mat_prim_path is not None and mat_name != "Plastic_Standardized_Surface_Finish_V15":
-            carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
+            #carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
             self.materials_in_scene.append(mat_prim_path)
         
         if mat_prim_path is not None and mat_name == "Plastic_Standardized_Surface_Finish_V15":
             self.plastics.append(mat_prim_path)
 
-        # 2. Smart Wait for Compilation
-        # We check if the shader is in the registry. 
-        # We search by filename because 'file:///...' might differ from registry's internal path.
-        target_filename = os.path.basename(mdl_url)
-        registry = Sdr.Registry()
-        
         # Fast check: is it already there?
         found = True
         mat_prim = self.stage.GetPrimAtPath(mat_prim_path)
@@ -94,11 +150,12 @@ class MaterialManager:
             found = False
             carb.log_warn(f"Material {mat_name} not found. Skipping randomization.")
 
+        #self.mat_params[mat_prim_path] = self._get_randomisable_params(prim_path=mat_prim_path,template_name=template_key)
         shader_path = mat_prim_path + "/Shader"
         shader_prim = self.stage.GetPrimAtPath(shader_path)
         if not shader_prim:
             found = False
-            carb.log_warn(f"Shader {mat_name} not found. Skipping randomization.")
+            #carb.log_warn(f"Shader {mat_name} not found. Skipping randomization.")
 
         if "randomise" in template_data:
             shader = UsdShade.Shader(shader_prim)
@@ -131,6 +188,9 @@ class MaterialManager:
                 template_data['non_visual'][1],
                 template_data['non_visual'][2]
             )
+            
+        self.mat_params[mat_prim_path] = self._get_randomisable_params(prim_path=mat_prim_path,template_name=template_key)
+
         return mat_prim_path
 
 
@@ -168,7 +228,7 @@ class MaterialManager:
         )
         
 
-        print(f"[MaterialManager] Bound {mat_prim_path} to {prim_path} (StrongerThanDescendants)")
+        #print(f"[MaterialManager] Bound {mat_prim_path} to {prim_path} (StrongerThanDescendants)")
     def create_and_bind(self, template=None, prim_path=None):
         """
         Creates a new material instance, randomizes it, and binds it to the prim.
@@ -199,7 +259,7 @@ class MaterialManager:
             on_create_fn=self.on_created_mdl
         )
         if mat_prim_path is not None:
-            carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
+            #carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
             self.materials_in_scene.append(mat_prim_path)
 
         # 2. Smart Wait for Compilation
@@ -256,7 +316,8 @@ class MaterialManager:
             paths=[prim_path]
         )
     def on_created_mdl(self,mat_prim):
-        carb.log_info("[MaterialManager] Created MDL material")
+        pass
+        #carb.log_info("[MaterialManager] Created MDL material")
     def _is_shader_loaded(self, registry, filename):
         """
         Checks if the shader is loaded. 

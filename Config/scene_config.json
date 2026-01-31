@@ -28,18 +28,16 @@
 			0.8,
 			2.0
 		],
-		"bin_dimensions": [
-			0.6975,
-			0.4975,
-			0.35
-		],
 		"cam_z_dist": 0.6,
-		"num_cameras": 3,
-		"sensor_type": "depth_simulator",
-		"sensor_resolution": [
-			640,
-			480
-		],
-		"voxel_jitter": 0.01
+		"voxel_jitter": 0.01,
+		"HDRI_paths": [
+			"/home/kaelin/BinPicking/SDG/HDRI/autoshop_01_8k.exr",
+			"/home/kaelin/BinPicking/SDG/HDRI/empty_warehouse_01_8k.exr",
+			"/home/kaelin/BinPicking/SDG/HDRI/industrial_pipe_and_valve_01_8k.exr",
+			"/home/kaelin/BinPicking/SDG/HDRI/machine_shop_01_8k.exr",
+			"/home/kaelin/BinPicking/SDG/HDRI/machine_shop_02_8k.exr",
+			"/home/kaelin/BinPicking/SDG/HDRI/machine_shop_03_8k.exr",
+			"/home/kaelin/BinPicking/SDG/HDRI/university_workshop_8k.exr"
+		]
 	}
 }

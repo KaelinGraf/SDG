@@ -1,24 +1,110 @@
 {
-	"object_1": {
-		"name": "rb_50x70",
-		"class": "round_billet",
-		"mesh_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_50x70_v2.obj",
-		"properties": {
-			"property_1": "value_1",
-			"property_2": "value_2",
-			"scale": 1.0
-		},
-		"usd_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_50x70_v2.usd"
-	},
-	"object_2": {
-		"name": "rb_100x50",
-		"class": "round_billet",
-		"mesh_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_100x50.obj",
-		"properties": {
-			"property_1": "value_3",
-			"property_2": "value_4",
-			"scale": 0.5
-		},
-		"usd_filepath": "/home/kaelin/BinPicking/SDG/Meshes/rb_100x50.usd"
-	}
+    "bins": {
+        "bin_0": {
+            "name": "container_b09_inst",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/bins/container_b09_inst.usd",
+            "class": "0"
+        },
+        "bin_1": {
+            "name": "container_b03_inst",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/bins/container_b03_inst.usd",
+            "class": "0"
+        },
+        "bin_2": {
+            "name": "container_h08",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/bins/container_h08.usd",
+            "class": "0"
+        },
+        "bin_3": {
+            "name": "tote_b06",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/bins/tote_b06.usd",
+            "class": "0"
+        },
+        "bin_4": {
+            "name": "bin_b04",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/bins/bin_b04.usd",
+            "class": "0"
+        }
+    },
+    "parts": {
+        "part_0": {
+            "name": "cylinder",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/cylinder.usd",
+            "class": "1"
+        },
+        "part_1": {
+            "name": "M5_LOCKNUT__JFn",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/M5_LOCKNUT__JFn.usd",
+            "class": "1"
+        },
+        "part_2": {
+            "name": "_25_mug",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_25_mug.usd",
+            "class": "1"
+        },
+        "part_3": {
+            "name": "_36_wood_block",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_36_wood_block.usd",
+            "class": "1"
+        },
+        "part_4": {
+            "name": "_24_bowl",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_24_bowl.usd",
+            "class": "1"
+        },
+        "part_5": {
+            "name": "_35_power_drill",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_35_power_drill.usd",
+            "class": "1"
+        },
+        "part_6": {
+            "name": "_05_tomato_soup_can_",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_05_tomato_soup_can_.usd",
+            "class": "1"
+        },
+        "part_7": {
+            "name": "screw_99",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/screw_99.usd",
+            "class": "1"
+        },
+        "part_8": {
+            "name": "_06_mustard_bottle",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_06_mustard_bottle.usd",
+            "class": "1"
+        },
+        "part_9": {
+            "name": "_10_potted_meat_can_",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_10_potted_meat_can_.usd",
+            "class": "1"
+        },
+        "part_10": {
+            "name": "_40_large_marker",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_40_large_marker.usd",
+            "class": "1"
+        },
+        "part_11": {
+            "name": "_19_pitcher_base",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_19_pitcher_base.usd",
+            "class": "1"
+        },
+        "part_12": {
+            "name": "_00_KFbH",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_00_KFbH.usd",
+            "class": "1"
+        },
+        "part_13": {
+            "name": "_07_tuna_fish_can",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_07_tuna_fish_can.usd",
+            "class": "1"
+        },
+        "part_14": {
+            "name": "ISO7380_1_M3X8_8_8_JFL",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/ISO7380_1_M3X8_8_8_JFL.usd",
+            "class": "1"
+        }
+    },
+    "stage": {
+        "name": "single_stage",
+        "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/single_stage.usd"
+    }
 }
