@@ -39,7 +39,7 @@ class AssetManager:
                         #"instanceable": True
                     }
                 )
-                prim.SetInstanceable(True)
+                #prim.SetInstanceable(True)
                                               
                 bounds = np.array(bounds_utils.compute_aabb(cache,prim_path))
                 #compute the diagonal (eg 0,0,0) to (x,y,z)

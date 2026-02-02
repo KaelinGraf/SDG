@@ -15,11 +15,12 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
+NUM_CLONES = 30
 
 from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
-    "headless": True,
+    "headless": False,
 }) 
 import carb
 from isaacsim.core.utils.extensions import enable_extension
@@ -44,6 +45,8 @@ from omni.physx.scripts import utils
 from isaacsim.core.utils.rotations import euler_angles_to_quat
 import isaacsim.core.utils.bounds as bounds_utils
 import isaacsim.zivid as zivid_sim
+from isaacsim.core.cloner import GridCloner    # import GridCloner interface
+
 import numpy as np
 import json
 import os
@@ -117,8 +120,17 @@ class SceneBuilder:
             self.asset_manager = AssetManager(self.objects_config)
             self.material_manager = MaterialManager()
             self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
-            
+            self.clone_world()
             self.material_manager._get_all_randomisable_params()
+            kit = omni.kit.app.get_app()
+                
+            self._build_replicator_graph()
+            # for _ in range(150):
+            #     kit.update()
+            # start = time.time_ns()
+            # rep.utils.send_og_event("randomize_scene")
+            # end = time.time_ns()
+            # print(f"Randomization time: {(end - start)/1e9} seconds")
         
 
         else:
@@ -185,9 +197,9 @@ class SceneBuilder:
         open_stage(usd_path)
         self.world = World()
         self.world.reset()
-        stage = omni.usd.get_context().get_stage()
+        self.stage = omni.usd.get_context().get_stage()
 
-        scene = UsdPhysics.Scene.Define(stage,Sdf.Path("/World/PhysicsScene"))
+        scene = UsdPhysics.Scene.Define(self.stage,Sdf.Path("/World/PhysicsScene"))
         scene_prim = self.world.stage.GetPrimAtPath("/World/PhysicsScene")  
         if not scene_prim.HasAPI(PhysxSchema.PhysxSceneAPI):
             physx_scene_api = PhysxSchema.PhysxSceneAPI.Apply(scene_prim)
@@ -198,6 +210,13 @@ class SceneBuilder:
         
         self.world.get_physics_context().set_solver_type("TGS")
         rep.new_layer()
+        
+    def clone_world(self):
+        base_env_path = "/Env_"
+        cloner = GridCloner(spacing = 50)
+        target_paths = cloner.generate_paths(base_env_path, NUM_CLONES)
+        cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True)
+
         
     def data_generator_loop(self,iters=10):
         #main data generation loop
@@ -483,37 +502,71 @@ class SceneBuilder:
         """
         Assembles Rep Randomizer Graph 
         """
-        
-        #register existing randomizers
-        rep.randomizer.register(self._hdri_background_rep)
     
-    def _hdri_background_rep(self):
-        """
-        Registers a HDRI background randomizer in the Replicator graph
-        """
-        HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/hdri/"
+        MAX_CAPACITY = 50  # Max number of objects in the bin
+        all_parts = [p.GetPath().pathString for p in self.stage.GetPrimAtPath("/World/Prim_Library").GetChildren()]
+        all_mats = self.material_manager.materials_in_scene
+        
+        bin_groups = {}
+        spawn_vols = rep.get.prims(path_pattern="/Env_*/Bin/*/SpawnVolume")
+        HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
+
         textures = [HDRI_PATH + f for f in os.listdir(HDRI_PATH) if f.endswith('.exr')]
-        light = rep.get.prim_at_path(path="/World/DomeLight")
-        with light:
-            rep.randomizers.texture(
-                textures=textures,
-            )
-        return light.node
-    
-    def _material_randomizer_rep(self):
-        """
-        Registers a material randomizer based on attributes from the asset manager params dict
-        """
+
         
-        if self.asset_manager is None:
-            print("Asset manager not initialised, cannot randomize materials")
-            return None
-        for material, params in self.asset_manager.mat_params.items():
-            pass
+        with rep.trigger.on_custom_event(event_name="randomize_scene"):
             
+            #HDRI randomization
+            dome_light = rep.get.light(path_match="/World/DomeLight")
+            with dome_light:
+                rep.modify.attribute(
+                    name="inputs:texture:file",
+                    value=rep.distribution.choice(textures)
+                )
+                
+            # pool = rep.randomizer.instantiate(
+            #     paths = all_parts,
+            #     size = MAX_CAPACITY
+            # )
+            
+            # rep.randomizer.scatter_3d(
+            #     volume_prims = spawn_vols,
+            #     check_for_collisions = True,
+            #     input_prims = pool,
+            # )
+            
+            #material randomization
+            
+            # if self.material_manager:
+            #     rep.randomizer.randomize_all_materials_direct(
+            #         self.material_manager.mat_params
+            #     )
+                    
+       
         
         
+    def _create_material_randomizer(self):
+        """
+        Creates a Replicator material randomizer node to randomize materials in the scene.
+        """
+        mat_params = self.material_manager.mat_params
         
+        
+
+            
+    def _assign_material_rep(self):
+        """
+        Assigns a random material to each spawned prim, depending on some rules:
+        - 70% chance of homogeneous material assignment (all objects get same material)
+        - 30% chance of heterogeneous material assignment (each object gets different material)
+        Also assigns 
+        """
+        
+        stage = omni.usd.get_context().get_stage()
+        mode = "HOMO" if random.random()<0.7 else "HETERO" #70% chance of homogeneous material assignment
+        
+            
+
         
         
     def read_configs(self):
@@ -628,7 +681,135 @@ def main():
     
     
     
+@rep.randomizer.register
+def randomize_bin_state(bin_groups_map, all_prototypes, all_materials, max_capacity):
+    """
+    Manages a fixed pool of objects to simulate a variable count bin.
+    """
+    stage = omni.usd.get_context().get_stage()
     
+    # --- 1. GLOBAL FRAME DECISIONS ---
+    # Decide rules for this epoch (e.g., Homogenous vs Heterogenous)
+    part_mode = "HOMO" if random.random() < 0.5 else "HETERO"
+    
+    # Material Logic (40% Uniform, 40% Distractor, 20% Chaos)
+    r_mat = random.random()
+    if r_mat < 0.4: mat_mode = "UNIFORM"
+    elif r_mat < 0.8: mat_mode = "DISTRACTOR"
+    else: mat_mode = "CHAOS"
+
+    # --- 2. PER-BIN EXECUTION ---
+    for bin_name, pattern in bin_groups_map.items():
+        
+        # A. Resolve the Pool
+        # pattern is like "/Replicator/Pool_Bin_0/Ref_*"
+        parent_path = pattern.split("/Ref_")[0]
+        parent_prim = stage.GetPrimAtPath(parent_path)
+        if not parent_prim.IsValid(): continue
+        
+        pool_prims = [c for c in parent_prim.GetChildren()]
+        
+        # B. Decide "N" for this bin (The Variable Count)
+        wanted_count = random.randint(5, max_capacity)
+        
+        active_prims = pool_prims[:wanted_count]
+        inactive_prims = pool_prims[wanted_count:]
+        
+        # --- 3. CONFIGURE ACTIVE OBJECTS ---
+        
+        # Pre-select shared assets if modes require it
+        homo_proto = random.choice(all_prototypes) if part_mode == "HOMO" else None
+        uniform_mat = random.choice(all_materials) if mat_mode == "UNIFORM" else None
+        distractor_main_mat = random.choice(all_materials) if mat_mode == "DISTRACTOR" else None
+
+        for i, prim in enumerate(active_prims):
+            # A. Enable Physics & Vis
+            _set_physics_state(prim, True)
+            
+            # B. Set Part Type (Reference Swap)
+            refs = prim.GetReferences()
+            refs.ClearReferences()
+            if part_mode == "HOMO":
+                refs.AddReference(homo_proto)
+            else:
+                refs.AddReference(random.choice(all_prototypes))
+
+            # C. Set Material
+            if mat_mode == "UNIFORM":
+                _bind_mat(stage, prim, uniform_mat)
+            elif mat_mode == "CHAOS":
+                _bind_mat(stage, prim, random.choice(all_materials))
+            elif mat_mode == "DISTRACTOR":
+                # 80% Main, 20% Random
+                tgt = distractor_main_mat if random.random() < 0.8 else random.choice(all_materials)
+                _bind_mat(stage, prim, tgt)
+
+        # --- 4. HIDE INACTIVE OBJECTS (Teleport to Void) ---
+        for prim in inactive_prims:
+            _set_physics_state(prim, False)
+            # Teleport far away so they don't interact
+            xform = UsdGeom.Xformable(prim)
+            xform.AddTranslateOp().Set(Gf.Vec3d(0, -10000, 0))
+
+    return True
+
+# --- HELPER FUNCTIONS ---
+def _set_physics_state(prim, enabled):
+    """Toggles RigidBody and Visibility safely"""
+    # 1. Visibility
+    imageable = UsdGeom.Imageable(prim)
+    if enabled: imageable.MakeVisible()
+    else: imageable.MakeInvisible()
+    
+    # 2. Physics (RigidBodyAPI)
+    rb = UsdPhysics.RigidBodyAPI(prim)
+    if not rb: rb = UsdPhysics.RigidBodyAPI.Apply(prim)
+    rb.GetRigidBodyEnabledAttr().Set(enabled)
+
+def _bind_mat(stage, prim, mat_path):
+    mat_prim = stage.GetPrimAtPath(mat_path)
+    if mat_prim:
+        UsdShade.MaterialBindingAPI.Apply(prim).Bind(UsdShade.Material(mat_prim))   
+        
+
+def randomize_all_materials_direct(mat_params_dict):
+    """
+    Randomizes all materials in one go using direct USD API.
+    100x faster than creating individual Replicator nodes.
+    
+    Args:
+        mat_params_dict (dict): The dictionary from self.material_manager.mat_params
+    """
+    stage = omni.usd.get_context().get_stage()
+    
+    for mat_path, params in mat_params_dict.items():
+        # 1. Get Prim directly (Instant lookup, no searching)
+        prim = stage.GetPrimAtPath(mat_path)
+        if not prim.IsValid():
+            continue
+            
+        shader_prim = stage.GetPrimAtPath(f"{mat_path}/Shader")
+        if not shader_prim.IsValid():
+            continue
+            
+        shader = UsdShade.Shader(shader_prim)
+        
+        for param_name, bounds in params.items():
+            if len(bounds) != 2 or not isinstance(bounds, list):
+                continue
+            #print(f"Randomizing {mat_path} param {param_name} within bounds {bounds}")
+            
+            # Helper to find the input object
+            inp = shader.GetInput(param_name)
+            if not inp:
+                inp = shader.GetInput(f"inputs:{param_name}")
+            
+            if inp:
+                # Randomize
+                val = random.uniform(bounds[0], bounds[1])
+                inp.Set(val)
+                
+    return rep.create.group([])
 if __name__ == "__main__":
     main()
     simulation_app.close()

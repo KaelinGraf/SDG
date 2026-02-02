@@ -13,7 +13,7 @@ import colorsys
 import asyncio
 from omni.isaac.core.utils import prims
 
-DIAGNOSTICS = True
+DIAGNOSTICS = False
 class MaterialManager:
     def __init__(self):
         
@@ -62,11 +62,11 @@ class MaterialManager:
             #print(f"Randomisations: ", randomizations)
 
         shader_inputs = shader.GetInputs(onlyAuthored=False)
-        print(f"Shader Inputs Length: ", len(shader_inputs))
+        #print(f"Shader Inputs Length: ", len(shader_inputs))
         for inp in shader_inputs:
-            print(f"Shader Input Found: ", inp.GetBaseName())
+            #print(f"Shader Input Found: ", inp.GetBaseName())
             if inp.GetBaseName() in randomizations:
-                print(f"Shader Input found in randomisation: ", inp.GetBaseName())
+                #print(f"Shader Input found in randomisation: ", inp.GetBaseName())
                 param_map[inp.GetBaseName()] = template_data["randomise"].get(inp.GetBaseName())
                 
         #print(f"Parameter Map: ", param_map)
@@ -77,7 +77,8 @@ class MaterialManager:
     def add_all_materials_to_scene(self):
         """creates all materials defined in the materials.json file, stores their paths in a list"""
         for template_key in self.materials:
-            asyncio.ensure_future(self.create_material(template=template_key))
+            #asyncio.ensure_future(
+            self.create_material(template=template_key)#)
 
 
             #self._get_randomisable_params(template_name=template_key)
@@ -102,7 +103,7 @@ class MaterialManager:
         """creates n materials, stores their paths in a list"""
         for i in range(n):
             self.materials_in_scene.append(self.create_material())
-    async def create_material(self,template=None):
+    def create_material(self,template=None):
 
         """create a single material primitive and return the path"""
 
@@ -129,13 +130,13 @@ class MaterialManager:
             mtl_name=mat_name,
             on_create_fn=self.on_created_mdl
         )
-        await omni.kit.app.get_app().next_update_async()
+        #await omni.kit.app.get_app().next_update_async()
         shader_path = mat_prim_path + "/Shader"
 
         selection = omni.usd.get_context().get_selection()
 
         selection.set_selected_prim_paths([shader_path],False)
-        await omni.kit.app.get_app().next_update_async()
+        #await omni.kit.app.get_app().next_update_async()
         if mat_prim_path is not None and mat_name != "Plastic_Standardized_Surface_Finish_V15":
             #carb.log_info(f"[MaterialManager] Created material {mat_name} at {mat_prim_path}")
             self.materials_in_scene.append(mat_prim_path)
