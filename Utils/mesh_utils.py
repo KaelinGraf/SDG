@@ -1,13 +1,16 @@
 #provides convenience functions for mesh processing and manipulation
-import isaacsim.core.utils.bounds as bounds_utils
-import isaacsim.core.utils.prims as prim_utils
+
 import numpy as np
 import random
 import os 
 import json
 from pathlib import Path
-
-
+from pxr import UsdGeom,UsdPhysics,Gf
+#from scene_builder import SceneBuilder
+import omni.usd
+import isaacsim.core.utils.bounds as bounds_utils
+import isaacsim.core.utils.prims as prim_utils
+import omni.isaac.core.utils.semantics as semantics_utils
 class AssetManager:
     """
     The asset manager provides utility functions for working with USD meshes.
@@ -29,6 +32,7 @@ class AssetManager:
         for obj_name, obj_info in self.objects_config["parts"].items():
             usd_filepath = obj_info.get("usd_filepath", None)
             prim_path = f"{prims_path}/{self.objects_config['parts'][obj_name]['name']}"
+            name = self.objects_config['parts'][obj_name]['name']
             if usd_filepath:
                 prim = prim_utils.create_prim(
                     prim_path=prim_path,
@@ -49,18 +53,141 @@ class AssetManager:
                 #store in asset registry
                 #print(bounds)
                 #print(f"diagonal length: {diag_length}")
-                self.asset_registry[obj_name] = {
+                self.asset_registry[name] = {
                     "bounds": bounds,
                     "diag_length": diag_length
                 }
+                print(f"Registered asset: {name} with bounds: {bounds} and diagonal length: {diag_length}")
                 prim_utils.set_prim_visibility(prim,False)
                 #delete temp prim
-                #prim_utils.delete_prim(temp_path)
+                #prim_utils.delete_prim(prim_path)
                 
+                
+    def create_generic_pools(self, num_bins, max_parts_per_bin):
+        """
+        Creates 'max_parts_per_bin' generic Xforms for each bin.
+        @args:
+            num_bins (int): number of bins to create pools for
+            max_parts_per_bin (int): maximum number of parts per bin
+        """
+        stage = omni.usd.get_context().get_stage()
+        self.bin_pools = {} # Map bin_index -> list of prim paths
+
+        for bin_idx in range(num_bins):
+            pool_path = f"/World/Pools/Bin_{bin_idx}"
+            stage.DefinePrim(pool_path, "Scope")
+            
+            self.bin_pools[bin_idx] = []
+            
+            for i in range(max_parts_per_bin):
+                prim_path = f"{pool_path}/Part_{i}"
+                
+                # Create a Generic Xform
+                prim = stage.DefinePrim(prim_path, "Xform")
+                prim.SetInstanceable(False)
+
+                # Add Physics APIs (Rigid Body, Colliders) NOW so they persist
+                # (We will enable/disable them later)
+                UsdPhysics.RigidBodyAPI.Apply(prim)
+
+                # 2. Apply Mass (Parent defines the weight)
+                mass_api = UsdPhysics.MassAPI.Apply(prim)
+                mass_api.CreateMassAttr(0.1) # Default placeholder mass
+                mass_api.CreateCenterOfMassAttr(Gf.Vec3f(0, 0, 0))
+                
+                #create semantic label "part"
+                semantics_utils.add_labels(
+                    prim=prim,
+                    labels=["part"],
+                    overwrite=True,
+                )
+                
+                # Make Invisible/Disabled by default
+                UsdGeom.Imageable(prim).MakeInvisible()
+                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(False)
+                
+                self.bin_pools[bin_idx].append(prim_path)
+                
+    def randomize_bin_contents(self, bin_index, mode="HOMO_80_20"):
+        """
+        Configures the generic pool for a specific bin to match the desired distribution.
+        """
+        stage = omni.usd.get_context().get_stage()
+        pool_paths = self.bin_pools[bin_index]
+        
+        # 1. Decide Object Counts
+        num_active = random.randint(50, 150) # How many parts in this bin?
+        
+        # Get all available object USD paths from your config
+        all_usd_paths = [v['usd_filepath'] for v in self.objects_config['parts'].values()]
+        
+        # 2. Select Objects based on Mode
+        selected_usds = []
+        
+        if mode == "HOMOGENEOUS":
+            # Pick 1 random object type for all
+            obj = random.choice(all_usd_paths)
+            selected_usds = [obj] * num_active
+            
+        elif mode == "HOMO_80_20":
+            # 80% Main Object, 20% Distractors
+            main_obj = random.choice(all_usd_paths)
+            distractors = [o for o in all_usd_paths if o != main_obj]
+            
+            count_main = int(num_active * 0.8)
+            count_dist = num_active - count_main
+            
+            selected_usds = [main_obj] * count_main
+            selected_usds += [random.choice(distractors) for _ in range(count_dist)]
+            random.shuffle(selected_usds) # Shuffle so they aren't stacked in order
+            
+        elif mode == "CHAOS":
+            # Pure random
+            selected_usds = [random.choice(all_usd_paths) for _ in range(num_active)]
+
+        # 3. Apply to Prims (Reference Swapping)
+        for i, prim_path in enumerate(pool_paths):
+            prim = stage.GetPrimAtPath(prim_path)
+            
+            if i < len(selected_usds):
+                # --- ACTIVE PART ---
+                usd_to_load = selected_usds[i]
+                
+                # A. Swap Reference (This is fast!)
+                refs = prim.GetReferences()
+                refs.ClearReferences()
+                refs.AddReference(usd_to_load)
+
+                    
+                        # B. Enable Physics & Vis
+                UsdGeom.Imageable(prim).MakeVisible()
+                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
+
+                
+                # # C. Randomize Scale/Material (Your Request)
+                # self.randomize_single_prim_attributes(prim) 
+
+            else:
+                # --- INACTIVE PART ---
+                # Disable Physics & Vis
+                    
+                        # B. Enable Physics & Vis
+                #UsdGeom.Imageable(prim).MakeVisible()
+                #UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
+                UsdGeom.Imageable(prim).MakeInvisible()
+                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(False)
+                
+                # Teleport away to be safe
+                xform = UsdGeom.Xformable(prim)
+                xform.ClearXformOpOrder()
+                xform.AddTranslateOp().Set(Gf.Vec3d(0.0, -10000.0, 0.0))
+                
+        return num_active # Return how many active parts were set, useful as first num_active in pool are active
+                    
                 
 def get_bounds(prim_path):
     cache = bounds_utils.create_bbox_cache()
-    return np.array(bounds_utils.compute_aabb(cache,prim_path))
+    return np.array(bounds_utils.compute_aabb(cache,prim_path,include_children=True))
 
 def create_objects_json(asset_paths,output_path="./Config/objects.json"):
     """
@@ -196,6 +323,46 @@ def get_position_from_voxel_index(voxel_index, voxel_size, grid_origin, grid_cou
     z = grid_origin[2] + (k + 0.5) * voxel_size[2] + random.uniform(-jitter, jitter)
     
     return (x, y, z)
+
+
+def get_voxel_positions_vectorised(voxel_size, grid_origin, grid_counts, jitter=0.0):
+    """
+    Vectorised version to compute world positions for multiple voxel indices.
+    grid_counts: A tuple (nx, ny, nz) representing the total number of voxels in each axis.
+    Returns Nx3 numpy array of world positions, such that each index maps to a position (in local bin space).
+    Voxel indices are un-needed as positions are computed for all voxels in the grid.
+    """
+    
+    nx, ny, nz = grid_counts
+    
+    # Create meshgrid of all voxel indices
+    i_indices, j_indices, k_indices = np.meshgrid(
+        np.arange(nx), 
+        np.arange(ny), 
+        np.arange(nz),
+        indexing='ij'
+    )
+    
+    # Flatten to get all combinations
+    i_flat = i_indices.flatten()
+    j_flat = j_indices.flatten()
+    k_flat = k_indices.flatten()
+    
+    # Compute positions using vectorised operations
+    x = grid_origin[0] + (i_flat - nx / 2.0 + 0.5) * voxel_size[0]
+    y = grid_origin[1] + (j_flat - ny / 2.0 + 0.5) * voxel_size[1]
+    z = grid_origin[2] + (k_flat + 0.5) * voxel_size[2]
+    
+    # Add jitter if specified
+    if jitter > 0.0:
+        x += np.random.uniform(-jitter, jitter, size=x.shape)
+        y += np.random.uniform(-jitter, jitter, size=y.shape)
+        z += np.random.uniform(-jitter, jitter, size=z.shape)
+    
+    # Stack into N x 3 array
+    positions = np.column_stack((x, y, z))
+    
+    return positions
 
 
 

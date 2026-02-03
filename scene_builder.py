@@ -15,7 +15,11 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 30
+NUM_CLONES = 2 #MIN 2
+HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
+
+
+
 
 from isaacsim import SimulationApp
 import warp
@@ -32,7 +36,7 @@ if not enable_extension("isaacsim.zivid"):
     raise RuntimeError("Failed to enable zivid extension")
 import omni.replicator.core as rep
 import omni.usd
-from omni.isaac.core.utils import prims
+from omni.isaac.core.utils import prims,xforms
 from omni.isaac.core import World
 from omni.isaac.core.utils.semantics import add_update_semantics
 from omni.isaac.core.utils.stage import open_stage
@@ -46,6 +50,8 @@ from isaacsim.core.utils.rotations import euler_angles_to_quat
 import isaacsim.core.utils.bounds as bounds_utils
 import isaacsim.zivid as zivid_sim
 from isaacsim.core.cloner import GridCloner    # import GridCloner interface
+import omni.isaac.core.utils.semantics as semantics_utils
+
 
 import numpy as np
 import json
@@ -58,9 +64,13 @@ import logging
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Utils.mesh_utils import AssetManager,get_bounds
-from Utils.mesh_utils import get_position_from_voxel_index
+from Utils.mesh_utils import get_position_from_voxel_index,get_voxel_positions_vectorised
 from Utils.replicator_utils import RepCam
 from Utils.material_manager import MaterialManager
+
+from pathlib import Path
+
+dir = script_dir = Path(__file__).resolve().parent
 
 
 
@@ -118,19 +128,34 @@ class SceneBuilder:
             self.read_configs()
             #initialise asset and material managers after stage is loaded such that the stage pointer held in them is valid
             self.asset_manager = AssetManager(self.objects_config)
-            self.material_manager = MaterialManager()
+            #self.material_manager = MaterialManager()
             self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
+            self._instantiate_bin()
             self.clone_world()
-            self.material_manager._get_all_randomisable_params()
+            self.asset_manager.create_generic_pools(num_bins=NUM_CLONES+1, max_parts_per_bin=150)
+            #self._build_replicator_graph()
+            for _ in range(5):
+                simulation_app.update()
+
             kit = omni.kit.app.get_app()
                 
-            self._build_replicator_graph()
+            #self._build_replicator_graph()
             # for _ in range(150):
-            #     kit.update()
-            # start = time.time_ns()
-            # rep.utils.send_og_event("randomize_scene")
-            # end = time.time_ns()
-            # print(f"Randomization time: {(end - start)/1e9} seconds")
+            #     simulation_app.update()
+            start = time.time_ns()
+            #rep.utils.send_og_event("randomize_scene")
+            self._randomize_scene(10)
+            end = time.time_ns()
+            print(f"Randomization time: {(end - start)/1e9} seconds")
+            
+            timeline = omni.timeline.get_timeline_interface()
+            subscription = timeline.get_timeline_event_stream().create_subscription_to_pop_by_type(
+            int(omni.timeline.TimelineEventType.PLAY), 
+            self.on_play_callback
+                )
+            
+            #self.world.add_timeline_callback("on_play", self.on_play_callback)
+
         
 
         else:
@@ -209,10 +234,22 @@ class SceneBuilder:
         scene.CreateGravityMagnitudeAttr().Set(9.810)
         
         self.world.get_physics_context().set_solver_type("TGS")
+        physx_scene_api = PhysxSchema.PhysxSceneAPI.Apply(scene_prim)
+
+        # 1. Contact Buffers (Error: "Contact buffer overflow")
+        physx_scene_api.CreateGpuMaxRigidContactCountAttr(10 * 1024 * 1024) 
+        
+        # 2. Patch Buffers (Error: "Patch buffer overflow")
+        physx_scene_api.CreateGpuMaxRigidPatchCountAttr(10 * 1024 * 1024) 
+        
+        # 3. Temp/Heap Buffers (Good practice to increase these too)
+        physx_scene_api.CreateGpuHeapCapacityAttr(64 * 1024 * 1024)
+        physx_scene_api.CreateGpuTempBufferCapacityAttr(64 * 1024 * 1024)
+        physx_scene_api.CreateGpuFoundLostPairsCapacityAttr(64 * 1024) # Broadphase pairs
         rep.new_layer()
         
     def clone_world(self):
-        base_env_path = "/Env_"
+        base_env_path = "/Env"
         cloner = GridCloner(spacing = 50)
         target_paths = cloner.generate_paths(base_env_path, NUM_CLONES)
         cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True)
@@ -497,7 +534,201 @@ class SceneBuilder:
                 rb_api = UsdPhysics.RigidBodyAPI(prim)
                 rb_api.CreateRigidBodyEnabledAttr(True)
                 rb_api.CreateKinematicEnabledAttr(False)      
+    
+    def _instantiate_bin(self):
+        """
+        Picks a bin from the assets (randomly), instiantiates it in the scene (ontop of the table), and applies physics materials
+        
+        """
+        table_prim_path = prims.find_matching_prim_paths("/Env/*table*")[0]
+        print("Table prim path: ", table_prim_path)
+        table_bounds = get_bounds(table_prim_path)
+        self.table_bounds = np.array(table_bounds)
+        bin_spawn_x = 0#(table_bounds[0] + table_bounds[3]) /2
+        bin_spawn_y = 0#(table_bounds[1] + table_bounds[4]) /2
+        bin_spawn_z = table_bounds[5]
+        
+        bin_usds = os.listdir(os.path.join(script_dir, "assets/bins/"))
+        selected_bin_usd = random.choice(bin_usds)
+        print("Selected bin USD: ", selected_bin_usd)
+        bin_usd_path = os.path.join(script_dir, "assets/bins/",selected_bin_usd,selected_bin_usd + ".usd")
+        print("Full bin USD path: ", bin_usd_path)
+        
+        prims.create_prim(
+            prim_path="/Env/Bin",
+            prim_type="Xform",
+            translation=(bin_spawn_x,bin_spawn_y,bin_spawn_z),
+            orientation= (0.0,0.0,0.0,0.0),#as quaternion
+            scale=(1.0,1.0,1.0),
+            usd_path=bin_usd_path,
+            semantic_label="background"
+        )
+    
+    def on_play_callback(self,event):
+        print("Play event detected!")
+        time_start = time.time_ns()
+        self._randomize_scene(iteration=0)
+        print(f"time elapsed = {(time_start - time.time_ns()) /1e9}")
+    def _randomize_scene(self,iteration):
+        """
+        Randomzes all scene parameters. 
+        Uses replicator where possible for efficiency, however, material attributes and part scattering are performed manually due to 
+        inneficiencies/inadequacies in the replicator randomizer nodes for these tasks.
+        """
+        
+        if iteration % 10 ==0:
+            #randomize HDRI
+            textures = [HDRI_PATH + f for f in os.listdir(HDRI_PATH) if f.endswith('.exr')]
+            light_prim = self.stage.GetPrimAtPath("/World/DomeLight")
+            light_prim.GetAttribute("inputs:texture:file").Set(random.choice(textures))
 
+        active_paths_resultant = {} #stores active paths (we check bounds after settling physics)
+        for bin_index in range(NUM_CLONES+1):
+            if bin_index ==0:
+                bin_path = "/Env/Bin"
+            else:
+                bin_path = f"/Env_{bin_index-1}/Bin"
+                
+            #perform bin scaling and rotation
+            bin_pos = xforms.get_local_pose(bin_path)[0] #only get translation
+            bin_prim = UsdGeom.Xformable(self.stage.GetPrimAtPath(bin_path))
+            bin_prim.ClearXformOpOrder()
+            #randomly scale bin dimensions
+            bin_bounds = np.array(get_bounds(bin_path))
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
+            scale_factor = random.uniform(self.scene_config["bin_scale_range"][0], self.scene_config["bin_scale_range"][1])
+            for idim, dim in enumerate(bin_dims):
+                if dim * scale_factor > (self.table_bounds[3+idim] - self.table_bounds[idim]):
+                    scale_factor = (self.table_bounds[3+idim] - self.table_bounds[idim]) / dim * 0.9 #add 10% margin
+            translate=bin_prim.AddTranslateOp()
+            rotate = bin_prim.AddRotateXYZOp()
+
+            scale = bin_prim.AddScaleOp()
+            scale.Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
+            #do this before rotation to get axis-aligned bounds
+            bin_bounds = np.array(get_bounds(bin_path)) #n
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
+            rotate.Set(Gf.Vec3d(0.0,0.0,random.uniform(-45.0,45.0)))
+            translate.Set(Gf.Vec3d(bin_pos[0],bin_pos[1],bin_pos[2]))
+
+            
+            #perform part randomization and scattering
+            num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index)
+            print(f"Randomized contents of bin at path: {bin_path}")
+            bin_pos = xforms.get_world_pose(bin_path)[0] #only get translation
+            bin_bounds = np.array(get_bounds(bin_path))
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
+            print(f"Bin {bin_index} position: {bin_pos}")
+            active_paths = self.asset_manager.bin_pools[bin_index][:num_active] #return first n active paths
+            print(f"Active paths: {active_paths}")
+            bin_prim = self.stage.GetPrimAtPath(bin_path).GetChildren()[0] #assumes bin prim is first child of /Env/Bin
+            volume_prim_path = bin_prim.GetPath().pathString + "/SpawnVolume"
+            print(f"Volume prim path: {volume_prim_path}")
+            
+            #max diagonal length calculation for voxel grid (we use this to set max samples in replicator scatter_3d)
+            max_diag_length = 0.0
+            for path in active_paths:
+                prim = self.stage.GetPrimAtPath(path)
+                child = prim.GetChildren()[0]
+                obj_name = child.GetName()
+                try:
+                    obj_diag_length = self.asset_manager.asset_registry[obj_name]["diag_length"]
+                
+                except KeyError:
+                    print(f"Warning: No registry entry for object '{obj_name}'")
+                    continue
+                if obj_diag_length > max_diag_length:
+                    max_diag_length = obj_diag_length
+                    
+            # max_samples = 2 *int((bin_dims[0] // max_diag_length) * (bin_dims[1] // max_diag_length) * (bin_dims[2] // max_diag_length))
+            # if max_samples < num_active:
+            #     active_paths = active_paths[:max_samples]
+            #     print(f"Reduced active paths to {max_samples} due to bin size constraints.")       
+            rep.randomizer.scatter_3d(
+                volume_prims = [volume_prim_path],
+                check_for_collisions = True,
+                input_prims = active_paths,
+            )
+            active_paths_resultant[bin_index] = active_paths
+            
+        for _ in range(150):
+            simulation_app.update()
+        
+        # #check if any part is outside bin bounds, if so change semantic label to background
+        # for bin_index in range(NUM_CLONES+1):
+        #     if bin_index ==0:
+        #         bin_path = "/Env/Bin"
+        #     else:
+        #         bin_path = f"/Env_{bin_index-1}/Bin"
+        #     bin_bounds = np.array(get_bounds(bin_path))
+        #     active_paths = active_paths_resultant[bin_index]
+        #     for path in active_paths:
+        #         prim = self.stage.GetPrimAtPath(path)
+        #         part_bounds = np.array(get_bounds(prim.GetPath().pathString))
+        #         part_center = (part_bounds[0:3] + part_bounds[3:6]) /2
+        #         if (part_center[0] < bin_bounds[0] or part_center[0] > bin_bounds[3] or
+        #             part_center[1] < bin_bounds[1] or part_center[1] > bin_bounds[4] or
+        #             part_center[2] < bin_bounds[2] or part_center[2] > bin_bounds[5]):
+        #             print(f"Part {path} is outside bin bounds, changing semantic label to background.")
+        #             semantics_utils.add_labels(
+        #                 prim=self.stage.GetPrimAtPath(path),
+        #                 labels=["background"],
+        #                 overwrite=True
+        #             )
+                    
+            
+            # max_diag_length = 0.0
+            # for path in active_paths:
+            #     prim = self.stage.GetPrimAtPath(path)
+            #     child = prim.GetChildren()[0]
+            #     obj_name = child.GetName()
+            #     try:
+            #         obj_diag_length = self.asset_manager.asset_registry[obj_name]["diag_length"]
+                
+            #     except KeyError:
+            #         print(f"Warning: No registry entry for object '{obj_name}'")
+            #         continue
+            #     if obj_diag_length > max_diag_length:
+            #         max_diag_length = obj_diag_length
+            # spawn_height_z = 0.2 #start spawning 20cm above bin base
+            # # Create voxel grid
+            # num_cells_x = int(bin_dims[0] // max_diag_length)
+            # num_cells_y = int(bin_dims[1] // max_diag_length)
+
+            # # Safety check: If bin is too small for even one object
+            # if num_cells_x < 1: num_cells_x = 1
+            # if num_cells_y < 1: num_cells_y = 1
+
+            # num_cells_z = math.ceil(num_active / (num_cells_x * num_cells_y))
+
+            # voxel_cells = list(range(0, num_cells_x * num_cells_y * num_cells_z))
+            # random.shuffle(voxel_cells)
+            # voxel_positions = get_voxel_positions_vectorised(
+            #     voxel_size=(max_diag_length, max_diag_length, max_diag_length),
+            #     grid_origin=(bin_pos[0], bin_pos[1], bin_pos[2]), 
+            #     grid_counts=(num_cells_x, num_cells_y, num_cells_z),
+            #     jitter=self.scene_config["voxel_jitter"]
+            # )
+            # print(voxel_positions)
+            # for i, part in enumerate(active_paths):
+            #     cell_index = voxel_cells.pop()
+            #     [cell_x, cell_y, cell_z] = voxel_positions[cell_index]
+            #     print(f"Placing part {part} at cell index {cell_index} with position {[cell_x, cell_y, cell_z]}")
+            #     part_xform = UsdGeom.Xformable(self.stage.GetPrimAtPath(part))
+            #     part_xform.ClearXformOpOrder()
+            #     translate = part_xform.AddTranslateOp()
+            #     translation = Gf.Vec3d(cell_x + bin_pos[0], cell_y + bin_pos[1], cell_z + bin_pos[2])
+            #     translate.Set(translation)
+            #     part_xform.AddRotateXYZOp().Set(Gf.Vec3d(random.uniform(-180.0, 180.0), random.uniform(-180.0, 180.0), random.uniform(-180.0, 180.0)))
+            
+                
+                
+                
+                
+                
+            
+        
+                 
     def _build_replicator_graph(self):
         """
         Assembles Rep Randomizer Graph 
@@ -506,6 +737,10 @@ class SceneBuilder:
         MAX_CAPACITY = 50  # Max number of objects in the bin
         all_parts = [p.GetPath().pathString for p in self.stage.GetPrimAtPath("/World/Prim_Library").GetChildren()]
         all_mats = self.material_manager.materials_in_scene
+        # pool = rep.randomizer.instantiate(
+        #         paths = all_parts,
+        #         size = MAX_CAPACITY
+        #     )
         
         bin_groups = {}
         spawn_vols = rep.get.prims(path_pattern="/Env_*/Bin/*/SpawnVolume")
@@ -515,19 +750,9 @@ class SceneBuilder:
 
         
         with rep.trigger.on_custom_event(event_name="randomize_scene"):
-            
-            #HDRI randomization
-            dome_light = rep.get.light(path_match="/World/DomeLight")
-            with dome_light:
-                rep.modify.attribute(
-                    name="inputs:texture:file",
-                    value=rep.distribution.choice(textures)
-                )
+            pass
                 
-            # pool = rep.randomizer.instantiate(
-            #     paths = all_parts,
-            #     size = MAX_CAPACITY
-            # )
+
             
             # rep.randomizer.scatter_3d(
             #     volume_prims = spawn_vols,
