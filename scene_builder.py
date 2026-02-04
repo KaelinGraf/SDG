@@ -127,12 +127,14 @@ class SceneBuilder:
             self.objects = {}
             self.read_configs()
             #initialise asset and material managers after stage is loaded such that the stage pointer held in them is valid
+            
             self.asset_manager = AssetManager(self.objects_config)
-            #self.material_manager = MaterialManager()
+            self.material_manager = MaterialManager()
+            self.physics_mat = self.create_physics_material(self.stage)
             self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
             self._instantiate_bin()
             self.clone_world()
-            self.asset_manager.create_generic_pools(num_bins=NUM_CLONES+1, max_parts_per_bin=150)
+            self.asset_manager.create_generic_pools(num_bins=NUM_CLONES+1, max_parts_per_bin=50,scene_builder = self)
             #self._build_replicator_graph()
             for _ in range(5):
                 simulation_app.update()
@@ -489,19 +491,20 @@ class SceneBuilder:
             self.assign_physics_materials(object_prim)
 
             self.scene_objects.append(object_prim)
-    def assign_physics_materials(self, prim,is_static=False):
+    def assign_physics_materials(self, prim,is_static=False,is_bin=False):
         """
         Applies Rigid Body physics, Mass, Collisions, and Visual Materials.
         """
 
         # MESH STUFF
-        if not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
+        if not is_bin and not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
             mesh_api = UsdPhysics.MeshCollisionAPI.Apply(prim)
             
             if not is_static:
                 mesh_api.CreateApproximationAttr("convexHull")
             else:
-                mesh_api.CreateApproximationAttr("meshSimplification") #bin gets decomp
+                mesh_api.CreateApproximationAttr("meshSimplification")
+             
         # COLLISION
         if not prim.HasAPI(UsdPhysics.CollisionAPI):
             col_api = UsdPhysics.CollisionAPI.Apply(prim)
@@ -528,6 +531,8 @@ class SceneBuilder:
                 physx_rb_api.CreateSleepThresholdAttr(0.005) # Prevent sleeping while still settling
                 physx_rb_api.CreateLinearDampingAttr(0.5)  # "Air resistance"
                 physx_rb_api.CreateAngularDampingAttr(0.5) # Rotational resistance
+                physx_rb_api.CreateMaxLinearVelocityAttr(5.0)
+                physx_rb_api.CreateMaxDepenetrationVelocityAttr(1.0)
                 
         if is_static:
             if prim.HasAPI(UsdPhysics.RigidBodyAPI):
@@ -541,10 +546,12 @@ class SceneBuilder:
         
         """
         table_prim_path = prims.find_matching_prim_paths("/Env/*table*")[0]
+        table_prim = self.stage.GetPrimAtPath(table_prim_path)
+        self.assign_physics_materials(table_prim,is_static=True)
         print("Table prim path: ", table_prim_path)
         table_bounds = get_bounds(table_prim_path)
         self.table_bounds = np.array(table_bounds)
-        bin_spawn_x = 0#(table_bounds[0] + table_bounds[3]) /2
+        bin_spawn_x = -0.1#(table_bounds[0] + table_bounds[3]) /2
         bin_spawn_y = 0#(table_bounds[1] + table_bounds[4]) /2
         bin_spawn_z = table_bounds[5]
         
@@ -554,7 +561,7 @@ class SceneBuilder:
         bin_usd_path = os.path.join(script_dir, "assets/bins/",selected_bin_usd,selected_bin_usd + ".usd")
         print("Full bin USD path: ", bin_usd_path)
         
-        prims.create_prim(
+        bin = prims.create_prim(
             prim_path="/Env/Bin",
             prim_type="Xform",
             translation=(bin_spawn_x,bin_spawn_y,bin_spawn_z),
@@ -562,6 +569,16 @@ class SceneBuilder:
             scale=(1.0,1.0,1.0),
             usd_path=bin_usd_path,
             semantic_label="background"
+        )
+        
+        for child in bin.GetChildren()[0].GetChildren(): #structure is /Env/bin/bin_name/children
+            if child.GetName() != "SpawnVolume":
+                print(f"applying to {child.GetName()}")
+                self.assign_physics_materials(child,is_static=True,is_bin=True)
+        mat_prim = self.stage.GetPrimAtPath(self.physics_mat)
+        UsdShade.MaterialBindingAPI.Apply(bin).Bind(
+            UsdShade.Material(mat_prim),
+            materialPurpose = "physics"
         )
     
     def on_play_callback(self,event):
@@ -596,24 +613,37 @@ class SceneBuilder:
             #randomly scale bin dimensions
             bin_bounds = np.array(get_bounds(bin_path))
             bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
-            scale_factor = random.uniform(self.scene_config["bin_scale_range"][0], self.scene_config["bin_scale_range"][1])
+            scale_factor = [1.0,1.0,1.0]
+            
             for idim, dim in enumerate(bin_dims):
-                if dim * scale_factor > (self.table_bounds[3+idim] - self.table_bounds[idim]):
-                    scale_factor = (self.table_bounds[3+idim] - self.table_bounds[idim]) / dim * 0.9 #add 10% margin
+                scale_factor[idim] = random.uniform(self.scene_config["bin_scale_range"][0], self.scene_config["bin_scale_range"][1])
+                if idim ==2:
+                    scale_factor[2] = min(scale_factor[0],scale_factor[1])
+                    continue
+                if dim * scale_factor[idim] > (abs(self.table_bounds[3+idim] - self.table_bounds[idim])*0.6):
+                    print(f"dimension {idim} max is {abs(self.table_bounds[3+idim] - self.table_bounds[idim])}")
+                    print(f"scaling reduced to {((abs(self.table_bounds[3+idim] - self.table_bounds[idim]))/dim) * 0.6}")
+                    scale_factor[idim] = ((abs(self.table_bounds[3+idim] - self.table_bounds[idim]))/dim) * 0.6 #add 20% margin
+                    if scale_factor[idim] < self.scene_config["bin_scale_range"][0]: scale_factor[idim]=self.scene_config["bin_scale_range"][0]
+                    
             translate=bin_prim.AddTranslateOp()
             rotate = bin_prim.AddRotateXYZOp()
 
             scale = bin_prim.AddScaleOp()
-            scale.Set(Gf.Vec3d(scale_factor, scale_factor, scale_factor))
+            scale.Set(Gf.Vec3d(scale_factor[0], scale_factor[1], scale_factor[2]))
             #do this before rotation to get axis-aligned bounds
             bin_bounds = np.array(get_bounds(bin_path)) #n
             bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
             rotate.Set(Gf.Vec3d(0.0,0.0,random.uniform(-45.0,45.0)))
             translate.Set(Gf.Vec3d(bin_pos[0],bin_pos[1],bin_pos[2]))
 
-            
+            modes = ["HOMOGENEOUS","HOMO_80_20","CHAOS"]
+            mat_mode = random.choice(modes)
+            mode = random.choice(modes)
             #perform part randomization and scattering
-            num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index)
+            randomize_all_materials_direct(self.material_manager.mat_params)
+
+            num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
             print(f"Randomized contents of bin at path: {bin_path}")
             bin_pos = xforms.get_world_pose(bin_path)[0] #only get translation
             bin_bounds = np.array(get_bounds(bin_path))
@@ -640,10 +670,10 @@ class SceneBuilder:
                 if obj_diag_length > max_diag_length:
                     max_diag_length = obj_diag_length
                     
-            # max_samples = 2 *int((bin_dims[0] // max_diag_length) * (bin_dims[1] // max_diag_length) * (bin_dims[2] // max_diag_length))
-            # if max_samples < num_active:
-            #     active_paths = active_paths[:max_samples]
-            #     print(f"Reduced active paths to {max_samples} due to bin size constraints.")       
+            max_samples = 2 *int((bin_dims[0] // max_diag_length) * (bin_dims[1] // max_diag_length) * (bin_dims[2] // max_diag_length))
+            if max_samples < num_active:
+                active_paths = active_paths[:max_samples]
+                print(f"Reduced active paths to {max_samples} due to bin size constraints.")       
             rep.randomizer.scatter_3d(
                 volume_prims = [volume_prim_path],
                 check_for_collisions = True,
@@ -652,30 +682,57 @@ class SceneBuilder:
             active_paths_resultant[bin_index] = active_paths
             
         for _ in range(150):
-            simulation_app.update()
+            self.world.step(render=True)
+            if _ % 10 == 0:
+                self.cull_fallen_parts()
         
-        # #check if any part is outside bin bounds, if so change semantic label to background
-        # for bin_index in range(NUM_CLONES+1):
-        #     if bin_index ==0:
-        #         bin_path = "/Env/Bin"
-        #     else:
-        #         bin_path = f"/Env_{bin_index-1}/Bin"
-        #     bin_bounds = np.array(get_bounds(bin_path))
-        #     active_paths = active_paths_resultant[bin_index]
-        #     for path in active_paths:
-        #         prim = self.stage.GetPrimAtPath(path)
-        #         part_bounds = np.array(get_bounds(prim.GetPath().pathString))
-        #         part_center = (part_bounds[0:3] + part_bounds[3:6]) /2
-        #         if (part_center[0] < bin_bounds[0] or part_center[0] > bin_bounds[3] or
-        #             part_center[1] < bin_bounds[1] or part_center[1] > bin_bounds[4] or
-        #             part_center[2] < bin_bounds[2] or part_center[2] > bin_bounds[5]):
-        #             print(f"Part {path} is outside bin bounds, changing semantic label to background.")
-        #             semantics_utils.add_labels(
-        #                 prim=self.stage.GetPrimAtPath(path),
-        #                 labels=["background"],
-        #                 overwrite=True
-        #             )
+        #self.update_semantic_labels_for_outliers(active_paths_resultant)
                     
+
+
+
+
+
+
+
+    # def update_semantic_labels_for_outliers(self, active_paths_resultant):
+    #     stage = omni.usd.get_context().get_stage()
+    #     bbox_cache = UsdGeom.BBoxCache(Usd.TimeCode.Default(), [UsdGeom.Tokens.default_])
+
+    #     for bin_index, active_paths in active_paths_resultant.items():
+    #         if bin_index == 0:
+    #             bin_root = "/Env/Bin"
+    #         else:
+    #             bin_root = f"/Env_{bin_index-1}/Bin"
+            
+    #         bin_prim = stage.GetPrimAtPath(bin_root)
+
+    #         target_prim = bin_prim
+    #         for child in Usd.PrimRange(bin_prim):
+    #             if child.IsA(UsdGeom.Mesh):
+    #                 target_prim = child
+    #                 break
+    #         bin_range = bbox_cache.ComputeWorldBound(target_prim).GetRange()
+    #         b_min = bin_range.GetMin()
+    #         b_max = bin_range.GetMax()
+    #         for path in active_paths:
+    #             part_prim = stage.GetPrimAtPath(path)
+    #             if not part_prim.IsValid(): continue
+    #             trans_attr = part_prim.GetAttribute("xformOp:translate")
+    #             pos = trans_attr.Get() # Reads current physics location
+                
+    #             if pos is None: continue
+    #             tolerance = 0.02 #20cm
+    #             out_x = pos[0] < b_min[0] - tolerance or pos[0] > b_max[0] + tolerance
+    #             out_y = pos[1] < b_min[1] - tolerance or pos[1] > b_max[1] + tolerance
+    #             out_z = pos[2] < b_min[2] - tolerance # Only check if below floor
+
+    #             if out_x or out_y or out_z:
+    #                 semantics_utils.add_labels(
+    #                     prim=part_prim,
+    #                     labels=["background"],
+    #                     overwrite=True,
+    #                 )  
             
             # max_diag_length = 0.0
             # for path in active_paths:
@@ -724,11 +781,71 @@ class SceneBuilder:
                 
                 
                 
+    def cull_fallen_parts(self):
+        """
+        Directly checks the 'xformOp:translate' attribute.
+        This is ~10-50x faster than get_world_pose() and reads the raw USD data 
+        that PhysX writes to every frame.
+        """
+        # 1. Iterate active pools
+        for bin_idx, pool_paths in self.asset_manager.bin_pools.items():
+            for prim_path in pool_paths:
+                prim = self.stage.GetPrimAtPath(prim_path)
+                if not prim.IsValid(): continue
                 
+                # 2. VISIBILITY CHECK (Fastest exit)
+                # If it's already hidden, skip it.
+                vis_attr = prim.GetAttribute("visibility")
+                if vis_attr.Get() == "invisible":
+                    continue
+
+                # 3. DIRECT TRANSLATE ACCESS (The "Live" check)
+                # PhysX updates this specific attribute every frame.
+                # We trust that the pool objects are children of a Scope (no parent transform),
+                # so local Z == world Z.
+                trans_attr = prim.GetAttribute("xformOp:translate")
+                val = trans_attr.Get() # Returns Gf.Vec3d
                 
-            
+                # Check Z height (val[2])
+                if val is not None and val[2] < -0.2: # -20cm threshold
+                    print(f"[Cull] Disabling part {prim_path} at Z={val[2]:.2f}")
+                    
+                    # A. Disable Physics (Stop Solver)
+                    rb = UsdPhysics.RigidBodyAPI(prim)
+                    if rb: rb.GetRigidBodyEnabledAttr().Set(False)
+                    
+                    # B. Hide (Stop Rendering)
+                    vis_attr.Set("invisible")
+                    
+                    # C. Teleport to Safety (Stop Bounds Checks)
+                    trans_attr.Set(Gf.Vec3d(0, -10000, 0))
         
-                 
+
+
+    def create_physics_material(self, stage, name="SmoothPlastic"):
+        # 1. Define the path
+        mat_path = f"/World/Physics_Materials/{name}"
+        
+        # 2. Create the Material Prim
+        if not stage.GetPrimAtPath(mat_path):
+            UsdShade.Material.Define(stage, mat_path)
+        
+        mat_prim = stage.GetPrimAtPath(mat_path)
+        
+        # 3. Apply Physics Material API
+        phys_mat = UsdPhysics.MaterialAPI.Apply(mat_prim)
+        
+        # 4. Set Properties (Tune these to stop sticking!)
+        # Static Friction: Resistance to starting movement (0.0 = Ice, 1.0 = Rubber)
+        phys_mat.CreateStaticFrictionAttr(0.2) 
+        
+        # Dynamic Friction: Resistance while sliding
+        phys_mat.CreateDynamicFrictionAttr(0.15) 
+        
+        # Restitution: Bounciness (0.0 = No bounce, 1.0 = Superball)
+        phys_mat.CreateRestitutionAttr(0.1) 
+        
+        return mat_path
     def _build_replicator_graph(self):
         """
         Assembles Rep Randomizer Graph 
@@ -1034,7 +1151,7 @@ def randomize_all_materials_direct(mat_params_dict):
                 val = random.uniform(bounds[0], bounds[1])
                 inp.Set(val)
                 
-    return rep.create.group([])
+
 if __name__ == "__main__":
     main()
     simulation_app.close()

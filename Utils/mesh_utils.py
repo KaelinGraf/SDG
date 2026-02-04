@@ -5,7 +5,7 @@ import random
 import os 
 import json
 from pathlib import Path
-from pxr import UsdGeom,UsdPhysics,Gf
+from pxr import UsdGeom,UsdPhysics,Gf,UsdShade
 #from scene_builder import SceneBuilder
 import omni.usd
 import isaacsim.core.utils.bounds as bounds_utils
@@ -63,7 +63,7 @@ class AssetManager:
                 #prim_utils.delete_prim(prim_path)
                 
                 
-    def create_generic_pools(self, num_bins, max_parts_per_bin):
+    def create_generic_pools(self, num_bins, max_parts_per_bin, scene_builder):
         """
         Creates 'max_parts_per_bin' generic Xforms for each bin.
         @args:
@@ -88,8 +88,7 @@ class AssetManager:
 
                 # Add Physics APIs (Rigid Body, Colliders) NOW so they persist
                 # (We will enable/disable them later)
-                UsdPhysics.RigidBodyAPI.Apply(prim)
-
+                scene_builder.assign_physics_materials(prim)
                 # 2. Apply Mass (Parent defines the weight)
                 mass_api = UsdPhysics.MassAPI.Apply(prim)
                 mass_api.CreateMassAttr(0.1) # Default placeholder mass
@@ -105,10 +104,22 @@ class AssetManager:
                 # Make Invisible/Disabled by default
                 UsdGeom.Imageable(prim).MakeInvisible()
                 UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(False)
+                mat_prim = scene_builder.stage.GetPrimAtPath(scene_builder.physics_mat)
+                phys_mat = UsdPhysics.MaterialAPI.Apply(mat_prim)
+        
+                phys_mat.CreateStaticFrictionAttr(0.2) 
+
+                phys_mat.CreateDynamicFrictionAttr(0.15) 
+                
+                phys_mat.CreateRestitutionAttr(0.1) 
+                UsdShade.MaterialBindingAPI.Apply(prim).Bind(
+                    UsdShade.Material(mat_prim),
+                    materialPurpose = "physics"
+                )
                 
                 self.bin_pools[bin_idx].append(prim_path)
                 
-    def randomize_bin_contents(self, bin_index, mode="HOMO_80_20"):
+    def randomize_bin_contents(self, bin_index,available_materials, mode="HOMO_80_20",mat_mode="HOMO_80_20"):
         """
         Configures the generic pool for a specific bin to match the desired distribution.
         """
@@ -116,7 +127,7 @@ class AssetManager:
         pool_paths = self.bin_pools[bin_index]
         
         # 1. Decide Object Counts
-        num_active = random.randint(50, 150) # How many parts in this bin?
+        num_active = random.randint(30, 50) # How many parts in this bin?
         
         # Get all available object USD paths from your config
         all_usd_paths = [v['usd_filepath'] for v in self.objects_config['parts'].values()]
@@ -144,19 +155,51 @@ class AssetManager:
         elif mode == "CHAOS":
             # Pure random
             selected_usds = [random.choice(all_usd_paths) for _ in range(num_active)]
+            
+        selected_mats = []
+        
+        if mat_mode == "HOMOGENEOUS":
+            # 1 Material for ALL parts
+            mat = random.choice(available_materials)
+            selected_mats = [mat] * num_active
+            
+        elif mat_mode == "HOMO_80_20":
+            # 80% Main Material, 20% Distractor Materials
+            main_mat = random.choice(available_materials)
+            distractor_mats = [m for m in available_materials if m != main_mat]
+            if not distractor_mats: distractor_mats = [main_mat]
+            
+            count_main = int(num_active * 0.8)
+            count_dist = num_active - count_main
+            
+            selected_mats = [main_mat] * count_main
+            selected_mats += [random.choice(distractor_mats) for _ in range(count_dist)]
+            random.shuffle(selected_mats)
+            
+        elif mat_mode == "CHAOS":
+            # Every part gets a random material
+            selected_mats = [random.choice(available_materials) for _ in range(num_active)]
 
         # 3. Apply to Prims (Reference Swapping)
         for i, prim_path in enumerate(pool_paths):
             prim = stage.GetPrimAtPath(prim_path)
             
             if i < len(selected_usds):
-                # --- ACTIVE PART ---
                 usd_to_load = selected_usds[i]
                 
                 # A. Swap Reference (This is fast!)
                 refs = prim.GetReferences()
                 refs.ClearReferences()
                 refs.AddReference(usd_to_load)
+                mat_path = selected_mats[i]
+                mat_prim = stage.GetPrimAtPath(mat_path)
+                #print(f"attempting to bind {mat_path} with {usd_to_load} to {prim.GetName()}")
+                if mat_prim:
+                    UsdShade.MaterialBindingAPI.Apply(prim).Bind(
+                        UsdShade.Material(mat_prim),
+                        bindingStrength=UsdShade.Tokens.strongerThanDescendants,
+                        #materialPurpose="" 
+                    )
 
                     
                         # B. Enable Physics & Vis
@@ -180,7 +223,7 @@ class AssetManager:
                 # Teleport away to be safe
                 xform = UsdGeom.Xformable(prim)
                 xform.ClearXformOpOrder()
-                xform.AddTranslateOp().Set(Gf.Vec3d(0.0, -10000.0, 0.0))
+                xform.AddTranslateOp(UsdGeom.XformOp.PrecisionFloat).Set(Gf.Vec3f(0.0, -10000.0, 0.0))
                 
         return num_active # Return how many active parts were set, useful as first num_active in pool are active
                     

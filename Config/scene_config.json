@@ -25,8 +25,8 @@
 		],
 		"vary_bin_scale": true,
 		"bin_scale_range": [
-			0.8,
-			2.0
+			0.7,
+			1.4
 		],
 		"cam_z_dist": 0.6,
 		"voxel_jitter": 0.01,
