@@ -828,41 +828,7 @@
             ]
         }
     },
-    "copper_antique_brushed": {
-        "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Antique_Brushed.mdl",
-        "name": "Copper_Antique_Brushed",
-        "non_visual": [
-            "oxidized_Bronze_Patina",
-            "none",
-            "emissive"
-        ],
-        "randomise": {
-            "reflection_contrast":[
-                0.2,
-                0.8
-            ],
-            "reflection_brightness": [
-                0.1,
-                0.9
-            ],
-            "smudge_amount": [
-                0.0,
-                0.4
-            ],
-            "bump_amount": [
-                0.6,
-                1.0
-            ],
-            "patina_amount": [
-                0.5,
-                1.0
-            ],
-            "patina_spots_brightness": [
-                0.3,
-                0.7
-            ]
-        }
-    },
+    
     "copper_antique_brushed_patinated": {
         "mdl_path": "file:///home/kaelin/Documents/mdl/vMaterials_2/Metal/Copper_Antique_Brushed_Patinated.mdl",
         "name": "Copper_Antique_Brushed_Patinated",

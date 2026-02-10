@@ -15,9 +15,9 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 2 #MIN 2
+NUM_CLONES = 16 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
-
+OUTPUT_DIR = "Outputs"
 
 
 
@@ -25,6 +25,11 @@ from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
     "headless": False,
+    "--/rtx/hydra/descriptorSetLimit": 65535,
+    "--/rtx/material/descriptorSetLimit": 65535,
+    "--/rtx/translucency/maxNodes": 65535,
+    "--/rtx/post/dlss/enabled": False,
+
 }) 
 import carb
 from isaacsim.core.utils.extensions import enable_extension
@@ -64,7 +69,7 @@ import logging
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Utils.mesh_utils import AssetManager,get_bounds
-from Utils.mesh_utils import get_position_from_voxel_index,get_voxel_positions_vectorised
+from Utils.mesh_utils import get_position_from_voxel_index,get_voxel_positions_vectorised, get_obb,is_point_within_obb
 from Utils.replicator_utils import RepCam
 from Utils.material_manager import MaterialManager
 
@@ -127,36 +132,47 @@ class SceneBuilder:
             self.objects = {}
             self.read_configs()
             #initialise asset and material managers after stage is loaded such that the stage pointer held in them is valid
-            
+            self.output_dir = os.path.join(os.getcwd(),OUTPUT_DIR)
+            if not os.path.exists(self.output_dir):
+                os.mkdir(self.output_dir)
+            print(f"output to {self.output_dir}")
+            print(f"cwd: {os.getcwd()}")
+            self.timeline = omni.timeline.get_timeline_interface()
+            #self.timeline.pause()
+
             self.asset_manager = AssetManager(self.objects_config)
             self.material_manager = MaterialManager()
             self.physics_mat = self.create_physics_material(self.stage)
-            self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
+            #self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
             self._instantiate_bin()
             self.clone_world()
+            self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"],output_dir = self.output_dir)
+            self.rep_cam.init_cam()
+
+
             self.asset_manager.create_generic_pools(num_bins=NUM_CLONES+1, max_parts_per_bin=50,scene_builder = self)
             #self._build_replicator_graph()
             for _ in range(5):
                 simulation_app.update()
+            #timeline = omni.timeline.get_timeline_interface()
+            # subscription = timeline.get_timeline_event_stream().create_subscription_to_pop_by_type(
+            # int(omni.timeline.TimelineEventType.PLAY), 
+            # self.on_play_callback
+            #     )
 
-            kit = omni.kit.app.get_app()
-                
-            #self._build_replicator_graph()
-            # for _ in range(150):
-            #     simulation_app.update()
+
             start = time.time_ns()
             #rep.utils.send_og_event("randomize_scene")
             self._randomize_scene(10)
+
+            #self.rep_cam.capture()
+
             end = time.time_ns()
-            print(f"Randomization time: {(end - start)/1e9} seconds")
-            
-            timeline = omni.timeline.get_timeline_interface()
-            subscription = timeline.get_timeline_event_stream().create_subscription_to_pop_by_type(
-            int(omni.timeline.TimelineEventType.PLAY), 
-            self.on_play_callback
-                )
-            
-            #self.world.add_timeline_callback("on_play", self.on_play_callback)
+            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES + 1} scenes")    
+            #self.rep_cam.view_frames()
+            #for _ in range(100):
+                #self.on_play_callback()
+
 
         
 
@@ -247,14 +263,14 @@ class SceneBuilder:
         # 3. Temp/Heap Buffers (Good practice to increase these too)
         physx_scene_api.CreateGpuHeapCapacityAttr(64 * 1024 * 1024)
         physx_scene_api.CreateGpuTempBufferCapacityAttr(64 * 1024 * 1024)
-        physx_scene_api.CreateGpuFoundLostPairsCapacityAttr(64 * 1024) # Broadphase pairs
+        physx_scene_api.CreateGpuFoundLostPairsCapacityAttr(64 * 4096 * 4) # Broadphase pairs
         rep.new_layer()
         
     def clone_world(self):
         base_env_path = "/Env"
         cloner = GridCloner(spacing = 50)
         target_paths = cloner.generate_paths(base_env_path, NUM_CLONES)
-        cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True)
+        cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True,base_env_path = base_env_path)
 
         
     def data_generator_loop(self,iters=10):
@@ -497,6 +513,7 @@ class SceneBuilder:
         """
 
         # MESH STUFF
+    
         if not is_bin and not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
             mesh_api = UsdPhysics.MeshCollisionAPI.Apply(prim)
             
@@ -504,7 +521,7 @@ class SceneBuilder:
                 mesh_api.CreateApproximationAttr("convexHull")
             else:
                 mesh_api.CreateApproximationAttr("meshSimplification")
-             
+                
         # COLLISION
         if not prim.HasAPI(UsdPhysics.CollisionAPI):
             col_api = UsdPhysics.CollisionAPI.Apply(prim)
@@ -581,10 +598,15 @@ class SceneBuilder:
             materialPurpose = "physics"
         )
     
-    def on_play_callback(self,event):
+    def on_play_callback(self,event=None):
         print("Play event detected!")
         time_start = time.time_ns()
-        self._randomize_scene(iteration=0)
+                # for _ in range(5):
+        simulation_app.update()
+        self._randomize_scene(10)
+        # for _ in range(5):
+        #     simulation_app.update()
+        self.rep_cam.capture()
         print(f"time elapsed = {(time_start - time.time_ns()) /1e9}")
     def _randomize_scene(self,iteration):
         """
@@ -637,6 +659,7 @@ class SceneBuilder:
             rotate.Set(Gf.Vec3d(0.0,0.0,random.uniform(-45.0,45.0)))
             translate.Set(Gf.Vec3d(bin_pos[0],bin_pos[1],bin_pos[2]))
 
+
             modes = ["HOMOGENEOUS","HOMO_80_20","CHAOS"]
             mat_mode = random.choice(modes)
             mode = random.choice(modes)
@@ -646,6 +669,7 @@ class SceneBuilder:
             num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
             print(f"Randomized contents of bin at path: {bin_path}")
             bin_pos = xforms.get_world_pose(bin_path)[0] #only get translation
+            bin_pos_for_barycentre = xforms.get_local_pose(bin_path)[0]
             bin_bounds = np.array(get_bounds(bin_path))
             bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
             print(f"Bin {bin_index} position: {bin_pos}")
@@ -654,39 +678,35 @@ class SceneBuilder:
             bin_prim = self.stage.GetPrimAtPath(bin_path).GetChildren()[0] #assumes bin prim is first child of /Env/Bin
             volume_prim_path = bin_prim.GetPath().pathString + "/SpawnVolume"
             print(f"Volume prim path: {volume_prim_path}")
-            
-            #max diagonal length calculation for voxel grid (we use this to set max samples in replicator scatter_3d)
-            max_diag_length = 0.0
-            for path in active_paths:
-                prim = self.stage.GetPrimAtPath(path)
-                child = prim.GetChildren()[0]
-                obj_name = child.GetName()
-                try:
-                    obj_diag_length = self.asset_manager.asset_registry[obj_name]["diag_length"]
-                
-                except KeyError:
-                    print(f"Warning: No registry entry for object '{obj_name}'")
-                    continue
-                if obj_diag_length > max_diag_length:
-                    max_diag_length = obj_diag_length
-                    
-            max_samples = 2 *int((bin_dims[0] // max_diag_length) * (bin_dims[1] // max_diag_length) * (bin_dims[2] // max_diag_length))
-            if max_samples < num_active:
-                active_paths = active_paths[:max_samples]
-                print(f"Reduced active paths to {max_samples} due to bin size constraints.")       
+            self.world.step()
+                    #randomize cameras in dome
+            rep.modify.pose_orbit(
+                barycentre = bin_pos_for_barycentre,
+                distance = random.uniform(bin_dims[2]+0.2,bin_dims[2]+0.8),
+                azimuth= random.uniform(0,360),
+                elevation = random.uniform(60,90),
+                look_at_barycentre = True,
+                input_prims = [self.rep_cam.camera_manager.container_paths[bin_index]]
+            )
+     
             rep.randomizer.scatter_3d(
                 volume_prims = [volume_prim_path],
                 check_for_collisions = True,
                 input_prims = active_paths,
             )
             active_paths_resultant[bin_index] = active_paths
+
             
+        #self.timeline.play()
+        simulation_app.update()
+
         for _ in range(150):
-            self.world.step(render=True)
+            self.world.step(render=False)
             if _ % 10 == 0:
                 self.cull_fallen_parts()
         
-        #self.update_semantic_labels_for_outliers(active_paths_resultant)
+        self.update_semantic_labels_for_outliers(active_paths_resultant)
+        #self.timeline.pause()
                     
 
 
@@ -695,44 +715,41 @@ class SceneBuilder:
 
 
 
-    # def update_semantic_labels_for_outliers(self, active_paths_resultant):
-    #     stage = omni.usd.get_context().get_stage()
-    #     bbox_cache = UsdGeom.BBoxCache(Usd.TimeCode.Default(), [UsdGeom.Tokens.default_])
+    def update_semantic_labels_for_outliers(self, active_paths_resultant):
+        stage = omni.usd.get_context().get_stage()
 
-    #     for bin_index, active_paths in active_paths_resultant.items():
-    #         if bin_index == 0:
-    #             bin_root = "/Env/Bin"
-    #         else:
-    #             bin_root = f"/Env_{bin_index-1}/Bin"
+        for bin_index, active_paths in active_paths_resultant.items():
+            if bin_index == 0:
+                bin_root = "/Env/Bin"
+            else:
+                bin_root = f"/Env_{bin_index-1}/Bin"
             
-    #         bin_prim = stage.GetPrimAtPath(bin_root)
+            bin_prim = stage.GetPrimAtPath(bin_root)
 
-    #         target_prim = bin_prim
-    #         for child in Usd.PrimRange(bin_prim):
-    #             if child.IsA(UsdGeom.Mesh):
-    #                 target_prim = child
-    #                 break
-    #         bin_range = bbox_cache.ComputeWorldBound(target_prim).GetRange()
-    #         b_min = bin_range.GetMin()
-    #         b_max = bin_range.GetMax()
-    #         for path in active_paths:
-    #             part_prim = stage.GetPrimAtPath(path)
-    #             if not part_prim.IsValid(): continue
-    #             trans_attr = part_prim.GetAttribute("xformOp:translate")
-    #             pos = trans_attr.Get() # Reads current physics location
+            target_prim = bin_prim
+            for child in Usd.PrimRange(bin_prim):
+                if child.IsA(UsdGeom.Mesh):
+                    target_prim = child
+                    break
+            bin_bounds = get_bounds(bin_root)
+            #print(f"found bin {bin_root} with bounds {bin_bounds}")
+            for path in active_paths:
+                part_prim = stage.GetPrimAtPath(path)
+                if not part_prim.IsValid(): continue
+                trans_attr = part_prim.GetAttribute("xformOp:translate")
+                pos = np.asarray(trans_attr.Get()) # Reads current physics location
+                if pos is not None:
+                #print(f"found part at {path} with location {pos}")
+                    is_contained = is_point_within_obb(pos,bin_root,tolerance=0.01) #10cm of tolerance
+                #print(f"part {path} is contained: {is_contained}")
                 
-    #             if pos is None: continue
-    #             tolerance = 0.02 #20cm
-    #             out_x = pos[0] < b_min[0] - tolerance or pos[0] > b_max[0] + tolerance
-    #             out_y = pos[1] < b_min[1] - tolerance or pos[1] > b_max[1] + tolerance
-    #             out_z = pos[2] < b_min[2] - tolerance # Only check if below floor
 
-    #             if out_x or out_y or out_z:
-    #                 semantics_utils.add_labels(
-    #                     prim=part_prim,
-    #                     labels=["background"],
-    #                     overwrite=True,
-    #                 )  
+                if not is_contained:
+                    semantics_utils.add_labels(
+                        prim=part_prim,
+                        labels=["background"],
+                        overwrite=True,
+                    )  
             
             # max_diag_length = 0.0
             # for path in active_paths:

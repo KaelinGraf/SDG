@@ -223,7 +223,7 @@ class AssetManager:
                 # Teleport away to be safe
                 xform = UsdGeom.Xformable(prim)
                 xform.ClearXformOpOrder()
-                xform.AddTranslateOp(UsdGeom.XformOp.PrecisionFloat).Set(Gf.Vec3f(0.0, -10000.0, 0.0))
+                xform.AddTranslateOp(UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3f(0.0, -10000.0, 0.0))
                 
         return num_active # Return how many active parts were set, useful as first num_active in pool are active
                     
@@ -231,6 +231,56 @@ class AssetManager:
 def get_bounds(prim_path):
     cache = bounds_utils.create_bbox_cache()
     return np.array(bounds_utils.compute_aabb(cache,prim_path,include_children=True))
+
+def get_obb(prim_path,get_corners=True):
+    """
+    compute_obb() returns a tuple of (centroid,axes,half extent) as type Tuple[np.ndarray,np.ndarray,np.ndarray]
+    if get_corners, returns a numpy array of shape 8,3 where each element is the x,y,z location of a corner.
+    From the documentation:
+    c0 = (xmin, ymin, zmin)
+    c1 = (xmin, ymin, zmax)
+    c2 = (xmin, ymax, zmin)
+    c3 = (xmin, ymax, zmax)
+    c4 = (xmax, ymin, zmin)
+    c5 = (xmax, ymin, zmax)
+    c6 = (xmax, ymax, zmin)
+    c7 = (xmax, ymax, zmax)
+    Args:
+        prim_path (str): path to the prim to compute object oriented boundin box for
+        get_corners (bool, optional): sets return type to get_corners. Defaults to True.
+
+    Returns:
+        see above 
+    """
+    cache = bounds_utils.create_bbox_cache()
+    obb = bounds_utils.compute_obb(cache,prim_path) #returns a tuple 
+    corners = bounds_utils.compute_obb_corners(cache,prim_path)
+    if get_corners: return corners 
+    else:return obb
+   
+   
+def is_point_within_obb(point:np.ndarray,obb_path:str,tolerance:float=0.0):
+    """
+    Computes if a point lies within the axis aligned bounding box of a prim.
+    The point and OBB must both be in the same co-ordinate space, which is world by default.
+    
+    Method:
+    d = P - C_b, where P is the point (vector from origin) and C_b is the centroid of the object to check against (vector from origin)
+    d_local = d X obb_axes, we apply the rotation matrix corresponding to the obb axes to d, transforming d into the object (bin) space
+    contained = |d_local| .<= (half_extents + tolerance), element wise comparison if magnitude of d_local is smaller than half extent (distance to bound from center) + tolerance.
+
+    Args:
+        point (np.ndarray): [x,y,z] location of point to query
+        obb_path (str): scene path to the prim to use as bounding volume to query
+        tolerance (float, optional): Tolerance for the walls to account for situations where the part centroid (point) sits just outside of the obb. Defaults to 0.0:float.
+    """
+    
+    [Cb,axes,half_extents] = get_obb(obb_path,get_corners=False)
+
+    d = point - Cb
+    d_local = d @ axes
+    
+    return np.all(np.abs(d_local) <= (half_extents+tolerance))
 
 def create_objects_json(asset_paths,output_path="./Config/objects.json"):
     """
