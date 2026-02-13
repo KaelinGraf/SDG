@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 16 #MIN 2
+NUM_CLONES = 2 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -150,7 +150,7 @@ class SceneBuilder:
             self.rep_cam.init_cam()
 
 
-            self.asset_manager.create_generic_pools(num_bins=NUM_CLONES+1, max_parts_per_bin=50,scene_builder = self)
+            self.asset_manager.create_generic_pools(num_bins=NUM_CLONES, max_parts_per_bin=50,scene_builder = self)
             #self._build_replicator_graph()
             for _ in range(5):
                 simulation_app.update()
@@ -165,11 +165,11 @@ class SceneBuilder:
             #rep.utils.send_og_event("randomize_scene")
             self._randomize_scene(10)
 
-            #self.rep_cam.capture()
+            self.rep_cam.capture()
 
             end = time.time_ns()
-            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES + 1} scenes")    
-            #self.rep_cam.view_frames()
+            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes")    
+            self.rep_cam.view_frames()
             #for _ in range(100):
                 #self.on_play_callback()
 
@@ -267,10 +267,10 @@ class SceneBuilder:
         rep.new_layer()
         
     def clone_world(self):
-        base_env_path = "/Env"
-        cloner = GridCloner(spacing = 50)
-        target_paths = cloner.generate_paths(base_env_path, NUM_CLONES)
-        cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True,base_env_path = base_env_path)
+        base_env_path = "/Env_0"
+        cloner = GridCloner(spacing = 8)
+        target_paths = cloner.generate_paths("/Env", NUM_CLONES)
+        cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True)
 
         
     def data_generator_loop(self,iters=10):
@@ -562,7 +562,7 @@ class SceneBuilder:
         Picks a bin from the assets (randomly), instiantiates it in the scene (ontop of the table), and applies physics materials
         
         """
-        table_prim_path = prims.find_matching_prim_paths("/Env/*table*")[0]
+        table_prim_path = prims.find_matching_prim_paths("/Env_0/*table*")[0]
         table_prim = self.stage.GetPrimAtPath(table_prim_path)
         self.assign_physics_materials(table_prim,is_static=True)
         print("Table prim path: ", table_prim_path)
@@ -579,7 +579,7 @@ class SceneBuilder:
         print("Full bin USD path: ", bin_usd_path)
         
         bin = prims.create_prim(
-            prim_path="/Env/Bin",
+            prim_path="/Env_0/Bin",
             prim_type="Xform",
             translation=(bin_spawn_x,bin_spawn_y,bin_spawn_z),
             orientation= (0.0,0.0,0.0,0.0),#as quaternion
@@ -614,19 +614,31 @@ class SceneBuilder:
         Uses replicator where possible for efficiency, however, material attributes and part scattering are performed manually due to 
         inneficiencies/inadequacies in the replicator randomizer nodes for these tasks.
         """
-        
+        light_prim = self.stage.GetPrimAtPath("/World/DomeLight")
+
         if iteration % 10 ==0:
             #randomize HDRI
             textures = [HDRI_PATH + f for f in os.listdir(HDRI_PATH) if f.endswith('.exr')]
-            light_prim = self.stage.GetPrimAtPath("/World/DomeLight")
             light_prim.GetAttribute("inputs:texture:file").Set(random.choice(textures))
+            
+        #rotate hdri
+        light_xform = UsdGeom.Xformable(light_prim)
+        light_xform.ClearXformOpOrder()
+        rot = light_xform.AddRotateXYZOp().Set(Gf.Vec3d(0.0,0.0,random.uniform(0.0,360.0)))
+
+        
 
         active_paths_resultant = {} #stores active paths (we check bounds after settling physics)
-        for bin_index in range(NUM_CLONES+1):
-            if bin_index ==0:
-                bin_path = "/Env/Bin"
-            else:
-                bin_path = f"/Env_{bin_index-1}/Bin"
+        active_paths={}
+        volume_prim_path={}
+        randomize_all_materials_direct(self.material_manager.mat_params)
+        for bin_index in range(NUM_CLONES):
+            time_bin_start = time.time_ns()
+            # if bin_index ==0:
+            #     bin_path = "/Env/Bin"
+            # else:
+            #     bin_path = f"/Env_{bin_index-1}/Bin"
+            bin_path = f"/Env_{bin_index}/Bin"
                 
             #perform bin scaling and rotation
             bin_pos = xforms.get_local_pose(bin_path)[0] #only get translation
@@ -664,37 +676,60 @@ class SceneBuilder:
             mat_mode = random.choice(modes)
             mode = random.choice(modes)
             #perform part randomization and scattering
-            randomize_all_materials_direct(self.material_manager.mat_params)
-
+            print(f"Time before randomize contents= {(time.time_ns() - time_bin_start)/1e9}")
             num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
-            print(f"Randomized contents of bin at path: {bin_path}")
-            bin_pos = xforms.get_world_pose(bin_path)[0] #only get translation
-            bin_pos_for_barycentre = xforms.get_local_pose(bin_path)[0]
-            bin_bounds = np.array(get_bounds(bin_path))
-            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
-            print(f"Bin {bin_index} position: {bin_pos}")
-            active_paths = self.asset_manager.bin_pools[bin_index][:num_active] #return first n active paths
-            print(f"Active paths: {active_paths}")
+            print(f"Time after randomize contents= {(time.time_ns() - time_bin_start)/1e9}")
+
+            bin_pos_world = xforms.get_world_pose(bin_path)[0] #only get translation
             bin_prim = self.stage.GetPrimAtPath(bin_path).GetChildren()[0] #assumes bin prim is first child of /Env/Bin
-            volume_prim_path = bin_prim.GetPath().pathString + "/SpawnVolume"
-            print(f"Volume prim path: {volume_prim_path}")
-            self.world.step()
-                    #randomize cameras in dome
-            rep.modify.pose_orbit(
-                barycentre = bin_pos_for_barycentre,
-                distance = random.uniform(bin_dims[2]+0.2,bin_dims[2]+0.8),
-                azimuth= random.uniform(0,360),
-                elevation = random.uniform(60,90),
-                look_at_barycentre = True,
-                input_prims = [self.rep_cam.camera_manager.container_paths[bin_index]]
-            )
-     
+
+            bin_bounds = np.array(get_bounds(f"{bin_prim.GetPath().pathString}/{bin_prim.GetChildren()[0].GetName()}"))
+            print(f"bounds: {bin_bounds} at location {bin_prim.GetPath().pathString}/{bin_prim.GetChildren()[0].GetName()}")
+            bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
+            active_paths[bin_index] = self.asset_manager.bin_pools[bin_index][:num_active] #return first n active paths
+            volume_prim_path[bin_index] = bin_prim.GetPath().pathString + "/SpawnVolume"
+            
+            
+            elev_angle = np.random.normal(loc = 90,scale = 1,size=None)
+            if elev_angle == 90: elev_angle = 89.99
+            if elev_angle >90: 90-(elev_angle-90) #wrap back around
+            if elev_angle < 60: elev_angle = 60
+            azimuth_angle = random.uniform(0, 360)
+            distance = random.uniform(bin_dims[2] + 0.5, bin_dims[2] + 0.8)
+            elev_rad = math.radians(elev_angle)
+            azim_rad = math.radians(azimuth_angle)
+            d = [distance*math.cos(elev_rad)*math.cos(azim_rad),distance*math.cos(elev_rad)*math.sin(azim_rad),distance*math.sin(elev_rad)]
+            pos = np.asarray(d) #+ bin_pos
+            x_local = np.asarray((-pos)/np.linalg.norm(pos)) #look at vector
+            pos_world = pos + bin_pos_world
+            up = [0,0,1] #z axis up
+            y_local_raw = np.cross(x_local,up)
+            y_local = y_local_raw/np.linalg.norm(y_local_raw)
+            z_local_raw = np.cross(x_local,y_local)
+            z_local = z_local_raw/np.linalg.norm(z_local_raw)
+            rot_matrix = np.column_stack((x_local,y_local,z_local))
+            print(f"pos: {pos}, x_local = {x_local},y_local= {y_local}, z_local = {z_local}")
+            print(f"rot matrix:{rot_matrix}")
+            self.rep_cam.camera_manager.set_cam_world_pos_by_idx(bin_index,pos_world,rot_matrix,degrees=False,rot_format="matrix")
+            
+            
+            
+            
+       
+
+         
+
+        
+        self.world.step()
+        
+        for bin_index in range(NUM_CLONES):
+
             rep.randomizer.scatter_3d(
-                volume_prims = [volume_prim_path],
+                volume_prims = [volume_prim_path[bin_index]],
                 check_for_collisions = True,
-                input_prims = active_paths,
+                input_prims = active_paths[bin_index],
             )
-            active_paths_resultant[bin_index] = active_paths
+
 
             
         #self.timeline.play()
@@ -705,7 +740,7 @@ class SceneBuilder:
             if _ % 10 == 0:
                 self.cull_fallen_parts()
         
-        self.update_semantic_labels_for_outliers(active_paths_resultant)
+        self.update_semantic_labels_for_outliers(active_paths)
         #self.timeline.pause()
                     
 
@@ -719,10 +754,12 @@ class SceneBuilder:
         stage = omni.usd.get_context().get_stage()
 
         for bin_index, active_paths in active_paths_resultant.items():
-            if bin_index == 0:
-                bin_root = "/Env/Bin"
-            else:
-                bin_root = f"/Env_{bin_index-1}/Bin"
+            # if bin_index == 0:
+            #     bin_root = "/Env/Bin"
+            # else:
+            #     bin_root = f"/Env_{bin_index-1}/Bin"
+            
+            bin_root = f"/Env_{bin_index}/Bin"
             
             bin_prim = stage.GetPrimAtPath(bin_root)
 
@@ -1040,7 +1077,7 @@ def main():
     
     
     
-@rep.randomizer.register
+
 def randomize_bin_state(bin_groups_map, all_prototypes, all_materials, max_capacity):
     """
     Manages a fixed pool of objects to simulate a variable count bin.

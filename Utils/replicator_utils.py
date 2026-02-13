@@ -30,7 +30,7 @@ class RepCam:
         init_translation =[bin_position[0],bin_position[1],self.focal_length+bin_position[2]+bin_bounds[2],0,0,0]
         self.output_dir = output_dir
         self.camera_manager = CameraManager(
-            env_path = "/Env",
+            env_path = "/Env_",
             output_dir = output_dir,
         )
         
