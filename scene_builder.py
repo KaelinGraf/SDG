@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 2 #MIN 2
+NUM_CLONES = 15 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -169,7 +169,9 @@ class SceneBuilder:
 
             end = time.time_ns()
             print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes")    
+            self.rep_cam.camera_manager.schedule_writes()
             self.rep_cam.view_frames()
+            
             #for _ in range(100):
                 #self.on_play_callback()
 
