@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 15 #MIN 2
+NUM_CLONES = 2 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -24,7 +24,7 @@ OUTPUT_DIR = "Outputs"
 from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
-    "headless": True,
+    "headless": False,
     "--/rtx/hydra/descriptorSetLimit": 65535,
     "--/rtx/material/descriptorSetLimit": 65535,
     "--/rtx/translucency/maxNodes": 65535,
@@ -57,7 +57,8 @@ import isaacsim.zivid as zivid_sim
 from isaacsim.core.cloner import GridCloner    # import GridCloner interface
 import omni.isaac.core.utils.semantics as semantics_utils
 
-
+import omni.kit.undo
+omni.kit.undo.subscribe_on_change(lambda *args: None)
 import numpy as np
 import json
 import os
@@ -158,7 +159,7 @@ class SceneBuilder:
 
             start = time.time_ns()
             #rep.utils.send_og_event("randomize_scene")
-            iters = 20
+            iters = 30
             for i in range(iters):
                 self._randomize_scene(i)
                 self.rep_cam.capture()
