@@ -3,6 +3,7 @@
 import numpy as np
 import random
 import os 
+import numpy as np
 import json
 from pathlib import Path
 from pxr import UsdGeom,UsdPhysics,Gf,UsdShade
@@ -222,8 +223,18 @@ class AssetManager:
                 
                 # Teleport away to be safe
                 xform = UsdGeom.Xformable(prim)
+            
                 xform.ClearXformOpOrder()
-                xform.AddTranslateOp(UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3f(0.0, -10000.0, 0.0))
+                try:
+                    translate_op = xform.AddTranslateOp()
+                except:
+                    translate_op=xform.GetTranslateOp()
+                typeName = type(translate_op.Get())
+                if translate_op.Get() is None:
+                    translate_op.Set(Gf.Vec3f(0.0, -10000.0, 0.0))
+                else:
+                    translate_op.Set(typeName([0.0, -10000.0, 0.0])) # replace it, by setting a new one
+                #xform.AddTranslateOp(UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3f(0.0, -10000.0, 0.0))
                 
         return num_active # Return how many active parts were set, useful as first num_active in pool are active
                     
@@ -458,7 +469,52 @@ def get_voxel_positions_vectorised(voxel_size, grid_origin, grid_counts, jitter=
     return positions
 
 
+import math
+
+def orbit_point(barycenter,distance,elevation,azimuth,degrees=False,look_at=True,up=[0,0,1]) ->tuple:
+    """
+    Returns tuple (pose,rot_matrix) of point orbiting barycenter.
+    Pose is in world co-ords (subtract barycenter to translate into barycenter frame)
+
+    Args:
+        barycenter (np.array): [x,y,z] of barycenter
+        distance (float): magnitude of vector (distance) between barycenter and point
+        elevation (float): elevation angle relative to the horizontal (azimuth) axis
+        azimuth (float): rotation about the up axis (i.e degrees around the clock if looking straight down the up axis)
+        degrees (bool, optional): input angles provided in degrees. Defaults to False.
+        look_at (bool, optional): return rotation matrix to look at point along axis perpendicular to up (defaults to x). Defaults to True
+        up (np.array, optional): unit vector array dictating up direction, defaults to Z
+    """
+    if degrees:
+        azimuth= math.radians(azimuth)
+        elevation = math.radians(elevation)
+        
+    
+    d = [distance*math.cos(elevation)*math.cos(azimuth),distance*math.cos(elevation)*math.sin(azimuth),distance*math.sin(elevation)]
+    pos = np.asarray(d) #+ bin_pos
+    x_local = np.asarray((-pos)/np.linalg.norm(pos)) #look at vector
+    pos_world = pos + barycenter
+    if look_at:
+        y_local_raw = np.cross(x_local,up)
+        y_local = y_local_raw/np.linalg.norm(y_local_raw)
+        z_local_raw = np.cross(x_local,y_local)
+        z_local = z_local_raw/np.linalg.norm(z_local_raw)
+        rot_matrix = np.column_stack((x_local,y_local,z_local))
+    elif not look_at:
+        rot_matrix = np.zeros(shape=(3,3))
+    
+    return (pos_world,rot_matrix)
 
 
+# d = [distance*math.cos(elev_rad)*math.cos(azim_rad),distance*math.cos(elev_rad)*math.sin(azim_rad),distance*math.sin(elev_rad)]
+#             pos = np.asarray(d) #+ bin_pos
+#             x_local = np.asarray((-pos)/np.linalg.norm(pos)) #look at vector
+#             pos_world = pos + bin_pos_world
+#             up = [0,0,1] #z axis up
+#             y_local_raw = np.cross(x_local,up)
+#             y_local = y_local_raw/np.linalg.norm(y_local_raw)
+#             z_local_raw = np.cross(x_local,y_local)
+#             z_local = z_local_raw/np.linalg.norm(z_local_raw)
+#             rot_matrix = np.column_stack((x_local,y_local,z_local))
 
 #create_objects_json(asset_paths="/home/kaelin/BinPicking/SDG/IS/assets",output_path="./Config/objects.json")

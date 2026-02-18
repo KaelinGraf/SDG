@@ -24,7 +24,7 @@ OUTPUT_DIR = "Outputs"
 from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
-    "headless": False,
+    "headless": True,
     "--/rtx/hydra/descriptorSetLimit": 65535,
     "--/rtx/material/descriptorSetLimit": 65535,
     "--/rtx/translucency/maxNodes": 65535,
@@ -69,7 +69,7 @@ import logging
 from PyQt6.QtWidgets import QApplication, QWidget
 
 from Utils.mesh_utils import AssetManager,get_bounds
-from Utils.mesh_utils import get_position_from_voxel_index,get_voxel_positions_vectorised, get_obb,is_point_within_obb
+from Utils.mesh_utils import get_position_from_voxel_index,get_voxel_positions_vectorised, get_obb,is_point_within_obb, orbit_point
 from Utils.replicator_utils import RepCam
 from Utils.material_manager import MaterialManager
 
@@ -154,22 +154,19 @@ class SceneBuilder:
             #self._build_replicator_graph()
             for _ in range(5):
                 simulation_app.update()
-            #timeline = omni.timeline.get_timeline_interface()
-            # subscription = timeline.get_timeline_event_stream().create_subscription_to_pop_by_type(
-            # int(omni.timeline.TimelineEventType.PLAY), 
-            # self.on_play_callback
-            #     )
 
 
             start = time.time_ns()
             #rep.utils.send_og_event("randomize_scene")
-            self._randomize_scene(10)
-
-            self.rep_cam.capture()
+            iters = 20
+            for i in range(iters):
+                self._randomize_scene(i)
+                self.rep_cam.capture()
 
             end = time.time_ns()
-            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes")    
-            self.rep_cam.camera_manager.schedule_writes()
+            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes and {iters} iterations ({NUM_CLONES * iter} frames)")
+            print(f"Time per frame (avg): {(end - start)/(1e9 * NUM_CLONES * iters)}")
+
             self.rep_cam.view_frames()
             
             #for _ in range(100):
@@ -270,7 +267,7 @@ class SceneBuilder:
         
     def clone_world(self):
         base_env_path = "/Env_0"
-        cloner = GridCloner(spacing = 8)
+        cloner = GridCloner(spacing = 20)
         target_paths = cloner.generate_paths("/Env", NUM_CLONES)
         cloner.clone(source_prim_path=base_env_path,prim_paths=target_paths,copy_from_source=True)
 
@@ -630,12 +627,10 @@ class SceneBuilder:
 
         
 
-        active_paths_resultant = {} #stores active paths (we check bounds after settling physics)
         active_paths={}
         volume_prim_path={}
         randomize_all_materials_direct(self.material_manager.mat_params)
         for bin_index in range(NUM_CLONES):
-            time_bin_start = time.time_ns()
             # if bin_index ==0:
             #     bin_path = "/Env/Bin"
             # else:
@@ -657,8 +652,6 @@ class SceneBuilder:
                     scale_factor[2] = min(scale_factor[0],scale_factor[1])
                     continue
                 if dim * scale_factor[idim] > (abs(self.table_bounds[3+idim] - self.table_bounds[idim])*0.6):
-                    print(f"dimension {idim} max is {abs(self.table_bounds[3+idim] - self.table_bounds[idim])}")
-                    print(f"scaling reduced to {((abs(self.table_bounds[3+idim] - self.table_bounds[idim]))/dim) * 0.6}")
                     scale_factor[idim] = ((abs(self.table_bounds[3+idim] - self.table_bounds[idim]))/dim) * 0.6 #add 20% margin
                     if scale_factor[idim] < self.scene_config["bin_scale_range"][0]: scale_factor[idim]=self.scene_config["bin_scale_range"][0]
                     
@@ -678,15 +671,12 @@ class SceneBuilder:
             mat_mode = random.choice(modes)
             mode = random.choice(modes)
             #perform part randomization and scattering
-            print(f"Time before randomize contents= {(time.time_ns() - time_bin_start)/1e9}")
             num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
-            print(f"Time after randomize contents= {(time.time_ns() - time_bin_start)/1e9}")
 
             bin_pos_world = xforms.get_world_pose(bin_path)[0] #only get translation
             bin_prim = self.stage.GetPrimAtPath(bin_path).GetChildren()[0] #assumes bin prim is first child of /Env/Bin
 
             bin_bounds = np.array(get_bounds(f"{bin_prim.GetPath().pathString}/{bin_prim.GetChildren()[0].GetName()}"))
-            print(f"bounds: {bin_bounds} at location {bin_prim.GetPath().pathString}/{bin_prim.GetChildren()[0].GetName()}")
             bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
             active_paths[bin_index] = self.asset_manager.bin_pools[bin_index][:num_active] #return first n active paths
             volume_prim_path[bin_index] = bin_prim.GetPath().pathString + "/SpawnVolume"
@@ -694,33 +684,22 @@ class SceneBuilder:
             
             elev_angle = np.random.normal(loc = 90,scale = 1,size=None)
             if elev_angle == 90: elev_angle = 89.99
-            if elev_angle >90: 90-(elev_angle-90) #wrap back around
+            if elev_angle >90: elev_angle = 90-(elev_angle-90) #wrap back around
             if elev_angle < 60: elev_angle = 60
-            azimuth_angle = random.uniform(0, 360)
+            azimuth_angle = random.uniform(0, 1)
             distance = random.uniform(bin_dims[2] + 0.5, bin_dims[2] + 0.8)
-            elev_rad = math.radians(elev_angle)
-            azim_rad = math.radians(azimuth_angle)
-            d = [distance*math.cos(elev_rad)*math.cos(azim_rad),distance*math.cos(elev_rad)*math.sin(azim_rad),distance*math.sin(elev_rad)]
-            pos = np.asarray(d) #+ bin_pos
-            x_local = np.asarray((-pos)/np.linalg.norm(pos)) #look at vector
-            pos_world = pos + bin_pos_world
-            up = [0,0,1] #z axis up
-            y_local_raw = np.cross(x_local,up)
-            y_local = y_local_raw/np.linalg.norm(y_local_raw)
-            z_local_raw = np.cross(x_local,y_local)
-            z_local = z_local_raw/np.linalg.norm(z_local_raw)
-            rot_matrix = np.column_stack((x_local,y_local,z_local))
-            print(f"pos: {pos}, x_local = {x_local},y_local= {y_local}, z_local = {z_local}")
-            print(f"rot matrix:{rot_matrix}")
+            (pos_world,rot_matrix) = orbit_point(bin_pos_world,distance,elev_angle,azimuth_angle,degrees=True,look_at=True)
             self.rep_cam.camera_manager.set_cam_world_pos_by_idx(bin_index,pos_world,rot_matrix,degrees=False,rot_format="matrix")
             
-            
-            
-            
-       
-
-         
-
+            #light randomization
+            elev_angle_light = np.random.uniform(50,90)
+            azimuth_angle_light = random.uniform(0, 360)
+            distance_light = random.uniform(1.5,3)
+            (pos_world_light,_) = orbit_point(bin_pos_world,distance_light,elev_angle_light,azimuth_angle_light,degrees=True,look_at=False)
+            scene_light_prim = self.stage.GetPrimAtPath(f"/Env_{bin_index}/SphereLight")
+            scene_light_xform=UsdGeom.Xformable(scene_light_prim)
+            scene_light_xform.ClearXformOpOrder()
+            scene_light_xform.AddTranslateOp().Set(Gf.Vec3d(pos_world_light[0],pos_world_light[1],pos_world_light[2]))
         
         self.world.step()
         
@@ -731,15 +710,11 @@ class SceneBuilder:
                 check_for_collisions = True,
                 input_prims = active_paths[bin_index],
             )
-
-
-            
-        #self.timeline.play()
         simulation_app.update()
 
         for _ in range(150):
             self.world.step(render=False)
-            if _ % 10 == 0:
+            if _ % 50 == 0:
                 self.cull_fallen_parts()
         
         self.update_semantic_labels_for_outliers(active_paths)
@@ -790,51 +765,7 @@ class SceneBuilder:
                         overwrite=True,
                     )  
             
-            # max_diag_length = 0.0
-            # for path in active_paths:
-            #     prim = self.stage.GetPrimAtPath(path)
-            #     child = prim.GetChildren()[0]
-            #     obj_name = child.GetName()
-            #     try:
-            #         obj_diag_length = self.asset_manager.asset_registry[obj_name]["diag_length"]
-                
-            #     except KeyError:
-            #         print(f"Warning: No registry entry for object '{obj_name}'")
-            #         continue
-            #     if obj_diag_length > max_diag_length:
-            #         max_diag_length = obj_diag_length
-            # spawn_height_z = 0.2 #start spawning 20cm above bin base
-            # # Create voxel grid
-            # num_cells_x = int(bin_dims[0] // max_diag_length)
-            # num_cells_y = int(bin_dims[1] // max_diag_length)
 
-            # # Safety check: If bin is too small for even one object
-            # if num_cells_x < 1: num_cells_x = 1
-            # if num_cells_y < 1: num_cells_y = 1
-
-            # num_cells_z = math.ceil(num_active / (num_cells_x * num_cells_y))
-
-            # voxel_cells = list(range(0, num_cells_x * num_cells_y * num_cells_z))
-            # random.shuffle(voxel_cells)
-            # voxel_positions = get_voxel_positions_vectorised(
-            #     voxel_size=(max_diag_length, max_diag_length, max_diag_length),
-            #     grid_origin=(bin_pos[0], bin_pos[1], bin_pos[2]), 
-            #     grid_counts=(num_cells_x, num_cells_y, num_cells_z),
-            #     jitter=self.scene_config["voxel_jitter"]
-            # )
-            # print(voxel_positions)
-            # for i, part in enumerate(active_paths):
-            #     cell_index = voxel_cells.pop()
-            #     [cell_x, cell_y, cell_z] = voxel_positions[cell_index]
-            #     print(f"Placing part {part} at cell index {cell_index} with position {[cell_x, cell_y, cell_z]}")
-            #     part_xform = UsdGeom.Xformable(self.stage.GetPrimAtPath(part))
-            #     part_xform.ClearXformOpOrder()
-            #     translate = part_xform.AddTranslateOp()
-            #     translation = Gf.Vec3d(cell_x + bin_pos[0], cell_y + bin_pos[1], cell_z + bin_pos[2])
-            #     translate.Set(translation)
-            #     part_xform.AddRotateXYZOp().Set(Gf.Vec3d(random.uniform(-180.0, 180.0), random.uniform(-180.0, 180.0), random.uniform(-180.0, 180.0)))
-            
-                
                 
                 
     def cull_fallen_parts(self):
@@ -864,7 +795,6 @@ class SceneBuilder:
                 
                 # Check Z height (val[2])
                 if val is not None and val[2] < -0.2: # -20cm threshold
-                    print(f"[Cull] Disabling part {prim_path} at Z={val[2]:.2f}")
                     
                     # A. Disable Physics (Stop Solver)
                     rb = UsdPhysics.RigidBodyAPI(prim)
