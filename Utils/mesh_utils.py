@@ -5,6 +5,8 @@ import random
 import os 
 import numpy as np
 import json
+import copy
+
 from pathlib import Path
 from pxr import UsdGeom,UsdPhysics,Gf,UsdShade
 #from scene_builder import SceneBuilder
@@ -120,18 +122,75 @@ class AssetManager:
                 
                 self.bin_pools[bin_idx].append(prim_path)
                 
+    def create_object_pool(self,num_bins,scene_builder):
+        self.max_objects = 50
+        stage = omni.usd.get_context().get_stage()
+        self.bin_pools = {} # Map bin_index -> list of prim paths
+
+        self.part_pools={} #takes form "part_name":[available_parts]
+        global_spawn_index =0
+        self.void_positions = {}
+
+        for v in self.objects_config['parts'].values():
+            type_path = f"/World/Pools/{v['name']}"
+                
+            stage.DefinePrim(type_path, "Scope")
+            usd_path = v['usd_filepath']
+            current_part_prims=[]
+            for i in (range(self.max_objects * num_bins)):
+                prim_path = f"{type_path}/part_{i}"
+                # --- FIX: Create a 3D grid in the void with 0.5m spacing ---
+                grid_x = -1000.0 + (global_spawn_index % 100) * 0.5
+                grid_y = (global_spawn_index // 100 % 100) * 0.5
+                grid_z = (global_spawn_index // 10000) * 0.5
+                global_spawn_index += 1
+                self.void_positions[prim_path] = (grid_x, grid_y, grid_z)
+                prim = prim_utils.create_prim(
+                    prim_path=f"{type_path}/part_{i}",
+                    prim_type="Xform",
+                    translation=(grid_x,grid_y,grid_z),
+                    orientation= (0.0,0.0,0.0,0.0),#as quaternion
+                    scale=(1.0,1.0,1.0),
+                    usd_path=usd_path,
+                    semantic_label="part"
+                )
+                prim.SetInstanceable(True)
+                current_part_prims.append(f"{type_path}/part_{i}")
+                if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
+                    UsdPhysics.RigidBodyAPI.Apply(prim)
+                if not prim.HasAPI(UsdPhysics.CollisionAPI):
+                    UsdPhysics.CollisionAPI.Apply(prim)
+                scene_builder.assign_physics_materials(prim)
+                mass_api = UsdPhysics.MassAPI.Apply(prim)
+                mass_api.CreateDensityAttr(7.85)
+                
+                UsdGeom.Imageable(prim).MakeInvisible()
+                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(False)
+                
+                mat_prim = stage.GetPrimAtPath(scene_builder.physics_mat)
+                UsdShade.MaterialBindingAPI.Apply(prim).Bind(
+                    UsdShade.Material(mat_prim),
+                    materialPurpose="physics"
+                )
+            self.part_pools[f"{v['name']}"] = current_part_prims
+            
+        self.master_part_pools = copy.deepcopy(self.part_pools)
+                    
+                    
+        
+                
     def randomize_bin_contents(self, bin_index,available_materials, mode="HOMO_80_20",mat_mode="HOMO_80_20"):
         """
         Configures the generic pool for a specific bin to match the desired distribution.
         """
         stage = omni.usd.get_context().get_stage()
-        pool_paths = self.bin_pools[bin_index]
+        #pool_paths = self.bin_pools[bin_index]
         
         # 1. Decide Object Counts
-        num_active = random.randint(30, 50) # How many parts in this bin?
+        num_active = random.randint(30,self.max_objects) # How many parts in this bin?
         
         # Get all available object USD paths from your config
-        all_usd_paths = [v['usd_filepath'] for v in self.objects_config['parts'].values()]
+        all_usd_paths = [v['name'] for v in self.objects_config['parts'].values()]
         
         # 2. Select Objects based on Mode
         selected_usds = []
@@ -151,7 +210,6 @@ class AssetManager:
             
             selected_usds = [main_obj] * count_main
             selected_usds += [random.choice(distractors) for _ in range(count_dist)]
-            random.shuffle(selected_usds) # Shuffle so they aren't stacked in order
             
         elif mode == "CHAOS":
             # Pure random
@@ -180,64 +238,109 @@ class AssetManager:
         elif mat_mode == "CHAOS":
             # Every part gets a random material
             selected_mats = [random.choice(available_materials) for _ in range(num_active)]
-
-        # 3. Apply to Prims (Reference Swapping)
-        for i, prim_path in enumerate(pool_paths):
-            prim = stage.GetPrimAtPath(prim_path)
+        
+        
+        bin_xform_paths = [] #stores xform paths for instances within this bin
+        result_data = []
+        bin_xform_paths = []
+        for i, part_type in enumerate(selected_usds):
+            # Pop one part of this type from the global pool
+            new_path = self.part_pools[part_type].pop()
+            bin_xform_paths.append(new_path)
             
-            if i < len(selected_usds):
-                usd_to_load = selected_usds[i]
+            # Pair the path with its chosen material
+            result_data.append((new_path, selected_mats[i]))
                 
-                # A. Swap Reference (This is fast!)
-                refs = prim.GetReferences()
-                refs.ClearReferences()
-                refs.AddReference(usd_to_load)
-                mat_path = selected_mats[i]
-                mat_prim = stage.GetPrimAtPath(mat_path)
-                #print(f"attempting to bind {mat_path} with {usd_to_load} to {prim.GetName()}")
-                if mat_prim:
-                    UsdShade.MaterialBindingAPI.Apply(prim).Bind(
-                        UsdShade.Material(mat_prim),
-                        bindingStrength=UsdShade.Tokens.strongerThanDescendants,
-                        #materialPurpose="" 
-                    )
+     
 
+        # Return the tuples of (path, material) so scene_builder can bind them
+        return result_data
+            
+
+
+
+        # # 3. Apply to Prims (Reference Swapping)
+        # for i, prim_path in enumerate(pool_paths):
+        #     if i >= len(selected_usds):
+        #         continue
+        #     prim = stage.GetPrimAtPath(prim_path)
+            
+        #     # Hide the geometry
+        #     UsdGeom.Imageable(prim).MakeInvisible()
+            
+        #     # Disable physics so PhysX doesn't freak out during the swap
+        #     rb_api = UsdPhysics.RigidBodyAPI(prim)
+        #     if rb_api:
+        #         rb_api.GetRigidBodyEnabledAttr().Set(False)
+            
+        # omni.kit.app.get_app().update()
+
+        # for i, prim_path in enumerate(pool_paths):
+        #     if i>=len(selected_usds):
+        #         continue
+
+        #     if i < len(selected_usds):
+        #         prim = stage.GetPrimAtPath(prim_path)
+
+        #         usd_to_load = selected_usds[i]
+                
+        #         refs = prim.GetReferences()
+        #         refs.ClearReferences()
+        #         refs.AddReference(usd_to_load)
+        #         mat_path = selected_mats[i]
+        #         mat_prim = stage.GetPrimAtPath(mat_path)
+        #         #print(f"attempting to bind {mat_path} with {usd_to_load} to {prim.GetName()}")
+        #         if mat_prim:
+        #             UsdShade.MaterialBindingAPI.Apply(prim).Bind(
+        #                 UsdShade.Material(mat_prim),
+        #                 bindingStrength=UsdShade.Tokens.strongerThanDescendants,
+        #                 #materialPurpose="" 
+        #             )
+        # omni.kit.app.get_app().update()
+
+        
                     
-                        # B. Enable Physics & Vis
-                UsdGeom.Imageable(prim).MakeVisible()
-                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
+
+            
+
 
                 
-                # # C. Randomize Scale/Material (Your Request)
-                # self.randomize_single_prim_attributes(prim) 
-
-            else:
-                # --- INACTIVE PART ---
-                # Disable Physics & Vis
-                    
-                        # B. Enable Physics & Vis
-                #UsdGeom.Imageable(prim).MakeVisible()
-                #UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
+        return num_active # Return how many active parts were set, useful as first num_active in pool are active
+    def flush_pools(self,previously_active_parts,num_bins):
+        stage = omni.usd.get_context().get_stage()
+        if previously_active_parts == None:
+            return 
+        
+        for bin_index in range(num_bins):
+       
+            for prim_path in previously_active_parts[bin_index]:
+                prim = stage.GetPrimAtPath(prim_path)
+                if not prim.IsValid(): continue
+                
+                # 1. Hide
                 UsdGeom.Imageable(prim).MakeInvisible()
-                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(False)
                 
-                # Teleport away to be safe
+                # 2. Disable Physics
+                rb_api = UsdPhysics.RigidBodyAPI(prim)
+                if rb_api: 
+                    rb_api.GetRigidBodyEnabledAttr().Set(False)
+                
+                # 3. Teleport to void
                 xform = UsdGeom.Xformable(prim)
-            
                 xform.ClearXformOpOrder()
                 try:
                     translate_op = xform.AddTranslateOp()
                 except:
-                    translate_op=xform.GetTranslateOp()
+                    translate_op = xform.GetTranslateOp()
+                x,y,z=self.void_positions[prim_path]
                 typeName = type(translate_op.Get())
                 if translate_op.Get() is None:
-                    translate_op.Set(Gf.Vec3f(0.0, -10000.0, 0.0))
+                    translate_op.Set(Gf.Vec3d(x, y, z))
                 else:
-                    translate_op.Set(typeName([0.0, -10000.0, 0.0])) # replace it, by setting a new one
-                #xform.AddTranslateOp(UsdGeom.XformOp.PrecisionDouble).Set(Gf.Vec3f(0.0, -10000.0, 0.0))
-                
-        return num_active # Return how many active parts were set, useful as first num_active in pool are active
-                    
+                    translate_op.Set(typeName([x,y,z]))
+
+
+        
                 
 def get_bounds(prim_path):
     cache = bounds_utils.create_bbox_cache()

@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 2 #MIN 2
+NUM_CLONES = 10 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -25,10 +25,10 @@ from isaacsim import SimulationApp
 import warp
 simulation_app = SimulationApp({
     "headless": False,
-    "--/rtx/hydra/descriptorSetLimit": 65535,
-    "--/rtx/material/descriptorSetLimit": 65535,
-    "--/rtx/translucency/maxNodes": 65535,
-    "--/rtx/post/dlss/enabled": False,
+    # "--/rtx/hydra/descriptorSetLimit": 65535,
+    # "--/rtx/material/descriptorSetLimit": 65535,
+    # "--/rtx/translucency/maxNodes": 65535,
+    # "--/rtx/post/dlss/enabled": False,
 
 }) 
 import carb
@@ -144,14 +144,17 @@ class SceneBuilder:
             self.asset_manager = AssetManager(self.objects_config)
             self.material_manager = MaterialManager()
             self.physics_mat = self.create_physics_material(self.stage)
+            self.set_up_dome_lights()
+            
             #self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
             self._instantiate_bin()
             self.clone_world()
             self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"],output_dir = self.output_dir)
             self.rep_cam.init_cam()
+            self.previous_active_parts=None
 
-
-            self.asset_manager.create_generic_pools(num_bins=NUM_CLONES, max_parts_per_bin=50,scene_builder = self)
+            #self.asset_manager.create_generic_pools(num_bins=NUM_CLONES, max_parts_per_bin=50,scene_builder = self)
+            self.asset_manager.create_object_pool(num_bins=NUM_CLONES,scene_builder=self)
             #self._build_replicator_graph()
             for _ in range(5):
                 simulation_app.update()
@@ -159,13 +162,13 @@ class SceneBuilder:
 
             start = time.time_ns()
             #rep.utils.send_og_event("randomize_scene")
-            iters = 30
+            iters = 15
             for i in range(iters):
                 self._randomize_scene(i)
-                self.rep_cam.capture()
+                #self.rep_cam.capture()
 
             end = time.time_ns()
-            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes and {iters} iterations ({NUM_CLONES * iter} frames)")
+            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes and {iters} iterations ({NUM_CLONES * iters} frames)")
             print(f"Time per frame (avg): {(end - start)/(1e9 * NUM_CLONES * iters)}")
 
             self.rep_cam.view_frames()
@@ -253,18 +256,27 @@ class SceneBuilder:
         
         self.world.get_physics_context().set_solver_type("TGS")
         physx_scene_api = PhysxSchema.PhysxSceneAPI.Apply(scene_prim)
-
-        # 1. Contact Buffers (Error: "Contact buffer overflow")
         physx_scene_api.CreateGpuMaxRigidContactCountAttr(10 * 1024 * 1024) 
-        
-        # 2. Patch Buffers (Error: "Patch buffer overflow")
         physx_scene_api.CreateGpuMaxRigidPatchCountAttr(10 * 1024 * 1024) 
-        
-        # 3. Temp/Heap Buffers (Good practice to increase these too)
         physx_scene_api.CreateGpuHeapCapacityAttr(64 * 1024 * 1024)
         physx_scene_api.CreateGpuTempBufferCapacityAttr(64 * 1024 * 1024)
         physx_scene_api.CreateGpuFoundLostPairsCapacityAttr(64 * 4096 * 4) # Broadphase pairs
         rep.new_layer()
+        
+    def set_up_dome_lights(self):
+        self.dome_lights=[]
+        textures = [HDRI_PATH + f for f in os.listdir(HDRI_PATH) if f.endswith('.exr')]
+        for i,texture in enumerate(textures):
+            self.dome_lights.append(UsdLux.DomeLight.Define(self.stage,f"/World/DomeLights/Dome_Light_{i}").GetPrim())
+            self.dome_lights[i].GetAttribute("inputs:texture:file").Set(textures[i])
+            self.dome_lights[i].GetAttribute("inputs:intensity").Set(1100.0)
+
+            UsdGeom.Imageable(self.dome_lights[i]).MakeInvisible()
+            
+        self.new_light = self.dome_lights[0] #initialzie to first one
+        UsdGeom.Imageable(self.new_light).MakeVisible()
+
+
         
     def clone_world(self):
         base_env_path = "/Env_0"
@@ -531,7 +543,7 @@ class SceneBuilder:
             if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
                 rb_api = UsdPhysics.RigidBodyAPI.Apply(prim)
             else:
-                rb_api = UsdPhysics.RigidBodyApi(prim)
+                rb_api = UsdPhysics.RigidBodyAPI(prim)
             rb_api.CreateRigidBodyEnabledAttr(True)
             rb_api.CreateKinematicEnabledAttr(False)      
             # MASS
@@ -614,15 +626,21 @@ class SceneBuilder:
         Uses replicator where possible for efficiency, however, material attributes and part scattering are performed manually due to 
         inneficiencies/inadequacies in the replicator randomizer nodes for these tasks.
         """
-        light_prim = self.stage.GetPrimAtPath("/World/DomeLight")
+        #self.world.reset()
+        self.asset_manager.flush_pools(self.previous_active_parts,NUM_CLONES)
+        self.asset_manager.part_pools = self.asset_manager.master_part_pools
+        simulation_app.update()
 
-        if iteration % 10 ==0:
-            #randomize HDRI
-            textures = [HDRI_PATH + f for f in os.listdir(HDRI_PATH) if f.endswith('.exr')]
-            light_prim.GetAttribute("inputs:texture:file").Set(random.choice(textures))
+        if iteration % 10 ==0 or iteration == 0:
+            self.new_light = random.choice(self.dome_lights)
+            for i,light in enumerate(self.dome_lights):
+                UsdGeom.Imageable(light).MakeInvisible()
+            UsdGeom.Imageable(self.new_light).MakeVisible()
+
+
             
         #rotate hdri
-        light_xform = UsdGeom.Xformable(light_prim)
+        light_xform = UsdGeom.Xformable(self.new_light)
         light_xform.ClearXformOpOrder()
         rot = light_xform.AddRotateXYZOp().Set(Gf.Vec3d(0.0,0.0,random.uniform(0.0,360.0)))
 
@@ -630,6 +648,7 @@ class SceneBuilder:
 
         active_paths={}
         volume_prim_path={}
+        result_data={}
         randomize_all_materials_direct(self.material_manager.mat_params)
         for bin_index in range(NUM_CLONES):
             # if bin_index ==0:
@@ -672,14 +691,13 @@ class SceneBuilder:
             mat_mode = random.choice(modes)
             mode = random.choice(modes)
             #perform part randomization and scattering
-            num_active = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
-
+            result_data[bin_index] = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
+ 
             bin_pos_world = xforms.get_world_pose(bin_path)[0] #only get translation
             bin_prim = self.stage.GetPrimAtPath(bin_path).GetChildren()[0] #assumes bin prim is first child of /Env/Bin
 
             bin_bounds = np.array(get_bounds(f"{bin_prim.GetPath().pathString}/{bin_prim.GetChildren()[0].GetName()}"))
             bin_dims = bin_bounds[3:6] - bin_bounds[0:3]
-            active_paths[bin_index] = self.asset_manager.bin_pools[bin_index][:num_active] #return first n active paths
             volume_prim_path[bin_index] = bin_prim.GetPath().pathString + "/SpawnVolume"
             
             
@@ -702,23 +720,74 @@ class SceneBuilder:
             scene_light_xform.ClearXformOpOrder()
             scene_light_xform.AddTranslateOp().Set(Gf.Vec3d(pos_world_light[0],pos_world_light[1],pos_world_light[2]))
         
-        self.world.step()
-        
-        for bin_index in range(NUM_CLONES):
+        simulation_app.update()        
+        # for bin_index in range(NUM_CLONES):
 
-            rep.randomizer.scatter_3d(
-                volume_prims = [volume_prim_path[bin_index]],
-                check_for_collisions = True,
-                input_prims = active_paths[bin_index],
-            )
+        #     rep.randomizer.scatter_3d(
+        #         volume_prims = [volume_prim_path[bin_index]],
+        #         check_for_collisions = True,
+        #         input_prims = active_paths[bin_index],
+        #     )
+        #     for prim in active_paths[bin_index]:
+        #         prim_xform=self.stage.GetPrimAtPath(prim)
+        #         UsdGeom.Imageable(prim_xform).MakeVisible()
+        #         UsdPhysics.RigidBodyAPI(prim_xform).GetRigidBodyEnabledAttr().Set(True)
+        mat_to_paths = {}
+        for bin_index in range(NUM_CLONES):
+            spawn_vol_path = volume_prim_path[bin_index]
+            bounds = np.array(get_bounds(spawn_vol_path))
+            dims = bounds[3:6] - bounds[0:3]
+            
+            result_tuple = result_data[bin_index]
+            num_parts = len(result_tuple)
+            if num_parts == 0: continue
+
+            grid_size = math.ceil(num_parts ** (1/3.0))
+            spacing = dims / max(grid_size, 1)
+
+            for idx,(path,material) in enumerate(result_tuple):
+                prim = self.stage.GetPrimAtPath(path)
+                if not prim.IsValid(): continue
+                
+                ix = idx % grid_size
+                iy = (idx // grid_size) % grid_size
+                iz = idx // (grid_size * grid_size)
+                
+                x = bounds[0]+0.03 + (ix + 0.5) * spacing[0] + random.uniform(-0.02, 0.02)
+                y = bounds[1]+0.03 + (iy + 0.5) * spacing[1] + random.uniform(-0.02, 0.02)
+                z = bounds[2]+0.03 + (iz + 0.5) * spacing[2] + random.uniform(-0.02, 0.02)
+                
+                xform = UsdGeom.Xformable(prim)
+                xform.ClearXformOpOrder()
+                xform.AddTranslateOp().Set(Gf.Vec3d(x, y, z))
+                xform.AddRotateXYZOp().Set(Gf.Vec3d(
+                    random.uniform(0, 360), random.uniform(0, 360), random.uniform(0, 360)
+                ))
+                UsdGeom.Imageable(prim).MakeVisible()
+                UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
+                if material not in mat_to_paths:
+                    mat_to_paths[material] = []
+                else:
+                    mat_to_paths[material].append(path)
+                
+            for mat_path, path_list in mat_to_paths.items():
+                omni.kit.commands.execute(
+                    "BindMaterial",
+                    prim_path=path_list, # Passing the list batches the operation perfectly!
+                    material_path=mat_path,
+                    strength=UsdShade.Tokens.strongerThanDescendants
+                )
+                
+        
         simulation_app.update()
 
         for _ in range(150):
             self.world.step(render=False)
-            if _ % 50 == 0:
+            if _ % 10 == 0:
                 self.cull_fallen_parts()
         
         self.update_semantic_labels_for_outliers(active_paths)
+        self.previous_active_parts = active_paths
         #self.timeline.pause()
                     
 
@@ -776,7 +845,7 @@ class SceneBuilder:
         that PhysX writes to every frame.
         """
         # 1. Iterate active pools
-        for bin_idx, pool_paths in self.asset_manager.bin_pools.items():
+        for bin_idx, pool_paths in self.asset_manager.part_pools.items():
             for prim_path in pool_paths:
                 prim = self.stage.GetPrimAtPath(prim_path)
                 if not prim.IsValid(): continue
