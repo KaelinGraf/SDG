@@ -123,7 +123,7 @@ class AssetManager:
                 self.bin_pools[bin_idx].append(prim_path)
                 
     def create_object_pool(self,num_bins,scene_builder):
-        self.max_objects = 50
+        self.max_objects = 20
         stage = omni.usd.get_context().get_stage()
         self.bin_pools = {} # Map bin_index -> list of prim paths
 
@@ -140,9 +140,9 @@ class AssetManager:
             for i in (range(self.max_objects * num_bins)):
                 prim_path = f"{type_path}/part_{i}"
                 # --- FIX: Create a 3D grid in the void with 0.5m spacing ---
-                grid_x = -1000.0 + (global_spawn_index % 100) * 0.5
-                grid_y = (global_spawn_index // 100 % 100) * 0.5
-                grid_z = (global_spawn_index // 10000) * 0.5
+                grid_x = (global_spawn_index % 50) * 0.1
+                grid_y = ((global_spawn_index // 50) % 50) * 0.1
+                grid_z = -5.0 - (global_spawn_index // 2500) * 0.1
                 global_spawn_index += 1
                 self.void_positions[prim_path] = (grid_x, grid_y, grid_z)
                 prim = prim_utils.create_prim(
@@ -187,7 +187,7 @@ class AssetManager:
         #pool_paths = self.bin_pools[bin_index]
         
         # 1. Decide Object Counts
-        num_active = random.randint(30,self.max_objects) # How many parts in this bin?
+        num_active = random.randint(2,self.max_objects) # How many parts in this bin?
         
         # Get all available object USD paths from your config
         all_usd_paths = [v['name'] for v in self.objects_config['parts'].values()]
@@ -305,7 +305,6 @@ class AssetManager:
 
 
                 
-        return num_active # Return how many active parts were set, useful as first num_active in pool are active
     def flush_pools(self,previously_active_parts,num_bins):
         stage = omni.usd.get_context().get_stage()
         if previously_active_parts == None:
@@ -313,7 +312,10 @@ class AssetManager:
         
         for bin_index in range(num_bins):
        
-            for prim_path in previously_active_parts[bin_index]:
+            for (prim_path,mat_path) in previously_active_parts[bin_index]:
+                part_type = prim_path.split("/")[-2]#/World/Part_Pools/[type]/part_num 
+                print(f'part type: {part_type}')
+                self.part_pools[part_type].append(prim_path)
                 prim = stage.GetPrimAtPath(prim_path)
                 if not prim.IsValid(): continue
                 
@@ -325,19 +327,21 @@ class AssetManager:
                 if rb_api: 
                     rb_api.GetRigidBodyEnabledAttr().Set(False)
                 
-                # 3. Teleport to void
-                xform = UsdGeom.Xformable(prim)
-                xform.ClearXformOpOrder()
-                try:
-                    translate_op = xform.AddTranslateOp()
-                except:
-                    translate_op = xform.GetTranslateOp()
-                x,y,z=self.void_positions[prim_path]
-                typeName = type(translate_op.Get())
-                if translate_op.Get() is None:
-                    translate_op.Set(Gf.Vec3d(x, y, z))
-                else:
-                    translate_op.Set(typeName([x,y,z]))
+                x, y, z = self.void_positions[prim_path]
+                prim.GetAttribute("xformOp:translate").Set(Gf.Vec3d(float(x), float(y), float(z)))
+                # # 3. Teleport to void
+                # xform = UsdGeom.Xformable(prim)
+                # xform.ClearXformOpOrder()
+                # try:
+                #     translate_op = xform.AddTranslateOp()
+                # except:
+                #     translate_op = xform.GetTranslateOp()
+                # x,y,z=self.void_positions[prim_path]
+                # typeName = type(translate_op.Get())
+                # if translate_op.Get() is None:
+                #     translate_op.Set(Gf.Vec3d(x, y, z))
+                # else:
+                #     translate_op.Set(typeName([x,y,z]))
 
 
         

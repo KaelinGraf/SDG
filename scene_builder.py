@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 10 #MIN 2
+NUM_CLONES = 1 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -162,10 +162,10 @@ class SceneBuilder:
 
             start = time.time_ns()
             #rep.utils.send_og_event("randomize_scene")
-            iters = 15
+            iters = 1
             for i in range(iters):
                 self._randomize_scene(i)
-                #self.rep_cam.capture()
+                self.rep_cam.capture()
 
             end = time.time_ns()
             print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes and {iters} iterations ({NUM_CLONES * iters} frames)")
@@ -269,7 +269,7 @@ class SceneBuilder:
         for i,texture in enumerate(textures):
             self.dome_lights.append(UsdLux.DomeLight.Define(self.stage,f"/World/DomeLights/Dome_Light_{i}").GetPrim())
             self.dome_lights[i].GetAttribute("inputs:texture:file").Set(textures[i])
-            self.dome_lights[i].GetAttribute("inputs:intensity").Set(1100.0)
+            self.dome_lights[i].GetAttribute("inputs:intensity").Set(1500.0)
 
             UsdGeom.Imageable(self.dome_lights[i]).MakeInvisible()
             
@@ -628,7 +628,6 @@ class SceneBuilder:
         """
         #self.world.reset()
         self.asset_manager.flush_pools(self.previous_active_parts,NUM_CLONES)
-        self.asset_manager.part_pools = self.asset_manager.master_part_pools
         simulation_app.update()
 
         if iteration % 10 ==0 or iteration == 0:
@@ -757,12 +756,21 @@ class SceneBuilder:
                 y = bounds[1]+0.03 + (iy + 0.5) * spacing[1] + random.uniform(-0.02, 0.02)
                 z = bounds[2]+0.03 + (iz + 0.5) * spacing[2] + random.uniform(-0.02, 0.02)
                 
-                xform = UsdGeom.Xformable(prim)
-                xform.ClearXformOpOrder()
-                xform.AddTranslateOp().Set(Gf.Vec3d(x, y, z))
-                xform.AddRotateXYZOp().Set(Gf.Vec3d(
-                    random.uniform(0, 360), random.uniform(0, 360), random.uniform(0, 360)
-                ))
+                prim.GetAttribute("xformOp:translate").Set(Gf.Vec3d(float(x), float(y), float(z)))
+                
+                # 2. Calculate a random rotation as a Quaternion
+                rot_x, rot_y, rot_z = random.uniform(0, 360), random.uniform(0, 360), random.uniform(0, 360)
+                rotation = Gf.Rotation(Gf.Vec3d(1, 0, 0), rot_x) * \
+                           Gf.Rotation(Gf.Vec3d(0, 1, 0), rot_y) * \
+                           Gf.Rotation(Gf.Vec3d(0, 0, 1), rot_z)
+                quat = rotation.GetQuat()
+                
+                # 3. Update the orientation directly (PhysX uses Gf.Quatf for orient ops)
+                prim.GetAttribute("xformOp:orient").Set(
+                    Gf.Quatd(quat.GetReal(), quat.GetImaginary()[0], quat.GetImaginary()[1], quat.GetImaginary()[2])
+                )
+                
+                prim.GetAttribute("xformOp:scale").Set(Gf.Vec3d(random.uniform(0.8,1.2),random.uniform(0.8,1.2),random.uniform(0.8,1.2)))
                 UsdGeom.Imageable(prim).MakeVisible()
                 UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
                 if material not in mat_to_paths:
@@ -771,13 +779,19 @@ class SceneBuilder:
                     mat_to_paths[material].append(path)
                 
             for mat_path, path_list in mat_to_paths.items():
-                omni.kit.commands.execute(
-                    "BindMaterial",
-                    prim_path=path_list, # Passing the list batches the operation perfectly!
-                    material_path=mat_path,
-                    strength=UsdShade.Tokens.strongerThanDescendants
-                )
+                mat_prim = self.stage.GetPrimAtPath(mat_path)
+                if not mat_prim.IsValid(): continue
+                material_obj = UsdShade.Material(mat_prim)
                 
+                # Use direct USD API instead of omni.kit.commands for massive speed boost
+                for path in path_list:
+                    target_prim = self.stage.GetPrimAtPath(path)
+                    if target_prim.IsValid():
+                        UsdShade.MaterialBindingAPI.Apply(target_prim).Bind(
+                            material_obj,
+                            materialPurpose="allPurpose",
+                            bindingStrength=UsdShade.Tokens.strongerThanDescendants
+                        )
         
         simulation_app.update()
 
@@ -786,8 +800,8 @@ class SceneBuilder:
             if _ % 10 == 0:
                 self.cull_fallen_parts()
         
-        self.update_semantic_labels_for_outliers(active_paths)
-        self.previous_active_parts = active_paths
+        self.update_semantic_labels_for_outliers(result_data)
+        self.previous_active_parts = result_data
         #self.timeline.pause()
                     
 
@@ -800,12 +814,12 @@ class SceneBuilder:
     def update_semantic_labels_for_outliers(self, active_paths_resultant):
         stage = omni.usd.get_context().get_stage()
 
-        for bin_index, active_paths in active_paths_resultant.items():
+        for bin_index, result_tuple in active_paths_resultant.items():
             # if bin_index == 0:
             #     bin_root = "/Env/Bin"
             # else:
             #     bin_root = f"/Env_{bin_index-1}/Bin"
-            
+            active_paths = [path for path,_ in result_tuple]
             bin_root = f"/Env_{bin_index}/Bin"
             
             bin_prim = stage.GetPrimAtPath(bin_root)
@@ -831,9 +845,15 @@ class SceneBuilder:
                 if not is_contained:
                     semantics_utils.add_labels(
                         prim=part_prim,
-                        labels=["background"],
+                        labels=["BACKGROUND"],
                         overwrite=True,
-                    )  
+                    )
+                else:
+                    semantics_utils.add_labels(
+                        prim=part_prim,
+                        labels=[path.split("/")[-2]],
+                        overwrite=True,
+                    )
             
 
                 
