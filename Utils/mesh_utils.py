@@ -8,7 +8,7 @@ import json
 import copy
 
 from pathlib import Path
-from pxr import UsdGeom,UsdPhysics,Gf,UsdShade
+from pxr import UsdGeom,UsdPhysics,Gf,UsdShade,Usd,Vt
 #from scene_builder import SceneBuilder
 import omni.usd
 import isaacsim.core.utils.bounds as bounds_utils
@@ -40,7 +40,7 @@ class AssetManager:
                 prim = prim_utils.create_prim(
                     prim_path=prim_path,
                     usd_path=usd_filepath,
-                    translation=[1000, 0, 0],
+                    translation=[0, 0, 0],
                     semantic_label="part",
                     attributes={
                         #"instanceable": True
@@ -49,6 +49,7 @@ class AssetManager:
                 #prim.SetInstanceable(True)
                                               
                 bounds = np.array(bounds_utils.compute_aabb(cache,prim_path))
+                corners = get_obb(prim_path)
                 #compute the diagonal (eg 0,0,0) to (x,y,z)
                 diag_vector = bounds[3:] - bounds[0:3]
                 #print(f"diagonal vector: {diag_vector}")
@@ -58,12 +59,13 @@ class AssetManager:
                 #print(f"diagonal length: {diag_length}")
                 self.asset_registry[name] = {
                     "bounds": bounds,
+                    "obb": corners,
                     "diag_length": diag_length
                 }
                 print(f"Registered asset: {name} with bounds: {bounds} and diagonal length: {diag_length}")
                 prim_utils.set_prim_visibility(prim,False)
                 #delete temp prim
-                #prim_utils.delete_prim(prim_path)
+                prim_utils.delete_prim(prim_path)
                 
                 
     def create_generic_pools(self, num_bins, max_parts_per_bin, scene_builder):
@@ -139,23 +141,25 @@ class AssetManager:
             current_part_prims=[]
             for i in (range(self.max_objects * num_bins)):
                 prim_path = f"{type_path}/part_{i}"
-                # --- FIX: Create a 3D grid in the void with 0.5m spacing ---
                 grid_x = (global_spawn_index % 50) * 0.1
                 grid_y = ((global_spawn_index // 50) % 50) * 0.1
                 grid_z = -5.0 - (global_spawn_index // 2500) * 0.1
                 global_spawn_index += 1
                 self.void_positions[prim_path] = (grid_x, grid_y, grid_z)
+                label = prim_path.split("/")[-2]
                 prim = prim_utils.create_prim(
-                    prim_path=f"{type_path}/part_{i}",
+                    prim_path=prim_path,
                     prim_type="Xform",
                     translation=(grid_x,grid_y,grid_z),
                     orientation= (0.0,0.0,0.0,0.0),#as quaternion
                     scale=(1.0,1.0,1.0),
                     usd_path=usd_path,
-                    semantic_label="part"
+                    semantic_label=f"{label}_instance_{global_spawn_index}"
                 )
-                prim.SetInstanceable(True)
-                current_part_prims.append(f"{type_path}/part_{i}")
+                
+                # Removed manual ExtentsHint injection (now pre-baked into USD)
+                #prim.SetInstanceable(True)
+                current_part_prims.append(prim_path)
                 if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
                     UsdPhysics.RigidBodyAPI.Apply(prim)
                 if not prim.HasAPI(UsdPhysics.CollisionAPI):
@@ -177,6 +181,7 @@ class AssetManager:
         self.master_part_pools = copy.deepcopy(self.part_pools)
                     
                     
+ 
         
                 
     def randomize_bin_contents(self, bin_index,available_materials, mode="HOMO_80_20",mat_mode="HOMO_80_20"):

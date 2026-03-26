@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 1 #MIN 2
+NUM_CLONES = 20 #MIN 2
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -162,7 +162,7 @@ class SceneBuilder:
 
             start = time.time_ns()
             #rep.utils.send_og_event("randomize_scene")
-            iters = 1
+            iters = 50000
             for i in range(iters):
                 self._randomize_scene(i)
                 self.rep_cam.capture()
@@ -599,6 +599,7 @@ class SceneBuilder:
             usd_path=bin_usd_path,
             semantic_label="background"
         )
+        # Removed manual ExtentsHint injection (now pre-baked into USD)
         
         for child in bin.GetChildren()[0].GetChildren(): #structure is /Env/bin/bin_name/children
             if child.GetName() != "SpawnVolume":
@@ -745,6 +746,7 @@ class SceneBuilder:
             spacing = dims / max(grid_size, 1)
 
             for idx,(path,material) in enumerate(result_tuple):
+                print(f"path:{path}, material: {material}")
                 prim = self.stage.GetPrimAtPath(path)
                 if not prim.IsValid(): continue
                 
@@ -769,29 +771,38 @@ class SceneBuilder:
                 prim.GetAttribute("xformOp:orient").Set(
                     Gf.Quatd(quat.GetReal(), quat.GetImaginary()[0], quat.GetImaginary()[1], quat.GetImaginary()[2])
                 )
-                
-                prim.GetAttribute("xformOp:scale").Set(Gf.Vec3d(random.uniform(0.8,1.2),random.uniform(0.8,1.2),random.uniform(0.8,1.2)))
+                scale_random = random.uniform(0.8,1.2)
+                prim.GetAttribute("xformOp:scale").Set(Gf.Vec3d(scale_random,scale_random,scale_random))
                 UsdGeom.Imageable(prim).MakeVisible()
                 UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(True)
-                if material not in mat_to_paths:
-                    mat_to_paths[material] = []
-                else:
-                    mat_to_paths[material].append(path)
-                
-            for mat_path, path_list in mat_to_paths.items():
-                mat_prim = self.stage.GetPrimAtPath(mat_path)
+                mat_prim = self.stage.GetPrimAtPath(material)
                 if not mat_prim.IsValid(): continue
                 material_obj = UsdShade.Material(mat_prim)
+                target_prim = self.stage.GetPrimAtPath(path)
+                if target_prim.IsValid():
+                    UsdShade.MaterialBindingAPI.Apply(target_prim).Bind(
+                        material_obj,
+                        bindingStrength=UsdShade.Tokens.strongerThanDescendants
+                    )
+                # if material not in mat_to_paths:
+                #     mat_to_paths[material] = []
+                # else:
+                #     mat_to_paths[material].append(path)
                 
-                # Use direct USD API instead of omni.kit.commands for massive speed boost
-                for path in path_list:
-                    target_prim = self.stage.GetPrimAtPath(path)
-                    if target_prim.IsValid():
-                        UsdShade.MaterialBindingAPI.Apply(target_prim).Bind(
-                            material_obj,
-                            materialPurpose="allPurpose",
-                            bindingStrength=UsdShade.Tokens.strongerThanDescendants
-                        )
+            # for mat_path, path_list in mat_to_paths.items():
+            #     mat_prim = self.stage.GetPrimAtPath(mat_path)
+            #     if not mat_prim.IsValid(): continue
+            #     material_obj = UsdShade.Material(mat_prim)
+                
+            #     # Use direct USD API instead of omni.kit.commands for massive speed boost
+            #     for path in path_list:
+            #         target_prim = self.stage.GetPrimAtPath(path)
+            #         if target_prim.IsValid():
+            #             UsdShade.MaterialBindingAPI.Apply(target_prim).Bind(
+            #                 material_obj,
+            #                 materialPurpose="allPurpose",
+            #                 bindingStrength=UsdShade.Tokens.strongerThanDescendants
+            #             )
         
         simulation_app.update()
 
@@ -799,6 +810,9 @@ class SceneBuilder:
             self.world.step(render=False)
             if _ % 10 == 0:
                 self.cull_fallen_parts()
+        
+        # Flush simulated physics translates purely into the Fabric OmniGraph so Replicator BBox Annotator doesn't mistakenly drop objects
+        simulation_app.update()
         
         self.update_semantic_labels_for_outliers(result_data)
         self.previous_active_parts = result_data
@@ -843,15 +857,13 @@ class SceneBuilder:
                 
 
                 if not is_contained:
-                    semantics_utils.add_labels(
-                        prim=part_prim,
-                        labels=["BACKGROUND"],
-                        overwrite=True,
-                    )
+                    label = "BACKGROUND"
+
                 else:
-                    semantics_utils.add_labels(
+                    label = [path.split("/")[-2]]
+                semantics_utils.add_labels(
                         prim=part_prim,
-                        labels=[path.split("/")[-2]],
+                        labels=[f"{label}"],
                         overwrite=True,
                     )
             
