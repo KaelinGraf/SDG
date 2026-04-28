@@ -124,41 +124,68 @@ class AssetManager:
                 
                 self.bin_pools[bin_idx].append(prim_path)
                 
-    def create_object_pool(self,num_bins,scene_builder):
-        self.max_objects = 20
-        stage = omni.usd.get_context().get_stage()
-        self.bin_pools = {} # Map bin_index -> list of prim paths
+    def create_object_pool(self, num_bins, scene_builder):
+        """
+        Creates per-part-type object pools, sized by volume.
+        Each part type gets: ceil(bin_volume / part_bbox_volume) * num_bins instances,
+        capped at MAX_POOL_PER_TYPE to avoid excessive memory.
+        """
+        MAX_POOL_PER_TYPE = 200  # hard cap per part type across all bins
+        MIN_POOL_PER_TYPE = 10   # at least this many instances
 
-        self.part_pools={} #takes form "part_name":[available_parts]
-        global_spawn_index =0
+        stage = omni.usd.get_context().get_stage()
+        self.bin_pools = {}
+        self.part_pools = {}  # "part_name": [available_prim_paths]
+        self.part_volumes = {}  # "part_name": bbox_volume (m³)
+        global_spawn_index = 0
         self.void_positions = {}
 
+        # Estimate a reference bin volume from scene_builder if available,
+        # otherwise use a sensible default (0.3 x 0.4 x 0.15 = 0.018 m³)
+        if hasattr(scene_builder, 'bin_dims') and scene_builder.bin_dims is not None:
+            ref_bin_vol = float(np.prod(scene_builder.bin_dims))
+        else:
+            ref_bin_vol = 0.018  # default ~18L bin
+
         for v in self.objects_config['parts'].values():
-            type_path = f"/World/Pools/{v['name']}"
-                
+            part_name = v['name']
+            type_path = f"/World/Pools/{part_name}"
             stage.DefinePrim(type_path, "Scope")
             usd_path = v['usd_filepath']
-            current_part_prims=[]
-            for i in (range(self.max_objects * num_bins)):
+
+            # Compute this part's bbox volume from the asset registry
+            if part_name in self.asset_registry:
+                bounds = self.asset_registry[part_name]['bounds']
+                dims = bounds[3:6] - bounds[0:3]
+                part_vol = float(abs(dims[0] * dims[1] * dims[2]))
+            else:
+                part_vol = 1e-5  # fallback for unregistered parts
+
+            self.part_volumes[part_name] = max(part_vol, 1e-8)
+
+            # Pool size: how many of this part could fit in one bin, times num_bins
+            fits_in_bin = max(1, int(ref_bin_vol / self.part_volumes[part_name]))
+            pool_size = min(MAX_POOL_PER_TYPE, max(MIN_POOL_PER_TYPE, fits_in_bin * num_bins))
+
+            current_part_prims = []
+            for i in range(pool_size):
                 prim_path = f"{type_path}/part_{i}"
                 grid_x = (global_spawn_index % 50) * 0.1
                 grid_y = ((global_spawn_index // 50) % 50) * 0.1
                 grid_z = -5.0 - (global_spawn_index // 2500) * 0.1
                 global_spawn_index += 1
                 self.void_positions[prim_path] = (grid_x, grid_y, grid_z)
-                label = prim_path.split("/")[-2]
+
                 prim = prim_utils.create_prim(
                     prim_path=prim_path,
                     prim_type="Xform",
-                    translation=(grid_x,grid_y,grid_z),
-                    orientation= (0.0,0.0,0.0,0.0),#as quaternion
-                    scale=(1.0,1.0,1.0),
+                    translation=(grid_x, grid_y, grid_z),
+                    orientation=(0.0, 0.0, 0.0, 0.0),
+                    scale=(1.0, 1.0, 1.0),
                     usd_path=usd_path,
-                    semantic_label=f"{label}_instance_{global_spawn_index}"
+                    semantic_label="part"
                 )
-                
-                # Removed manual ExtentsHint injection (now pre-baked into USD)
-                #prim.SetInstanceable(True)
+
                 current_part_prims.append(prim_path)
                 if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
                     UsdPhysics.RigidBodyAPI.Apply(prim)
@@ -167,98 +194,147 @@ class AssetManager:
                 scene_builder.assign_physics_materials(prim)
                 mass_api = UsdPhysics.MassAPI.Apply(prim)
                 mass_api.CreateDensityAttr(7.85)
-                
+
                 UsdGeom.Imageable(prim).MakeInvisible()
                 UsdPhysics.RigidBodyAPI(prim).GetRigidBodyEnabledAttr().Set(False)
-                
+
                 mat_prim = stage.GetPrimAtPath(scene_builder.physics_mat)
                 UsdShade.MaterialBindingAPI.Apply(prim).Bind(
                     UsdShade.Material(mat_prim),
                     materialPurpose="physics"
                 )
-            self.part_pools[f"{v['name']}"] = current_part_prims
-            
+
+            self.part_pools[part_name] = current_part_prims
+            print(f"  Pool: {part_name} → {pool_size} instances "
+                  f"(vol={self.part_volumes[part_name]*1e6:.1f}cm³, "
+                  f"fits≈{fits_in_bin}/bin)")
+
         self.master_part_pools = copy.deepcopy(self.part_pools)
                     
                     
  
         
                 
-    def randomize_bin_contents(self, bin_index,available_materials, mode="HOMO_80_20",mat_mode="HOMO_80_20"):
+    def randomize_bin_contents(self, bin_index, available_materials, mode="HOMO_80_20", mat_mode="HOMO_80_20",
+                                bin_volume=None):
         """
-        Configures the generic pool for a specific bin to match the desired distribution.
+        Volume-aware bin filling.
+        
+        Instead of picking a fixed number of objects, picks a random target fill
+        volume (fraction of bin_volume) and adds objects until that volume is
+        reached, respecting the distribution mode.
+        
+        Args:
+            bin_volume: volume of the bin in m³. If None, falls back to a default.
         """
         stage = omni.usd.get_context().get_stage()
-        #pool_paths = self.bin_pools[bin_index]
-        
-        # 1. Decide Object Counts
-        num_active = random.randint(2,self.max_objects) # How many parts in this bin?
-        
-        # Get all available object USD paths from your config
-        all_usd_paths = [v['name'] for v in self.objects_config['parts'].values()]
-        
-        # 2. Select Objects based on Mode
-        selected_usds = []
-        
+
+        # ── Volume budget ──
+        if bin_volume is None:
+            bin_volume = 0.018  # default ~18L
+
+        # ~1% chance of an intentionally empty bin (teaches the model not to hallucinate)
+        if random.randint(0, 99) == 0:
+            return []
+
+        # Random fill fraction: 10%-80% of bin volume
+        # (objects are convex so they don't pack perfectly — packing efficiency ~60%)
+        fill_fraction = random.uniform(0.10, 0.80)
+        target_volume = bin_volume * fill_fraction
+
+        # Get all available part types
+        all_part_names = [v['name'] for v in self.objects_config['parts'].values()]
+
+        # ── Select part types based on mode ──
         if mode == "HOMOGENEOUS":
-            # Pick 1 random object type for all
-            obj = random.choice(all_usd_paths)
-            selected_usds = [obj] * num_active
-            
+            main_part = random.choice(all_part_names)
+            part_roster = [main_part]  # only one type
+            distractor_roster = []
+
         elif mode == "HOMO_80_20":
-            # 80% Main Object, 20% Distractors
-            main_obj = random.choice(all_usd_paths)
-            distractors = [o for o in all_usd_paths if o != main_obj]
-            
-            count_main = int(num_active * 0.8)
-            count_dist = num_active - count_main
-            
-            selected_usds = [main_obj] * count_main
-            selected_usds += [random.choice(distractors) for _ in range(count_dist)]
-            
+            main_part = random.choice(all_part_names)
+            distractors = [p for p in all_part_names if p != main_part]
+            part_roster = [main_part]
+            distractor_roster = distractors if distractors else [main_part]
+
         elif mode == "CHAOS":
-            # Pure random
-            selected_usds = [random.choice(all_usd_paths) for _ in range(num_active)]
-            
+            part_roster = all_part_names
+            distractor_roster = []
+
+        else:
+            part_roster = all_part_names
+            distractor_roster = []
+
+        # ── Fill by volume integration ──
+        selected_usds = []
+        accumulated_volume = 0.0
+
+        while accumulated_volume < target_volume:
+            # Choose which part to add
+            if mode == "HOMO_80_20":
+                # 80% chance main, 20% chance distractor
+                if random.random() < 0.8:
+                    part_name = part_roster[0]
+                else:
+                    part_name = random.choice(distractor_roster)
+            elif mode == "HOMOGENEOUS":
+                part_name = part_roster[0]
+            else:  # CHAOS
+                part_name = random.choice(part_roster)
+
+            # Check we have instances left in the pool
+            if part_name not in self.part_pools or len(self.part_pools[part_name]) == 0:
+                # Try another part type
+                available = [p for p in all_part_names
+                             if p in self.part_pools and len(self.part_pools[p]) > 0]
+                if not available:
+                    break  # all pools exhausted
+                part_name = random.choice(available)
+
+            # Get this part's volume
+            part_vol = self.part_volumes.get(part_name, 1e-5)
+
+            selected_usds.append(part_name)
+            accumulated_volume += part_vol
+
+        num_active = len(selected_usds)
+        if num_active == 0:
+            return []
+
+        # ── Material selection (unchanged logic) ──
         selected_mats = []
-        
+
         if mat_mode == "HOMOGENEOUS":
-            # 1 Material for ALL parts
             mat = random.choice(available_materials)
             selected_mats = [mat] * num_active
-            
+
         elif mat_mode == "HOMO_80_20":
-            # 80% Main Material, 20% Distractor Materials
             main_mat = random.choice(available_materials)
             distractor_mats = [m for m in available_materials if m != main_mat]
-            if not distractor_mats: distractor_mats = [main_mat]
-            
+            if not distractor_mats:
+                distractor_mats = [main_mat]
+
             count_main = int(num_active * 0.8)
             count_dist = num_active - count_main
-            
+
             selected_mats = [main_mat] * count_main
             selected_mats += [random.choice(distractor_mats) for _ in range(count_dist)]
             random.shuffle(selected_mats)
-            
+
         elif mat_mode == "CHAOS":
-            # Every part gets a random material
             selected_mats = [random.choice(available_materials) for _ in range(num_active)]
-        
-        
-        bin_xform_paths = [] #stores xform paths for instances within this bin
-        result_data = []
+
+        # ── Pop instances from pools ──
         bin_xform_paths = []
+        result_data = []
+
         for i, part_type in enumerate(selected_usds):
-            # Pop one part of this type from the global pool
+            if part_type not in self.part_pools or len(self.part_pools[part_type]) == 0:
+                continue  # pool exhausted for this type
             new_path = self.part_pools[part_type].pop()
             bin_xform_paths.append(new_path)
-            
-            # Pair the path with its chosen material
-            result_data.append((new_path, selected_mats[i]))
-                
-     
+            result_data.append((new_path, selected_mats[i] if i < len(selected_mats) else selected_mats[-1]))
 
-        # Return the tuples of (path, material) so scene_builder can bind them
         return result_data
             
 

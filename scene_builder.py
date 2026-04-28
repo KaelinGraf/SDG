@@ -15,7 +15,7 @@
 #Email: kaelin@iscar.co.nz
 
 ZIVID_EXT_PATH = "/home/kaelin/zivid-isaac-sim/source"
-NUM_CLONES = 20 #MIN 2
+NUM_CLONES = 1 
 HDRI_PATH = "/home/kaelin/BinPicking/SDG/IS/assets/HDRI/"
 OUTPUT_DIR = "Outputs"
 
@@ -125,7 +125,10 @@ register_core_mdl_paths()
 enable_extension("omni.kit.material.library")
 
 class SceneBuilder:
-    def __init__(self,scene_name,usd_path=None):
+    def __init__(self, scene_name, usd_path=None, batch_file=None, iters=500):
+        print(f"batch file: {batch_file}")
+        self.batch_file = batch_file
+        self.iters = iters
         if usd_path is not None:
             self.world_setup_from_usd(usd_path)
             #self.carb_setup()
@@ -146,59 +149,30 @@ class SceneBuilder:
             self.physics_mat = self.create_physics_material(self.stage)
             self.set_up_dome_lights()
             
-            #self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"])
             self._instantiate_bin()
             self.clone_world()
-            self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"],output_dir = self.output_dir)
+            self.rep_cam = RepCam(focal_length=self.scene_config["cam_z_dist"],output_dir = self.output_dir,structured_light=True)
             self.rep_cam.init_cam()
             self.previous_active_parts=None
 
-            #self.asset_manager.create_generic_pools(num_bins=NUM_CLONES, max_parts_per_bin=50,scene_builder = self)
             self.asset_manager.create_object_pool(num_bins=NUM_CLONES,scene_builder=self)
-            #self._build_replicator_graph()
             for _ in range(5):
                 simulation_app.update()
 
 
             start = time.time_ns()
-            #rep.utils.send_og_event("randomize_scene")
-            iters = 50000
-            for i in range(iters):
+            for i in range(self.iters):
                 self._randomize_scene(i)
                 self.rep_cam.capture()
 
             end = time.time_ns()
-            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes and {iters} iterations ({NUM_CLONES * iters} frames)")
-            print(f"Time per frame (avg): {(end - start)/(1e9 * NUM_CLONES * iters)}")
-
-            self.rep_cam.view_frames()
-            
-            #for _ in range(100):
-                #self.on_play_callback()
+            print(f"Capture time: {(end - start)/1e9} seconds for {NUM_CLONES} scenes and {self.iters} iterations ({NUM_CLONES * self.iters} frames)")
+            print(f"Time per frame (avg): {(end - start)/(1e9 * NUM_CLONES * self.iters)}")
 
 
         
 
-        else:
-            #initialise asset and material managers after stage is loaded such that the stage pointer held in them is valid
-            self.scene_name = scene_name
-            self.objects = {}
-            self.read_configs()
-            self.asset_manager = AssetManager(self.objects_config)
-            self.material_manager = MaterialManager()
-            
-            self.world_setup()
-            #self.carb_setup()
-    
-        # self.table_bounds = None
-        # if usd_path is not None:
-        #     cache = bounds_utils.create_bbox_cache()
-        #     self.table_bounds = np.array(bounds_utils.compute_aabb(cache,self.scene_config["tabletop_prim"]))
-        #     #apply physics to tabletop
-        #     self.assign_physics_materials(self.world.stage.GetPrimAtPath(self.scene_config["tabletop_prim"]),is_static=True)
-        
-        
-     
+
 
     
     def world_setup(self):
@@ -522,44 +496,49 @@ class SceneBuilder:
     def assign_physics_materials(self, prim,is_static=False,is_bin=False):
         """
         Applies Rigid Body physics, Mass, Collisions, and Visual Materials.
+        
+        Physics API placement:
+          - RigidBody + Mass + PhysX tuning → root prim (may be wrapper Xform)
+          - CollisionAPI + MeshCollisionAPI → descendant Mesh prims only
         """
 
-        # MESH STUFF
-    
-        if not is_bin and not prim.HasAPI(UsdPhysics.MeshCollisionAPI):
-            mesh_api = UsdPhysics.MeshCollisionAPI.Apply(prim)
-            
-            if not is_static:
-                mesh_api.CreateApproximationAttr("convexHull")
-            else:
-                mesh_api.CreateApproximationAttr("meshSimplification")
-                
-        # COLLISION
-        if not prim.HasAPI(UsdPhysics.CollisionAPI):
-            col_api = UsdPhysics.CollisionAPI.Apply(prim)
-            col_api.CreateCollisionEnabledAttr(True)
+        # ── Collision: apply to descendant Mesh prims only ──
+        # (NOT the root prim, which may be a wrapper Xform without geometry)
+        stage = prim.GetStage()
+        for child in Usd.PrimRange(prim):
+            if not child.IsA(UsdGeom.Mesh):
+                continue
+            if not child.HasAPI(UsdPhysics.CollisionAPI):
+                col_api = UsdPhysics.CollisionAPI.Apply(child)
+                col_api.CreateCollisionEnabledAttr(True)
+            if not is_bin and not child.HasAPI(UsdPhysics.MeshCollisionAPI):
+                mesh_api = UsdPhysics.MeshCollisionAPI.Apply(child)
+                if not is_static:
+                    mesh_api.CreateApproximationAttr("convexHull")
+                else:
+                    mesh_api.CreateApproximationAttr("meshSimplification")
+
+        # ── Root prim: RigidBody + Mass + PhysX tuning ──
         if not is_static:
-            # RIGID BODY
             if not prim.HasAPI(UsdPhysics.RigidBodyAPI):
                 rb_api = UsdPhysics.RigidBodyAPI.Apply(prim)
             else:
                 rb_api = UsdPhysics.RigidBodyAPI(prim)
             rb_api.CreateRigidBodyEnabledAttr(True)
             rb_api.CreateKinematicEnabledAttr(False)      
-            # MASS
+
             if not prim.HasAPI(UsdPhysics.MassAPI):
                 mass_api = UsdPhysics.MassAPI.Apply(prim)
                 mass_api.CreateDensityAttr(7800) #constant steel density for now
 
-            #
             if not prim.HasAPI(PhysxSchema.PhysxRigidBodyAPI):
                 physx_rb_api = PhysxSchema.PhysxRigidBodyAPI.Apply(prim)
                 physx_rb_api.CreateEnableCCDAttr(True)
-                physx_rb_api.CreateSolverPositionIterationCountAttr(8) # Default is usually 4 or 8
+                physx_rb_api.CreateSolverPositionIterationCountAttr(8)
                 physx_rb_api.CreateSolverVelocityIterationCountAttr(0)
-                physx_rb_api.CreateSleepThresholdAttr(0.005) # Prevent sleeping while still settling
-                physx_rb_api.CreateLinearDampingAttr(0.5)  # "Air resistance"
-                physx_rb_api.CreateAngularDampingAttr(0.5) # Rotational resistance
+                physx_rb_api.CreateSleepThresholdAttr(0.005)
+                physx_rb_api.CreateLinearDampingAttr(0.5)
+                physx_rb_api.CreateAngularDampingAttr(0.5)
                 physx_rb_api.CreateMaxLinearVelocityAttr(5.0)
                 physx_rb_api.CreateMaxDepenetrationVelocityAttr(1.0)
                 
@@ -690,8 +669,9 @@ class SceneBuilder:
             modes = ["HOMOGENEOUS","HOMO_80_20","CHAOS"]
             mat_mode = random.choice(modes)
             mode = random.choice(modes)
-            #perform part randomization and scattering
-            result_data[bin_index] = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene)
+            #perform part randomization and scattering — pass bin volume for volume-aware filling
+            bin_vol = float(bin_dims[0] * bin_dims[1] * bin_dims[2])
+            result_data[bin_index] = self.asset_manager.randomize_bin_contents(bin_index=bin_index,mode=mode,mat_mode=mat_mode,available_materials=self.material_manager.materials_in_scene, bin_volume=bin_vol)
  
             bin_pos_world = xforms.get_world_pose(bin_path)[0] #only get translation
             bin_prim = self.stage.GetPrimAtPath(bin_path).GetChildren()[0] #assumes bin prim is first child of /Env/Bin
@@ -708,7 +688,7 @@ class SceneBuilder:
             azimuth_angle = random.uniform(0, 1)
             distance = random.uniform(bin_dims[2] + 0.5, bin_dims[2] + 0.8)
             (pos_world,rot_matrix) = orbit_point(bin_pos_world,distance,elev_angle,azimuth_angle,degrees=True,look_at=True)
-            self.rep_cam.camera_manager.set_cam_world_pos_by_idx(bin_index,pos_world,rot_matrix,degrees=False,rot_format="matrix")
+            self.rep_cam.set_cam_world_pos_by_idx(bin_index,pos_world,rot_matrix,degrees=False,rot_format="matrix")
             
             #light randomization
             elev_angle_light = np.random.uniform(50,90)
@@ -829,10 +809,6 @@ class SceneBuilder:
         stage = omni.usd.get_context().get_stage()
 
         for bin_index, result_tuple in active_paths_resultant.items():
-            # if bin_index == 0:
-            #     bin_root = "/Env/Bin"
-            # else:
-            #     bin_root = f"/Env_{bin_index-1}/Bin"
             active_paths = [path for path,_ in result_tuple]
             bin_root = f"/Env_{bin_index}/Bin"
             
@@ -844,28 +820,26 @@ class SceneBuilder:
                     target_prim = child
                     break
             bin_bounds = get_bounds(bin_root)
-            #print(f"found bin {bin_root} with bounds {bin_bounds}")
             for path in active_paths:
                 part_prim = stage.GetPrimAtPath(path)
                 if not part_prim.IsValid(): continue
-                trans_attr = part_prim.GetAttribute("xformOp:translate")
-                pos = np.asarray(trans_attr.Get()) # Reads current physics location
+
+                # Use world pose (reflects physics-settled position)
+                pos = xforms.get_world_pose(path)[0]
+                is_contained = False
                 if pos is not None:
-                #print(f"found part at {path} with location {pos}")
-                    is_contained = is_point_within_obb(pos,bin_root,tolerance=0.01) #10cm of tolerance
-                #print(f"part {path} is contained: {is_contained}")
-                
+                    is_contained = is_point_within_obb(pos, bin_root, tolerance=0.01)
 
                 if not is_contained:
-                    label = "BACKGROUND"
-
+                    label = "background"
                 else:
-                    label = [path.split("/")[-2]]
+                    label = "part"
+
                 semantics_utils.add_labels(
-                        prim=part_prim,
-                        labels=[f"{label}"],
-                        overwrite=True,
-                    )
+                    prim=part_prim,
+                    labels=[label],
+                    overwrite=True,
+                )
             
 
                 
@@ -1003,13 +977,14 @@ class SceneBuilder:
         #read scene config file
         with open("./Config/scene_config.json", 'r') as f:
             self.scene_config = json.load(f)[self.scene_name]
-        #print("Loaded scene config: ", self.scene_config)
-        with open("./Config/objects.json", 'r') as f:
-            self.objects_config = json.load(f)
-        #print("Loaded objects config: ", self.objects_config)
-        self.object_keys = list(self.objects_config.keys()) #list to hold object names, for easy random selection
-        #print(len(self.objects_config.keys()), " objects available for scene building")
+        obj_file_to_read = self.batch_file if self.batch_file else "./Config/objects.json"
         
+        with open(obj_file_to_read, 'r') as f:
+            self.objects_config = json.load(f)
+        
+        
+            
+        self.object_keys = list(self.objects_config["parts"].keys())[:10]
     #def _create_bin_
 
     def generate_box_uvs(self, root_prim, scale=10.0):
@@ -1087,29 +1062,17 @@ class SceneBuilder:
             #print(f"Generated Box UVs for {prim.GetPath()}")
     
 def main():
-    parser = argparse.ArgumentParser(description="Isaac Sim Bin Picking Data Generator Scene Builder")
-    parser.add_argument('--scene_name', type=str, default="default_scene", help='Name of the scene configuration to use from scene_config.json')
-    parser.add_argument('--iters', type=int, default=10, help='Number of data generation iterations to run')
+    parser = argparse.ArgumentParser(description="Isaac Sim Bin Picking Data Generator")
+    parser.add_argument('--scene_name', type=str, default="default_scene")
+    parser.add_argument('--iters', type=int, default=500)
+    parser.add_argument('--batch_file', type=str, default=None, help="Path to a subset objects.json") # NEW
     args = parser.parse_args()
     
-    scene_builder = SceneBuilder(args.scene_name,usd_path="/home/kaelin/BinPicking/SDG/IS/assets/single_stage.usd") #initialize scene builder with specified scene config, does not start data generation
-    #scene_builder = SceneBuilder(args.scene_name)#args.scene_name,usd_path="/home/kaelin/Desktop/custom_usds/warehouse_ur12e.usd") #initialize scene builder with specified scene config, does not start data generation
-
-    print(f"Scene Builder initialised for scene: {args.scene_name}. Starting data generation loop for {args.iters} iterations.")
-    #scene_builder.world.reset()
-    #scene_builder.data_generator_loop(iters=20)
-    print("Holding simulation open. Press Ctrl+C in terminal to stop.")
-    #scene_builder.data_generator_loop(args.iters) #start data generation loop
-    # # Create a viewer loop so you can see the bin
-    while simulation_app.is_running():
-        # This triggers the renderer and physics step
-        simulation_app.update() 
-        
-    #     # Optional: If you want to verify the bin exists, check it here
-    #     # if scene_builder.world.scene.get_object("/World/Bin"):
-    #     #    pass
-    
-    
+    # Pass the arguments down
+    scene_builder = SceneBuilder(args.scene_name, usd_path="assets/single_stage.usd", batch_file=args.batch_file, iters=args.iters)
+    while True:
+        simulation_app.update()
+    simulation_app.close() # Safely shutdown Isaac Sim
     
 
 def randomize_bin_state(bin_groups_map, all_prototypes, all_materials, max_capacity):

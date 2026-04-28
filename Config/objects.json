@@ -97,14 +97,4215 @@
             "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/_07_tuna_fish_can.usd",
             "class": "1"
         },
-        "part_14": {
-            "name": "ISO7380_1_M3X8_8_8_JFL",
-            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/parts/ISO7380_1_M3X8_8_8_JFL.usd",
-            "class": "1"
+        "distractor_63ae0999b11f455d99d78db69de7adc2": {
+            "name": "distractor_63ae0999b11f455d99d78db69de7adc2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_63ae0999b11f455d99d78db69de7adc2.usd",
+            "class": "1",
+            "scale_factor": [
+                8.869392880012359e-05,
+                8.869392880012359e-05,
+                8.869392880012359e-05
+            ]
+        },
+        "distractor_16651ce36ac541ac93f750c59b7e0611": {
+            "name": "distractor_16651ce36ac541ac93f750c59b7e0611",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_16651ce36ac541ac93f750c59b7e0611.usd",
+            "class": "1",
+            "scale_factor": [
+                3.405891903965101e-05,
+                3.405891903965101e-05,
+                3.405891903965101e-05
+            ]
+        },
+        "distractor_7cb580512d69458fb1890568f5573e3a": {
+            "name": "distractor_7cb580512d69458fb1890568f5573e3a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7cb580512d69458fb1890568f5573e3a.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4132190277823105e-06,
+                1.4132190277823105e-06,
+                1.4132190277823105e-06
+            ]
+        },
+        "distractor_52f79b3eb0494e328d9e2d5fee0e9520": {
+            "name": "distractor_52f79b3eb0494e328d9e2d5fee0e9520",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_52f79b3eb0494e328d9e2d5fee0e9520.usd",
+            "class": "1",
+            "scale_factor": [
+                0.004995304539026822,
+                0.004995304539026822,
+                0.004995304539026822
+            ]
+        },
+        "distractor_88916064c6534801ae21ea6f9f788ea8": {
+            "name": "distractor_88916064c6534801ae21ea6f9f788ea8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_88916064c6534801ae21ea6f9f788ea8.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003689559778303531,
+                0.0003689559778303531,
+                0.0003689559778303531
+            ]
+        },
+        "distractor_c95f8154bbf640fd83dc5d454fa1ac74": {
+            "name": "distractor_c95f8154bbf640fd83dc5d454fa1ac74",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c95f8154bbf640fd83dc5d454fa1ac74.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00012436946526125922,
+                0.00012436946526125922,
+                0.00012436946526125922
+            ]
+        },
+        "distractor_fa14fe77f3d64666b3e06e179a52f2b1": {
+            "name": "distractor_fa14fe77f3d64666b3e06e179a52f2b1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fa14fe77f3d64666b3e06e179a52f2b1.usd",
+            "class": "1",
+            "scale_factor": [
+                2.6153413588904693e-06,
+                2.6153413588904693e-06,
+                2.6153413588904693e-06
+            ]
+        },
+        "distractor_649d75f6737848e5ac0c3a09c57e0943": {
+            "name": "distractor_649d75f6737848e5ac0c3a09c57e0943",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_649d75f6737848e5ac0c3a09c57e0943.usd",
+            "class": "1",
+            "scale_factor": [
+                5.863561280497663e-06,
+                5.863561280497663e-06,
+                5.863561280497663e-06
+            ]
+        },
+        "distractor_978431d26c124900b8f03467cacdd056": {
+            "name": "distractor_978431d26c124900b8f03467cacdd056",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_978431d26c124900b8f03467cacdd056.usd",
+            "class": "1",
+            "scale_factor": [
+                0.012030451424117704,
+                0.012030451424117704,
+                0.012030451424117704
+            ]
+        },
+        "distractor_9f8153ff93e34ea6ae6bb11d33ede7d1": {
+            "name": "distractor_9f8153ff93e34ea6ae6bb11d33ede7d1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9f8153ff93e34ea6ae6bb11d33ede7d1.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3689068043364404e-05,
+                1.3689068043364404e-05,
+                1.3689068043364404e-05
+            ]
+        },
+        "distractor_75ded06b514f4da0bb6213a258a54115": {
+            "name": "distractor_75ded06b514f4da0bb6213a258a54115",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_75ded06b514f4da0bb6213a258a54115.usd",
+            "class": "1",
+            "scale_factor": [
+                2.219194632893134e-05,
+                2.219194632893134e-05,
+                2.219194632893134e-05
+            ]
+        },
+        "distractor_7a9604909ca64ae9bedbfb20aaefaec8": {
+            "name": "distractor_7a9604909ca64ae9bedbfb20aaefaec8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7a9604909ca64ae9bedbfb20aaefaec8.usd",
+            "class": "1",
+            "scale_factor": [
+                4.098297758173884e-06,
+                4.098297758173884e-06,
+                4.098297758173884e-06
+            ]
+        },
+        "distractor_40207c5d95804bb9bb446b17b3a3f93e": {
+            "name": "distractor_40207c5d95804bb9bb446b17b3a3f93e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_40207c5d95804bb9bb446b17b3a3f93e.usd",
+            "class": "1",
+            "scale_factor": [
+                9.80296720625668e-05,
+                9.80296720625668e-05,
+                9.80296720625668e-05
+            ]
+        },
+        "distractor_b9981fd3fd3548a1acac55e70054bdf3": {
+            "name": "distractor_b9981fd3fd3548a1acac55e70054bdf3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b9981fd3fd3548a1acac55e70054bdf3.usd",
+            "class": "1",
+            "scale_factor": [
+                7.760663323642806e-05,
+                7.760663323642806e-05,
+                7.760663323642806e-05
+            ]
+        },
+        "distractor_a84dc0e597bf4d77a47812166cbd4a63": {
+            "name": "distractor_a84dc0e597bf4d77a47812166cbd4a63",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a84dc0e597bf4d77a47812166cbd4a63.usd",
+            "class": "1",
+            "scale_factor": [
+                2.8231446726006486e-05,
+                2.8231446726006486e-05,
+                2.8231446726006486e-05
+            ]
+        },
+        "distractor_f6563bbdbfc2403ba5efa1880a01c83b": {
+            "name": "distractor_f6563bbdbfc2403ba5efa1880a01c83b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f6563bbdbfc2403ba5efa1880a01c83b.usd",
+            "class": "1",
+            "scale_factor": [
+                7.685038718517618e-06,
+                7.685038718517618e-06,
+                7.685038718517618e-06
+            ]
+        },
+        "distractor_60a919a164cd4ba88721d774f746b4e9": {
+            "name": "distractor_60a919a164cd4ba88721d774f746b4e9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_60a919a164cd4ba88721d774f746b4e9.usd",
+            "class": "1",
+            "scale_factor": [
+                0.006327104876343067,
+                0.006327104876343067,
+                0.006327104876343067
+            ]
+        },
+        "distractor_0b6d4cea7b0346c4ba8bfa3408fc32f1": {
+            "name": "distractor_0b6d4cea7b0346c4ba8bfa3408fc32f1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_0b6d4cea7b0346c4ba8bfa3408fc32f1.usd",
+            "class": "1",
+            "scale_factor": [
+                7.62736642769844e-05,
+                7.62736642769844e-05,
+                7.62736642769844e-05
+            ]
+        },
+        "distractor_17f6e7da6de644e293009c8d24b511b6": {
+            "name": "distractor_17f6e7da6de644e293009c8d24b511b6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_17f6e7da6de644e293009c8d24b511b6.usd",
+            "class": "1",
+            "scale_factor": [
+                4.210723471425119e-06,
+                4.210723471425119e-06,
+                4.210723471425119e-06
+            ]
+        },
+        "distractor_5b8323047183432dad434d04ddcecac9": {
+            "name": "distractor_5b8323047183432dad434d04ddcecac9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5b8323047183432dad434d04ddcecac9.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00045540116279538755,
+                0.00045540116279538755,
+                0.00045540116279538755
+            ]
+        },
+        "distractor_4ee674bf12fa4dcda306f4d9fa7db250": {
+            "name": "distractor_4ee674bf12fa4dcda306f4d9fa7db250",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4ee674bf12fa4dcda306f4d9fa7db250.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1265030298276362e-05,
+                1.1265030298276362e-05,
+                1.1265030298276362e-05
+            ]
+        },
+        "distractor_3471658d0750451b9d8a99f508d1503a": {
+            "name": "distractor_3471658d0750451b9d8a99f508d1503a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3471658d0750451b9d8a99f508d1503a.usd",
+            "class": "1",
+            "scale_factor": [
+                0.016998127364926643,
+                0.016998127364926643,
+                0.016998127364926643
+            ]
+        },
+        "distractor_e2b19c81f6304bdca8284c9bcb9b7c8b": {
+            "name": "distractor_e2b19c81f6304bdca8284c9bcb9b7c8b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e2b19c81f6304bdca8284c9bcb9b7c8b.usd",
+            "class": "1",
+            "scale_factor": [
+                5.0396372607951116e-06,
+                5.0396372607951116e-06,
+                5.0396372607951116e-06
+            ]
+        },
+        "distractor_567058de5d2c47df8b77e9c45a5a95f6": {
+            "name": "distractor_567058de5d2c47df8b77e9c45a5a95f6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_567058de5d2c47df8b77e9c45a5a95f6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008786923797028406,
+                0.0008786923797028406,
+                0.0008786923797028406
+            ]
+        },
+        "distractor_9fded60287f34fc0a1366ceccf823f84": {
+            "name": "distractor_9fded60287f34fc0a1366ceccf823f84",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9fded60287f34fc0a1366ceccf823f84.usd",
+            "class": "1",
+            "scale_factor": [
+                0.021333029549999844,
+                0.021333029549999844,
+                0.021333029549999844
+            ]
+        },
+        "distractor_84a656c9a1d3402aaccd1b83289b7b25": {
+            "name": "distractor_84a656c9a1d3402aaccd1b83289b7b25",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_84a656c9a1d3402aaccd1b83289b7b25.usd",
+            "class": "1",
+            "scale_factor": [
+                4.1671443150463876e-05,
+                4.1671443150463876e-05,
+                4.1671443150463876e-05
+            ]
+        },
+        "distractor_78c7743910f742a88f3ec5571e91830b": {
+            "name": "distractor_78c7743910f742a88f3ec5571e91830b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_78c7743910f742a88f3ec5571e91830b.usd",
+            "class": "1",
+            "scale_factor": [
+                2.929665261366504e-05,
+                2.929665261366504e-05,
+                2.929665261366504e-05
+            ]
+        },
+        "distractor_37651416b0a042aeba9b8498e72fc790": {
+            "name": "distractor_37651416b0a042aeba9b8498e72fc790",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_37651416b0a042aeba9b8498e72fc790.usd",
+            "class": "1",
+            "scale_factor": [
+                2.1503740996999783e-05,
+                2.1503740996999783e-05,
+                2.1503740996999783e-05
+            ]
+        },
+        "distractor_705af50fd63b489bb302c8421ef198b2": {
+            "name": "distractor_705af50fd63b489bb302c8421ef198b2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_705af50fd63b489bb302c8421ef198b2.usd",
+            "class": "1",
+            "scale_factor": [
+                4.6703191722221754e-05,
+                4.6703191722221754e-05,
+                4.6703191722221754e-05
+            ]
+        },
+        "distractor_bfe12b44833e42a487d28d039f0aa4ef": {
+            "name": "distractor_bfe12b44833e42a487d28d039f0aa4ef",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bfe12b44833e42a487d28d039f0aa4ef.usd",
+            "class": "1",
+            "scale_factor": [
+                0.001053757770345758,
+                0.001053757770345758,
+                0.001053757770345758
+            ]
+        },
+        "distractor_900810b55fa741328f92ea288f9e4aa6": {
+            "name": "distractor_900810b55fa741328f92ea288f9e4aa6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_900810b55fa741328f92ea288f9e4aa6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00021514568576618795,
+                0.00021514568576618795,
+                0.00021514568576618795
+            ]
+        },
+        "distractor_b0a88f8144aa49d99a2fe01e03736799": {
+            "name": "distractor_b0a88f8144aa49d99a2fe01e03736799",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b0a88f8144aa49d99a2fe01e03736799.usd",
+            "class": "1",
+            "scale_factor": [
+                1.584727429873008e-05,
+                1.584727429873008e-05,
+                1.584727429873008e-05
+            ]
+        },
+        "distractor_52f0d3783abc4ca6af1e799071dec41c": {
+            "name": "distractor_52f0d3783abc4ca6af1e799071dec41c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_52f0d3783abc4ca6af1e799071dec41c.usd",
+            "class": "1",
+            "scale_factor": [
+                6.847805372572908e-05,
+                6.847805372572908e-05,
+                6.847805372572908e-05
+            ]
+        },
+        "distractor_1f4a20706e244cf195bd9508ebb0d731": {
+            "name": "distractor_1f4a20706e244cf195bd9508ebb0d731",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1f4a20706e244cf195bd9508ebb0d731.usd",
+            "class": "1",
+            "scale_factor": [
+                4.766445258796684e-05,
+                4.766445258796684e-05,
+                4.766445258796684e-05
+            ]
+        },
+        "distractor_b2814cd691c94912aa160027707588c1": {
+            "name": "distractor_b2814cd691c94912aa160027707588c1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b2814cd691c94912aa160027707588c1.usd",
+            "class": "1",
+            "scale_factor": [
+                6.924022346500065e-05,
+                6.924022346500065e-05,
+                6.924022346500065e-05
+            ]
+        },
+        "distractor_bd6d543b310d4c0691c26ad9c1c373b7": {
+            "name": "distractor_bd6d543b310d4c0691c26ad9c1c373b7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bd6d543b310d4c0691c26ad9c1c373b7.usd",
+            "class": "1",
+            "scale_factor": [
+                1.487637151058865e-05,
+                1.487637151058865e-05,
+                1.487637151058865e-05
+            ]
+        },
+        "distractor_5a1c06d1f04142279b9453a0113faab0": {
+            "name": "distractor_5a1c06d1f04142279b9453a0113faab0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5a1c06d1f04142279b9453a0113faab0.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002960875808894296,
+                0.0002960875808894296,
+                0.0002960875808894296
+            ]
+        },
+        "distractor_b7e27dff7a2c4ea295ae3fd16947f2e8": {
+            "name": "distractor_b7e27dff7a2c4ea295ae3fd16947f2e8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b7e27dff7a2c4ea295ae3fd16947f2e8.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0005512089732991187,
+                0.0005512089732991187,
+                0.0005512089732991187
+            ]
+        },
+        "distractor_8aabceb40c08405e99ed324169022e51": {
+            "name": "distractor_8aabceb40c08405e99ed324169022e51",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8aabceb40c08405e99ed324169022e51.usd",
+            "class": "1",
+            "scale_factor": [
+                4.2689990078098456e-05,
+                4.2689990078098456e-05,
+                4.2689990078098456e-05
+            ]
+        },
+        "distractor_78a0354fe6404a2a8d24376eeb69d90e": {
+            "name": "distractor_78a0354fe6404a2a8d24376eeb69d90e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_78a0354fe6404a2a8d24376eeb69d90e.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003016344270247611,
+                0.0003016344270247611,
+                0.0003016344270247611
+            ]
+        },
+        "distractor_5ae8a84b415f4291bce4b7e5ef7d753b": {
+            "name": "distractor_5ae8a84b415f4291bce4b7e5ef7d753b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5ae8a84b415f4291bce4b7e5ef7d753b.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006969336330710049,
+                0.0006969336330710049,
+                0.0006969336330710049
+            ]
+        },
+        "distractor_4cc43531e2884500b3c7fca738511e87": {
+            "name": "distractor_4cc43531e2884500b3c7fca738511e87",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4cc43531e2884500b3c7fca738511e87.usd",
+            "class": "1",
+            "scale_factor": [
+                6.6288898191479874e-06,
+                6.6288898191479874e-06,
+                6.6288898191479874e-06
+            ]
+        },
+        "distractor_11b0a21217a44ff080bd9c93d43c4183": {
+            "name": "distractor_11b0a21217a44ff080bd9c93d43c4183",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_11b0a21217a44ff080bd9c93d43c4183.usd",
+            "class": "1",
+            "scale_factor": [
+                0.001751539106302183,
+                0.001751539106302183,
+                0.001751539106302183
+            ]
+        },
+        "distractor_72bca5f639404a29b0dda6b12e0be5c6": {
+            "name": "distractor_72bca5f639404a29b0dda6b12e0be5c6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_72bca5f639404a29b0dda6b12e0be5c6.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4378811174723902e-05,
+                1.4378811174723902e-05,
+                1.4378811174723902e-05
+            ]
+        },
+        "distractor_c38d1fcffedc4aaf873cacd8518f270b": {
+            "name": "distractor_c38d1fcffedc4aaf873cacd8518f270b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c38d1fcffedc4aaf873cacd8518f270b.usd",
+            "class": "1",
+            "scale_factor": [
+                5.211642610136299e-05,
+                5.211642610136299e-05,
+                5.211642610136299e-05
+            ]
+        },
+        "distractor_c49ab41304064b19b418eff3c9d64c83": {
+            "name": "distractor_c49ab41304064b19b418eff3c9d64c83",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c49ab41304064b19b418eff3c9d64c83.usd",
+            "class": "1",
+            "scale_factor": [
+                7.983065449554904e-07,
+                7.983065449554904e-07,
+                7.983065449554904e-07
+            ]
+        },
+        "distractor_ed21e083efab4ce4adb5f54786aaa209": {
+            "name": "distractor_ed21e083efab4ce4adb5f54786aaa209",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ed21e083efab4ce4adb5f54786aaa209.usd",
+            "class": "1",
+            "scale_factor": [
+                7.0145016490552036e-06,
+                7.0145016490552036e-06,
+                7.0145016490552036e-06
+            ]
+        },
+        "distractor_dcfd0262da6443f4be321ad2161d43d6": {
+            "name": "distractor_dcfd0262da6443f4be321ad2161d43d6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_dcfd0262da6443f4be321ad2161d43d6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00023226059480314373,
+                0.00023226059480314373,
+                0.00023226059480314373
+            ]
+        },
+        "distractor_a183698cc5ba479db7d95c33fde08910": {
+            "name": "distractor_a183698cc5ba479db7d95c33fde08910",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a183698cc5ba479db7d95c33fde08910.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00021826751057615413,
+                0.00021826751057615413,
+                0.00021826751057615413
+            ]
+        },
+        "distractor_b98a30007e3a4871a0486bc83e9cca76": {
+            "name": "distractor_b98a30007e3a4871a0486bc83e9cca76",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b98a30007e3a4871a0486bc83e9cca76.usd",
+            "class": "1",
+            "scale_factor": [
+                0.008184364099818955,
+                0.008184364099818955,
+                0.008184364099818955
+            ]
+        },
+        "distractor_4838b7ede2df4d879a56fe769b5ff3e3": {
+            "name": "distractor_4838b7ede2df4d879a56fe769b5ff3e3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4838b7ede2df4d879a56fe769b5ff3e3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.006125610841141002,
+                0.006125610841141002,
+                0.006125610841141002
+            ]
+        },
+        "distractor_5cef5d36107c43df94df547c54628a53": {
+            "name": "distractor_5cef5d36107c43df94df547c54628a53",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5cef5d36107c43df94df547c54628a53.usd",
+            "class": "1",
+            "scale_factor": [
+                7.712442235111541e-05,
+                7.712442235111541e-05,
+                7.712442235111541e-05
+            ]
+        },
+        "distractor_4bba778145e5479c85b9c20386475e1d": {
+            "name": "distractor_4bba778145e5479c85b9c20386475e1d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4bba778145e5479c85b9c20386475e1d.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008939062863811624,
+                0.0008939062863811624,
+                0.0008939062863811624
+            ]
+        },
+        "distractor_775daf7fcacd41d0a80d00406ae94a09": {
+            "name": "distractor_775daf7fcacd41d0a80d00406ae94a09",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_775daf7fcacd41d0a80d00406ae94a09.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0005484283675036681,
+                0.0005484283675036681,
+                0.0005484283675036681
+            ]
+        },
+        "distractor_4c5135eaad0140aba0e6b15b765f1e9c": {
+            "name": "distractor_4c5135eaad0140aba0e6b15b765f1e9c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4c5135eaad0140aba0e6b15b765f1e9c.usd",
+            "class": "1",
+            "scale_factor": [
+                8.1646078758232e-06,
+                8.1646078758232e-06,
+                8.1646078758232e-06
+            ]
+        },
+        "distractor_fcc4d8ddcb334e9989525a7fcda41302": {
+            "name": "distractor_fcc4d8ddcb334e9989525a7fcda41302",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fcc4d8ddcb334e9989525a7fcda41302.usd",
+            "class": "1",
+            "scale_factor": [
+                2.8774320020965466e-05,
+                2.8774320020965466e-05,
+                2.8774320020965466e-05
+            ]
+        },
+        "distractor_a9f59c5ccd1f4424a75d2ced0b5ad105": {
+            "name": "distractor_a9f59c5ccd1f4424a75d2ced0b5ad105",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a9f59c5ccd1f4424a75d2ced0b5ad105.usd",
+            "class": "1",
+            "scale_factor": [
+                0.003017147734739937,
+                0.003017147734739937,
+                0.003017147734739937
+            ]
+        },
+        "distractor_a787a678dcdf4fa3bd53b9957532fed6": {
+            "name": "distractor_a787a678dcdf4fa3bd53b9957532fed6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a787a678dcdf4fa3bd53b9957532fed6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.02526288681499824,
+                0.02526288681499824,
+                0.02526288681499824
+            ]
+        },
+        "distractor_c3d66a9bab5a48cba3680b5c7f2f791b": {
+            "name": "distractor_c3d66a9bab5a48cba3680b5c7f2f791b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c3d66a9bab5a48cba3680b5c7f2f791b.usd",
+            "class": "1",
+            "scale_factor": [
+                7.456565284301198e-05,
+                7.456565284301198e-05,
+                7.456565284301198e-05
+            ]
+        },
+        "distractor_1caacc9825844452aa5ab64cb4bd5e57": {
+            "name": "distractor_1caacc9825844452aa5ab64cb4bd5e57",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1caacc9825844452aa5ab64cb4bd5e57.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0001343735911773315,
+                0.0001343735911773315,
+                0.0001343735911773315
+            ]
+        },
+        "distractor_3be07a34145f4bd0bbc2dd01f8fca136": {
+            "name": "distractor_3be07a34145f4bd0bbc2dd01f8fca136",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3be07a34145f4bd0bbc2dd01f8fca136.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00021587467129125776,
+                0.00021587467129125776,
+                0.00021587467129125776
+            ]
+        },
+        "distractor_b8928abc11d04145ac305022254ad84e": {
+            "name": "distractor_b8928abc11d04145ac305022254ad84e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b8928abc11d04145ac305022254ad84e.usd",
+            "class": "1",
+            "scale_factor": [
+                9.661091415751566e-05,
+                9.661091415751566e-05,
+                9.661091415751566e-05
+            ]
+        },
+        "distractor_3a070720184e4ad8b14adb8bbdcabff2": {
+            "name": "distractor_3a070720184e4ad8b14adb8bbdcabff2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3a070720184e4ad8b14adb8bbdcabff2.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0011724696554891842,
+                0.0011724696554891842,
+                0.0011724696554891842
+            ]
+        },
+        "distractor_2d5c6f35931c4202bacee5742f732f2d": {
+            "name": "distractor_2d5c6f35931c4202bacee5742f732f2d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2d5c6f35931c4202bacee5742f732f2d.usd",
+            "class": "1",
+            "scale_factor": [
+                2.084704809080757e-05,
+                2.084704809080757e-05,
+                2.084704809080757e-05
+            ]
+        },
+        "distractor_6d29570a3eca490bb1cca48462feb0bc": {
+            "name": "distractor_6d29570a3eca490bb1cca48462feb0bc",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6d29570a3eca490bb1cca48462feb0bc.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00017824744900225324,
+                0.00017824744900225324,
+                0.00017824744900225324
+            ]
+        },
+        "distractor_e6b725998e194b7bb770950b57b78a87": {
+            "name": "distractor_e6b725998e194b7bb770950b57b78a87",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e6b725998e194b7bb770950b57b78a87.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00024819025318564836,
+                0.00024819025318564836,
+                0.00024819025318564836
+            ]
+        },
+        "distractor_ebace7f788424169a8721d0cf1296da0": {
+            "name": "distractor_ebace7f788424169a8721d0cf1296da0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ebace7f788424169a8721d0cf1296da0.usd",
+            "class": "1",
+            "scale_factor": [
+                0.015283964743724433,
+                0.015283964743724433,
+                0.015283964743724433
+            ]
+        },
+        "distractor_ad81c044a9ea4f1282e22b6a6cf21124": {
+            "name": "distractor_ad81c044a9ea4f1282e22b6a6cf21124",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ad81c044a9ea4f1282e22b6a6cf21124.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002670294027456756,
+                0.0002670294027456756,
+                0.0002670294027456756
+            ]
+        },
+        "distractor_2fd56bbf742f4e22818999b5614c698e": {
+            "name": "distractor_2fd56bbf742f4e22818999b5614c698e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2fd56bbf742f4e22818999b5614c698e.usd",
+            "class": "1",
+            "scale_factor": [
+                2.90998646193652e-05,
+                2.90998646193652e-05,
+                2.90998646193652e-05
+            ]
+        },
+        "distractor_735618e72efd4840a5f22ac7d846e5fc": {
+            "name": "distractor_735618e72efd4840a5f22ac7d846e5fc",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_735618e72efd4840a5f22ac7d846e5fc.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00016232926552365033,
+                0.00016232926552365033,
+                0.00016232926552365033
+            ]
+        },
+        "distractor_5aa01f97ee1e419797a17f2f4e35f79b": {
+            "name": "distractor_5aa01f97ee1e419797a17f2f4e35f79b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5aa01f97ee1e419797a17f2f4e35f79b.usd",
+            "class": "1",
+            "scale_factor": [
+                2.6797384664120734e-05,
+                2.6797384664120734e-05,
+                2.6797384664120734e-05
+            ]
+        },
+        "distractor_e8af96a51d6940a2a550ed84132069e9": {
+            "name": "distractor_e8af96a51d6940a2a550ed84132069e9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e8af96a51d6940a2a550ed84132069e9.usd",
+            "class": "1",
+            "scale_factor": [
+                1.755072487983276e-05,
+                1.755072487983276e-05,
+                1.755072487983276e-05
+            ]
+        },
+        "distractor_70babab6a3494399813dc023c43114cb": {
+            "name": "distractor_70babab6a3494399813dc023c43114cb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_70babab6a3494399813dc023c43114cb.usd",
+            "class": "1",
+            "scale_factor": [
+                1.0290323341839936e-05,
+                1.0290323341839936e-05,
+                1.0290323341839936e-05
+            ]
+        },
+        "distractor_5e924bd219204611b9dad02b38ef4993": {
+            "name": "distractor_5e924bd219204611b9dad02b38ef4993",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5e924bd219204611b9dad02b38ef4993.usd",
+            "class": "1",
+            "scale_factor": [
+                2.114190897137917e-05,
+                2.114190897137917e-05,
+                2.114190897137917e-05
+            ]
+        },
+        "distractor_9dd5c250258141e98cf998c1479fd72f": {
+            "name": "distractor_9dd5c250258141e98cf998c1479fd72f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9dd5c250258141e98cf998c1479fd72f.usd",
+            "class": "1",
+            "scale_factor": [
+                2.506403413426064e-05,
+                2.506403413426064e-05,
+                2.506403413426064e-05
+            ]
+        },
+        "distractor_383a6bb503624aad97baef91ad97893b": {
+            "name": "distractor_383a6bb503624aad97baef91ad97893b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_383a6bb503624aad97baef91ad97893b.usd",
+            "class": "1",
+            "scale_factor": [
+                6.493070506055716e-05,
+                6.493070506055716e-05,
+                6.493070506055716e-05
+            ]
+        },
+        "distractor_c2b7bbdf048d4a3db42472fe1fa84f21": {
+            "name": "distractor_c2b7bbdf048d4a3db42472fe1fa84f21",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c2b7bbdf048d4a3db42472fe1fa84f21.usd",
+            "class": "1",
+            "scale_factor": [
+                2.9934940605372438e-05,
+                2.9934940605372438e-05,
+                2.9934940605372438e-05
+            ]
+        },
+        "distractor_2553bf20c22f4400a827ef008cbe8233": {
+            "name": "distractor_2553bf20c22f4400a827ef008cbe8233",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2553bf20c22f4400a827ef008cbe8233.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0018885608850729976,
+                0.0018885608850729976,
+                0.0018885608850729976
+            ]
+        },
+        "distractor_bc00db686ce54c84b2ad17662748c2d3": {
+            "name": "distractor_bc00db686ce54c84b2ad17662748c2d3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bc00db686ce54c84b2ad17662748c2d3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00012082205003897541,
+                0.00012082205003897541,
+                0.00012082205003897541
+            ]
+        },
+        "distractor_874303d219dc445b94ef5610c522ace0": {
+            "name": "distractor_874303d219dc445b94ef5610c522ace0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_874303d219dc445b94ef5610c522ace0.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007362790447742784,
+                0.0007362790447742784,
+                0.0007362790447742784
+            ]
+        },
+        "distractor_d087d5ec073f4b2c9c73eda14d8238dc": {
+            "name": "distractor_d087d5ec073f4b2c9c73eda14d8238dc",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d087d5ec073f4b2c9c73eda14d8238dc.usd",
+            "class": "1",
+            "scale_factor": [
+                1.866103945931184e-05,
+                1.866103945931184e-05,
+                1.866103945931184e-05
+            ]
+        },
+        "distractor_c05e39813331407daafa3e5aee854672": {
+            "name": "distractor_c05e39813331407daafa3e5aee854672",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c05e39813331407daafa3e5aee854672.usd",
+            "class": "1",
+            "scale_factor": [
+                2.859292360344533e-05,
+                2.859292360344533e-05,
+                2.859292360344533e-05
+            ]
+        },
+        "distractor_35b9a98a54604d2aa7839ebc7795b2f1": {
+            "name": "distractor_35b9a98a54604d2aa7839ebc7795b2f1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_35b9a98a54604d2aa7839ebc7795b2f1.usd",
+            "class": "1",
+            "scale_factor": [
+                1.0503817249346595e-05,
+                1.0503817249346595e-05,
+                1.0503817249346595e-05
+            ]
+        },
+        "distractor_bb8a75843b83498396af24bc5761e1ca": {
+            "name": "distractor_bb8a75843b83498396af24bc5761e1ca",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bb8a75843b83498396af24bc5761e1ca.usd",
+            "class": "1",
+            "scale_factor": [
+                1.7580773526425765e-05,
+                1.7580773526425765e-05,
+                1.7580773526425765e-05
+            ]
+        },
+        "distractor_74d761cf18c44b01aa67df8f3d5f708a": {
+            "name": "distractor_74d761cf18c44b01aa67df8f3d5f708a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_74d761cf18c44b01aa67df8f3d5f708a.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00023114274173652587,
+                0.00023114274173652587,
+                0.00023114274173652587
+            ]
+        },
+        "distractor_24d1bb5b02014ba8be693b6cca1ca752": {
+            "name": "distractor_24d1bb5b02014ba8be693b6cca1ca752",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_24d1bb5b02014ba8be693b6cca1ca752.usd",
+            "class": "1",
+            "scale_factor": [
+                7.924593389720174e-06,
+                7.924593389720174e-06,
+                7.924593389720174e-06
+            ]
+        },
+        "distractor_a18d31285a7a4de5aa97e54779f2c299": {
+            "name": "distractor_a18d31285a7a4de5aa97e54779f2c299",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a18d31285a7a4de5aa97e54779f2c299.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0010377296794687144,
+                0.0010377296794687144,
+                0.0010377296794687144
+            ]
+        },
+        "distractor_6a12ad272e3341719eb698a720f7d830": {
+            "name": "distractor_6a12ad272e3341719eb698a720f7d830",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6a12ad272e3341719eb698a720f7d830.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007209224231278041,
+                0.0007209224231278041,
+                0.0007209224231278041
+            ]
+        },
+        "distractor_b00ff986dcd54c9da20dfc200a9b5a5d": {
+            "name": "distractor_b00ff986dcd54c9da20dfc200a9b5a5d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b00ff986dcd54c9da20dfc200a9b5a5d.usd",
+            "class": "1",
+            "scale_factor": [
+                1.817463515289007e-05,
+                1.817463515289007e-05,
+                1.817463515289007e-05
+            ]
+        },
+        "distractor_701ff92e52d54c7cb4778e59686c3779": {
+            "name": "distractor_701ff92e52d54c7cb4778e59686c3779",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_701ff92e52d54c7cb4778e59686c3779.usd",
+            "class": "1",
+            "scale_factor": [
+                0.002629161686739183,
+                0.002629161686739183,
+                0.002629161686739183
+            ]
+        },
+        "distractor_d6758b43c71641c394dc958babfb65ba": {
+            "name": "distractor_d6758b43c71641c394dc958babfb65ba",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d6758b43c71641c394dc958babfb65ba.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00024166854795331917,
+                0.00024166854795331917,
+                0.00024166854795331917
+            ]
+        },
+        "distractor_20912a93c25d4fcc9295b0dcf2d051ca": {
+            "name": "distractor_20912a93c25d4fcc9295b0dcf2d051ca",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_20912a93c25d4fcc9295b0dcf2d051ca.usd",
+            "class": "1",
+            "scale_factor": [
+                5.259046458680601e-05,
+                5.259046458680601e-05,
+                5.259046458680601e-05
+            ]
+        },
+        "distractor_2ce2881612f14ed0a01993f8e1a390d1": {
+            "name": "distractor_2ce2881612f14ed0a01993f8e1a390d1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2ce2881612f14ed0a01993f8e1a390d1.usd",
+            "class": "1",
+            "scale_factor": [
+                4.5964166127004584e-05,
+                4.5964166127004584e-05,
+                4.5964166127004584e-05
+            ]
+        },
+        "distractor_7ee65df35c0743baaccc5b338ae90ff0": {
+            "name": "distractor_7ee65df35c0743baaccc5b338ae90ff0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7ee65df35c0743baaccc5b338ae90ff0.usd",
+            "class": "1",
+            "scale_factor": [
+                6.9226765667937145e-06,
+                6.9226765667937145e-06,
+                6.9226765667937145e-06
+            ]
+        },
+        "distractor_2278728ec0a2456b8793210d24f4dd79": {
+            "name": "distractor_2278728ec0a2456b8793210d24f4dd79",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2278728ec0a2456b8793210d24f4dd79.usd",
+            "class": "1",
+            "scale_factor": [
+                5.031285974795649e-05,
+                5.031285974795649e-05,
+                5.031285974795649e-05
+            ]
+        },
+        "distractor_9ec133ed41e340aa81ae10b5b20aade7": {
+            "name": "distractor_9ec133ed41e340aa81ae10b5b20aade7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9ec133ed41e340aa81ae10b5b20aade7.usd",
+            "class": "1",
+            "scale_factor": [
+                1.5168151931262106e-05,
+                1.5168151931262106e-05,
+                1.5168151931262106e-05
+            ]
+        },
+        "distractor_19dda58d31654bde939cb30694579fc3": {
+            "name": "distractor_19dda58d31654bde939cb30694579fc3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_19dda58d31654bde939cb30694579fc3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0016851078313751486,
+                0.0016851078313751486,
+                0.0016851078313751486
+            ]
+        },
+        "distractor_1b20457597f44190a5ed24f68050fada": {
+            "name": "distractor_1b20457597f44190a5ed24f68050fada",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1b20457597f44190a5ed24f68050fada.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003862395052107483,
+                0.0003862395052107483,
+                0.0003862395052107483
+            ]
+        },
+        "distractor_e3d121ed4a674077b6c5aad5d03991f7": {
+            "name": "distractor_e3d121ed4a674077b6c5aad5d03991f7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e3d121ed4a674077b6c5aad5d03991f7.usd",
+            "class": "1",
+            "scale_factor": [
+                3.6980094699621376e-05,
+                3.6980094699621376e-05,
+                3.6980094699621376e-05
+            ]
+        },
+        "distractor_1f8abc738d7e4d74909522e06d342132": {
+            "name": "distractor_1f8abc738d7e4d74909522e06d342132",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1f8abc738d7e4d74909522e06d342132.usd",
+            "class": "1",
+            "scale_factor": [
+                7.552661293703538e-06,
+                7.552661293703538e-06,
+                7.552661293703538e-06
+            ]
+        },
+        "distractor_edb231dbeb4447e19cc5fd52eb9f0cba": {
+            "name": "distractor_edb231dbeb4447e19cc5fd52eb9f0cba",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_edb231dbeb4447e19cc5fd52eb9f0cba.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007293013062037481,
+                0.0007293013062037481,
+                0.0007293013062037481
+            ]
+        },
+        "distractor_d6aa4b557c014f2aacbe15e1dabbf9dd": {
+            "name": "distractor_d6aa4b557c014f2aacbe15e1dabbf9dd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d6aa4b557c014f2aacbe15e1dabbf9dd.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007670581825847077,
+                0.0007670581825847077,
+                0.0007670581825847077
+            ]
+        },
+        "distractor_262e5f04d7cd480e989192dc47134f88": {
+            "name": "distractor_262e5f04d7cd480e989192dc47134f88",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_262e5f04d7cd480e989192dc47134f88.usd",
+            "class": "1",
+            "scale_factor": [
+                0.005200394635383382,
+                0.005200394635383382,
+                0.005200394635383382
+            ]
+        },
+        "distractor_f5a2390972ad45829360e619999f6ec6": {
+            "name": "distractor_f5a2390972ad45829360e619999f6ec6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f5a2390972ad45829360e619999f6ec6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0019697642119850286,
+                0.0019697642119850286,
+                0.0019697642119850286
+            ]
+        },
+        "distractor_50a6b597beab4465934647ec647021c9": {
+            "name": "distractor_50a6b597beab4465934647ec647021c9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_50a6b597beab4465934647ec647021c9.usd",
+            "class": "1",
+            "scale_factor": [
+                7.771027848292018e-05,
+                7.771027848292018e-05,
+                7.771027848292018e-05
+            ]
+        },
+        "distractor_491363c21d4a4cb29fbc4b7f959255b5": {
+            "name": "distractor_491363c21d4a4cb29fbc4b7f959255b5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_491363c21d4a4cb29fbc4b7f959255b5.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1739486389923731e-05,
+                1.1739486389923731e-05,
+                1.1739486389923731e-05
+            ]
+        },
+        "distractor_fbad9a2c7d874c3aaa0d88657589edd0": {
+            "name": "distractor_fbad9a2c7d874c3aaa0d88657589edd0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fbad9a2c7d874c3aaa0d88657589edd0.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006502357788073962,
+                0.0006502357788073962,
+                0.0006502357788073962
+            ]
+        },
+        "distractor_da09f77e930f4d138b88193bcc8c6f99": {
+            "name": "distractor_da09f77e930f4d138b88193bcc8c6f99",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_da09f77e930f4d138b88193bcc8c6f99.usd",
+            "class": "1",
+            "scale_factor": [
+                5.140960589686721e-05,
+                5.140960589686721e-05,
+                5.140960589686721e-05
+            ]
+        },
+        "distractor_b5974f8828094d59afb27ec10876dd7b": {
+            "name": "distractor_b5974f8828094d59afb27ec10876dd7b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b5974f8828094d59afb27ec10876dd7b.usd",
+            "class": "1",
+            "scale_factor": [
+                2.7314901950325777e-05,
+                2.7314901950325777e-05,
+                2.7314901950325777e-05
+            ]
+        },
+        "distractor_8913b23dc0dc49a8a65f42f17db4ba68": {
+            "name": "distractor_8913b23dc0dc49a8a65f42f17db4ba68",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8913b23dc0dc49a8a65f42f17db4ba68.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002370562932040751,
+                0.0002370562932040751,
+                0.0002370562932040751
+            ]
+        },
+        "distractor_9340eebe4ef84f7faaf31119adc5f0b6": {
+            "name": "distractor_9340eebe4ef84f7faaf31119adc5f0b6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9340eebe4ef84f7faaf31119adc5f0b6.usd",
+            "class": "1",
+            "scale_factor": [
+                8.796589415723989e-06,
+                8.796589415723989e-06,
+                8.796589415723989e-06
+            ]
+        },
+        "distractor_99c5f8f798234ada8c707621d57ba3e3": {
+            "name": "distractor_99c5f8f798234ada8c707621d57ba3e3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_99c5f8f798234ada8c707621d57ba3e3.usd",
+            "class": "1",
+            "scale_factor": [
+                3.28149319455513e-07,
+                3.28149319455513e-07,
+                3.28149319455513e-07
+            ]
+        },
+        "distractor_1fe0656bd57543728a3e92d82565ec03": {
+            "name": "distractor_1fe0656bd57543728a3e92d82565ec03",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1fe0656bd57543728a3e92d82565ec03.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003164342126366449,
+                0.0003164342126366449,
+                0.0003164342126366449
+            ]
+        },
+        "distractor_65c0171c84ac41bb84dcefd773ff11b2": {
+            "name": "distractor_65c0171c84ac41bb84dcefd773ff11b2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_65c0171c84ac41bb84dcefd773ff11b2.usd",
+            "class": "1",
+            "scale_factor": [
+                4.999370855427981e-06,
+                4.999370855427981e-06,
+                4.999370855427981e-06
+            ]
+        },
+        "distractor_48e98e98cdc44d2fab2ca275c9070dc8": {
+            "name": "distractor_48e98e98cdc44d2fab2ca275c9070dc8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_48e98e98cdc44d2fab2ca275c9070dc8.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4268594023100185e-05,
+                1.4268594023100185e-05,
+                1.4268594023100185e-05
+            ]
+        },
+        "distractor_94cfd6dd3f5d485386c230a7f6dade2b": {
+            "name": "distractor_94cfd6dd3f5d485386c230a7f6dade2b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_94cfd6dd3f5d485386c230a7f6dade2b.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2660459322588727e-05,
+                1.2660459322588727e-05,
+                1.2660459322588727e-05
+            ]
+        },
+        "distractor_a81297a4365e49a3a57b1fde6d5ba8bd": {
+            "name": "distractor_a81297a4365e49a3a57b1fde6d5ba8bd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a81297a4365e49a3a57b1fde6d5ba8bd.usd",
+            "class": "1",
+            "scale_factor": [
+                2.3514176979132598e-05,
+                2.3514176979132598e-05,
+                2.3514176979132598e-05
+            ]
+        },
+        "distractor_965c133558bb4e43baae56b5f2235077": {
+            "name": "distractor_965c133558bb4e43baae56b5f2235077",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_965c133558bb4e43baae56b5f2235077.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00021113636968743697,
+                0.00021113636968743697,
+                0.00021113636968743697
+            ]
+        },
+        "distractor_6ad7d1950a8e4816bc080d072958a6e3": {
+            "name": "distractor_6ad7d1950a8e4816bc080d072958a6e3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6ad7d1950a8e4816bc080d072958a6e3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.030549238557678264,
+                0.030549238557678264,
+                0.030549238557678264
+            ]
+        },
+        "distractor_07b2a386523e481c9efc4f8bc2b9f093": {
+            "name": "distractor_07b2a386523e481c9efc4f8bc2b9f093",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_07b2a386523e481c9efc4f8bc2b9f093.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00014684140819930266,
+                0.00014684140819930266,
+                0.00014684140819930266
+            ]
+        },
+        "distractor_8b096452767e4816a87e283b1c92b277": {
+            "name": "distractor_8b096452767e4816a87e283b1c92b277",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8b096452767e4816a87e283b1c92b277.usd",
+            "class": "1",
+            "scale_factor": [
+                1.7236997488350814e-05,
+                1.7236997488350814e-05,
+                1.7236997488350814e-05
+            ]
+        },
+        "distractor_9c7f88cefd34428aa336921d4138570f": {
+            "name": "distractor_9c7f88cefd34428aa336921d4138570f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9c7f88cefd34428aa336921d4138570f.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00017002587540110282,
+                0.00017002587540110282,
+                0.00017002587540110282
+            ]
+        },
+        "distractor_110550d2127148159789b7c5609f0d40": {
+            "name": "distractor_110550d2127148159789b7c5609f0d40",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_110550d2127148159789b7c5609f0d40.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3869724840320244e-05,
+                1.3869724840320244e-05,
+                1.3869724840320244e-05
+            ]
+        },
+        "distractor_f29d6671fd1c45bd9bdec1659cd2d318": {
+            "name": "distractor_f29d6671fd1c45bd9bdec1659cd2d318",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f29d6671fd1c45bd9bdec1659cd2d318.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002633942434186677,
+                0.0002633942434186677,
+                0.0002633942434186677
+            ]
+        },
+        "distractor_5794311bfc3e44fab29200126ff338cc": {
+            "name": "distractor_5794311bfc3e44fab29200126ff338cc",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5794311bfc3e44fab29200126ff338cc.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00011940978307057065,
+                0.00011940978307057065,
+                0.00011940978307057065
+            ]
+        },
+        "distractor_ff5d1c07cd4b4f1bbb7da5fbf09f5957": {
+            "name": "distractor_ff5d1c07cd4b4f1bbb7da5fbf09f5957",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ff5d1c07cd4b4f1bbb7da5fbf09f5957.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00024278404108659432,
+                0.00024278404108659432,
+                0.00024278404108659432
+            ]
+        },
+        "distractor_621eca6aeb904cc59b4c04d9c3822aef": {
+            "name": "distractor_621eca6aeb904cc59b4c04d9c3822aef",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_621eca6aeb904cc59b4c04d9c3822aef.usd",
+            "class": "1",
+            "scale_factor": [
+                0.000296667454339503,
+                0.000296667454339503,
+                0.000296667454339503
+            ]
+        },
+        "distractor_06e6e8e61bc54904a7200b428340e3cd": {
+            "name": "distractor_06e6e8e61bc54904a7200b428340e3cd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_06e6e8e61bc54904a7200b428340e3cd.usd",
+            "class": "1",
+            "scale_factor": [
+                1.7294061547072347e-05,
+                1.7294061547072347e-05,
+                1.7294061547072347e-05
+            ]
+        },
+        "distractor_03d654f0a6c74de788c02055661b5746": {
+            "name": "distractor_03d654f0a6c74de788c02055661b5746",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_03d654f0a6c74de788c02055661b5746.usd",
+            "class": "1",
+            "scale_factor": [
+                9.946407177567838e-06,
+                9.946407177567838e-06,
+                9.946407177567838e-06
+            ]
+        },
+        "distractor_d66bb48e8cfa433ab7cb4eeb3ff3ee07": {
+            "name": "distractor_d66bb48e8cfa433ab7cb4eeb3ff3ee07",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d66bb48e8cfa433ab7cb4eeb3ff3ee07.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007624037970180825,
+                0.0007624037970180825,
+                0.0007624037970180825
+            ]
+        },
+        "distractor_58b6717e98604351ab86aec4371aa977": {
+            "name": "distractor_58b6717e98604351ab86aec4371aa977",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_58b6717e98604351ab86aec4371aa977.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0005169683596974585,
+                0.0005169683596974585,
+                0.0005169683596974585
+            ]
+        },
+        "distractor_2c1bc9bacd184f3fa8f908be9d24be87": {
+            "name": "distractor_2c1bc9bacd184f3fa8f908be9d24be87",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2c1bc9bacd184f3fa8f908be9d24be87.usd",
+            "class": "1",
+            "scale_factor": [
+                2.5475450784292387e-05,
+                2.5475450784292387e-05,
+                2.5475450784292387e-05
+            ]
+        },
+        "distractor_1290508942554dd596c15ef549aebe34": {
+            "name": "distractor_1290508942554dd596c15ef549aebe34",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1290508942554dd596c15ef549aebe34.usd",
+            "class": "1",
+            "scale_factor": [
+                2.4142202755403016e-05,
+                2.4142202755403016e-05,
+                2.4142202755403016e-05
+            ]
+        },
+        "distractor_0bb1314e57794c6d972ff043c2022577": {
+            "name": "distractor_0bb1314e57794c6d972ff043c2022577",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_0bb1314e57794c6d972ff043c2022577.usd",
+            "class": "1",
+            "scale_factor": [
+                2.6701292750544507e-06,
+                2.6701292750544507e-06,
+                2.6701292750544507e-06
+            ]
+        },
+        "distractor_7385f51f03c2410d833f4b4b8882e628": {
+            "name": "distractor_7385f51f03c2410d833f4b4b8882e628",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7385f51f03c2410d833f4b4b8882e628.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0010014724731735585,
+                0.0010014724731735585,
+                0.0010014724731735585
+            ]
+        },
+        "distractor_d2341e00eab045e2aa189454483e1703": {
+            "name": "distractor_d2341e00eab045e2aa189454483e1703",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d2341e00eab045e2aa189454483e1703.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003138142037998943,
+                0.0003138142037998943,
+                0.0003138142037998943
+            ]
+        },
+        "distractor_56830d26f6054fa3bcb17eebf739261e": {
+            "name": "distractor_56830d26f6054fa3bcb17eebf739261e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_56830d26f6054fa3bcb17eebf739261e.usd",
+            "class": "1",
+            "scale_factor": [
+                3.535217135127711e-05,
+                3.535217135127711e-05,
+                3.535217135127711e-05
+            ]
+        },
+        "distractor_87dff60392c84b089d0e7c1f3cef5d22": {
+            "name": "distractor_87dff60392c84b089d0e7c1f3cef5d22",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_87dff60392c84b089d0e7c1f3cef5d22.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1339631793417651e-05,
+                1.1339631793417651e-05,
+                1.1339631793417651e-05
+            ]
+        },
+        "distractor_30134c11e00c4496baff2db222481142": {
+            "name": "distractor_30134c11e00c4496baff2db222481142",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_30134c11e00c4496baff2db222481142.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0009476396995929395,
+                0.0009476396995929395,
+                0.0009476396995929395
+            ]
+        },
+        "distractor_80977a2787c14f2e9bd0d0b8b9187e2c": {
+            "name": "distractor_80977a2787c14f2e9bd0d0b8b9187e2c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_80977a2787c14f2e9bd0d0b8b9187e2c.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006698758093117552,
+                0.0006698758093117552,
+                0.0006698758093117552
+            ]
+        },
+        "distractor_7c2027dfe0ca4651a278a0d55dacf1d1": {
+            "name": "distractor_7c2027dfe0ca4651a278a0d55dacf1d1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7c2027dfe0ca4651a278a0d55dacf1d1.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00012645794928736463,
+                0.00012645794928736463,
+                0.00012645794928736463
+            ]
+        },
+        "distractor_5cbaddd9ebd44eb68feb1351ed1b72fa": {
+            "name": "distractor_5cbaddd9ebd44eb68feb1351ed1b72fa",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5cbaddd9ebd44eb68feb1351ed1b72fa.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00023165001372260158,
+                0.00023165001372260158,
+                0.00023165001372260158
+            ]
+        },
+        "distractor_a44c818f72af4cb4a3f8a3c6af95a077": {
+            "name": "distractor_a44c818f72af4cb4a3f8a3c6af95a077",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a44c818f72af4cb4a3f8a3c6af95a077.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002062466669181903,
+                0.0002062466669181903,
+                0.0002062466669181903
+            ]
+        },
+        "distractor_9e85cdd685234601a7cab1bfe79074fb": {
+            "name": "distractor_9e85cdd685234601a7cab1bfe79074fb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9e85cdd685234601a7cab1bfe79074fb.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00011309650665368137,
+                0.00011309650665368137,
+                0.00011309650665368137
+            ]
+        },
+        "distractor_fdb38c9c687a40c68f1a91cf2d46fe13": {
+            "name": "distractor_fdb38c9c687a40c68f1a91cf2d46fe13",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fdb38c9c687a40c68f1a91cf2d46fe13.usd",
+            "class": "1",
+            "scale_factor": [
+                5.178866748141517e-05,
+                5.178866748141517e-05,
+                5.178866748141517e-05
+            ]
+        },
+        "distractor_940edad20b714c51a6885607a4b4cfac": {
+            "name": "distractor_940edad20b714c51a6885607a4b4cfac",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_940edad20b714c51a6885607a4b4cfac.usd",
+            "class": "1",
+            "scale_factor": [
+                4.193899462617392e-05,
+                4.193899462617392e-05,
+                4.193899462617392e-05
+            ]
+        },
+        "distractor_1a577daee80241e2bc212b8534c0eec0": {
+            "name": "distractor_1a577daee80241e2bc212b8534c0eec0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1a577daee80241e2bc212b8534c0eec0.usd",
+            "class": "1",
+            "scale_factor": [
+                1.5149851845008032e-05,
+                1.5149851845008032e-05,
+                1.5149851845008032e-05
+            ]
+        },
+        "distractor_ca80239efef7421396115ebaf127b70e": {
+            "name": "distractor_ca80239efef7421396115ebaf127b70e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ca80239efef7421396115ebaf127b70e.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2448957243170651e-05,
+                1.2448957243170651e-05,
+                1.2448957243170651e-05
+            ]
+        },
+        "distractor_c5544cde14934e50836832ec9dbc01ba": {
+            "name": "distractor_c5544cde14934e50836832ec9dbc01ba",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c5544cde14934e50836832ec9dbc01ba.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002306435186691934,
+                0.0002306435186691934,
+                0.0002306435186691934
+            ]
+        },
+        "distractor_1e9d4f45a64f41209e3e9a89e8ecac77": {
+            "name": "distractor_1e9d4f45a64f41209e3e9a89e8ecac77",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1e9d4f45a64f41209e3e9a89e8ecac77.usd",
+            "class": "1",
+            "scale_factor": [
+                1.9157250676383463e-05,
+                1.9157250676383463e-05,
+                1.9157250676383463e-05
+            ]
+        },
+        "distractor_42027f78e219460bbd97b1152401c317": {
+            "name": "distractor_42027f78e219460bbd97b1152401c317",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_42027f78e219460bbd97b1152401c317.usd",
+            "class": "1",
+            "scale_factor": [
+                3.0991985552515098e-06,
+                3.0991985552515098e-06,
+                3.0991985552515098e-06
+            ]
+        },
+        "distractor_c311dd865c814256bfa166ac5e44d6e8": {
+            "name": "distractor_c311dd865c814256bfa166ac5e44d6e8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c311dd865c814256bfa166ac5e44d6e8.usd",
+            "class": "1",
+            "scale_factor": [
+                8.798625912468947e-05,
+                8.798625912468947e-05,
+                8.798625912468947e-05
+            ]
+        },
+        "distractor_e0acce0e1da044c59e5ae70ccfa6c764": {
+            "name": "distractor_e0acce0e1da044c59e5ae70ccfa6c764",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e0acce0e1da044c59e5ae70ccfa6c764.usd",
+            "class": "1",
+            "scale_factor": [
+                2.3274131939177975e-05,
+                2.3274131939177975e-05,
+                2.3274131939177975e-05
+            ]
+        },
+        "distractor_14b021bd7e29403699baf2c68784ddeb": {
+            "name": "distractor_14b021bd7e29403699baf2c68784ddeb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_14b021bd7e29403699baf2c68784ddeb.usd",
+            "class": "1",
+            "scale_factor": [
+                0.006202783921113038,
+                0.006202783921113038,
+                0.006202783921113038
+            ]
+        },
+        "distractor_ab2a30613eb648e99beb05c61d6d196f": {
+            "name": "distractor_ab2a30613eb648e99beb05c61d6d196f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ab2a30613eb648e99beb05c61d6d196f.usd",
+            "class": "1",
+            "scale_factor": [
+                6.489041425867428e-05,
+                6.489041425867428e-05,
+                6.489041425867428e-05
+            ]
+        },
+        "distractor_524931f57ea44707b6fbf6750602d4dd": {
+            "name": "distractor_524931f57ea44707b6fbf6750602d4dd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_524931f57ea44707b6fbf6750602d4dd.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0014349961761144741,
+                0.0014349961761144741,
+                0.0014349961761144741
+            ]
+        },
+        "distractor_5c4b8516166b4c699fc398224adc58af": {
+            "name": "distractor_5c4b8516166b4c699fc398224adc58af",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5c4b8516166b4c699fc398224adc58af.usd",
+            "class": "1",
+            "scale_factor": [
+                4.7440654467487427e-05,
+                4.7440654467487427e-05,
+                4.7440654467487427e-05
+            ]
+        },
+        "distractor_6200ffa5fd6b446fb9611a6552c84a43": {
+            "name": "distractor_6200ffa5fd6b446fb9611a6552c84a43",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6200ffa5fd6b446fb9611a6552c84a43.usd",
+            "class": "1",
+            "scale_factor": [
+                8.00276119178851e-05,
+                8.00276119178851e-05,
+                8.00276119178851e-05
+            ]
+        },
+        "distractor_feb9a57e2d4b484f88c6ae1127fd3eb7": {
+            "name": "distractor_feb9a57e2d4b484f88c6ae1127fd3eb7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_feb9a57e2d4b484f88c6ae1127fd3eb7.usd",
+            "class": "1",
+            "scale_factor": [
+                5.159092912184332e-05,
+                5.159092912184332e-05,
+                5.159092912184332e-05
+            ]
+        },
+        "distractor_f4eaad927925455a8e892c97315262d7": {
+            "name": "distractor_f4eaad927925455a8e892c97315262d7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f4eaad927925455a8e892c97315262d7.usd",
+            "class": "1",
+            "scale_factor": [
+                2.553356233411596e-05,
+                2.553356233411596e-05,
+                2.553356233411596e-05
+            ]
+        },
+        "distractor_7f80f3403cf6406fb7b8be25a5e174d5": {
+            "name": "distractor_7f80f3403cf6406fb7b8be25a5e174d5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7f80f3403cf6406fb7b8be25a5e174d5.usd",
+            "class": "1",
+            "scale_factor": [
+                6.313264828232506e-06,
+                6.313264828232506e-06,
+                6.313264828232506e-06
+            ]
+        },
+        "distractor_dd4a460ce7bf476eb5a9b85222dbfb24": {
+            "name": "distractor_dd4a460ce7bf476eb5a9b85222dbfb24",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_dd4a460ce7bf476eb5a9b85222dbfb24.usd",
+            "class": "1",
+            "scale_factor": [
+                3.610621624028292e-05,
+                3.610621624028292e-05,
+                3.610621624028292e-05
+            ]
+        },
+        "distractor_159cea36f78c459993943b44dbfb5339": {
+            "name": "distractor_159cea36f78c459993943b44dbfb5339",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_159cea36f78c459993943b44dbfb5339.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007806004832512234,
+                0.0007806004832512234,
+                0.0007806004832512234
+            ]
+        },
+        "distractor_b8fa56ee6c0a45c9b7f9161b65dd3432": {
+            "name": "distractor_b8fa56ee6c0a45c9b7f9161b65dd3432",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b8fa56ee6c0a45c9b7f9161b65dd3432.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00010116632676370175,
+                0.00010116632676370175,
+                0.00010116632676370175
+            ]
+        },
+        "distractor_bd201ff1b2b94848aa261aaeffbc255a": {
+            "name": "distractor_bd201ff1b2b94848aa261aaeffbc255a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bd201ff1b2b94848aa261aaeffbc255a.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3548237768020089e-05,
+                1.3548237768020089e-05,
+                1.3548237768020089e-05
+            ]
+        },
+        "distractor_72f492e36af5461b91ce066dab70af79": {
+            "name": "distractor_72f492e36af5461b91ce066dab70af79",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_72f492e36af5461b91ce066dab70af79.usd",
+            "class": "1",
+            "scale_factor": [
+                0.23543395543526557,
+                0.23543395543526557,
+                0.23543395543526557
+            ]
+        },
+        "distractor_125243538f54423387248959e2e41776": {
+            "name": "distractor_125243538f54423387248959e2e41776",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_125243538f54423387248959e2e41776.usd",
+            "class": "1",
+            "scale_factor": [
+                3.749689816034828e-05,
+                3.749689816034828e-05,
+                3.749689816034828e-05
+            ]
+        },
+        "distractor_9fe11064eef548dbbd44b056d1f331ab": {
+            "name": "distractor_9fe11064eef548dbbd44b056d1f331ab",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9fe11064eef548dbbd44b056d1f331ab.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008253256623332129,
+                0.0008253256623332129,
+                0.0008253256623332129
+            ]
+        },
+        "distractor_cec53aa15e054a699d0c33fa2dab899b": {
+            "name": "distractor_cec53aa15e054a699d0c33fa2dab899b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cec53aa15e054a699d0c33fa2dab899b.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0001815511276492251,
+                0.0001815511276492251,
+                0.0001815511276492251
+            ]
+        },
+        "distractor_580ea53e0155428498ed6ebde1acfeba": {
+            "name": "distractor_580ea53e0155428498ed6ebde1acfeba",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_580ea53e0155428498ed6ebde1acfeba.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00028982462180426356,
+                0.00028982462180426356,
+                0.00028982462180426356
+            ]
+        },
+        "distractor_617aa06ab1274fd78275a573c963e893": {
+            "name": "distractor_617aa06ab1274fd78275a573c963e893",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_617aa06ab1274fd78275a573c963e893.usd",
+            "class": "1",
+            "scale_factor": [
+                0.03558104922604521,
+                0.03558104922604521,
+                0.03558104922604521
+            ]
+        },
+        "distractor_d64bf29444564dd0bf70df1110d32931": {
+            "name": "distractor_d64bf29444564dd0bf70df1110d32931",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d64bf29444564dd0bf70df1110d32931.usd",
+            "class": "1",
+            "scale_factor": [
+                8.060834394515262e-06,
+                8.060834394515262e-06,
+                8.060834394515262e-06
+            ]
+        },
+        "distractor_de148ed2c3764b6490e9660525b5cad3": {
+            "name": "distractor_de148ed2c3764b6490e9660525b5cad3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_de148ed2c3764b6490e9660525b5cad3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.04771173736082365,
+                0.04771173736082365,
+                0.04771173736082365
+            ]
+        },
+        "distractor_97dea691b6a1493a8777dcf67080fab3": {
+            "name": "distractor_97dea691b6a1493a8777dcf67080fab3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_97dea691b6a1493a8777dcf67080fab3.usd",
+            "class": "1",
+            "scale_factor": [
+                1.6426483096734747e-05,
+                1.6426483096734747e-05,
+                1.6426483096734747e-05
+            ]
+        },
+        "distractor_f36e8f3f8d8343b782f917329e3d76d1": {
+            "name": "distractor_f36e8f3f8d8343b782f917329e3d76d1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f36e8f3f8d8343b782f917329e3d76d1.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1532138125915103e-05,
+                1.1532138125915103e-05,
+                1.1532138125915103e-05
+            ]
+        },
+        "distractor_b6bc770878ab41c88fa7b51274497bbb": {
+            "name": "distractor_b6bc770878ab41c88fa7b51274497bbb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b6bc770878ab41c88fa7b51274497bbb.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0030700870202914616,
+                0.0030700870202914616,
+                0.0030700870202914616
+            ]
+        },
+        "distractor_ae5c3481f14d4683a319667717d65352": {
+            "name": "distractor_ae5c3481f14d4683a319667717d65352",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ae5c3481f14d4683a319667717d65352.usd",
+            "class": "1",
+            "scale_factor": [
+                3.753099271160245e-05,
+                3.753099271160245e-05,
+                3.753099271160245e-05
+            ]
+        },
+        "distractor_f5b8c16dc68b426597161e9f2401b254": {
+            "name": "distractor_f5b8c16dc68b426597161e9f2401b254",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f5b8c16dc68b426597161e9f2401b254.usd",
+            "class": "1",
+            "scale_factor": [
+                1.9779457757179003e-05,
+                1.9779457757179003e-05,
+                1.9779457757179003e-05
+            ]
+        },
+        "distractor_11bb947627ac48c78ca0f138112ffdc6": {
+            "name": "distractor_11bb947627ac48c78ca0f138112ffdc6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_11bb947627ac48c78ca0f138112ffdc6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.010101418577475537,
+                0.010101418577475537,
+                0.010101418577475537
+            ]
+        },
+        "distractor_87814aa5175648c49c153f76c9c344f5": {
+            "name": "distractor_87814aa5175648c49c153f76c9c344f5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_87814aa5175648c49c153f76c9c344f5.usd",
+            "class": "1",
+            "scale_factor": [
+                4.537878728350989e-05,
+                4.537878728350989e-05,
+                4.537878728350989e-05
+            ]
+        },
+        "distractor_e5405780b0c44be69324f28a763c2ede": {
+            "name": "distractor_e5405780b0c44be69324f28a763c2ede",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e5405780b0c44be69324f28a763c2ede.usd",
+            "class": "1",
+            "scale_factor": [
+                1.9182571145505775e-05,
+                1.9182571145505775e-05,
+                1.9182571145505775e-05
+            ]
+        },
+        "distractor_1d95523b285c49e0b6d4c8a59799dbc7": {
+            "name": "distractor_1d95523b285c49e0b6d4c8a59799dbc7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1d95523b285c49e0b6d4c8a59799dbc7.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00026777611518732724,
+                0.00026777611518732724,
+                0.00026777611518732724
+            ]
+        },
+        "distractor_58a574111ea64cd59dd7ab32276ae3a2": {
+            "name": "distractor_58a574111ea64cd59dd7ab32276ae3a2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_58a574111ea64cd59dd7ab32276ae3a2.usd",
+            "class": "1",
+            "scale_factor": [
+                1.360234360196508e-06,
+                1.360234360196508e-06,
+                1.360234360196508e-06
+            ]
+        },
+        "distractor_a76dd383af504f12a3112fc084b76f30": {
+            "name": "distractor_a76dd383af504f12a3112fc084b76f30",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a76dd383af504f12a3112fc084b76f30.usd",
+            "class": "1",
+            "scale_factor": [
+                5.505496516296811e-06,
+                5.505496516296811e-06,
+                5.505496516296811e-06
+            ]
+        },
+        "distractor_fa5d3a97ed59421f93bb08b7015dc38d": {
+            "name": "distractor_fa5d3a97ed59421f93bb08b7015dc38d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fa5d3a97ed59421f93bb08b7015dc38d.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006543449095086474,
+                0.0006543449095086474,
+                0.0006543449095086474
+            ]
+        },
+        "distractor_43225fb548c14cb0a7fb02fee3ce4198": {
+            "name": "distractor_43225fb548c14cb0a7fb02fee3ce4198",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_43225fb548c14cb0a7fb02fee3ce4198.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3653428169716695e-05,
+                1.3653428169716695e-05,
+                1.3653428169716695e-05
+            ]
+        },
+        "distractor_6b3d3232aab84f638aeb38411e8fb1bb": {
+            "name": "distractor_6b3d3232aab84f638aeb38411e8fb1bb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6b3d3232aab84f638aeb38411e8fb1bb.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00117817620191696,
+                0.00117817620191696,
+                0.00117817620191696
+            ]
+        },
+        "distractor_5b4bae991a134228ac9388ffcf549f52": {
+            "name": "distractor_5b4bae991a134228ac9388ffcf549f52",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5b4bae991a134228ac9388ffcf549f52.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3483134780957074e-05,
+                1.3483134780957074e-05,
+                1.3483134780957074e-05
+            ]
+        },
+        "distractor_5dea28f32d0b47b6a59a3031ac9e0eca": {
+            "name": "distractor_5dea28f32d0b47b6a59a3031ac9e0eca",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5dea28f32d0b47b6a59a3031ac9e0eca.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002715043837387739,
+                0.0002715043837387739,
+                0.0002715043837387739
+            ]
+        },
+        "distractor_b7fa635af1ef47a3a549042a0c659163": {
+            "name": "distractor_b7fa635af1ef47a3a549042a0c659163",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b7fa635af1ef47a3a549042a0c659163.usd",
+            "class": "1",
+            "scale_factor": [
+                5.144754742823418e-05,
+                5.144754742823418e-05,
+                5.144754742823418e-05
+            ]
+        },
+        "distractor_186fc4adc12943f391e23459b427cf54": {
+            "name": "distractor_186fc4adc12943f391e23459b427cf54",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_186fc4adc12943f391e23459b427cf54.usd",
+            "class": "1",
+            "scale_factor": [
+                1.532622609643227e-05,
+                1.532622609643227e-05,
+                1.532622609643227e-05
+            ]
+        },
+        "distractor_7fdbc93ea07c422c9ba48fa3cb05a8d4": {
+            "name": "distractor_7fdbc93ea07c422c9ba48fa3cb05a8d4",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7fdbc93ea07c422c9ba48fa3cb05a8d4.usd",
+            "class": "1",
+            "scale_factor": [
+                9.123445204099837e-05,
+                9.123445204099837e-05,
+                9.123445204099837e-05
+            ]
+        },
+        "distractor_a923e07ec811492f8ebb384c006c2685": {
+            "name": "distractor_a923e07ec811492f8ebb384c006c2685",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a923e07ec811492f8ebb384c006c2685.usd",
+            "class": "1",
+            "scale_factor": [
+                0.06450822568354096,
+                0.06450822568354096,
+                0.06450822568354096
+            ]
+        },
+        "distractor_0a5b453599d5483a845fc8fe5a260f99": {
+            "name": "distractor_0a5b453599d5483a845fc8fe5a260f99",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_0a5b453599d5483a845fc8fe5a260f99.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00010223449345673199,
+                0.00010223449345673199,
+                0.00010223449345673199
+            ]
+        },
+        "distractor_596e3739c3844733a542c89ea7465dab": {
+            "name": "distractor_596e3739c3844733a542c89ea7465dab",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_596e3739c3844733a542c89ea7465dab.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0009884028260605966,
+                0.0009884028260605966,
+                0.0009884028260605966
+            ]
+        },
+        "distractor_2732dd443c4c4a028fb5323992078b08": {
+            "name": "distractor_2732dd443c4c4a028fb5323992078b08",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2732dd443c4c4a028fb5323992078b08.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00807562087870758,
+                0.00807562087870758,
+                0.00807562087870758
+            ]
+        },
+        "distractor_48d245306ca845a7b9b80f3aea489a74": {
+            "name": "distractor_48d245306ca845a7b9b80f3aea489a74",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_48d245306ca845a7b9b80f3aea489a74.usd",
+            "class": "1",
+            "scale_factor": [
+                9.75259728535707e-05,
+                9.75259728535707e-05,
+                9.75259728535707e-05
+            ]
+        },
+        "distractor_88faadb9b1984500b507f01a7579b3ad": {
+            "name": "distractor_88faadb9b1984500b507f01a7579b3ad",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_88faadb9b1984500b507f01a7579b3ad.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007443662702361189,
+                0.0007443662702361189,
+                0.0007443662702361189
+            ]
+        },
+        "distractor_a6a080fc587941f5b5bceb75f2346d94": {
+            "name": "distractor_a6a080fc587941f5b5bceb75f2346d94",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a6a080fc587941f5b5bceb75f2346d94.usd",
+            "class": "1",
+            "scale_factor": [
+                2.6205671736845002e-05,
+                2.6205671736845002e-05,
+                2.6205671736845002e-05
+            ]
+        },
+        "distractor_3bcdd52d640f4750b03b16f7326ed612": {
+            "name": "distractor_3bcdd52d640f4750b03b16f7326ed612",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3bcdd52d640f4750b03b16f7326ed612.usd",
+            "class": "1",
+            "scale_factor": [
+                2.9470124926000884e-05,
+                2.9470124926000884e-05,
+                2.9470124926000884e-05
+            ]
+        },
+        "distractor_869636bcdb0844ed80368501d3eef865": {
+            "name": "distractor_869636bcdb0844ed80368501d3eef865",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_869636bcdb0844ed80368501d3eef865.usd",
+            "class": "1",
+            "scale_factor": [
+                2.6303020610229125e-05,
+                2.6303020610229125e-05,
+                2.6303020610229125e-05
+            ]
+        },
+        "distractor_ce1f5cfa69a74e0a93432da4bf8fcb94": {
+            "name": "distractor_ce1f5cfa69a74e0a93432da4bf8fcb94",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ce1f5cfa69a74e0a93432da4bf8fcb94.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00046311374409914094,
+                0.00046311374409914094,
+                0.00046311374409914094
+            ]
+        },
+        "distractor_2d32e17cd4b44564aad129416e26d641": {
+            "name": "distractor_2d32e17cd4b44564aad129416e26d641",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2d32e17cd4b44564aad129416e26d641.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00015935030388753097,
+                0.00015935030388753097,
+                0.00015935030388753097
+            ]
+        },
+        "distractor_caf2eb40570748e39079bb79a6e27069": {
+            "name": "distractor_caf2eb40570748e39079bb79a6e27069",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_caf2eb40570748e39079bb79a6e27069.usd",
+            "class": "1",
+            "scale_factor": [
+                1.428146384993773e-06,
+                1.428146384993773e-06,
+                1.428146384993773e-06
+            ]
+        },
+        "distractor_3116199794424ab396ac765c6f7827f7": {
+            "name": "distractor_3116199794424ab396ac765c6f7827f7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3116199794424ab396ac765c6f7827f7.usd",
+            "class": "1",
+            "scale_factor": [
+                1.9766746485950978e-05,
+                1.9766746485950978e-05,
+                1.9766746485950978e-05
+            ]
+        },
+        "distractor_ce3ba2d9ef1e413e82002d2064cf0513": {
+            "name": "distractor_ce3ba2d9ef1e413e82002d2064cf0513",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ce3ba2d9ef1e413e82002d2064cf0513.usd",
+            "class": "1",
+            "scale_factor": [
+                1.9810632332129937e-05,
+                1.9810632332129937e-05,
+                1.9810632332129937e-05
+            ]
+        },
+        "distractor_4046819f39194b71b23e74ef648c4b72": {
+            "name": "distractor_4046819f39194b71b23e74ef648c4b72",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4046819f39194b71b23e74ef648c4b72.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003204305070581282,
+                0.0003204305070581282,
+                0.0003204305070581282
+            ]
+        },
+        "distractor_d165fd6f84b14c1da9aee8bda2bb48a9": {
+            "name": "distractor_d165fd6f84b14c1da9aee8bda2bb48a9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d165fd6f84b14c1da9aee8bda2bb48a9.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0014354475650704903,
+                0.0014354475650704903,
+                0.0014354475650704903
+            ]
+        },
+        "distractor_edc42b3b030a48eaa87e9d1b128a1e94": {
+            "name": "distractor_edc42b3b030a48eaa87e9d1b128a1e94",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_edc42b3b030a48eaa87e9d1b128a1e94.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008925439041791325,
+                0.0008925439041791325,
+                0.0008925439041791325
+            ]
+        },
+        "distractor_df3c29202d7c41e5bf68e375ced35b82": {
+            "name": "distractor_df3c29202d7c41e5bf68e375ced35b82",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_df3c29202d7c41e5bf68e375ced35b82.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00015856469772536095,
+                0.00015856469772536095,
+                0.00015856469772536095
+            ]
+        },
+        "distractor_5f4e230e322a4a49a2a040900bc34e7f": {
+            "name": "distractor_5f4e230e322a4a49a2a040900bc34e7f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5f4e230e322a4a49a2a040900bc34e7f.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003932858608778839,
+                0.0003932858608778839,
+                0.0003932858608778839
+            ]
+        },
+        "distractor_d6a985870b5840c196af1ceef34b6a4f": {
+            "name": "distractor_d6a985870b5840c196af1ceef34b6a4f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d6a985870b5840c196af1ceef34b6a4f.usd",
+            "class": "1",
+            "scale_factor": [
+                8.422692589847755e-06,
+                8.422692589847755e-06,
+                8.422692589847755e-06
+            ]
+        },
+        "distractor_a69dcfd9abba43249ffdf0922f75a0c8": {
+            "name": "distractor_a69dcfd9abba43249ffdf0922f75a0c8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a69dcfd9abba43249ffdf0922f75a0c8.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0013657919142332554,
+                0.0013657919142332554,
+                0.0013657919142332554
+            ]
+        },
+        "distractor_778d48f8ece7404faaa3cde152dd3070": {
+            "name": "distractor_778d48f8ece7404faaa3cde152dd3070",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_778d48f8ece7404faaa3cde152dd3070.usd",
+            "class": "1",
+            "scale_factor": [
+                1.6660722088993735e-05,
+                1.6660722088993735e-05,
+                1.6660722088993735e-05
+            ]
+        },
+        "distractor_6f609a24da21450cb030dcd7b108cf92": {
+            "name": "distractor_6f609a24da21450cb030dcd7b108cf92",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6f609a24da21450cb030dcd7b108cf92.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00012832071142716443,
+                0.00012832071142716443,
+                0.00012832071142716443
+            ]
+        },
+        "distractor_e6b8448619ab4c2c9b1313a0457ab68f": {
+            "name": "distractor_e6b8448619ab4c2c9b1313a0457ab68f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e6b8448619ab4c2c9b1313a0457ab68f.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007629154950648257,
+                0.0007629154950648257,
+                0.0007629154950648257
+            ]
+        },
+        "distractor_efc5bb7ca83d44d688dbdcad8a677873": {
+            "name": "distractor_efc5bb7ca83d44d688dbdcad8a677873",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_efc5bb7ca83d44d688dbdcad8a677873.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00398843702502505,
+                0.00398843702502505,
+                0.00398843702502505
+            ]
+        },
+        "distractor_b83713f8384c43eb9118504b36abcdb9": {
+            "name": "distractor_b83713f8384c43eb9118504b36abcdb9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b83713f8384c43eb9118504b36abcdb9.usd",
+            "class": "1",
+            "scale_factor": [
+                1.649265107744979e-05,
+                1.649265107744979e-05,
+                1.649265107744979e-05
+            ]
+        },
+        "distractor_791c169ddc9a4d90bacfd2694c7551ca": {
+            "name": "distractor_791c169ddc9a4d90bacfd2694c7551ca",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_791c169ddc9a4d90bacfd2694c7551ca.usd",
+            "class": "1",
+            "scale_factor": [
+                3.6399959324858716e-06,
+                3.6399959324858716e-06,
+                3.6399959324858716e-06
+            ]
+        },
+        "distractor_067d5a1a43244fa98774de0dab6c2398": {
+            "name": "distractor_067d5a1a43244fa98774de0dab6c2398",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_067d5a1a43244fa98774de0dab6c2398.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3453601422378768e-05,
+                1.3453601422378768e-05,
+                1.3453601422378768e-05
+            ]
+        },
+        "distractor_ad512b007efe46b7b2957c6c9433f840": {
+            "name": "distractor_ad512b007efe46b7b2957c6c9433f840",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ad512b007efe46b7b2957c6c9433f840.usd",
+            "class": "1",
+            "scale_factor": [
+                3.3128031240240496e-05,
+                3.3128031240240496e-05,
+                3.3128031240240496e-05
+            ]
+        },
+        "distractor_333c075e3423426abdd8664ea238bded": {
+            "name": "distractor_333c075e3423426abdd8664ea238bded",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_333c075e3423426abdd8664ea238bded.usd",
+            "class": "1",
+            "scale_factor": [
+                1.456114961363263e-05,
+                1.456114961363263e-05,
+                1.456114961363263e-05
+            ]
+        },
+        "distractor_143d00bec7ce4c7aab0d8b17fabc85b3": {
+            "name": "distractor_143d00bec7ce4c7aab0d8b17fabc85b3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_143d00bec7ce4c7aab0d8b17fabc85b3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0005340021376559392,
+                0.0005340021376559392,
+                0.0005340021376559392
+            ]
+        },
+        "distractor_4435f08637794f47a8e17197cff81935": {
+            "name": "distractor_4435f08637794f47a8e17197cff81935",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4435f08637794f47a8e17197cff81935.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007816374084087644,
+                0.0007816374084087644,
+                0.0007816374084087644
+            ]
+        },
+        "distractor_1d1ac4f354884394a8b129ca4655eba9": {
+            "name": "distractor_1d1ac4f354884394a8b129ca4655eba9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1d1ac4f354884394a8b129ca4655eba9.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2624985394102198e-05,
+                1.2624985394102198e-05,
+                1.2624985394102198e-05
+            ]
+        },
+        "distractor_17f7643e2a0a483b8b4c18b694d450fd": {
+            "name": "distractor_17f7643e2a0a483b8b4c18b694d450fd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_17f7643e2a0a483b8b4c18b694d450fd.usd",
+            "class": "1",
+            "scale_factor": [
+                9.020939413830469e-05,
+                9.020939413830469e-05,
+                9.020939413830469e-05
+            ]
+        },
+        "distractor_f76c889b9f8c4cafbf58a52e252cc6d3": {
+            "name": "distractor_f76c889b9f8c4cafbf58a52e252cc6d3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f76c889b9f8c4cafbf58a52e252cc6d3.usd",
+            "class": "1",
+            "scale_factor": [
+                2.2725153975619913e-05,
+                2.2725153975619913e-05,
+                2.2725153975619913e-05
+            ]
+        },
+        "distractor_426f0b2bd5e8400684d319e537937197": {
+            "name": "distractor_426f0b2bd5e8400684d319e537937197",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_426f0b2bd5e8400684d319e537937197.usd",
+            "class": "1",
+            "scale_factor": [
+                0.07129652910817758,
+                0.07129652910817758,
+                0.07129652910817758
+            ]
+        },
+        "distractor_d36760a4964d4e9cb143d5acd80a5556": {
+            "name": "distractor_d36760a4964d4e9cb143d5acd80a5556",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d36760a4964d4e9cb143d5acd80a5556.usd",
+            "class": "1",
+            "scale_factor": [
+                3.671560484146533e-05,
+                3.671560484146533e-05,
+                3.671560484146533e-05
+            ]
+        },
+        "distractor_8e34a0df91904d858f009e497f9f9066": {
+            "name": "distractor_8e34a0df91904d858f009e497f9f9066",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8e34a0df91904d858f009e497f9f9066.usd",
+            "class": "1",
+            "scale_factor": [
+                2.9246370061311622e-05,
+                2.9246370061311622e-05,
+                2.9246370061311622e-05
+            ]
+        },
+        "distractor_b331fe1a56284a498e2547cedd5b390f": {
+            "name": "distractor_b331fe1a56284a498e2547cedd5b390f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b331fe1a56284a498e2547cedd5b390f.usd",
+            "class": "1",
+            "scale_factor": [
+                1.607244982241059e-05,
+                1.607244982241059e-05,
+                1.607244982241059e-05
+            ]
+        },
+        "distractor_0ae32d4807364eac9f9b4e5607c91637": {
+            "name": "distractor_0ae32d4807364eac9f9b4e5607c91637",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_0ae32d4807364eac9f9b4e5607c91637.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00018294656892403434,
+                0.00018294656892403434,
+                0.00018294656892403434
+            ]
+        },
+        "distractor_dca30c44f6d94fae9feb9ef5d0fff6a9": {
+            "name": "distractor_dca30c44f6d94fae9feb9ef5d0fff6a9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_dca30c44f6d94fae9feb9ef5d0fff6a9.usd",
+            "class": "1",
+            "scale_factor": [
+                5.6177445458424414e-05,
+                5.6177445458424414e-05,
+                5.6177445458424414e-05
+            ]
+        },
+        "distractor_f41b3337efba4f93a7a9f8b8ad667deb": {
+            "name": "distractor_f41b3337efba4f93a7a9f8b8ad667deb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f41b3337efba4f93a7a9f8b8ad667deb.usd",
+            "class": "1",
+            "scale_factor": [
+                9.479497810621867e-05,
+                9.479497810621867e-05,
+                9.479497810621867e-05
+            ]
+        },
+        "distractor_e9c7b5be938041b1825307c6f73099c4": {
+            "name": "distractor_e9c7b5be938041b1825307c6f73099c4",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e9c7b5be938041b1825307c6f73099c4.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00030347952190387493,
+                0.00030347952190387493,
+                0.00030347952190387493
+            ]
+        },
+        "distractor_3ccc1d1866f244669ece26660294a476": {
+            "name": "distractor_3ccc1d1866f244669ece26660294a476",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3ccc1d1866f244669ece26660294a476.usd",
+            "class": "1",
+            "scale_factor": [
+                0.004527771265662873,
+                0.004527771265662873,
+                0.004527771265662873
+            ]
+        },
+        "distractor_56c92af066b54df5a5997d15037d6d93": {
+            "name": "distractor_56c92af066b54df5a5997d15037d6d93",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_56c92af066b54df5a5997d15037d6d93.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4915975687575067e-05,
+                1.4915975687575067e-05,
+                1.4915975687575067e-05
+            ]
+        },
+        "distractor_49070a92230944a1a78fc51c7e2d1892": {
+            "name": "distractor_49070a92230944a1a78fc51c7e2d1892",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_49070a92230944a1a78fc51c7e2d1892.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00019142553559018088,
+                0.00019142553559018088,
+                0.00019142553559018088
+            ]
+        },
+        "distractor_d5572cdefdf24bea97e6a393b42e5b9f": {
+            "name": "distractor_d5572cdefdf24bea97e6a393b42e5b9f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d5572cdefdf24bea97e6a393b42e5b9f.usd",
+            "class": "1",
+            "scale_factor": [
+                7.246034428358614e-05,
+                7.246034428358614e-05,
+                7.246034428358614e-05
+            ]
+        },
+        "distractor_cfda83fa54094c11ab50f4b99c8ea692": {
+            "name": "distractor_cfda83fa54094c11ab50f4b99c8ea692",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cfda83fa54094c11ab50f4b99c8ea692.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008086362171409929,
+                0.0008086362171409929,
+                0.0008086362171409929
+            ]
+        },
+        "distractor_583f8a87ee094167b20eaff5da99ed47": {
+            "name": "distractor_583f8a87ee094167b20eaff5da99ed47",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_583f8a87ee094167b20eaff5da99ed47.usd",
+            "class": "1",
+            "scale_factor": [
+                1.646423677802465e-05,
+                1.646423677802465e-05,
+                1.646423677802465e-05
+            ]
+        },
+        "distractor_cacfeefb83134bb19cae8630a4e240af": {
+            "name": "distractor_cacfeefb83134bb19cae8630a4e240af",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cacfeefb83134bb19cae8630a4e240af.usd",
+            "class": "1",
+            "scale_factor": [
+                1.7712876242861255e-05,
+                1.7712876242861255e-05,
+                1.7712876242861255e-05
+            ]
+        },
+        "distractor_9ec03fb0145e48459d8272b603cd159c": {
+            "name": "distractor_9ec03fb0145e48459d8272b603cd159c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9ec03fb0145e48459d8272b603cd159c.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2627875833093453e-05,
+                1.2627875833093453e-05,
+                1.2627875833093453e-05
+            ]
+        },
+        "distractor_656ceb50157441f1849cca4b7c50cbce": {
+            "name": "distractor_656ceb50157441f1849cca4b7c50cbce",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_656ceb50157441f1849cca4b7c50cbce.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00015476671663226772,
+                0.00015476671663226772,
+                0.00015476671663226772
+            ]
+        },
+        "distractor_db97c7641d3e443793c2e5c26f7f5608": {
+            "name": "distractor_db97c7641d3e443793c2e5c26f7f5608",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_db97c7641d3e443793c2e5c26f7f5608.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1372058093109965e-05,
+                1.1372058093109965e-05,
+                1.1372058093109965e-05
+            ]
+        },
+        "distractor_d91643759d3645bf811dff22b8dac5f3": {
+            "name": "distractor_d91643759d3645bf811dff22b8dac5f3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d91643759d3645bf811dff22b8dac5f3.usd",
+            "class": "1",
+            "scale_factor": [
+                1.9451419047975272e-05,
+                1.9451419047975272e-05,
+                1.9451419047975272e-05
+            ]
+        },
+        "distractor_53b895c098f44825be5c9a970bf2dd53": {
+            "name": "distractor_53b895c098f44825be5c9a970bf2dd53",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_53b895c098f44825be5c9a970bf2dd53.usd",
+            "class": "1",
+            "scale_factor": [
+                5.211222179601375e-05,
+                5.211222179601375e-05,
+                5.211222179601375e-05
+            ]
+        },
+        "distractor_d92f21bd52ed436c966570f88cc3bb17": {
+            "name": "distractor_d92f21bd52ed436c966570f88cc3bb17",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d92f21bd52ed436c966570f88cc3bb17.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0001590726771596865,
+                0.0001590726771596865,
+                0.0001590726771596865
+            ]
+        },
+        "distractor_307c58e8171845ae9da8100a974e96c4": {
+            "name": "distractor_307c58e8171845ae9da8100a974e96c4",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_307c58e8171845ae9da8100a974e96c4.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00022763723739725763,
+                0.00022763723739725763,
+                0.00022763723739725763
+            ]
+        },
+        "distractor_5d96b8f746f24c3591eb54984a9a7a29": {
+            "name": "distractor_5d96b8f746f24c3591eb54984a9a7a29",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5d96b8f746f24c3591eb54984a9a7a29.usd",
+            "class": "1",
+            "scale_factor": [
+                3.0876922279261744e-05,
+                3.0876922279261744e-05,
+                3.0876922279261744e-05
+            ]
+        },
+        "distractor_e740b561cbaf472dba969724a0049dca": {
+            "name": "distractor_e740b561cbaf472dba969724a0049dca",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e740b561cbaf472dba969724a0049dca.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006114343078488267,
+                0.0006114343078488267,
+                0.0006114343078488267
+            ]
+        },
+        "distractor_3b3922660d7d46e38b9e5ceb0ac30aa0": {
+            "name": "distractor_3b3922660d7d46e38b9e5ceb0ac30aa0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3b3922660d7d46e38b9e5ceb0ac30aa0.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1962117710499571e-05,
+                1.1962117710499571e-05,
+                1.1962117710499571e-05
+            ]
+        },
+        "distractor_08bfada20a55451283759512bc49a1d7": {
+            "name": "distractor_08bfada20a55451283759512bc49a1d7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_08bfada20a55451283759512bc49a1d7.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1297816876334576e-05,
+                1.1297816876334576e-05,
+                1.1297816876334576e-05
+            ]
+        },
+        "distractor_7ea633a46c4c47028acb565da6dbfe1a": {
+            "name": "distractor_7ea633a46c4c47028acb565da6dbfe1a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7ea633a46c4c47028acb565da6dbfe1a.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0004568959425921581,
+                0.0004568959425921581,
+                0.0004568959425921581
+            ]
+        },
+        "distractor_3599b0bf5b9d4bc68c739648898fea6b": {
+            "name": "distractor_3599b0bf5b9d4bc68c739648898fea6b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3599b0bf5b9d4bc68c739648898fea6b.usd",
+            "class": "1",
+            "scale_factor": [
+                7.770212223979518e-06,
+                7.770212223979518e-06,
+                7.770212223979518e-06
+            ]
+        },
+        "distractor_c80d9d11f68248c181e10b070a0a062a": {
+            "name": "distractor_c80d9d11f68248c181e10b070a0a062a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c80d9d11f68248c181e10b070a0a062a.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0004970828692333185,
+                0.0004970828692333185,
+                0.0004970828692333185
+            ]
+        },
+        "distractor_05e202bb68314420b2b2cdaf2ede5360": {
+            "name": "distractor_05e202bb68314420b2b2cdaf2ede5360",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_05e202bb68314420b2b2cdaf2ede5360.usd",
+            "class": "1",
+            "scale_factor": [
+                3.212787845651197e-05,
+                3.212787845651197e-05,
+                3.212787845651197e-05
+            ]
+        },
+        "distractor_12179145dc954f5792bb1fa196ee04ea": {
+            "name": "distractor_12179145dc954f5792bb1fa196ee04ea",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_12179145dc954f5792bb1fa196ee04ea.usd",
+            "class": "1",
+            "scale_factor": [
+                5.019769403190983e-05,
+                5.019769403190983e-05,
+                5.019769403190983e-05
+            ]
+        },
+        "distractor_71f5709d02464a12b236fe53a0e0fbdd": {
+            "name": "distractor_71f5709d02464a12b236fe53a0e0fbdd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_71f5709d02464a12b236fe53a0e0fbdd.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003423078875831727,
+                0.0003423078875831727,
+                0.0003423078875831727
+            ]
+        },
+        "distractor_fdc585fb9b184e13a45e6b3c35b98c43": {
+            "name": "distractor_fdc585fb9b184e13a45e6b3c35b98c43",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fdc585fb9b184e13a45e6b3c35b98c43.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2534639679386753e-05,
+                1.2534639679386753e-05,
+                1.2534639679386753e-05
+            ]
+        },
+        "distractor_15185d8f02944be2b1b2389c6aeda2d6": {
+            "name": "distractor_15185d8f02944be2b1b2389c6aeda2d6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_15185d8f02944be2b1b2389c6aeda2d6.usd",
+            "class": "1",
+            "scale_factor": [
+                1.0965365974890952e-05,
+                1.0965365974890952e-05,
+                1.0965365974890952e-05
+            ]
+        },
+        "distractor_c2c87f3c1ab743d8882dd7de873ac6c8": {
+            "name": "distractor_c2c87f3c1ab743d8882dd7de873ac6c8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c2c87f3c1ab743d8882dd7de873ac6c8.usd",
+            "class": "1",
+            "scale_factor": [
+                2.3034827459095936e-05,
+                2.3034827459095936e-05,
+                2.3034827459095936e-05
+            ]
+        },
+        "distractor_cae639a3371341a7be9632d4f46aa7ac": {
+            "name": "distractor_cae639a3371341a7be9632d4f46aa7ac",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cae639a3371341a7be9632d4f46aa7ac.usd",
+            "class": "1",
+            "scale_factor": [
+                4.8341073125088006e-05,
+                4.8341073125088006e-05,
+                4.8341073125088006e-05
+            ]
+        },
+        "distractor_0281795e08f44fbbab345b3926fb7728": {
+            "name": "distractor_0281795e08f44fbbab345b3926fb7728",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_0281795e08f44fbbab345b3926fb7728.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0010438234403729338,
+                0.0010438234403729338,
+                0.0010438234403729338
+            ]
+        },
+        "distractor_c0d0babc689248afacae3db02247abdb": {
+            "name": "distractor_c0d0babc689248afacae3db02247abdb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c0d0babc689248afacae3db02247abdb.usd",
+            "class": "1",
+            "scale_factor": [
+                0.002719845821293878,
+                0.002719845821293878,
+                0.002719845821293878
+            ]
+        },
+        "distractor_e92982af34cb4025b6e594efe94d26c3": {
+            "name": "distractor_e92982af34cb4025b6e594efe94d26c3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e92982af34cb4025b6e594efe94d26c3.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4133593207123127e-05,
+                1.4133593207123127e-05,
+                1.4133593207123127e-05
+            ]
+        },
+        "distractor_8b7daba1ebb641448a316946a6dc1837": {
+            "name": "distractor_8b7daba1ebb641448a316946a6dc1837",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8b7daba1ebb641448a316946a6dc1837.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003195971316809523,
+                0.0003195971316809523,
+                0.0003195971316809523
+            ]
+        },
+        "distractor_c5e1cdf9129f4afeae9b73a7d6f24462": {
+            "name": "distractor_c5e1cdf9129f4afeae9b73a7d6f24462",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c5e1cdf9129f4afeae9b73a7d6f24462.usd",
+            "class": "1",
+            "scale_factor": [
+                4.875367476566125e-06,
+                4.875367476566125e-06,
+                4.875367476566125e-06
+            ]
+        },
+        "distractor_77fd9b44d011439db767c9c24b99f187": {
+            "name": "distractor_77fd9b44d011439db767c9c24b99f187",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_77fd9b44d011439db767c9c24b99f187.usd",
+            "class": "1",
+            "scale_factor": [
+                1.0772663756426246e-05,
+                1.0772663756426246e-05,
+                1.0772663756426246e-05
+            ]
+        },
+        "distractor_f1ae3a5ec7a14ae68a274df2e72a012d": {
+            "name": "distractor_f1ae3a5ec7a14ae68a274df2e72a012d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f1ae3a5ec7a14ae68a274df2e72a012d.usd",
+            "class": "1",
+            "scale_factor": [
+                7.78790904629839e-06,
+                7.78790904629839e-06,
+                7.78790904629839e-06
+            ]
+        },
+        "distractor_4efd7e6e550d4274828771f6eb5bc15a": {
+            "name": "distractor_4efd7e6e550d4274828771f6eb5bc15a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4efd7e6e550d4274828771f6eb5bc15a.usd",
+            "class": "1",
+            "scale_factor": [
+                5.0947634864523976e-06,
+                5.0947634864523976e-06,
+                5.0947634864523976e-06
+            ]
+        },
+        "distractor_6427b8557752473b9f0d933b10c1799c": {
+            "name": "distractor_6427b8557752473b9f0d933b10c1799c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6427b8557752473b9f0d933b10c1799c.usd",
+            "class": "1",
+            "scale_factor": [
+                3.337603273382808e-05,
+                3.337603273382808e-05,
+                3.337603273382808e-05
+            ]
+        },
+        "distractor_3509d44eab284424a2ea9550d60e3e39": {
+            "name": "distractor_3509d44eab284424a2ea9550d60e3e39",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3509d44eab284424a2ea9550d60e3e39.usd",
+            "class": "1",
+            "scale_factor": [
+                3.436615538666086e-05,
+                3.436615538666086e-05,
+                3.436615538666086e-05
+            ]
+        },
+        "distractor_18b8a19efcc34bb8ab086e15bd406326": {
+            "name": "distractor_18b8a19efcc34bb8ab086e15bd406326",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_18b8a19efcc34bb8ab086e15bd406326.usd",
+            "class": "1",
+            "scale_factor": [
+                4.347962599456765e-05,
+                4.347962599456765e-05,
+                4.347962599456765e-05
+            ]
+        },
+        "distractor_2a1a311cb8324544acccee4c226e8919": {
+            "name": "distractor_2a1a311cb8324544acccee4c226e8919",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2a1a311cb8324544acccee4c226e8919.usd",
+            "class": "1",
+            "scale_factor": [
+                9.181115249024315e-05,
+                9.181115249024315e-05,
+                9.181115249024315e-05
+            ]
+        },
+        "distractor_a1d3bb5489e34af5bce9222922bdda24": {
+            "name": "distractor_a1d3bb5489e34af5bce9222922bdda24",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a1d3bb5489e34af5bce9222922bdda24.usd",
+            "class": "1",
+            "scale_factor": [
+                1.5878929303051672e-05,
+                1.5878929303051672e-05,
+                1.5878929303051672e-05
+            ]
+        },
+        "distractor_21cfc1335098406793c47f9e641f9a96": {
+            "name": "distractor_21cfc1335098406793c47f9e641f9a96",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_21cfc1335098406793c47f9e641f9a96.usd",
+            "class": "1",
+            "scale_factor": [
+                0.010645942296130825,
+                0.010645942296130825,
+                0.010645942296130825
+            ]
+        },
+        "distractor_b51f7373982b46e58fc358e020db5655": {
+            "name": "distractor_b51f7373982b46e58fc358e020db5655",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b51f7373982b46e58fc358e020db5655.usd",
+            "class": "1",
+            "scale_factor": [
+                8.36820897796042e-06,
+                8.36820897796042e-06,
+                8.36820897796042e-06
+            ]
+        },
+        "distractor_f0622a4a675f4fa89f2fe9fffbc95a6f": {
+            "name": "distractor_f0622a4a675f4fa89f2fe9fffbc95a6f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f0622a4a675f4fa89f2fe9fffbc95a6f.usd",
+            "class": "1",
+            "scale_factor": [
+                5.872342066732882e-05,
+                5.872342066732882e-05,
+                5.872342066732882e-05
+            ]
+        },
+        "distractor_a40ea917e4824769854665e70bb5d92b": {
+            "name": "distractor_a40ea917e4824769854665e70bb5d92b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a40ea917e4824769854665e70bb5d92b.usd",
+            "class": "1",
+            "scale_factor": [
+                5.875968721538884e-05,
+                5.875968721538884e-05,
+                5.875968721538884e-05
+            ]
+        },
+        "distractor_d3af66e9f74040508937b1dc81964f26": {
+            "name": "distractor_d3af66e9f74040508937b1dc81964f26",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d3af66e9f74040508937b1dc81964f26.usd",
+            "class": "1",
+            "scale_factor": [
+                0.010089460168145634,
+                0.010089460168145634,
+                0.010089460168145634
+            ]
+        },
+        "distractor_29ee7d120f664017a5a0e28bfc73e99f": {
+            "name": "distractor_29ee7d120f664017a5a0e28bfc73e99f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_29ee7d120f664017a5a0e28bfc73e99f.usd",
+            "class": "1",
+            "scale_factor": [
+                0.005707260446764302,
+                0.005707260446764302,
+                0.005707260446764302
+            ]
+        },
+        "distractor_2863ddc3aa6e46dc9d0f8ecad657c085": {
+            "name": "distractor_2863ddc3aa6e46dc9d0f8ecad657c085",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2863ddc3aa6e46dc9d0f8ecad657c085.usd",
+            "class": "1",
+            "scale_factor": [
+                3.125223550548772e-05,
+                3.125223550548772e-05,
+                3.125223550548772e-05
+            ]
+        },
+        "distractor_4906375e16354b95b135b8cb03a6d7e3": {
+            "name": "distractor_4906375e16354b95b135b8cb03a6d7e3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4906375e16354b95b135b8cb03a6d7e3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.04636549511702546,
+                0.04636549511702546,
+                0.04636549511702546
+            ]
+        },
+        "distractor_6041fdd7f4fa45a5b7cceb7f9850afe2": {
+            "name": "distractor_6041fdd7f4fa45a5b7cceb7f9850afe2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6041fdd7f4fa45a5b7cceb7f9850afe2.usd",
+            "class": "1",
+            "scale_factor": [
+                4.141853668935585e-06,
+                4.141853668935585e-06,
+                4.141853668935585e-06
+            ]
+        },
+        "distractor_a7a624ea28664927bf8a657bdb6b8138": {
+            "name": "distractor_a7a624ea28664927bf8a657bdb6b8138",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a7a624ea28664927bf8a657bdb6b8138.usd",
+            "class": "1",
+            "scale_factor": [
+                6.6930069607184e-06,
+                6.6930069607184e-06,
+                6.6930069607184e-06
+            ]
+        },
+        "distractor_cf64d04d3c4e4fa18e0eed26af665aec": {
+            "name": "distractor_cf64d04d3c4e4fa18e0eed26af665aec",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cf64d04d3c4e4fa18e0eed26af665aec.usd",
+            "class": "1",
+            "scale_factor": [
+                1.5285077874857394e-05,
+                1.5285077874857394e-05,
+                1.5285077874857394e-05
+            ]
+        },
+        "distractor_74b00320039844c89719a7290459e9a2": {
+            "name": "distractor_74b00320039844c89719a7290459e9a2",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_74b00320039844c89719a7290459e9a2.usd",
+            "class": "1",
+            "scale_factor": [
+                5.332889982406897e-06,
+                5.332889982406897e-06,
+                5.332889982406897e-06
+            ]
+        },
+        "distractor_5cda1f9b4761436a8ab3e8804cc79e76": {
+            "name": "distractor_5cda1f9b4761436a8ab3e8804cc79e76",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5cda1f9b4761436a8ab3e8804cc79e76.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003506444637385972,
+                0.0003506444637385972,
+                0.0003506444637385972
+            ]
+        },
+        "distractor_419ccd779ebd4e94a8b7460fae805e18": {
+            "name": "distractor_419ccd779ebd4e94a8b7460fae805e18",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_419ccd779ebd4e94a8b7460fae805e18.usd",
+            "class": "1",
+            "scale_factor": [
+                8.269855497528262e-05,
+                8.269855497528262e-05,
+                8.269855497528262e-05
+            ]
+        },
+        "distractor_616b339cef6b44dfa28e336a3d813284": {
+            "name": "distractor_616b339cef6b44dfa28e336a3d813284",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_616b339cef6b44dfa28e336a3d813284.usd",
+            "class": "1",
+            "scale_factor": [
+                2.951187268872136e-05,
+                2.951187268872136e-05,
+                2.951187268872136e-05
+            ]
+        },
+        "distractor_e711a680d44a4c9597a5d1b0e125bfee": {
+            "name": "distractor_e711a680d44a4c9597a5d1b0e125bfee",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e711a680d44a4c9597a5d1b0e125bfee.usd",
+            "class": "1",
+            "scale_factor": [
+                0.04434336238571404,
+                0.04434336238571404,
+                0.04434336238571404
+            ]
+        },
+        "distractor_2a8d0d799d724ae1b2f1f7c56f79f752": {
+            "name": "distractor_2a8d0d799d724ae1b2f1f7c56f79f752",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2a8d0d799d724ae1b2f1f7c56f79f752.usd",
+            "class": "1",
+            "scale_factor": [
+                2.8249925103749614e-05,
+                2.8249925103749614e-05,
+                2.8249925103749614e-05
+            ]
+        },
+        "distractor_6a03b21735ec40ee8447ca0eff53ad8d": {
+            "name": "distractor_6a03b21735ec40ee8447ca0eff53ad8d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6a03b21735ec40ee8447ca0eff53ad8d.usd",
+            "class": "1",
+            "scale_factor": [
+                4.587703132089232e-06,
+                4.587703132089232e-06,
+                4.587703132089232e-06
+            ]
+        },
+        "distractor_af0589b0a7e74136a785b89b4a627215": {
+            "name": "distractor_af0589b0a7e74136a785b89b4a627215",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_af0589b0a7e74136a785b89b4a627215.usd",
+            "class": "1",
+            "scale_factor": [
+                3.630515129333732e-05,
+                3.630515129333732e-05,
+                3.630515129333732e-05
+            ]
+        },
+        "distractor_cebd2072540c41f39d75868bab62b792": {
+            "name": "distractor_cebd2072540c41f39d75868bab62b792",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cebd2072540c41f39d75868bab62b792.usd",
+            "class": "1",
+            "scale_factor": [
+                0.005781509583014703,
+                0.005781509583014703,
+                0.005781509583014703
+            ]
+        },
+        "distractor_8f61ed806d314d41a513bcab30152a63": {
+            "name": "distractor_8f61ed806d314d41a513bcab30152a63",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8f61ed806d314d41a513bcab30152a63.usd",
+            "class": "1",
+            "scale_factor": [
+                2.4807740759459602e-05,
+                2.4807740759459602e-05,
+                2.4807740759459602e-05
+            ]
+        },
+        "distractor_6e367862a7634d84b45de19022e0c260": {
+            "name": "distractor_6e367862a7634d84b45de19022e0c260",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6e367862a7634d84b45de19022e0c260.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4386275621159672e-06,
+                1.4386275621159672e-06,
+                1.4386275621159672e-06
+            ]
+        },
+        "distractor_d89e0701347547958b02ecb6616b58b1": {
+            "name": "distractor_d89e0701347547958b02ecb6616b58b1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d89e0701347547958b02ecb6616b58b1.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008835425976504841,
+                0.0008835425976504841,
+                0.0008835425976504841
+            ]
+        },
+        "distractor_2c0efd08b6b54bf98f80e7bb9b4de244": {
+            "name": "distractor_2c0efd08b6b54bf98f80e7bb9b4de244",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2c0efd08b6b54bf98f80e7bb9b4de244.usd",
+            "class": "1",
+            "scale_factor": [
+                3.749600652465975e-05,
+                3.749600652465975e-05,
+                3.749600652465975e-05
+            ]
+        },
+        "distractor_344e40f83895469f948e5950b5748259": {
+            "name": "distractor_344e40f83895469f948e5950b5748259",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_344e40f83895469f948e5950b5748259.usd",
+            "class": "1",
+            "scale_factor": [
+                1.543697705399528e-05,
+                1.543697705399528e-05,
+                1.543697705399528e-05
+            ]
+        },
+        "distractor_45a28692a217483ea501c3b8425c26ba": {
+            "name": "distractor_45a28692a217483ea501c3b8425c26ba",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_45a28692a217483ea501c3b8425c26ba.usd",
+            "class": "1",
+            "scale_factor": [
+                3.624505782245666e-05,
+                3.624505782245666e-05,
+                3.624505782245666e-05
+            ]
+        },
+        "distractor_bd7703bba0ab41038fb7f953b7bd7d2b": {
+            "name": "distractor_bd7703bba0ab41038fb7f953b7bd7d2b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bd7703bba0ab41038fb7f953b7bd7d2b.usd",
+            "class": "1",
+            "scale_factor": [
+                4.134429785688667e-05,
+                4.134429785688667e-05,
+                4.134429785688667e-05
+            ]
+        },
+        "distractor_9f36207b7446451bb000d771ce9d999d": {
+            "name": "distractor_9f36207b7446451bb000d771ce9d999d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9f36207b7446451bb000d771ce9d999d.usd",
+            "class": "1",
+            "scale_factor": [
+                2.2832697932923637e-05,
+                2.2832697932923637e-05,
+                2.2832697932923637e-05
+            ]
+        },
+        "distractor_db2e0978568845238aa4c2edf95e0ba3": {
+            "name": "distractor_db2e0978568845238aa4c2edf95e0ba3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_db2e0978568845238aa4c2edf95e0ba3.usd",
+            "class": "1",
+            "scale_factor": [
+                0.12643904813813742,
+                0.12643904813813742,
+                0.12643904813813742
+            ]
+        },
+        "distractor_e7a3e32e80784482b7182fa662c79a94": {
+            "name": "distractor_e7a3e32e80784482b7182fa662c79a94",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e7a3e32e80784482b7182fa662c79a94.usd",
+            "class": "1",
+            "scale_factor": [
+                1.5507306351375382e-05,
+                1.5507306351375382e-05,
+                1.5507306351375382e-05
+            ]
+        },
+        "distractor_b4bc1e5e1e5845e4b792de0c4df67108": {
+            "name": "distractor_b4bc1e5e1e5845e4b792de0c4df67108",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b4bc1e5e1e5845e4b792de0c4df67108.usd",
+            "class": "1",
+            "scale_factor": [
+                0.008255650330181028,
+                0.008255650330181028,
+                0.008255650330181028
+            ]
+        },
+        "distractor_776d751c8b46456e9630c6fc832db9ad": {
+            "name": "distractor_776d751c8b46456e9630c6fc832db9ad",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_776d751c8b46456e9630c6fc832db9ad.usd",
+            "class": "1",
+            "scale_factor": [
+                3.024665849977062e-05,
+                3.024665849977062e-05,
+                3.024665849977062e-05
+            ]
+        },
+        "distractor_f988f782783d43f590a3900f15d18053": {
+            "name": "distractor_f988f782783d43f590a3900f15d18053",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f988f782783d43f590a3900f15d18053.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00018387260112565345,
+                0.00018387260112565345,
+                0.00018387260112565345
+            ]
+        },
+        "distractor_8954dac8d4dd4273b743a37a51ed1033": {
+            "name": "distractor_8954dac8d4dd4273b743a37a51ed1033",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8954dac8d4dd4273b743a37a51ed1033.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2535522949957924e-05,
+                1.2535522949957924e-05,
+                1.2535522949957924e-05
+            ]
+        },
+        "distractor_a8031bf2eee349679b3a69686857b18f": {
+            "name": "distractor_a8031bf2eee349679b3a69686857b18f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a8031bf2eee349679b3a69686857b18f.usd",
+            "class": "1",
+            "scale_factor": [
+                2.3318932964785755e-05,
+                2.3318932964785755e-05,
+                2.3318932964785755e-05
+            ]
+        },
+        "distractor_b88b2abd82fb4b2f9242009e63a32510": {
+            "name": "distractor_b88b2abd82fb4b2f9242009e63a32510",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b88b2abd82fb4b2f9242009e63a32510.usd",
+            "class": "1",
+            "scale_factor": [
+                1.4064107166158027e-05,
+                1.4064107166158027e-05,
+                1.4064107166158027e-05
+            ]
+        },
+        "distractor_1856722a71a94716a385460126d05dd3": {
+            "name": "distractor_1856722a71a94716a385460126d05dd3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1856722a71a94716a385460126d05dd3.usd",
+            "class": "1",
+            "scale_factor": [
+                4.5331439239232656e-05,
+                4.5331439239232656e-05,
+                4.5331439239232656e-05
+            ]
+        },
+        "distractor_a05b6ddf572e405bae15e7eba49c486f": {
+            "name": "distractor_a05b6ddf572e405bae15e7eba49c486f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a05b6ddf572e405bae15e7eba49c486f.usd",
+            "class": "1",
+            "scale_factor": [
+                6.300610487616874e-05,
+                6.300610487616874e-05,
+                6.300610487616874e-05
+            ]
+        },
+        "distractor_59e342de144442cebfb035600e9ffc2d": {
+            "name": "distractor_59e342de144442cebfb035600e9ffc2d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_59e342de144442cebfb035600e9ffc2d.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3564373762437326e-06,
+                1.3564373762437326e-06,
+                1.3564373762437326e-06
+            ]
+        },
+        "distractor_fa62a9fa2f74440fb9b4c036f8f6d5bd": {
+            "name": "distractor_fa62a9fa2f74440fb9b4c036f8f6d5bd",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fa62a9fa2f74440fb9b4c036f8f6d5bd.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00022106385800680308,
+                0.00022106385800680308,
+                0.00022106385800680308
+            ]
+        },
+        "distractor_04d9a424b38e469d874833c8c47b58ab": {
+            "name": "distractor_04d9a424b38e469d874833c8c47b58ab",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_04d9a424b38e469d874833c8c47b58ab.usd",
+            "class": "1",
+            "scale_factor": [
+                9.541021964813378e-06,
+                9.541021964813378e-06,
+                9.541021964813378e-06
+            ]
+        },
+        "distractor_43e15221a2994aa980fbe56daaffa0b8": {
+            "name": "distractor_43e15221a2994aa980fbe56daaffa0b8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_43e15221a2994aa980fbe56daaffa0b8.usd",
+            "class": "1",
+            "scale_factor": [
+                6.148141184254958e-06,
+                6.148141184254958e-06,
+                6.148141184254958e-06
+            ]
+        },
+        "distractor_5b5f75894cb7455989b7595c9f3aaee5": {
+            "name": "distractor_5b5f75894cb7455989b7595c9f3aaee5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5b5f75894cb7455989b7595c9f3aaee5.usd",
+            "class": "1",
+            "scale_factor": [
+                5.268076334338239e-05,
+                5.268076334338239e-05,
+                5.268076334338239e-05
+            ]
+        },
+        "distractor_71be9d781c394827a712dce0a9f9b816": {
+            "name": "distractor_71be9d781c394827a712dce0a9f9b816",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_71be9d781c394827a712dce0a9f9b816.usd",
+            "class": "1",
+            "scale_factor": [
+                5.776657533055806e-05,
+                5.776657533055806e-05,
+                5.776657533055806e-05
+            ]
+        },
+        "distractor_f0e982708ac04abbb9a67e264dda4bf9": {
+            "name": "distractor_f0e982708ac04abbb9a67e264dda4bf9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f0e982708ac04abbb9a67e264dda4bf9.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00015383120747970288,
+                0.00015383120747970288,
+                0.00015383120747970288
+            ]
+        },
+        "distractor_c32d2d53afa749d6b7db9b067035655a": {
+            "name": "distractor_c32d2d53afa749d6b7db9b067035655a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c32d2d53afa749d6b7db9b067035655a.usd",
+            "class": "1",
+            "scale_factor": [
+                0.019182273390149288,
+                0.019182273390149288,
+                0.019182273390149288
+            ]
+        },
+        "distractor_855679aa50ee4de385f5817654442b0f": {
+            "name": "distractor_855679aa50ee4de385f5817654442b0f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_855679aa50ee4de385f5817654442b0f.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00016456607235378412,
+                0.00016456607235378412,
+                0.00016456607235378412
+            ]
+        },
+        "distractor_2a11255117b14019a3e58d2ec51a276c": {
+            "name": "distractor_2a11255117b14019a3e58d2ec51a276c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2a11255117b14019a3e58d2ec51a276c.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007453287373553248,
+                0.0007453287373553248,
+                0.0007453287373553248
+            ]
+        },
+        "distractor_0979e67994c4490780e0f55e6c3572a4": {
+            "name": "distractor_0979e67994c4490780e0f55e6c3572a4",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_0979e67994c4490780e0f55e6c3572a4.usd",
+            "class": "1",
+            "scale_factor": [
+                0.004239238382483241,
+                0.004239238382483241,
+                0.004239238382483241
+            ]
+        },
+        "distractor_fcab4a86262340a4ab7a3d9ea0585f85": {
+            "name": "distractor_fcab4a86262340a4ab7a3d9ea0585f85",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fcab4a86262340a4ab7a3d9ea0585f85.usd",
+            "class": "1",
+            "scale_factor": [
+                6.896546240835348e-05,
+                6.896546240835348e-05,
+                6.896546240835348e-05
+            ]
+        },
+        "distractor_daa1a4a4013b479097633f75a33bb543": {
+            "name": "distractor_daa1a4a4013b479097633f75a33bb543",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_daa1a4a4013b479097633f75a33bb543.usd",
+            "class": "1",
+            "scale_factor": [
+                3.227065059435748e-07,
+                3.227065059435748e-07,
+                3.227065059435748e-07
+            ]
+        },
+        "distractor_95ea9360e2a24e35ba56c2c9e020bc2a": {
+            "name": "distractor_95ea9360e2a24e35ba56c2c9e020bc2a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_95ea9360e2a24e35ba56c2c9e020bc2a.usd",
+            "class": "1",
+            "scale_factor": [
+                3.576211877124017e-06,
+                3.576211877124017e-06,
+                3.576211877124017e-06
+            ]
+        },
+        "distractor_e7163d227f844670a00e3325a96af494": {
+            "name": "distractor_e7163d227f844670a00e3325a96af494",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e7163d227f844670a00e3325a96af494.usd",
+            "class": "1",
+            "scale_factor": [
+                2.347320666795358e-05,
+                2.347320666795358e-05,
+                2.347320666795358e-05
+            ]
+        },
+        "distractor_e28b5813e3104d158ae485b729269bf9": {
+            "name": "distractor_e28b5813e3104d158ae485b729269bf9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_e28b5813e3104d158ae485b729269bf9.usd",
+            "class": "1",
+            "scale_factor": [
+                6.597596613540499e-06,
+                6.597596613540499e-06,
+                6.597596613540499e-06
+            ]
+        },
+        "distractor_2b8deaf8256e4bc88eb26bcf63e4db94": {
+            "name": "distractor_2b8deaf8256e4bc88eb26bcf63e4db94",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2b8deaf8256e4bc88eb26bcf63e4db94.usd",
+            "class": "1",
+            "scale_factor": [
+                2.4769228899436914e-05,
+                2.4769228899436914e-05,
+                2.4769228899436914e-05
+            ]
+        },
+        "distractor_3febaf99611f4969883db5736a1a802f": {
+            "name": "distractor_3febaf99611f4969883db5736a1a802f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3febaf99611f4969883db5736a1a802f.usd",
+            "class": "1",
+            "scale_factor": [
+                9.266893066645769e-06,
+                9.266893066645769e-06,
+                9.266893066645769e-06
+            ]
+        },
+        "distractor_80d839864a2848cabb4bbd02e4502889": {
+            "name": "distractor_80d839864a2848cabb4bbd02e4502889",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_80d839864a2848cabb4bbd02e4502889.usd",
+            "class": "1",
+            "scale_factor": [
+                2.010248488569003e-05,
+                2.010248488569003e-05,
+                2.010248488569003e-05
+            ]
+        },
+        "distractor_1f0b7746c7e743d987b291ed564d5ac3": {
+            "name": "distractor_1f0b7746c7e743d987b291ed564d5ac3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1f0b7746c7e743d987b291ed564d5ac3.usd",
+            "class": "1",
+            "scale_factor": [
+                7.740726729266649e-05,
+                7.740726729266649e-05,
+                7.740726729266649e-05
+            ]
+        },
+        "distractor_3de9f91f950b4a408a1d94d76200e6bf": {
+            "name": "distractor_3de9f91f950b4a408a1d94d76200e6bf",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3de9f91f950b4a408a1d94d76200e6bf.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00025908253036885956,
+                0.00025908253036885956,
+                0.00025908253036885956
+            ]
+        },
+        "distractor_70cb1993141d480dbd69ab20a8c74ec1": {
+            "name": "distractor_70cb1993141d480dbd69ab20a8c74ec1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_70cb1993141d480dbd69ab20a8c74ec1.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00015621375952210695,
+                0.00015621375952210695,
+                0.00015621375952210695
+            ]
+        },
+        "distractor_d9ed97fdc71d49fb99219c3a3d34a294": {
+            "name": "distractor_d9ed97fdc71d49fb99219c3a3d34a294",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d9ed97fdc71d49fb99219c3a3d34a294.usd",
+            "class": "1",
+            "scale_factor": [
+                8.802057498913579e-05,
+                8.802057498913579e-05,
+                8.802057498913579e-05
+            ]
+        },
+        "distractor_29e907cd254541c3ad8b42850e9ff504": {
+            "name": "distractor_29e907cd254541c3ad8b42850e9ff504",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_29e907cd254541c3ad8b42850e9ff504.usd",
+            "class": "1",
+            "scale_factor": [
+                1.6467934674218164e-06,
+                1.6467934674218164e-06,
+                1.6467934674218164e-06
+            ]
+        },
+        "distractor_785fe3ef0292487d86a53c031cf9fff8": {
+            "name": "distractor_785fe3ef0292487d86a53c031cf9fff8",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_785fe3ef0292487d86a53c031cf9fff8.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0009052449378318558,
+                0.0009052449378318558,
+                0.0009052449378318558
+            ]
+        },
+        "distractor_f82fdf42b40e41ec84186e27fb4d4775": {
+            "name": "distractor_f82fdf42b40e41ec84186e27fb4d4775",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f82fdf42b40e41ec84186e27fb4d4775.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0007575227887495479,
+                0.0007575227887495479,
+                0.0007575227887495479
+            ]
+        },
+        "distractor_087a0257a1064764ac57efbd0221ef20": {
+            "name": "distractor_087a0257a1064764ac57efbd0221ef20",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_087a0257a1064764ac57efbd0221ef20.usd",
+            "class": "1",
+            "scale_factor": [
+                5.904384360643835e-06,
+                5.904384360643835e-06,
+                5.904384360643835e-06
+            ]
+        },
+        "distractor_3644de503c6e4985ae1116f5b7a5649c": {
+            "name": "distractor_3644de503c6e4985ae1116f5b7a5649c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3644de503c6e4985ae1116f5b7a5649c.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003600843862881439,
+                0.0003600843862881439,
+                0.0003600843862881439
+            ]
+        },
+        "distractor_888ced4c67474bb2a3b953bd5aabe2ae": {
+            "name": "distractor_888ced4c67474bb2a3b953bd5aabe2ae",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_888ced4c67474bb2a3b953bd5aabe2ae.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3316692021722074e-05,
+                1.3316692021722074e-05,
+                1.3316692021722074e-05
+            ]
+        },
+        "distractor_b05e9eaee368459289cb3566c05a7533": {
+            "name": "distractor_b05e9eaee368459289cb3566c05a7533",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b05e9eaee368459289cb3566c05a7533.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00011592679477482897,
+                0.00011592679477482897,
+                0.00011592679477482897
+            ]
+        },
+        "distractor_4fe8a66daa684ab2b689430fc02ba3c0": {
+            "name": "distractor_4fe8a66daa684ab2b689430fc02ba3c0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4fe8a66daa684ab2b689430fc02ba3c0.usd",
+            "class": "1",
+            "scale_factor": [
+                5.039889834517348e-07,
+                5.039889834517348e-07,
+                5.039889834517348e-07
+            ]
+        },
+        "distractor_96f1f042ef624112b5975e93a4077a28": {
+            "name": "distractor_96f1f042ef624112b5975e93a4077a28",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_96f1f042ef624112b5975e93a4077a28.usd",
+            "class": "1",
+            "scale_factor": [
+                2.2723479860344754e-05,
+                2.2723479860344754e-05,
+                2.2723479860344754e-05
+            ]
+        },
+        "distractor_f3e9544ad9df44ab9e159cc5e0c4d827": {
+            "name": "distractor_f3e9544ad9df44ab9e159cc5e0c4d827",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f3e9544ad9df44ab9e159cc5e0c4d827.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0003177344066322294,
+                0.0003177344066322294,
+                0.0003177344066322294
+            ]
+        },
+        "distractor_d15cc55f9a6f40bcad02f22b3511891e": {
+            "name": "distractor_d15cc55f9a6f40bcad02f22b3511891e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d15cc55f9a6f40bcad02f22b3511891e.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00027912291921867695,
+                0.00027912291921867695,
+                0.00027912291921867695
+            ]
+        },
+        "distractor_2deb043176b84c0b904963a605467b56": {
+            "name": "distractor_2deb043176b84c0b904963a605467b56",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2deb043176b84c0b904963a605467b56.usd",
+            "class": "1",
+            "scale_factor": [
+                1.1407794178976667e-05,
+                1.1407794178976667e-05,
+                1.1407794178976667e-05
+            ]
+        },
+        "distractor_693addba2a434590934a195a07dfcc17": {
+            "name": "distractor_693addba2a434590934a195a07dfcc17",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_693addba2a434590934a195a07dfcc17.usd",
+            "class": "1",
+            "scale_factor": [
+                2.459103677475114e-05,
+                2.459103677475114e-05,
+                2.459103677475114e-05
+            ]
+        },
+        "distractor_833c11949de94092ad4d3da7c0d71d40": {
+            "name": "distractor_833c11949de94092ad4d3da7c0d71d40",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_833c11949de94092ad4d3da7c0d71d40.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006422201555530912,
+                0.0006422201555530912,
+                0.0006422201555530912
+            ]
+        },
+        "distractor_bfee859734644f84ad12fc1b015a7791": {
+            "name": "distractor_bfee859734644f84ad12fc1b015a7791",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bfee859734644f84ad12fc1b015a7791.usd",
+            "class": "1",
+            "scale_factor": [
+                3.1292130197231556e-06,
+                3.1292130197231556e-06,
+                3.1292130197231556e-06
+            ]
+        },
+        "distractor_54ae65986db145a282245ae393d27a1a": {
+            "name": "distractor_54ae65986db145a282245ae393d27a1a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_54ae65986db145a282245ae393d27a1a.usd",
+            "class": "1",
+            "scale_factor": [
+                7.735311211770637e-05,
+                7.735311211770637e-05,
+                7.735311211770637e-05
+            ]
+        },
+        "distractor_d630ee4f92d544b88b798e53a49a6edf": {
+            "name": "distractor_d630ee4f92d544b88b798e53a49a6edf",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d630ee4f92d544b88b798e53a49a6edf.usd",
+            "class": "1",
+            "scale_factor": [
+                4.676129849191596e-05,
+                4.676129849191596e-05,
+                4.676129849191596e-05
+            ]
+        },
+        "distractor_ecc05f8d00b542208c85797bfd0664a0": {
+            "name": "distractor_ecc05f8d00b542208c85797bfd0664a0",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ecc05f8d00b542208c85797bfd0664a0.usd",
+            "class": "1",
+            "scale_factor": [
+                1.7344652839353244e-05,
+                1.7344652839353244e-05,
+                1.7344652839353244e-05
+            ]
+        },
+        "distractor_a31691fad7e044ba8c68fa7eb19b241e": {
+            "name": "distractor_a31691fad7e044ba8c68fa7eb19b241e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a31691fad7e044ba8c68fa7eb19b241e.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00025384077273706457,
+                0.00025384077273706457,
+                0.00025384077273706457
+            ]
+        },
+        "distractor_fac8c850cf5d483699d4f4047059115a": {
+            "name": "distractor_fac8c850cf5d483699d4f4047059115a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fac8c850cf5d483699d4f4047059115a.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00038429377776040346,
+                0.00038429377776040346,
+                0.00038429377776040346
+            ]
+        },
+        "distractor_97d6869dbe494ca5a3797991bf1db852": {
+            "name": "distractor_97d6869dbe494ca5a3797991bf1db852",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_97d6869dbe494ca5a3797991bf1db852.usd",
+            "class": "1",
+            "scale_factor": [
+                3.2893997514410535e-05,
+                3.2893997514410535e-05,
+                3.2893997514410535e-05
+            ]
+        },
+        "distractor_24bc0ec8c16f46a9b8c8459147ed1c87": {
+            "name": "distractor_24bc0ec8c16f46a9b8c8459147ed1c87",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_24bc0ec8c16f46a9b8c8459147ed1c87.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2174734061628915e-05,
+                1.2174734061628915e-05,
+                1.2174734061628915e-05
+            ]
+        },
+        "distractor_7d1d9fe10e1d4cdbab26b993254ed6aa": {
+            "name": "distractor_7d1d9fe10e1d4cdbab26b993254ed6aa",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7d1d9fe10e1d4cdbab26b993254ed6aa.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00017232974716058607,
+                0.00017232974716058607,
+                0.00017232974716058607
+            ]
+        },
+        "distractor_9091ea660fa048278ad82c5f1c148252": {
+            "name": "distractor_9091ea660fa048278ad82c5f1c148252",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9091ea660fa048278ad82c5f1c148252.usd",
+            "class": "1",
+            "scale_factor": [
+                3.719477383881087e-05,
+                3.719477383881087e-05,
+                3.719477383881087e-05
+            ]
+        },
+        "distractor_f17445d21af14b65b8ccc03c885b6d72": {
+            "name": "distractor_f17445d21af14b65b8ccc03c885b6d72",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f17445d21af14b65b8ccc03c885b6d72.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00019062815789575127,
+                0.00019062815789575127,
+                0.00019062815789575127
+            ]
+        },
+        "distractor_6e3ba87c500b46f58325b229f183a727": {
+            "name": "distractor_6e3ba87c500b46f58325b229f183a727",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6e3ba87c500b46f58325b229f183a727.usd",
+            "class": "1",
+            "scale_factor": [
+                2.6296640244790812e-05,
+                2.6296640244790812e-05,
+                2.6296640244790812e-05
+            ]
+        },
+        "distractor_21c3dbccbc0d49b0bbf535c97020608c": {
+            "name": "distractor_21c3dbccbc0d49b0bbf535c97020608c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_21c3dbccbc0d49b0bbf535c97020608c.usd",
+            "class": "1",
+            "scale_factor": [
+                4.8882468898483196e-05,
+                4.8882468898483196e-05,
+                4.8882468898483196e-05
+            ]
+        },
+        "distractor_fa7142626c6347fbb828ba3d5be7b196": {
+            "name": "distractor_fa7142626c6347fbb828ba3d5be7b196",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_fa7142626c6347fbb828ba3d5be7b196.usd",
+            "class": "1",
+            "scale_factor": [
+                4.095361444231111e-06,
+                4.095361444231111e-06,
+                4.095361444231111e-06
+            ]
+        },
+        "distractor_86ee529c142e4846a7efca8a2e50de6e": {
+            "name": "distractor_86ee529c142e4846a7efca8a2e50de6e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_86ee529c142e4846a7efca8a2e50de6e.usd",
+            "class": "1",
+            "scale_factor": [
+                3.87662256312932e-05,
+                3.87662256312932e-05,
+                3.87662256312932e-05
+            ]
+        },
+        "distractor_21861d9c95314dbb8e586517758b7612": {
+            "name": "distractor_21861d9c95314dbb8e586517758b7612",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_21861d9c95314dbb8e586517758b7612.usd",
+            "class": "1",
+            "scale_factor": [
+                0.005751241722517763,
+                0.005751241722517763,
+                0.005751241722517763
+            ]
+        },
+        "distractor_be2b0b50b49a459884194dce5470a721": {
+            "name": "distractor_be2b0b50b49a459884194dce5470a721",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_be2b0b50b49a459884194dce5470a721.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0005115174332675887,
+                0.0005115174332675887,
+                0.0005115174332675887
+            ]
+        },
+        "distractor_d1fa52427e0e4ed9a678beb6dba2bc4a": {
+            "name": "distractor_d1fa52427e0e4ed9a678beb6dba2bc4a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d1fa52427e0e4ed9a678beb6dba2bc4a.usd",
+            "class": "1",
+            "scale_factor": [
+                6.180367963452878e-05,
+                6.180367963452878e-05,
+                6.180367963452878e-05
+            ]
+        },
+        "distractor_89c5a8409e2b40259d038a9be2455bb5": {
+            "name": "distractor_89c5a8409e2b40259d038a9be2455bb5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_89c5a8409e2b40259d038a9be2455bb5.usd",
+            "class": "1",
+            "scale_factor": [
+                5.952323662089574e-05,
+                5.952323662089574e-05,
+                5.952323662089574e-05
+            ]
+        },
+        "distractor_15490024c156480a9e8bbf86753d0e58": {
+            "name": "distractor_15490024c156480a9e8bbf86753d0e58",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_15490024c156480a9e8bbf86753d0e58.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0004126041849017656,
+                0.0004126041849017656,
+                0.0004126041849017656
+            ]
+        },
+        "distractor_9db254d258284918a6ede0965527ed25": {
+            "name": "distractor_9db254d258284918a6ede0965527ed25",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_9db254d258284918a6ede0965527ed25.usd",
+            "class": "1",
+            "scale_factor": [
+                1.546374440452597e-05,
+                1.546374440452597e-05,
+                1.546374440452597e-05
+            ]
+        },
+        "distractor_daf14abf40074f7584229bf4d789f85a": {
+            "name": "distractor_daf14abf40074f7584229bf4d789f85a",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_daf14abf40074f7584229bf4d789f85a.usd",
+            "class": "1",
+            "scale_factor": [
+                2.8921421502917537e-05,
+                2.8921421502917537e-05,
+                2.8921421502917537e-05
+            ]
+        },
+        "distractor_7aa49d09220d4709a5c3671204e655d5": {
+            "name": "distractor_7aa49d09220d4709a5c3671204e655d5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7aa49d09220d4709a5c3671204e655d5.usd",
+            "class": "1",
+            "scale_factor": [
+                1.533091337952719e-05,
+                1.533091337952719e-05,
+                1.533091337952719e-05
+            ]
+        },
+        "distractor_659be6d782d547589dc5c0e9ce37fc51": {
+            "name": "distractor_659be6d782d547589dc5c0e9ce37fc51",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_659be6d782d547589dc5c0e9ce37fc51.usd",
+            "class": "1",
+            "scale_factor": [
+                8.241909894786375e-05,
+                8.241909894786375e-05,
+                8.241909894786375e-05
+            ]
+        },
+        "distractor_08fcffcad7174327a23b8a7e3c141096": {
+            "name": "distractor_08fcffcad7174327a23b8a7e3c141096",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_08fcffcad7174327a23b8a7e3c141096.usd",
+            "class": "1",
+            "scale_factor": [
+                4.256028601717566e-06,
+                4.256028601717566e-06,
+                4.256028601717566e-06
+            ]
+        },
+        "distractor_537a727fc49c4cecb5c27ab358bbec92": {
+            "name": "distractor_537a727fc49c4cecb5c27ab358bbec92",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_537a727fc49c4cecb5c27ab358bbec92.usd",
+            "class": "1",
+            "scale_factor": [
+                1.3139714463453744e-05,
+                1.3139714463453744e-05,
+                1.3139714463453744e-05
+            ]
+        },
+        "distractor_6e9951dd41be4ae5b98a3e1857b94671": {
+            "name": "distractor_6e9951dd41be4ae5b98a3e1857b94671",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6e9951dd41be4ae5b98a3e1857b94671.usd",
+            "class": "1",
+            "scale_factor": [
+                3.713058998532156e-07,
+                3.713058998532156e-07,
+                3.713058998532156e-07
+            ]
+        },
+        "distractor_90bcd9f34a10492e813ad6e3f106f10c": {
+            "name": "distractor_90bcd9f34a10492e813ad6e3f106f10c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_90bcd9f34a10492e813ad6e3f106f10c.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006957312891344582,
+                0.0006957312891344582,
+                0.0006957312891344582
+            ]
+        },
+        "distractor_cbf6c1fcae284ae0becae8b584ba189f": {
+            "name": "distractor_cbf6c1fcae284ae0becae8b584ba189f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_cbf6c1fcae284ae0becae8b584ba189f.usd",
+            "class": "1",
+            "scale_factor": [
+                7.49341089767072e-06,
+                7.49341089767072e-06,
+                7.49341089767072e-06
+            ]
+        },
+        "distractor_1982bab56e5f49a3abc92c9c344d8dff": {
+            "name": "distractor_1982bab56e5f49a3abc92c9c344d8dff",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_1982bab56e5f49a3abc92c9c344d8dff.usd",
+            "class": "1",
+            "scale_factor": [
+                9.092619286637049e-06,
+                9.092619286637049e-06,
+                9.092619286637049e-06
+            ]
+        },
+        "distractor_26ecb909ac4e402ebbb9d430598a2254": {
+            "name": "distractor_26ecb909ac4e402ebbb9d430598a2254",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_26ecb909ac4e402ebbb9d430598a2254.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0001726369946468595,
+                0.0001726369946468595,
+                0.0001726369946468595
+            ]
+        },
+        "distractor_56f5ae62fae64b3692a9e523e95c4bd5": {
+            "name": "distractor_56f5ae62fae64b3692a9e523e95c4bd5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_56f5ae62fae64b3692a9e523e95c4bd5.usd",
+            "class": "1",
+            "scale_factor": [
+                1.724282988450298e-05,
+                1.724282988450298e-05,
+                1.724282988450298e-05
+            ]
+        },
+        "distractor_8ad1102500bb402da1f06a8e6e0b052d": {
+            "name": "distractor_8ad1102500bb402da1f06a8e6e0b052d",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8ad1102500bb402da1f06a8e6e0b052d.usd",
+            "class": "1",
+            "scale_factor": [
+                9.982426267225556e-06,
+                9.982426267225556e-06,
+                9.982426267225556e-06
+            ]
+        },
+        "distractor_93d9991078204bc4921269c3c8fa4576": {
+            "name": "distractor_93d9991078204bc4921269c3c8fa4576",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_93d9991078204bc4921269c3c8fa4576.usd",
+            "class": "1",
+            "scale_factor": [
+                1.8618367240721377e-06,
+                1.8618367240721377e-06,
+                1.8618367240721377e-06
+            ]
+        },
+        "distractor_29a9b2de8bbf4742bba053f7db22eec7": {
+            "name": "distractor_29a9b2de8bbf4742bba053f7db22eec7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_29a9b2de8bbf4742bba053f7db22eec7.usd",
+            "class": "1",
+            "scale_factor": [
+                6.698763706645862e-05,
+                6.698763706645862e-05,
+                6.698763706645862e-05
+            ]
+        },
+        "distractor_ca35b4ff5386445893f76521b4e9f9fc": {
+            "name": "distractor_ca35b4ff5386445893f76521b4e9f9fc",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ca35b4ff5386445893f76521b4e9f9fc.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2501770499646554e-05,
+                1.2501770499646554e-05,
+                1.2501770499646554e-05
+            ]
+        },
+        "distractor_b958f90f18ee472282bc14a0407598aa": {
+            "name": "distractor_b958f90f18ee472282bc14a0407598aa",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b958f90f18ee472282bc14a0407598aa.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00021091426222626932,
+                0.00021091426222626932,
+                0.00021091426222626932
+            ]
+        },
+        "distractor_2bed176de5754bfab888947fa8e2dcc4": {
+            "name": "distractor_2bed176de5754bfab888947fa8e2dcc4",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2bed176de5754bfab888947fa8e2dcc4.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0008491036638016795,
+                0.0008491036638016795,
+                0.0008491036638016795
+            ]
+        },
+        "distractor_ff2d13ec5ec34634b009acc397412c2e": {
+            "name": "distractor_ff2d13ec5ec34634b009acc397412c2e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_ff2d13ec5ec34634b009acc397412c2e.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0006339571335072652,
+                0.0006339571335072652,
+                0.0006339571335072652
+            ]
+        },
+        "distractor_42eb28c2528c4819b128ca47f5c9d2f1": {
+            "name": "distractor_42eb28c2528c4819b128ca47f5c9d2f1",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_42eb28c2528c4819b128ca47f5c9d2f1.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00016828229569635449,
+                0.00016828229569635449,
+                0.00016828229569635449
+            ]
+        },
+        "distractor_c7aa7882e2f7463bae1f846df8e05fdf": {
+            "name": "distractor_c7aa7882e2f7463bae1f846df8e05fdf",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c7aa7882e2f7463bae1f846df8e05fdf.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0002675468962996481,
+                0.0002675468962996481,
+                0.0002675468962996481
+            ]
+        },
+        "distractor_402578125c2540c886df11f1c0b514b6": {
+            "name": "distractor_402578125c2540c886df11f1c0b514b6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_402578125c2540c886df11f1c0b514b6.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0064059696547601516,
+                0.0064059696547601516,
+                0.0064059696547601516
+            ]
+        },
+        "distractor_dbd2795418024477b97d3cc052ec27e7": {
+            "name": "distractor_dbd2795418024477b97d3cc052ec27e7",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_dbd2795418024477b97d3cc052ec27e7.usd",
+            "class": "1",
+            "scale_factor": [
+                0.07406842064385363,
+                0.07406842064385363,
+                0.07406842064385363
+            ]
+        },
+        "distractor_8af55d13883a496c92c99c3ff08eae78": {
+            "name": "distractor_8af55d13883a496c92c99c3ff08eae78",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8af55d13883a496c92c99c3ff08eae78.usd",
+            "class": "1",
+            "scale_factor": [
+                0.03573762242353126,
+                0.03573762242353126,
+                0.03573762242353126
+            ]
+        },
+        "distractor_f561f1c61ff549d0b4b8c75f3f761a8c": {
+            "name": "distractor_f561f1c61ff549d0b4b8c75f3f761a8c",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f561f1c61ff549d0b4b8c75f3f761a8c.usd",
+            "class": "1",
+            "scale_factor": [
+                6.2905703511971e-05,
+                6.2905703511971e-05,
+                6.2905703511971e-05
+            ]
+        },
+        "distractor_31d7e9ff655a44a4b0cf2c1da8ddc6b5": {
+            "name": "distractor_31d7e9ff655a44a4b0cf2c1da8ddc6b5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_31d7e9ff655a44a4b0cf2c1da8ddc6b5.usd",
+            "class": "1",
+            "scale_factor": [
+                0.0005402199276467725,
+                0.0005402199276467725,
+                0.0005402199276467725
+            ]
+        },
+        "distractor_80048a8844a748f8955ff029cdc7ea04": {
+            "name": "distractor_80048a8844a748f8955ff029cdc7ea04",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_80048a8844a748f8955ff029cdc7ea04.usd",
+            "class": "1",
+            "scale_factor": [
+                2.8061867844698365e-05,
+                2.8061867844698365e-05,
+                2.8061867844698365e-05
+            ]
+        },
+        "distractor_c2f7c8849d344c3f9c4e2d3755b253cf": {
+            "name": "distractor_c2f7c8849d344c3f9c4e2d3755b253cf",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_c2f7c8849d344c3f9c4e2d3755b253cf.usd",
+            "class": "1",
+            "scale_factor": [
+                4.4721515283229796e-05,
+                4.4721515283229796e-05,
+                4.4721515283229796e-05
+            ]
+        },
+        "distractor_2d85ff0a1fb6421b844bae878154eaff": {
+            "name": "distractor_2d85ff0a1fb6421b844bae878154eaff",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_2d85ff0a1fb6421b844bae878154eaff.usd",
+            "class": "1",
+            "scale_factor": [
+                3.57335007780889e-05,
+                3.57335007780889e-05,
+                3.57335007780889e-05
+            ]
+        },
+        "distractor_7240ee347fd544dd834bf711d28b8878": {
+            "name": "distractor_7240ee347fd544dd834bf711d28b8878",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7240ee347fd544dd834bf711d28b8878.usd",
+            "class": "1",
+            "scale_factor": [
+                6.865793448973253e-05,
+                6.865793448973253e-05,
+                6.865793448973253e-05
+            ]
+        },
+        "distractor_b7758ccba7064adb905acc38efe78fa6": {
+            "name": "distractor_b7758ccba7064adb905acc38efe78fa6",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_b7758ccba7064adb905acc38efe78fa6.usd",
+            "class": "1",
+            "scale_factor": [
+                9.80617751467929e-06,
+                9.80617751467929e-06,
+                9.80617751467929e-06
+            ]
+        },
+        "distractor_66652c2cda5d4a7191567adc55fc7b8f": {
+            "name": "distractor_66652c2cda5d4a7191567adc55fc7b8f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_66652c2cda5d4a7191567adc55fc7b8f.usd",
+            "class": "1",
+            "scale_factor": [
+                3.1925282912924096e-05,
+                3.1925282912924096e-05,
+                3.1925282912924096e-05
+            ]
+        },
+        "distractor_8ce45fd1b78d4215afd08799bec0b495": {
+            "name": "distractor_8ce45fd1b78d4215afd08799bec0b495",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_8ce45fd1b78d4215afd08799bec0b495.usd",
+            "class": "1",
+            "scale_factor": [
+                0.00017396642878214708,
+                0.00017396642878214708,
+                0.00017396642878214708
+            ]
+        },
+        "distractor_82763a60c5974bea9cd9fe5fd595025b": {
+            "name": "distractor_82763a60c5974bea9cd9fe5fd595025b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_82763a60c5974bea9cd9fe5fd595025b.usd",
+            "class": "1",
+            "scale_factor": [
+                2.3944890367903707e-05,
+                2.3944890367903707e-05,
+                2.3944890367903707e-05
+            ]
+        },
+        "distractor_a9f41b0a275047739d93011389695b20": {
+            "name": "distractor_a9f41b0a275047739d93011389695b20",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_a9f41b0a275047739d93011389695b20.usd",
+            "class": "1",
+            "scale_factor": [
+                3.973898345200273e-05,
+                3.973898345200273e-05,
+                3.973898345200273e-05
+            ]
+        },
+        "distractor_f0008ddd805d46bbae82f1b76e1fb829": {
+            "name": "distractor_f0008ddd805d46bbae82f1b76e1fb829",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_f0008ddd805d46bbae82f1b76e1fb829.usd",
+            "class": "1",
+            "scale_factor": [
+                6.902813824968383e-05,
+                6.902813824968383e-05,
+                6.902813824968383e-05
+            ]
+        },
+        "distractor_6a96a2375bdb4297ba8eac43674f688f": {
+            "name": "distractor_6a96a2375bdb4297ba8eac43674f688f",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_6a96a2375bdb4297ba8eac43674f688f.usd",
+            "class": "1",
+            "scale_factor": [
+                9.132712079975128e-05,
+                9.132712079975128e-05,
+                9.132712079975128e-05
+            ]
+        },
+        "distractor_83ddd8a330774cab840568148aae134e": {
+            "name": "distractor_83ddd8a330774cab840568148aae134e",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_83ddd8a330774cab840568148aae134e.usd",
+            "class": "1",
+            "scale_factor": [
+                3.092196976824035e-05,
+                3.092196976824035e-05,
+                3.092196976824035e-05
+            ]
+        },
+        "distractor_46ba62e74a6d404787269f8eb7c7c93b": {
+            "name": "distractor_46ba62e74a6d404787269f8eb7c7c93b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_46ba62e74a6d404787269f8eb7c7c93b.usd",
+            "class": "1",
+            "scale_factor": [
+                8.205131798483323e-06,
+                8.205131798483323e-06,
+                8.205131798483323e-06
+            ]
+        },
+        "distractor_4c30829d0b8d4b919fea7b0624744eb3": {
+            "name": "distractor_4c30829d0b8d4b919fea7b0624744eb3",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4c30829d0b8d4b919fea7b0624744eb3.usd",
+            "class": "1",
+            "scale_factor": [
+                6.040348067909275e-05,
+                6.040348067909275e-05,
+                6.040348067909275e-05
+            ]
+        },
+        "distractor_172019d5a9734aa2b04d458d78321cc9": {
+            "name": "distractor_172019d5a9734aa2b04d458d78321cc9",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_172019d5a9734aa2b04d458d78321cc9.usd",
+            "class": "1",
+            "scale_factor": [
+                0.008798032245948556,
+                0.008798032245948556,
+                0.008798032245948556
+            ]
+        },
+        "distractor_7492a08774b943549b180b061f4c33af": {
+            "name": "distractor_7492a08774b943549b180b061f4c33af",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_7492a08774b943549b180b061f4c33af.usd",
+            "class": "1",
+            "scale_factor": [
+                7.846721207204854e-05,
+                7.846721207204854e-05,
+                7.846721207204854e-05
+            ]
+        },
+        "distractor_4f14fd4fdb6f47929a2c5920cfdf00d5": {
+            "name": "distractor_4f14fd4fdb6f47929a2c5920cfdf00d5",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4f14fd4fdb6f47929a2c5920cfdf00d5.usd",
+            "class": "1",
+            "scale_factor": [
+                1.2824271353505325e-05,
+                1.2824271353505325e-05,
+                1.2824271353505325e-05
+            ]
+        },
+        "distractor_bdcd141c36b4465fa4fb18620af3b12b": {
+            "name": "distractor_bdcd141c36b4465fa4fb18620af3b12b",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_bdcd141c36b4465fa4fb18620af3b12b.usd",
+            "class": "1",
+            "scale_factor": [
+                3.6587580029633624e-05,
+                3.6587580029633624e-05,
+                3.6587580029633624e-05
+            ]
+        },
+        "distractor_3c08b0093b6847e9a0eefe0ebeb81754": {
+            "name": "distractor_3c08b0093b6847e9a0eefe0ebeb81754",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_3c08b0093b6847e9a0eefe0ebeb81754.usd",
+            "class": "1",
+            "scale_factor": [
+                3.727471924005045e-05,
+                3.727471924005045e-05,
+                3.727471924005045e-05
+            ]
+        },
+        "distractor_087808cbfd304524af1aa01abc17d5eb": {
+            "name": "distractor_087808cbfd304524af1aa01abc17d5eb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_087808cbfd304524af1aa01abc17d5eb.usd",
+            "class": "1",
+            "scale_factor": [
+                9.942705425144846e-05,
+                9.942705425144846e-05,
+                9.942705425144846e-05
+            ]
+        },
+        "distractor_763161ccf817486c82813fb9dc30c9cb": {
+            "name": "distractor_763161ccf817486c82813fb9dc30c9cb",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_763161ccf817486c82813fb9dc30c9cb.usd",
+            "class": "1",
+            "scale_factor": [
+                0.001432847522447999,
+                0.001432847522447999,
+                0.001432847522447999
+            ]
+        },
+        "distractor_d002e8028c2f432db4792c333f576f27": {
+            "name": "distractor_d002e8028c2f432db4792c333f576f27",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_d002e8028c2f432db4792c333f576f27.usd",
+            "class": "1",
+            "scale_factor": [
+                1.5026839199148882e-05,
+                1.5026839199148882e-05,
+                1.5026839199148882e-05
+            ]
+        },
+        "distractor_5ce26e4e1094485db97964c7d7d95dfc": {
+            "name": "distractor_5ce26e4e1094485db97964c7d7d95dfc",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_5ce26e4e1094485db97964c7d7d95dfc.usd",
+            "class": "1",
+            "scale_factor": [
+                6.467152075168614e-05,
+                6.467152075168614e-05,
+                6.467152075168614e-05
+            ]
+        },
+        "distractor_4a4a516b7c7143039d1882dd108c78ae": {
+            "name": "distractor_4a4a516b7c7143039d1882dd108c78ae",
+            "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/distractors/distractor_4a4a516b7c7143039d1882dd108c78ae.usd",
+            "class": "1",
+            "scale_factor": [
+                2.572749255822963e-05,
+                2.572749255822963e-05,
+                2.572749255822963e-05
+            ]
         }
-    },
-    "stage": {
-        "name": "single_stage",
-        "usd_filepath": "/home/kaelin/BinPicking/SDG/IS/assets/single_stage.usd"
     }
 }
